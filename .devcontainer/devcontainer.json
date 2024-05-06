@@ -6,7 +6,7 @@
 	// "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 	"dockerFile": "Dockerfile",
 	"mounts": [
-        "source=${localEnv:Home}/,target=/root,type=bind,consistency=cached"
+        "source=${localEnv:HOME},target=/root,type=bind,consistency=cached"
     ],
 	"customizations": {
 		"vscode": {
@@ -15,8 +15,8 @@
 				"editor.renderWhitespace": "all",
 				"editor.insertSpaces": false,
 				"debug.onTaskErrors": "debugAnyway",
-				"42header.email": "jkauker@student.42heilbronn.de",
-				"42header.username": "jkauker"
+				"42header.email": "tpaesch@student.42heilbronn.de",
+				"42header.username": "tpaesch"
 			},
 			"extensions": [
 				"ms-vscode.cpptools-themes",
