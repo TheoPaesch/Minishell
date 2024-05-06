@@ -7,3 +7,9 @@ integrates changes from specified branch
 git merge <name>
 pulls newest version from remote repository (same branch)
 git pull
+
+
+
+## Useful Links
+
+https://www.gnu.org/software/bash/manual/bash.html
