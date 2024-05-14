@@ -70,3 +70,73 @@ The readline() function can cause memory leaks. You don’t have to fix them. Bu
 that doesn’t mean your own code, yes the code you wrote, can have memory
 leaks.
 ____________________________________________________________________________________________________________
+
+
+## allowed functions explained
+
+
+readline: This function is used to read a line of text from the standard input. It's commonly used for creating interactive command-line interfaces.
+
+rl_clear_history: Clears the history maintained by the readline library.
+
+rl_on_new_line: Notifies readline that a new line has been started.
+
+rl_replace_line: Replaces the current line of input in the readline buffer with a new line.
+
+rl_redisplay: Redraws the current line in the readline buffer.
+
+add_history: Adds a line to the history maintained by the readline library.
+
+printf: Prints formatted output to the standard output.
+
+malloc: Allocates memory dynamically on the heap.
+
+free: Frees memory allocated dynamically with malloc, calloc, or realloc.
+
+write: Writes data to a file descriptor.
+
+access: Checks whether a file exists and the user has the necessary permissions to access it.
+
+open: Opens a file or device for reading or writing.
+
+read: Reads data from a file descriptor.
+
+close: Closes a file descriptor.
+
+fork: Creates a new process by duplicating the existing process.
+
+wait, waitpid, wait3, wait4: Functions for waiting for child processes to terminate and retrieving their status.
+
+signal, sigaction, sigemptyset, sigaddset, kill: Functions for handling signals in UNIX-like operating systems.
+
+exit: Terminates the calling process and returns an exit status to the operating system.
+
+getcwd: Gets the current working directory.
+
+chdir: Changes the current working directory.
+
+stat, lstat, fstat: Functions for retrieving file status information.
+
+unlink: Deletes a name from the filesystem.
+
+execve: Executes a program.
+
+dup, dup2: Duplicates file descriptors.
+
+pipe: Creates a pipe, which is a unidirectional communication channel.
+
+opendir, readdir, closedir: Functions for working with directories.
+
+strerror: Returns a string describing the error code passed to it.
+
+perror: Prints a descriptive error message to the standard error.
+
+isatty, ttyname, ttyslot, ioctl: Functions related to terminal I/O.
+
+getenv: Retrieves the value of an environment variable.
+
+tcsetattr, tcgetattr: Functions for setting and getting terminal attributes.
+
+tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs: Functions for interacting with the terminal database (terminfo), used for obtaining terminal capabilities and controlling terminal behavior in a platform-independent manner.
+
+____________________________________________________________________________________________________________
