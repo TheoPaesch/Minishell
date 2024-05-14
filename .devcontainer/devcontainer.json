@@ -1,47 +1,35 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-	"name": "42 Dev Container",
+	"name": "C-Codespace",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	// "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 	"dockerFile": "Dockerfile",
+
 	"mounts": [
-		"source=${localEnv:HOME}/,target=/root,type=bind,consistency=cached"
+		"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
 	],
 	"customizations": {
 		"vscode": {
-			"settings": {
-				"files.autoSave": "onFocusChange",
-				"editor.renderWhitespace": "all",
-				"editor.insertSpaces": false,
-				"debug.onTaskErrors": "debugAnyway",
-				"42header.email": "tpaesch@student.42heilbronn.de",
-				"42header.username": "tpaesch"
-			},
 			"extensions": [
 				"ms-vscode.cpptools-themes",
 				"ms-vscode-remote.remote-containers",
+				"GitHub.github-vscode-theme",
+				"keyhr.42-c-format",
+				"DoKca.42-ft-count-line",
+				"kube.42header",
+				"MariusvanWijk-JoppeKoers.codam-norminette-3",
 				"mitaki28.vscode-clang",
 				"ms-vscode.cpptools",
 				"ms-vscode.cpptools-extension-pack",
-				"kube.42header",
+				"franneck94.c-cpp-runner",
 				"twxs.cmake",
 				"ms-vscode.cmake-tools",
 				"vadimcn.vscode-lldb",
-				"ms-vscode.makefile-tools",
-				"GitHub.copilot",
-				"ms-azuretools.vscode-docker",
-				"ms-vscode-remote.remote-containers",
-				"DoKca.42-ft-count-line",
-				"MariusvanWijk-JoppeKoers.codam-norminette-3",
-				"Gruntfuggly.todo-tree",
-				"keyhr.42-c-format",
-				"vsls-contrib.codetour",
-				"mhutchie.git-graph",
-				"oderwat.indent-rainbow"
+				"ms-vscode.makefile-tools"
 			]
 		}
-	},
+	}
+
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
@@ -49,7 +37,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "echo 'Container created. Happy coding!'"
+	// "postCreateCommand": "uname -a",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
