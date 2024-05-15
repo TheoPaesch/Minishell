@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/12 20:49:56 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:44:42 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // ##############################  LINKED LISTS  ##############################
 typedef struct s_list
 {
-	void			*content;
+	void			*data;
 	struct s_list	*next;
 }					t_list;
 
