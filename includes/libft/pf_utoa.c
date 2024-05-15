@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pf_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 11:21:19 by mstrauss          #+#    #+#             */
-/*   Updated: 2023/12/14 20:02:39 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:19:10 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ int	pf_utoa(unsigned int n)
 		return (-1);
 	ptr = pf_utoa_conv(ptr, n, char_count);
 	tmp = pf_putstr(ptr, 1);
-	free(ptr);
+	ft_free(ptr);
 	return (tmp);
 }

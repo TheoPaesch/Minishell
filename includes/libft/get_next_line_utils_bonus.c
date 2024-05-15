@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 00:25:05 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/15 17:01:26 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:18:09 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ char	*gnl_strjoin(char *s1, char *s2)
 	i = -1;
 	j = -1;
 	if (s1 == NULL)
-		return (free(s2), NULL);
+		return (ft_free(s2), NULL);
 	ptr = ft_malloc(gnl_strlen(s1) + gnl_strlen(s2) + 1);
 	if (ptr == NULL)
-		return (free(s1), NULL);
+		return (ft_free(s1), NULL);
 	while (s1 && s1[++i])
 		ptr[i] = s1[i];
 	while (s2 && s2[++j])
 		ptr[i + j] = s2[j];
 	ptr[i + j] = '\0';
-	free(s1);
+	ft_free(s1);
 	s1 = NULL;
 	return (ptr);
 }

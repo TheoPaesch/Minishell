@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:24:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/15 16:45:53 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:16:37 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	del(lst->data);
-	free(lst);
+	ft_ft_free(lst);
 }
