@@ -6,13 +6,14 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/09 19:08:28 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/12 20:49:56 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // LIBFT.H
 #ifndef LIBFT_H
 # define LIBFT_H
+# include <stddef.h>
 
 // ##############################  LINKED LISTS  ##############################
 typedef struct s_list

@@ -13,3 +13,8 @@ git pull
 ## Useful Links
 
 https://www.gnu.org/software/bash/manual/bash.html
+
+
+### TOKENISATION
+look at strtok and build it
+https://cplusplus.com/reference/cstring/strtok/
