@@ -140,3 +140,6 @@ tcsetattr, tcgetattr: Functions for setting and getting terminal attributes.
 tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs: Functions for interacting with the terminal database (terminfo), used for obtaining terminal capabilities and controlling terminal behavior in a platform-independent manner.
 
 ____________________________________________________________________________________________________________
+### TOKENISATION
+look at strtok and build it
+https://cplusplus.com/reference/cstring/strtok/
