@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/16 15:56:35 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:03:32 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,3 @@ typedef struct s_list
 }					t_list;
 
 */
-
-ptr = malloc() malloc(&ptr);
