@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:34:34 by mstrauss          #+#    #+#             */
-/*   Updated: 2023/11/29 15:06:38 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:19:06 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,21 @@ char	*gnl_get_more(char *tmp, char *buffer, int fd)
 		return (NULL);
 	new = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (new == NULL)
-		return (free(tmp), NULL);
+		return (ft_free(tmp), NULL);
 	while (bytes_read && gnl_strchr(tmp, '\n') == -1)
 	{
 		bytes_read = read(fd, new, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (gnl_bzero(buffer, BUFFER_SIZE), gnl_bzero(new, BUFFER_SIZE),
-				free(new), NULL);
+				ft_free(new), NULL);
 		new[bytes_read] = '\0';
 		tmp = gnl_strjoin(tmp, new);
 		if (tmp == NULL)
-			return (free(new), free(tmp), NULL);
+			return (ft_free(new), ft_free(tmp), NULL);
 		if (gnl_strlen(tmp) == 0)
-			return (free(new), free(tmp), NULL);
+			return (ft_free(new), ft_free(tmp), NULL);
 	}
-	return (free(new), tmp);
+	return (ft_free(new), tmp);
 }
 
 /// @brief 		Gets the next line from the file pointed to by fd,
@@ -97,8 +97,8 @@ char	*get_next_line(int fd)
 		return (tmp);
 	final = gnl_calloc(nl_index + 2, sizeof(char));
 	if (final == NULL)
-		return (free(tmp), NULL);
+		return (ft_free(tmp), NULL);
 	gnl_strlcpy(buffer, &tmp[nl_index + 1], BUFFER_SIZE);
 	gnl_strlcpy(final, tmp, nl_index + 2);
-	return (free(tmp), final);
+	return (ft_free(tmp), final);
 }

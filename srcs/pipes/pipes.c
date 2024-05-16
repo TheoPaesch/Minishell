@@ -40,7 +40,7 @@ int	main(int ac, char *av[])
 //         printf("You entered: %s", line);
 //     }
 
-//     free(line);
+//     ft_free(line);
 //     return (0);
 // }
 

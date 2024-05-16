@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:24:33 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/09 19:58:11 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:19:14 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	shunting_yard(void)
 					ft_lstadd_back(&output, ft_lstnew(operators->content));
 					tmp = operators;
 					operators = operators->next;
-					free(tmp);
+					ft_free(tmp);
 				}
 				ft_lstadd_back(&operators, ft_lstnew(input->content));
 			}
@@ -63,7 +63,7 @@ void	shunting_yard(void)
 		ft_lstadd_back(&output, ft_lstnew(operators->content));
 		tmp = operators;
 		operators = operators->next;
-		free(tmp);
+		ft_free(tmp);
 	}
 }
 

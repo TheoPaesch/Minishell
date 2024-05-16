@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 13:19:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2023/11/16 22:17:27 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:58:48 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*ft_calloc(size_t count, size_t size)
 	unsigned long	i;
 
 	i = 0;
-	ptr = malloc(count * size);
+	ptr = ft_malloc(count * size);
 	if (ptr == NULL)
 		return (NULL);
 	return (ft_bzero(ptr, count * size), ptr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 00:25:05 by mstrauss          #+#    #+#             */
-/*   Updated: 2023/12/14 20:38:02 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:18:20 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ char	*gnl_strjoin(char *s1, char *s2)
 	i = -1;
 	j = -1;
 	if (s1 == NULL)
-		return (free(s2), NULL);
-	ptr = malloc(gnl_strlen(s1) + gnl_strlen(s2) + 1);
+		return (ft_free(s2), NULL);
+	ptr = ft_malloc(gnl_strlen(s1) + gnl_strlen(s2) + 1);
 	if (ptr == NULL)
-		return (free(s1), NULL);
+		return (ft_free(s1), NULL);
 	while (s1 && s1[++i])
 		ptr[i] = s1[i];
 	while (s2 && s2[++j])
 		ptr[i + j] = s2[j];
 	ptr[i + j] = '\0';
-	free(s1);
+	ft_free(s1);
 	s1 = NULL;
 	return (ptr);
 }
@@ -77,7 +77,7 @@ char	*gnl_strdup(char *s1)
 
 	len = gnl_strlen(s1);
 	i = -1;
-	ptr = malloc(len + 1);
+	ptr = ft_malloc(len + 1);
 	if (ptr == NULL)
 		return (NULL);
 	while (++i <= len && s1[i])
@@ -124,7 +124,7 @@ void	*gnl_calloc(size_t count, size_t size)
 	i = 0;
 	n = count * size;
 	ptr = NULL;
-	ptr = malloc(n);
+	ptr = ft_malloc(n);
 	if (ptr == NULL)
 		return (NULL);
 	while (0 < n)

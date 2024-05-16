@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:32:13 by mstrauss          #+#    #+#             */
-/*   Updated: 2023/11/16 22:56:35 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:16:30 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static int	ft_countdelim(char const *s, char c)
 static void	ft_clean(char **arr, int amount)
 {
 	while (amount >= 0)
-		free(arr[amount--]);
-	free(arr);
+		ft_free(arr[amount--]);
+	ft_free(arr);
 }
 
 char	**ft_split_malloc_helper(int wrdcnt)
 {
 	char	**arr;
 
-	arr = malloc(sizeof(char *) * (wrdcnt + 1));
+	arr = ft_malloc(sizeof(char *) * (wrdcnt + 1));
 	if (arr == NULL)
 		return (NULL);
 	arr[wrdcnt] = NULL;
