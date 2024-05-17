@@ -8,6 +8,16 @@ which are sequences of contiguous characters separated by
 any of the characters that are part of delimiters.
 */
 
+/*
+ - Split @ Pipes
+	-> search for '|', split into multiple strings
+ - Split into tokens
+
+ add?
+ - types
+ - precedence
+*/
+
 void	tokenize(const char *str)
 {
 }
