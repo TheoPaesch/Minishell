@@ -6,11 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 17:19:36 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/15 16:46:04 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 /// @brief 		Adds the node ’new’ at the end of the list.
 /// @param lst 	Address of a pointer to the first link of a list.

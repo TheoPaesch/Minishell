@@ -6,11 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:33:58 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/15 16:45:57 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 /// @brief		Deletes and frees the given node and every successor of that
 ///				node, using the function ’del’ and free(3). Finally, the pointer

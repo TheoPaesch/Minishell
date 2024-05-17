@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:26:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/09 18:02:10 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 /// @brief Copies n bytes from memory area src to memory area dst.
 /// @param dst 	Destination to copy to.

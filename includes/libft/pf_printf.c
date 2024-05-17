@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pf_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:32:28 by mstrauss          #+#    #+#             */
-/*   Updated: 2023/12/14 20:17:35 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 // • %X Prints a number in hexadecimal (base 16) uppercase format.
 // • %% Prints a percent sign.
 
-#include "libft.h"
+#include "../libft.h"
 
 int	pf_putchar(char c, int fd)
 {

@@ -6,11 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 11:21:19 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/15 17:19:10 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 static int	pf_countdigit(unsigned int n)
 {
@@ -52,7 +52,7 @@ int	pf_utoa(unsigned int n)
 	char_count = pf_countdigit(n);
 	ptr = ft_calloc(sizeof(char), char_count + 1);
 	if (ptr == NULL)
-		return (-1);
+		return (1);
 	ptr = pf_utoa_conv(ptr, n, char_count);
 	tmp = pf_putstr(ptr, 1);
 	ft_free(ptr);
