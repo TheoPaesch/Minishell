@@ -6,25 +6,24 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 15:48:14 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:02:22 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	*ft_malloc(void **ptr, int size)
+int	ft_malloc(void **ptr, int size)
 {
-	void			*tmp;
 	static t_list	*allocs;
 
-	tmp = malloc(size);
-	if (!tmp)
-		return (NULL);
+	*ptr = malloc(size);
+	if (*ptr == NULL)
+		return (1);
 	if (!allocs)
-		allocs = ft_lstnew(tmp);
+		allocs = ft_lstnew(*ptr);
 	else
-		ft_lstadd_front(allocs, ft_lstnew(tmp));
-	return (tmp);
+		ft_lstadd_front(allocs, ft_lstnew(*ptr));
+	return (0);
 }
 
 /* -------------------------------------------------------------------------- */
