@@ -10,7 +10,9 @@ void	ft_get_input(char **env)
 	i = 0;
 	while (*env[i] != NULL)
 		i++;
-	ft_malloc(env, sizeof(s_env) * i);
-	ft_malloc(expo, sizeof(s_env) * i);
+	if (ft_malloc(env, sizeof(s_env) * i))
+		return (printf("Error: malloc failed in get_env\n"));
+	if (ft_malloc(expo, sizeof(s_env) * i))
+		return (printf("Error: malloc failed in get_env\n"));
 	/* build linked list for env ad fill with befor "=" and after*/
 }

@@ -6,13 +6,13 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/16 19:22:04 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/16 19:30:40 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	*ft_malloc(int size, void **ptr)
+int	*ft_malloc(int size, void **ptr)
 {
 	static t_list	allocs;
 
