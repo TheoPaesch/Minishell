@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:07:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/16 15:55:24 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:48:11 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ft_free(void **ptr)
 {
-	if (ptr == NULL)
-		return ();
+	if (ptr == NULL || *ptr == NULL)
+		return ;
 	free(*ptr);
-	ptr = NULL;
+	*ptr = NULL;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -27,11 +27,12 @@ void	ft_free(void **ptr)
 
 malloc takes the PTR as an argument.
 	it allocates the requested memory.
-	it remembers which memory it allocated by writing its address to s_garbage in a list.
-	it remembers the pointer it assigned the allocated memory to (in s_garbage).
+	it remembers which memory it allocated by writing its address to s_garbage
+		in a list.
+	it remembers the pointer it assigned the allocated memory to (in s_garbage)
 
 No matter how freeing is done (manual first, then garbage collection / reverse)
-there will be no double frees due to all pointers being set to NULL after freeing.
+there will be no double frees due to all pointers being set to NULL afterfreein
 
 
 EXAMPLE:

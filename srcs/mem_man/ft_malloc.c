@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/16 16:07:42 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:48:14 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_malloc(void **ptr, int size)
 {
 	void			*tmp;
-	static t_list	allocs;
+	static t_list	*allocs;
 
 	tmp = malloc(size);
 	if (!tmp)
@@ -48,5 +48,4 @@ typedef struct s_list
 	void			*data; // store s_garbage here
 	struct s_list	*next;
 }					t_list;
-
 */

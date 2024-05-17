@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_garbage_col.c                                   :+:      :+:    :+:   */
+/*   ft_del_mem.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:28:52 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/16 09:51:07 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:47:45 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_garbage_col(s_garbage mem)
+void	ft_del_mem(t_mem *mem)
 {
-	if (mem->extern_ptr != NULL && mem->allocated_mem != NULL)
+	if (mem->ext_ptr != NULL && mem->allocd_mem != NULL)
 	{
-		ft_free(mem->allocated_mem);
-		mem->extern_ptr == NULL;
+		ft_free(mem->allocd_mem);
+		mem->ext_ptr = NULL;
 	}
-	else if (mem->extern_ptr != mem->allocated_mem
-		&& mem->allocated_mem != NULL)
+	else if (mem->ext_ptr != mem->allocd_mem && mem->allocd_mem != NULL)
 	{
-		ft_free(mem->allocated_mem);
+		ft_free(mem->allocd_mem);
 	}
-	else if (mem->extern_ptr == NULL)
+	else if (mem->ext_ptr == NULL)
 	{
-		mem->allocated = NULL;
+		mem->allocd_mem = NULL;
 	}
 }
 
