@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/12 18:53:49 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:03:20 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # ifndef LIBFT_H
 #  include "./includes/libft/libft.h"
 # endif
+# include <errno.h>
+# include <signal.h>
+# include <stdbool.h>
+# include <stdlib.h>
 
 /* -------------------------------------------------------------------------- */
 /*                                   STRUCTS                                  */
@@ -23,7 +27,7 @@
 typedef struct s_token
 {
 	char	*token;
-    
+
 }			t_token;
 
 /* -------------------------------------------------------------------------- */
