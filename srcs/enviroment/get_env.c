@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/18 18:53:41 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/18 18:57:56 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_get_input(char **envp)
 		i++;
 	}
 }
+
+// check if key filled and value empty, then dont get into env
 
 char	*ft_strcdup(char *str, char c, bool side)
 {
