@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/18 15:54:21 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/18 19:36:19 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,27 @@
 /* -------------------------------------------------------------------------- */
 /*                                   STRUCTS                                  */
 /* -------------------------------------------------------------------------- */
+
+# define MAXARGS 10
+
 typedef struct s_token
 {
 	char		*token;
 }				t_token;
 
-struct			cmd
+typedef struct s_cmd
 {
 	int			type;
-};
+}				t_cmd;
 
-struct			execcmd
+typedef struct s_exec_cmd
 {
 	int			type;
 	char		*argv[MAXARGS];
-	char		*eargv[MAXARGS];
-};
+	char		*end_argv[MAXARGS];
+}				t_cmd;
 
-struct			redircmd
+typedef struct s_redir_cmd
 {
 	int			type;
 	struct cmd	*cmd;
@@ -66,27 +69,27 @@ struct			redircmd
 	char		*efile;
 	int			mode;
 	int			fd;
-};
+}				t_exec_cmd;
 
-struct			pipecmd
+typedef struct s_pipe_cmd
 {
 	int			type;
 	struct cmd	*left;
 	struct cmd	*right;
-};
+}				t_pipecmd;
 
-struct			listcmd
+typedef struct s_list_cmd
 {
 	int			type;
 	struct cmd	*left;
 	struct cmd	*right;
-};
+}				t_list_cmd;
 
-struct			backcmd
+typedef struct s_back_cmd
 {
 	int			type;
 	struct cmd	*cmd;
-};
+}				t_back_cmd;
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
