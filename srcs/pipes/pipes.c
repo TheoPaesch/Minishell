@@ -1,4 +1,6 @@
-#include <./minishell.h>
+#include <../../includes/minishell.h>
+
+// EPIPE -- Error code for pipe errors
 
 int	main(int ac, char *av[])
 {
