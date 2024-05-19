@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/19 15:39:24 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/19 16:22:57 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	ft_get_input(char **envp)
 		data->value = ft_strcdup(envp[i], '=', 1);
 		if (data->value[0] != '\0')
 		{
-			env->data = data;
+			env->content = data;
 			ft_lstaddfront(env, ft_lstnew(env));
 		}
-		expo->data = data;
+		expo->content = data;
 		ft_lstaddfront(expo, ft_lstnew(expo));
 		i++;
 	}
