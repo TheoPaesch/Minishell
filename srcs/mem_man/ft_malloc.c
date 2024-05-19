@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 16:02:22 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/19 16:20:44 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_malloc(void **ptr, int size)
+bool	ft_malloc(void **ptr, int size)
 {
 	static t_list	*allocs;
 
 	*ptr = malloc(size);
 	if (*ptr == NULL)
-		return (1);
+		return (false);
 	if (!allocs)
 		allocs = ft_lstnew(*ptr);
 	else
 		ft_lstadd_front(allocs, ft_lstnew(*ptr));
-	return (0);
+	return (true);
 }
 
 /* -------------------------------------------------------------------------- */

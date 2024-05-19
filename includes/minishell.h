@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 15:43:42 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/19 16:17:42 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct s_token
 	char	*token;
 }			t_token;
 
+typedef struct s_env
+{
+	char	*key;
+	char	*value;
+}			t_env;
+
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
@@ -40,6 +46,9 @@ typedef struct s_token
 /* ---------------------------------- Pipes --------------------------------- */
 
 /* -------------------------------- Get Input ------------------------------- */
+
+void		ft_epmty_env(void);
+void		ft_get_input(char **envp);
 
 /* ---------------------------- Memory Management --------------------------- */
 typedef struct s_mem
@@ -53,6 +62,10 @@ void		*ft_malloc(void **ptr, int size);
 void		ft_del_mem(t_mem *mem);
 
 /* -------------------------------- Execution ------------------------------- */
+
+void		print_export(t_list *expo);
+void		prtint_env(t_list *env);
+void		add_export(t_list *env, t_list *expo, char *key, char *value);
 
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
