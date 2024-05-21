@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:25:48 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/21 11:28:39 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/21 22:03:03 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_read_input(t_program *mushell)
 
 	if (mushell->isatty)
 	{
-		prompt = ft_build_prompt();
+		prompt = getcwd(NULL, 0);
 		if (prompt == NULL)
 			return (NULL);
 		input = readline(prompt);

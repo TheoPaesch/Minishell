@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/21 21:08:57 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/21 22:12:34 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <readline/history.h>
+# include <readline/readline.h>
+
+typedef struct s_list	t_list;
 
 /* -------------------------------------------------------------------------- */
 /*                                   STRUCTS                                  */

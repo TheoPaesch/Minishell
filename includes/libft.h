@@ -6,13 +6,14 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/19 16:16:19 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/21 22:11:11 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // LIBFT.H
 #ifndef LIBFT_H
 # define LIBFT_H
+# include "minishell.h"
 # include <stddef.h>
 
 /* -------------------------------------------------------------------------- */
@@ -64,7 +65,6 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
@@ -77,13 +77,13 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 
 /* --------------------------------- PRINTF --------------------------------- */
-int					pf_printf(const char *str, ...);
-int					pf_tohexlower(unsigned long n);
-int					pf_tohexupper(unsigned long n);
-int					pf_utoa(unsigned int n);
-int					pf_itoa(int n);
-int					pf_putstr(char *s, int fd);
-int					pf_putptr(unsigned long int n);
+// int					pf_printf(const char *str, ...);
+// int					pf_tohexlower(unsigned long n);
+// int					pf_tohexupper(unsigned long n);
+// int					pf_utoa(unsigned int n);
+// int					pf_itoa(int n);
+// int					pf_putstr(char *s, int fd);
+// int					pf_putptr(unsigned long int n);
 
 /* ------------------------------ GET NEXT LINE ----------------------------- */
 # ifndef BUFFER_SIZE
