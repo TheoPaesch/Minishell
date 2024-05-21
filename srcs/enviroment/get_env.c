@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/19 16:22:57 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/20 18:43:12 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ void	ft_epmty_env(void)
 	add_export(env, expo, "SHLVL", "1");
 }
 
-void	ft_get_input(char **envp)
+void	ft_get_input(char **envp, struct s_list *env, struct s_list *expo)
 {
 	int				i;
 	struct s_env	*data;
-	struct s_list	*env;
-	struct s_list	*expo;
 
 	i = 0;
 	if (ft_lstnew(env) == NULL)
@@ -86,3 +84,15 @@ static char	*ft_strcdup(char *str, char c, bool side)
 	return (new);
 }
 /* build linked list for env ad fill with befor "=" and after*/
+
+void	fill_program(t_program *shell, char **envp)
+{
+	if (shell->env == NULL)
+		ft_epmty_env();
+	else
+		ft_get_input(envp, shell->env, shell->expo);
+	if (shell->env == NULL || shell->expo == NULL)
+		exit(1);
+	shell->ex_status = false;
+	shell->isatty = isatty(STDIN_FILENO);
+}

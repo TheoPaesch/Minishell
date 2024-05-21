@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/19 16:17:42 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:40:40 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ typedef struct s_env
 	char	*key;
 	char	*value;
 }			t_env;
+
+typedef struct s_program
+{
+	t_list	*env;
+	t_list	*expo;
+	bool	ex_status;
+	bool	isatty;
+}			t_program;
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
