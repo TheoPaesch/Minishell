@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/19 16:20:44 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/21 21:09:21 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	ft_malloc(void **ptr, int size)
 	if (!allocs)
 		allocs = ft_lstnew(*ptr);
 	else
-		ft_lstadd_front(allocs, ft_lstnew(*ptr));
+		ft_lstadd_front(&allocs, ft_lstnew(*ptr));
 	return (true);
 }
 

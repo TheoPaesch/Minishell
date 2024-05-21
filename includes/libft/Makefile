@@ -18,7 +18,6 @@ SRCS = 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c 
 			get_next_line_bonus.c get_next_line_utils_bonus.c
 
 OBJECTS = $(SRCS:.c=.o)
-BONUS_OBJS = $(BONUS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
@@ -35,7 +34,4 @@ fclean: clean
 
 re: fclean $(NAME)
 
-bonus: $(OBJECTS) $(BONUS_OBJS)
-	ar -rcs $(NAME) $(OBJECTS) $(BONUS_OBJS)
-
-.PHONY: clean fclean all re ar bonus
+.PHONY: clean fclean all re ar

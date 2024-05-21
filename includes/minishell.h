@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/20 17:40:40 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/21 21:08:57 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # ifndef LIBFT_H
 #  include "libft.h"
 # endif
-# include "enviroment/env.h"   // koennen wir die yeeten?
-# include "signal/sig_handl.h" // bitte ALLES in minishell.h, ist uebersichtlich
-# include <errno.h>            // genug und ich brauche nicht 10 files oeffnen
+# include <errno.h> // genug und ich brauche nicht 10 files oeffnen
 # include <signal.h>
 # include <stdarg.h>
 # include <stdbool.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <readline/history.h>
 
 /* -------------------------------------------------------------------------- */
 /*                                   STRUCTS                                  */
@@ -56,7 +56,8 @@ typedef struct s_program
 /* -------------------------------- Get Input ------------------------------- */
 
 void		ft_epmty_env(void);
-void		ft_get_input(char **envp);
+void		ft_get_input(char **envp, struct s_list *env, struct s_list *expo);
+void		fill_program(t_program *shell, char **envp);
 
 /* ---------------------------- Memory Management --------------------------- */
 typedef struct s_mem
@@ -66,9 +67,12 @@ typedef struct s_mem
 }			t_mem;
 
 void		ft_free(void **ptr);
-void		*ft_malloc(void **ptr, int size);
+bool		ft_malloc(void **ptr, int size);
 void		ft_del_mem(t_mem *mem);
 
+/* ------------------------------ Signal Handling --------------------------- */
+
+void		handle_sigint(int sig);
 /* -------------------------------- Execution ------------------------------- */
 
 void		print_export(t_list *expo);
@@ -83,5 +87,7 @@ char		*ft_strtok(char *str, const char *delimiters);
 /* --------------------------------- Parsing -------------------------------- */
 size_t		ft_strspn(const char *str1, const char *str2);
 char		*ft_strjoinall(int count, bool free, ...);
+
+char		*ft_read_input(t_program *mushell);
 
 #endif
