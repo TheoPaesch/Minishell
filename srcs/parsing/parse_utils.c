@@ -6,38 +6,44 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/18 17:23:27 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/19 17:45:37 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+ToDo:
+- nullterm()
+- get_token()
+- error()
+
+*/
 
 #include "../../includes/minishell.h"
 
 const static char	*g_whitespace = " \t\r\n\v ";
 const static char	*g_symbols = "<|>&;()";
 
-struct cmd	*parse_cmd(char *str)
+
+/*
+STILL MISSING OPERATORS:
+
+<<	should be given a delimiter, then read the input until a line containing the
+	delimiter is seen. However, it doesn’t have to update the history!
+
+>>	redirect output in append mode.
+
+'	single quote which should prevent the shell from interpreting the
+	metacharacters in the quoted sequence.
+
+
+UNSURE:
+
+is $ sign interpreting available inside of ""?
+*/
+
+struct s_cmd	*parse_pipe(char **ptr_str, char *end_str)
 {
-	char		*end_str;
-	struct cmd	*cmd;
-
-	end_str = str + ft_strlen(str);
-	cmd = parse_line(&str, end_str);
-	scan_skip_ws(&str, end_str, "");
-	if (str != end_str)
-	{
-		printf(2, "Leftovers: %s\n", str); // remove later
-		error();                           // add error function
-	}
-}
-//
-
-struct cmd			*parse_exec(char **ptr_str, char *end_str);
-
-struct cmd			*parse_redir(char **ptr_str, char *end_str);
-
-struct cmd	*parse_pipe(char **ptr_str, char *end_str)
-{
-	struct cmd	*cmd;
+	struct s_cmd	*cmd;
 
 	cmd = parse_exec(ptr_str, end_str);
 	if (scan_skip_ws(ptr_str, end_str, "|"))
@@ -48,9 +54,9 @@ struct cmd	*parse_pipe(char **ptr_str, char *end_str)
 	return (cmd);
 }
 
-struct cmd	*parse_line(char **ptr_str, char *end_str)
+struct s_cmd	*parse_line(char **ptr_str, char *end_str)
 {
-	struct cmd	*cmd;
+	struct s_cmd	*cmd;
 
 	cmd = parse_pipe(ptr_str, end_str);
 	while (scan_skip_ws(ptr_str, end_str, "&"))
@@ -66,7 +72,20 @@ struct cmd	*parse_line(char **ptr_str, char *end_str)
 	return (cmd);
 }
 
-struct cmd			parse_block(void);
+struct s_cmd	*parse_block(char **ptr_str, char *end_str)
+{
+	struct scmd	*cmd;
+
+	if (!scan_skip_ws(ptr_str, end_str, "("))
+		error("Parseblock"); // adjust for real error func
+	get_token(ptr_str, end_str, 0, 0);
+	cmd = parse_line(ptr_str, end_str);
+	if (!scan_skip_ws(ptr_str, end_str, ")"))
+		error("SYNTAX: missing an ')'"); // adjust for real error func
+	get_token(ptr_str, end_str, 0, 0);
+	cmd = parse_redirs(cmd, ptr_str, end_str);
+	return (cmd);
+}
 
 int	scan_skip_ws(char **ptr_str, char *end_str, char *tokens)
 {

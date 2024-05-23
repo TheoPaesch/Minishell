@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/18 19:36:19 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/21 22:36:40 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # ifndef LIBFT_H
 #  include "libft.h"
 # endif
-# include "enviroment/env.h"   // koennen wir die yeeten?
-# include "signal/sig_handl.h" // bitte ALLES in minishell.h, ist uebersichtlich
 # include <curses.h>
 # include <errno.h> // genug und ich brauche nicht 10 files oeffnen
 # include <fcntl.h>
@@ -34,9 +32,6 @@
 # define PIPE 3
 # define LIST 4
 # define BACK 5
-
-// char			whitespace[] = " \t\r\n\v";
-// char			symbols[] = "<|>&;()";
 
 /* -------------------------------------------------------------------------- */
 /*                                   STRUCTS                                  */
@@ -59,17 +54,17 @@ typedef struct s_exec_cmd
 	int			type;
 	char		*argv[MAXARGS];
 	char		*end_argv[MAXARGS];
-}				t_cmd;
+}				t_exec_cmd;
 
 typedef struct s_redir_cmd
 {
 	int			type;
 	struct cmd	*cmd;
 	char		*file;
-	char		*efile;
+	char		*end_file;
 	int			mode;
 	int			fd;
-}				t_exec_cmd;
+}				t_redir_cmd;
 
 typedef struct s_pipe_cmd
 {
@@ -90,9 +85,11 @@ typedef struct s_back_cmd
 	int			type;
 	struct cmd	*cmd;
 }				t_back_cmd;
+
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
+
 void			splash_screen(void);
 
 /* ---------------------------------- Pipes --------------------------------- */
@@ -100,6 +97,7 @@ void			splash_screen(void);
 /* -------------------------------- Get Input ------------------------------- */
 
 /* ---------------------------- Memory Management --------------------------- */
+
 typedef struct s_mem
 {
 	void		**ext_ptr;
@@ -107,7 +105,7 @@ typedef struct s_mem
 }				t_mem;
 
 void			ft_free(void **ptr);
-void			*ft_malloc(void **ptr, int size);
+int				ft_malloc(void *ptr, size_t size);
 void			ft_del_mem(t_mem *mem);
 
 /* -------------------------------- Execution ------------------------------- */
@@ -115,9 +113,11 @@ void			ft_del_mem(t_mem *mem);
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
 /* ------------------------------ Tokenization ------------------------------ */
+
 char			*ft_strtok(char *str, const char *delimiters);
 
 /* --------------------------------- Parsing -------------------------------- */
+
 size_t			ft_strspn(const char *str1, const char *str2);
 char			*ft_strjoinall(int count, bool free, ...);
 

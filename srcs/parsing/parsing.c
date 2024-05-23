@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:24:33 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/15 17:19:14 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:59:27 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,29 @@ void	shunting_yard(void)
 		if (input->type == OPERATOR)
 		{
 			if (operators == NULL)
-				ft_lstadd_back(&operators, ft_lstnew(input->content));
-			else if (precedence(input->content) > precedence(operators->content))
-				ft_lstadd_back(&operators, ft_lstnew(input->content));
+				ft_lstadd_back(&operators, ft_lstnew(input->data));
+			else if (precedence(input->data) > precedence(operators->data))
+				ft_lstadd_back(&operators, ft_lstnew(input->data));
 			else
 			{
 				while (operators
-					&& precedence(input->content) <= precedence(operators->content))
+					&& precedence(input->data) <= precedence(operators->data))
 				{
-					ft_lstadd_back(&output, ft_lstnew(operators->content));
+					ft_lstadd_back(&output, ft_lstnew(operators->data));
 					tmp = operators;
 					operators = operators->next;
 					ft_free(tmp);
 				}
-				ft_lstadd_back(&operators, ft_lstnew(input->content));
+				ft_lstadd_back(&operators, ft_lstnew(input->data));
 			}
 		}
 		else
-			ft_lstadd_back(&output, ft_lstnew(input->content));
+			ft_lstadd_back(&output, ft_lstnew(input->data));
 		input = input->next;
 	}
 	while (operators)
 	{
-		ft_lstadd_back(&output, ft_lstnew(operators->content));
+		ft_lstadd_back(&output, ft_lstnew(operators->data));
 		tmp = operators;
 		operators = operators->next;
 		ft_free(tmp);

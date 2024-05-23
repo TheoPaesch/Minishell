@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/18 18:49:56 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/21 22:38:27 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,6 @@ typedef struct s_list
 	void			*data;
 	struct s_list	*next;
 }					t_list;
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-}					t_env;
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);

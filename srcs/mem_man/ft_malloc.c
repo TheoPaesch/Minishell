@@ -6,23 +6,33 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 16:02:22 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/21 22:45:26 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_malloc(void **ptr, int size)
+int	ft_malloc(void *ptr, size_t size)
 {
 	static t_list	*allocs;
+	void			**ext_ptr;
 
-	*ptr = malloc(size);
-	if (*ptr == NULL)
+	ext_ptr = (void **)ptr;
+	*ext_ptr = malloc(size);
+	if (*ext_ptr == NULL)
 		return (1);
 	if (!allocs)
-		allocs = ft_lstnew(*ptr);
+		allocs = ft_lstnew(*ext_ptr);
 	else
-		ft_lstadd_front(allocs, ft_lstnew(*ptr));
+		ft_lstadd_front(&allocs, ft_lstnew(*ext_ptr));
+	return (0);
+}
+
+int	main(void)
+{
+	char	*str;
+
+	ft_malloc(&str, 2);
 	return (0);
 }
 

@@ -57,8 +57,9 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
 "C_Cpp_Runner.msvcSecureNoWarnings": false,
 "files.associations": {
-	"minishell.h": "c",
-	"libft.h": "c",
-	"unistd.h": "c"
+  "minishell.h": "c",
+  "libft.h": "c",
+  "unistd.h": "c",
+  "__mutex_base": "c"
 }
 }
