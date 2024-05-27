@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/21 21:04:24 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 21:04:26 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	main(int ac, char **av, char **envp)
 	t_program	shell;
 	char		*input;
 
-	if (ac > 1)
+	if (ac > 1 && av[1] != NULL)
 		printf("minishell: no arguments needed\n");
-	else if (ac == 1 && av[1] != NULL)
+	else
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGINT, SIG_IGN);

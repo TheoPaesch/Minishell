@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:45:42 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/27 14:59:27 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 20:57:42 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_strlcpy(dst, &s[start], len + 1);
 	return (dst);
 }
+
+
+// pulll again from intra to be sure this is right
