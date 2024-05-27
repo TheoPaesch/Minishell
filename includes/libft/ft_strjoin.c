@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:01:15 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/25 16:59:50 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 14:56:37 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = -1;
 	j = -1;
 	ptr = NULL;
-	ft_malloc(ptr, ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (ptr == NULL)
-		return (NULL);
+	if (ft_malloc(ptr, ft_strlen(s1) + ft_strlen(s2) + 1))
+		exit(1);
 	while (s1[++i])
 		ptr[i] = s1[i];
 	while (s2[++j])

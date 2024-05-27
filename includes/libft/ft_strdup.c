@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:08:24 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/25 16:58:18 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 14:56:19 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ char	*ft_strdup(const char *s1)
 	len = ft_strlen(s1) + 1;
 	i = -1;
 	ptr = NULL;
-	ft_malloc(ptr, len);
-	if (ptr == NULL)
-		return (NULL);
+	if (ft_malloc(ptr, len))
+		exit(1);
 	while (++i <= len && s1[i])
 		ptr[i] = s1[i];
 	ptr[i] = '\0';

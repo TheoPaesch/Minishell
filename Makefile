@@ -1,11 +1,10 @@
-NAME = minishell.a
+NAME = minishell
 
 LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g
-MAKE	=	make
 RM		=	rm -rf
 
 LIB		=	-lreadline -L$(LIBFT_DIR)
@@ -15,13 +14,11 @@ SRC_DIRS = ./srcs \
 		   ./srcs/enviroment \
 		   ./srcs/main \
 		   ./srcs/prompt \
-		   ./srcs/signal \
-		   ./srcs/mem_man 
+		   ./srcs/signal 
 vpath %.c $(SRC_DIRS)
 
 SRC = env_export_execution.c get_env.c \
 	  main.c \
-	  ft_del_mem.c ft_free.c ft_malloc.c \
 	  signal.c \
 	  ft_strcspn.c \
 	  ft_strspn.c \
@@ -36,7 +33,7 @@ $(NAME):	$(LIBFT) $(OBJ_DIR) $(OBJ)
 			$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@ $(CFLAGS) $(LIB)
 
 $(LIBFT):
-				cd $(LIBFT_DIR) && $(MAKE)
+				cd $(LIBFT_DIR) && make
 
 $(OBJ_DIR):
 				mkdir $(OBJ_DIR)
@@ -45,11 +42,11 @@ $(OBJ_DIR)/%.o:	%.c
 				$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 clean:
-			cd $(LIBFT_DIR) && $(MAKE) clean
+			cd $(LIBFT_DIR) && make clean
 			$(RM) $(OBJ_DIR)
 
 fclean:		clean
-			cd $(LIBFT_DIR) && $(MAKE) fclean
+			cd $(LIBFT_DIR) && make fclean
 			$(RM) $(NAME)
 
 re:			fclean all

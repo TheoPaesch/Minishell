@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:45:42 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/25 16:59:30 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 14:59:27 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,23 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if ((len == 0 || s_len == 0) || start >= s_len)
 	{
 		dst = NULL;
-		ft_malloc(dst, 1);
-		if (dst == NULL)
-			return (NULL);
+		if (ft_malloc(dst, 1))
+			exit(1);
 		*dst = '\0';
 		return (dst);
 	}
 	else if (len > s_len - start)
 	{
 		dst = NULL;
-		ft_malloc(dst, s_len - start + 1);
-		if (dst == NULL)
-			return (NULL);
+		if (ft_malloc(dst, s_len - start + 1))
+			exit(1);
 		len = s_len;
 	}
 	else
 	{
 		dst = NULL;
-		ft_malloc(dst,len + 1);
+		if (ft_malloc(dst, len + 1))
+			exit(1);
 	}
 	if (dst == NULL)
 		return (NULL);

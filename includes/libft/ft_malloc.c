@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/25 17:55:19 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 14:45:54 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	ft_malloc(void *ptr, size_t size)
 	ext_ptr = (void **)ptr;
 	*ext_ptr = malloc(size);
 	if (*ext_ptr == NULL)
-		return (1);
+		return (printf("malloc failed\n"), 0);
 	if (!allocs)
 		allocs = ft_lstnew(*ext_ptr);
 	else
 		ft_lstadd_front(&allocs, ft_lstnew(*ext_ptr));
-	return (0);
+	return (1);
 }
 
 /* -------------------------------------------------------------------------- */

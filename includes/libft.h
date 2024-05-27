@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/27 13:52:42 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 14:38:16 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t count, size_t size);
-void				ft_free(void **ptr);
+void				ft_free(void *ptr);
 int					ft_isalnum(int c);
 int					ft_isalpha(int num);
 int					ft_isascii(int c);

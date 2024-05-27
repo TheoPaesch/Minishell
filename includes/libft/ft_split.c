@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:32:13 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/25 17:03:23 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 14:56:02 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,8 @@ char	**ft_split_malloc_helper(int wrdcnt)
 	char	**arr;
 
 	arr = NULL;
-	ft_malloc(arr, sizeof(char *) * (wrdcnt + 1));
-	if (arr == NULL)
-		return (NULL);
+	if (ft_malloc(arr, sizeof(char *) * (wrdcnt + 1)))
+		exit(1);
 	arr[wrdcnt] = NULL;
 	return (arr);
 }
