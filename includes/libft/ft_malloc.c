@@ -3,18 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/19 16:20:44 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 12:07:39 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	ft_malloc(void **ptr, int size)
+
+// initialize the 'allocs' list by passing it the global pointer and size of 0.
+bool	ft_malloc(void *ptr, int size)
 {
 	static t_list	*allocs;
+
+
+
+
+	if (ptr == NULL && size == 0)
+		return (false);
+	{
+		/* code */
+	}
+	
 
 	*ptr = malloc(size);
 	if (*ptr == NULL)
