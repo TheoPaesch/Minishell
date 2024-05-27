@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 18:34:34 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/25 17:11:30 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,21 @@ static char	*gnl_get_more(char *tmp, char *buffer, int fd)
 		return (NULL);
 	new = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (new == NULL)
-		return (ft_free(tmp), NULL);
+		return (ft_free((void **)&tmp), NULL);
 	while (bytes_read && gnl_strchr(tmp, '\n') == -1)
 	{
 		bytes_read = read(fd, new, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (gnl_bzero(buffer, BUFFER_SIZE), gnl_bzero(new, BUFFER_SIZE),
-				ft_free(new), NULL);
+				ft_free((void **)&new), NULL);
 		new[bytes_read] = '\0';
 		tmp = gnl_strjoin(tmp, new);
 		if (tmp == NULL)
-			return (ft_free(new), ft_free(tmp), NULL);
+			return (ft_free((void **)&new), ft_free((void **)&tmp), NULL);
 		if (gnl_strlen(tmp) == 0)
-			return (ft_free(new), ft_free(tmp), NULL);
+			return (ft_free((void **)&new), ft_free((void **)&tmp), NULL);
 	}
-	return (ft_free(new), tmp);
+	return (ft_free((void **)&new), tmp);
 }
 
 /// @brief 		Gets the next line from the file pointed to by fd,
@@ -101,8 +101,8 @@ char	*get_next_line(int fd)
 		return (tmp);
 	final = gnl_calloc(nl_index + 2, sizeof(char));
 	if (final == NULL)
-		return (ft_free(tmp), NULL);
+		return (ft_free((void **)&tmp), NULL);
 	gnl_strlcpy(buffer[fd], &tmp[nl_index + 1], BUFFER_SIZE);
 	gnl_strlcpy(final, tmp, nl_index + 2);
-	return (ft_free(tmp), final);
+	return (ft_free((void **)&tmp), final);
 }

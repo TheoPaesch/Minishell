@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/21 21:03:25 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/25 18:34:05 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	ft_epmty_env(void)
 {
-	struct s_env	*data;
 	struct s_list	*env;
 	struct s_list	*expo;
 
-	data = NULL;
 	env = NULL;
 	expo = NULL;
 	if (ft_lstnew(env) == NULL)
@@ -60,9 +58,7 @@ void	ft_get_input(char **envp, struct s_list *env, struct s_list *expo)
 	t_env	*data;
 
 	i = 0;
-	if (ft_lstnew(env) == NULL)
-		printf("Error: malloc failed in get_env\n");
-	if (ft_lstnew(expo) == NULL)
+	if (ft_lstnew(env) == NULL || ft_lstnew(expo) == NULL)
 		printf("Error: malloc failed in get_env\n");
 	while (envp[i] != NULL)
 	{

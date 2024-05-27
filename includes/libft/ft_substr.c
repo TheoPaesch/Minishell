@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:45:42 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/25 16:59:30 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	s_len = ft_strlen(s);
 	if ((len == 0 || s_len == 0) || start >= s_len)
 	{
-		dst = ft_malloc(1);
+		dst = NULL;
+		ft_malloc(dst, 1);
 		if (dst == NULL)
 			return (NULL);
 		*dst = '\0';
@@ -34,13 +35,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	else if (len > s_len - start)
 	{
-		dst = ft_malloc(s_len - start + 1);
+		dst = NULL;
+		ft_malloc(dst, s_len - start + 1);
 		if (dst == NULL)
 			return (NULL);
 		len = s_len;
 	}
 	else
-		dst = ft_malloc(len + 1);
+	{
+		dst = NULL;
+		ft_malloc(dst,len + 1);
+	}
 	if (dst == NULL)
 		return (NULL);
 	ft_strlcpy(dst, &s[start], len + 1);

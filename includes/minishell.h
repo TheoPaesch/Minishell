@@ -3,28 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/21 22:12:34 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 12:33:09 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# ifndef LIBFT_H
-#  include "libft.h"
-# endif
-# include <errno.h> // genug und ich brauche nicht 10 files oeffnen
+# include "libft.h"
+# include <errno.h> 
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <signal.h>
 # include <stdarg.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 
 typedef struct s_list	t_list;
 
@@ -33,22 +31,22 @@ typedef struct s_list	t_list;
 /* -------------------------------------------------------------------------- */
 typedef struct s_token
 {
-	char	*token;
-}			t_token;
+	char				*token;
+}						t_token;
 
 typedef struct s_env
 {
-	char	*key;
-	char	*value;
-}			t_env;
+	char				*key;
+	char				*value;
+}						t_env;
 
 typedef struct s_program
 {
-	t_list	*env;
-	t_list	*expo;
-	bool	ex_status;
-	bool	isatty;
-}			t_program;
+	t_list				*env;
+	t_list				*expo;
+	bool				ex_status;
+	bool				isatty;
+}						t_program;
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
@@ -58,39 +56,33 @@ typedef struct s_program
 
 /* -------------------------------- Get Input ------------------------------- */
 
-void		ft_epmty_env(void);
-void		ft_get_input(char **envp, struct s_list *env, struct s_list *expo);
-void		fill_program(t_program *shell, char **envp);
+void					ft_epmty_env(void);
+void					ft_get_input(char **envp, struct s_list *env,
+							struct s_list *expo);
+void					fill_program(t_program *shell, char **envp);
 
 /* ---------------------------- Memory Management --------------------------- */
-typedef struct s_mem
-{
-	void	**ext_ptr;
-	void	*allocd_mem;
-}			t_mem;
 
-void		ft_free(void **ptr);
-bool		ft_malloc(void **ptr, int size);
-void		ft_del_mem(t_mem *mem);
 
 /* ------------------------------ Signal Handling --------------------------- */
 
-void		handle_sigint(int sig);
+void					handle_sigint(int sig);
 /* -------------------------------- Execution ------------------------------- */
 
-void		print_export(t_list *expo);
-void		prtint_env(t_list *env);
-void		add_export(t_list *env, t_list *expo, char *key, char *value);
+void					print_export(t_list *expo);
+void					prtint_env(t_list *env);
+void					add_export(t_list *env, t_list *expo, char *key,
+							char *value);
 
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
 /* ------------------------------ Tokenization ------------------------------ */
-char		*ft_strtok(char *str, const char *delimiters);
+char					*ft_strtok(char *str, const char *delimiters);
 
 /* --------------------------------- Parsing -------------------------------- */
-size_t		ft_strspn(const char *str1, const char *str2);
-char		*ft_strjoinall(int count, bool free, ...);
+size_t					ft_strspn(const char *str1, const char *str2);
+char					*ft_strjoinall(int count, bool free, ...);
 
-char		*ft_read_input(t_program *mushell);
+char					*ft_read_input(t_program *mushell);
 
 #endif

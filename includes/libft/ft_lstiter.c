@@ -12,7 +12,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 	while (lst != NULL)
 	{
 		lst = lst->next;
-		f(tmp->data);
+		f(tmp->content);
 		tmp = lst;
 	}
 }

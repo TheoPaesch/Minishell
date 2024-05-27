@@ -8,41 +8,35 @@ CFLAGS	=	-Wall -Wextra -Werror -g
 MAKE	=	make
 RM		=	rm -rf
 
-LIB		=	-lreadline -lft -L$(LIBFT_DIR)
+LIB		=	-lreadline -L$(LIBFT_DIR)
 INC		=	-I includes
 
-SRC_DIRS = ./srcs/enviroment \
+SRC_DIRS = ./srcs \
+		   ./srcs/enviroment \
 		   ./srcs/main \
 		   ./srcs/prompt \
 		   ./srcs/signal \
-		   ./srcs/mem_man \
-		   ./srcs/parsing \
-		   ./srcs/pipes \
-		   ./srcs/tokenizer
+		   ./srcs/mem_man 
 vpath %.c $(SRC_DIRS)
 
 SRC = env_export_execution.c get_env.c \
 	  main.c \
 	  ft_del_mem.c ft_free.c ft_malloc.c \
-	  parsing.c \
-	  pipes.c \
 	  signal.c \
 	  ft_strcspn.c \
-	  ft_strjoinall.c \
 	  ft_strspn.c \
-	  prompt.c \
-	  ft_strtok.c tokenizer.c
+	  prompt.c 
 
 OBJ_DIR	=	obj
-OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))obj
+OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: 		$(NAME)
 
 $(NAME):	$(LIBFT) $(OBJ_DIR) $(OBJ)
-			$(CC) $(CFLAGS) $(OBJ) -o $@ $(CFLAGS) $(LIB)
+			$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@ $(CFLAGS) $(LIB)
 
 $(LIBFT):
-				cd $(LIBFT_DIR) && $(MAKE) clean
+				cd $(LIBFT_DIR) && $(MAKE)
 
 $(OBJ_DIR):
 				mkdir $(OBJ_DIR)
