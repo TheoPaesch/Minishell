@@ -6,12 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/29 16:15:47 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:55:26 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include "../../includes/libft.h"
 
 void	ft_empty_env(void)
 {
@@ -53,18 +52,12 @@ static char	*ft_strcdup(char *str, char c, bool side)
 	return (new);
 }
 
-void	ft_get_input(char **envp, t_list *env, t_list *expo)
+void	ft_get_input(char **envp, t_list **env, t_list **expo)
 {
 	int		i;
 	t_env	*data;
 
 	i = 0;
-	if (!env && !expo)
-	{
-		ft_lstnew(&env);
-		ft_lstnew(&expo);
-	}
-	printf("reached get_input here\n");
 	while (envp[i] != NULL)
 	{
 		if (!ft_malloc(&data, sizeof(t_env)))
@@ -73,12 +66,8 @@ void	ft_get_input(char **envp, t_list *env, t_list *expo)
 		data->key = ft_strcdup(envp[i], '=', 0);
 		data->value = ft_strcdup(envp[i], '=', 1);
 		if (data->value[0] != '\0')
-		{
-			env->content = data;
-			ft_lstadd_front(&env, ft_lstnew(env));
-		}
-		expo->content = data;
-		ft_lstadd_front(&expo, ft_lstnew(expo));
+			ft_lstadd_front(env, ft_lstnew(data));
+		ft_lstadd_front(expo, ft_lstnew(data));
 		i++;
 	}
 	printf("reached get_input here\n");
@@ -92,7 +81,7 @@ void	fill_program(t_program *shell, char **envp)
 	if (envp == NULL)
 		ft_empty_env();
 	else
-		ft_get_input(envp, shell->env, shell->expo);
+		ft_get_input(envp, &shell->env, &shell->expo);
 	if (shell->env == NULL || shell->expo == NULL)
 		exit(1);
 	printf("reached fill_program here\n");

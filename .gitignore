@@ -60,5 +60,5 @@ dkms.conf
 trash
 
 # vscode
-.vscode
+.vscode/
 venv/
