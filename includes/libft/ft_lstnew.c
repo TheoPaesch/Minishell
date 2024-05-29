@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:08:57 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/27 14:51:14 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/29 11:05:05 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_list	*ft_lstnew(void *data)
 {
 	t_list	*sl1;
 
+	printf("reached lstnew here\n");
 	sl1 = NULL;
 	if (!ft_malloc(sl1, sizeof(t_list)))
 		exit(1);

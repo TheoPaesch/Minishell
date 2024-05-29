@@ -6,11 +6,12 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/25 18:34:05 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/29 11:28:38 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/libft.h"
 
 void	ft_epmty_env(void)
 {
@@ -52,17 +53,22 @@ static char	*ft_strcdup(char *str, char c, bool side)
 	return (new);
 }
 
-void	ft_get_input(char **envp, struct s_list *env, struct s_list *expo)
+void	ft_get_input(char **envp, t_list *env, t_list *expo)
 {
 	int		i;
 	t_env	*data;
 
 	i = 0;
-	if (ft_lstnew(env) == NULL || ft_lstnew(expo) == NULL)
-		printf("Error: malloc failed in get_env\n");
+	if (!env && !expo)
+	{
+		ft_lstnew(env);
+		ft_lstnew(expo);
+	}
+	printf("reached get_input here\n");
 	while (envp[i] != NULL)
 	{
-		if (!ft_malloc((void **)&data, sizeof(struct s_env)))
+		printf("reached get_input here\n");
+		if (!ft_malloc(&data, sizeof(t_env)))
 			printf("Error: malloc failed in get_env\n");
 		data->key = ft_strcdup(envp[i], '=', 0);
 		data->value = ft_strcdup(envp[i], '=', 1);
@@ -75,6 +81,7 @@ void	ft_get_input(char **envp, struct s_list *env, struct s_list *expo)
 		ft_lstadd_front(&expo, ft_lstnew(expo));
 		i++;
 	}
+	printf("reached get_input here\n");
 }
 
 /* build linked list for env ad fill with befor "=" and after*/
@@ -87,6 +94,7 @@ void	fill_program(t_program *shell, char **envp)
 		ft_get_input(envp, shell->env, shell->expo);
 	if (shell->env == NULL || shell->expo == NULL)
 		exit(1);
+	printf("reached fill_program here\n");
 	shell->ex_status = false;
 	shell->isatty = isatty(STDIN_FILENO);
 }
