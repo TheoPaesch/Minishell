@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/29 11:02:01 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/29 11:30:31 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGINT, SIG_IGN);
-			printf("reached main here\n");
+		printf("reached main here\n");
 		fill_program(&shell, envp);
 		while (1)
 		{

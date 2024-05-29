@@ -6,17 +6,17 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/29 11:28:38 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/29 11:40:44 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/libft.h"
 
-void	ft_epmty_env(void)
+void	ft_empty_env(void)
 {
-	struct s_list	*env;
-	struct s_list	*expo;
+	t_list	*env;
+	t_list	*expo;
 
 	env = NULL;
 	expo = NULL;
@@ -67,9 +67,9 @@ void	ft_get_input(char **envp, t_list *env, t_list *expo)
 	printf("reached get_input here\n");
 	while (envp[i] != NULL)
 	{
-		printf("reached get_input here\n");
 		if (!ft_malloc(&data, sizeof(t_env)))
 			printf("Error: malloc failed in get_env\n");
+		printf("reached get_input here\n");
 		data->key = ft_strcdup(envp[i], '=', 0);
 		data->value = ft_strcdup(envp[i], '=', 1);
 		if (data->value[0] != '\0')
@@ -89,7 +89,7 @@ void	ft_get_input(char **envp, t_list *env, t_list *expo)
 void	fill_program(t_program *shell, char **envp)
 {
 	if (envp == NULL)
-		ft_epmty_env();
+		ft_empty_env();
 	else
 		ft_get_input(envp, shell->env, shell->expo);
 	if (shell->env == NULL || shell->expo == NULL)
