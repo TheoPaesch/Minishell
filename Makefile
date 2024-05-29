@@ -11,10 +11,11 @@ LIB		=	-lreadline -L$(LIBFT_DIR)
 INC		=	-I includes
 
 SRC_DIRS = ./srcs \
-		   ./srcs/enviroment \
+		   ./srcs/environment \
 		   ./srcs/main \
 		   ./srcs/prompt \
-		   ./srcs/signal 
+		   ./srcs/signal
+
 vpath %.c $(SRC_DIRS)
 
 SRC = env_export_execution.c get_env.c \

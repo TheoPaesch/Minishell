@@ -18,7 +18,7 @@ SRCS = 	ft_atoi.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.
 
 OBJECTS = $(SRCS:.c=.o)
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 
 all: $(NAME)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/29 11:40:44 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:15:47 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	ft_get_input(char **envp, t_list *env, t_list *expo)
 	i = 0;
 	if (!env && !expo)
 	{
-		ft_lstnew(env);
-		ft_lstnew(expo);
+		ft_lstnew(&env);
+		ft_lstnew(&expo);
 	}
 	printf("reached get_input here\n");
 	while (envp[i] != NULL)
@@ -88,6 +88,7 @@ void	ft_get_input(char **envp, t_list *env, t_list *expo)
 
 void	fill_program(t_program *shell, char **envp)
 {
+	ft_malloc(&shell->mem, 0);
 	if (envp == NULL)
 		ft_empty_env();
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/29 11:39:50 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:14:30 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_program
 {
 	t_list				*env;
 	t_list				*expo;
+	t_list				*mem;
 	bool				ex_status;
 	bool				isatty;
 }						t_program;
@@ -62,7 +63,6 @@ void					ft_get_input(char **envp, t_list *env,
 void					fill_program(t_program *shell, char **envp);
 
 /* ---------------------------- Memory Management --------------------------- */
-
 
 /* ------------------------------ Signal Handling --------------------------- */
 
