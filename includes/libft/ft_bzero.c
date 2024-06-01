@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_putptr.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 17:01:06 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 16:09:38 by mstrauss         ###   ########.fr       */
+/*   Created: 2024/05/27 14:08:10 by tpaesch           #+#    #+#             */
+/*   Updated: 2024/05/27 14:15:05 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	pf_putptr(unsigned long int n)
+void	ft_bzero(void *s, size_t n)
 {
-	int	tmp;
+	size_t		i;
+	char	    *str;
 
-	tmp = 0;
-	tmp = write(1, "0x", 2);
-	if (tmp == -1)
-		return (tmp);
-	return (pf_tohexlower(n) + tmp);
+	str = s;
+	i = 0;
+	while (n > i)
+	{
+		str[i] = '\0';
+		i++;
+	}
 }

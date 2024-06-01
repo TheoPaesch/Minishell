@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 14:54:12 by tpaesch           #+#    #+#             */
+/*   Updated: 2024/05/27 14:54:15 by tpaesch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft.h"
 
 /// @brief 		Iterates the list ’lst’ and applies the function ’f’ on
@@ -12,7 +24,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 	while (lst != NULL)
 	{
 		lst = lst->next;
-		f(tmp->data);
+		f(tmp->content);
 		tmp = lst;
 	}
 }

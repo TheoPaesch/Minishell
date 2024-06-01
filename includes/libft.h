@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/19 16:16:19 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/27 14:38:16 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
 
 /* -------------------------------------------------------------------------- */
 /*                                    LIBFT                                   */
@@ -23,11 +26,13 @@
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t count, size_t size);
+void				ft_free(void *ptr);
 int					ft_isalnum(int c);
 int					ft_isalpha(int num);
 int					ft_isascii(int c);
 int					ft_isdigit(int num);
 int					ft_isprint(int c);
+int					ft_malloc(void *ptr, size_t size);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -64,6 +69,11 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct s_mem
+{
+	void				**ext_ptr;
+	void				*allocd_mem;
+}						t_mem;
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);
@@ -75,15 +85,16 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+void				ft_del_mem(t_mem *mem);
 
 /* --------------------------------- PRINTF --------------------------------- */
-int					pf_printf(const char *str, ...);
-int					pf_tohexlower(unsigned long n);
-int					pf_tohexupper(unsigned long n);
-int					pf_utoa(unsigned int n);
-int					pf_itoa(int n);
-int					pf_putstr(char *s, int fd);
-int					pf_putptr(unsigned long int n);
+// int					pf_printf(const char *str, ...);
+// int					pf_tohexlower(unsigned long n);
+// int					pf_tohexupper(unsigned long n);
+// int					pf_utoa(unsigned int n);
+// int					pf_itoa(int n);
+// int					pf_putstr(char *s, int fd);
+// int					pf_putptr(unsigned long int n);
 
 /* ------------------------------ GET NEXT LINE ----------------------------- */
 # ifndef BUFFER_SIZE

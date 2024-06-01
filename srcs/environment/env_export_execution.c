@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_export_execution.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:49:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/19 16:23:34 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:15:43 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,18 @@ void	add_export(t_list *env, t_list *expo, char *key, char *value)
 {
 	t_env	*data;
 
-	if (!ft_malloc(&data, sizeof(t_env)))
-		return (printf("Error: malloc failed in add_export\n"));
+	if (!ft_malloc((void **)&data, sizeof(t_env)))
+		printf("Error: malloc failed in add_export\n");
 	data->key = key;
 	data->value = value;
 	if (data->value[0] != '\0')
 	{
 		env->content = data;
-		ft_lstaddfront(env, ft_lstnew(env));
+		ft_lstadd_front(&env, ft_lstnew(env));
 	}
 	expo->content = data;
-	ft_lstaddfront(expo, ft_lstnew(expo));
+	ft_lstadd_front(&expo, ft_lstnew(expo));
 }
+
+
+/* have to add, that if key is the same, overwrite the current value also have to handle unset to delete*/

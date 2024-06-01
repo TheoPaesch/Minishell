@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:07:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 16:02:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:38:08 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_free(void **ptr)
+void	ft_free(void *ptr)
 {
-	if (ptr == NULL || *ptr == NULL)
+	void **tmp;
+
+	tmp = ptr;
+	if (tmp == NULL || *tmp == NULL)
 		return ;
-	free(*ptr);
-	*ptr = NULL;
+	free(*tmp);
+	*tmp = NULL;
 }
 
 /* -------------------------------------------------------------------------- */
