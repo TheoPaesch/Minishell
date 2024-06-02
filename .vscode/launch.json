@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/workspaces/Minishell/includes/libft",
-      "program": "/workspaces/Minishell/includes/libft/build/Debug/outDebug",
+      "cwd": "/workspaces/Minishell",
+      "program": "/workspaces/Minishell/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
