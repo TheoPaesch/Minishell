@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/21 22:36:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:33:47 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_cmd
 typedef struct s_exec_cmd
 {
 	int			type;
+
 	char		*argv[MAXARGS];
 	char		*end_argv[MAXARGS];
 }				t_exec_cmd;
@@ -71,7 +72,7 @@ typedef struct s_pipe_cmd
 	int			type;
 	struct cmd	*left;
 	struct cmd	*right;
-}				t_pipecmd;
+}				t_pipe_cmd;
 
 typedef struct s_list_cmd
 {
@@ -85,6 +86,23 @@ typedef struct s_back_cmd
 	int			type;
 	struct cmd	*cmd;
 }				t_back_cmd;
+
+typedef struct s_parse_exec_vars
+{
+	t_cmd		*retrn_val;
+	t_exec_cmd	*cmd;
+	int			token;
+	int			argc;
+	char		*quote;
+	char		*end_quote;
+}				t_parse_exec_vars;
+
+typedef struct s_parse_redir_vars
+{
+	int			*token;
+	char		*quote;
+	char		*end_quote;
+}				t_parse_redir_vars;
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
@@ -120,5 +138,26 @@ char			*ft_strtok(char *str, const char *delimiters);
 
 size_t			ft_strspn(const char *str1, const char *str2);
 char			*ft_strjoinall(int count, bool free, ...);
+int				scan_skip_ws(char **ptr_str, char *end_str, char *tokens);
+t_cmd			*parse_block(char **ptr_str, char *end_str);
+t_cmd			*parse_line(char **ptr_str, char *end_str);
+t_cmd			*parse_pipe(char **ptr_str, char *end_str);
+t_cmd			*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str);
+t_cmd			*parse_cmd(char *str);
+t_cmd			*parse_exec(char **ptr_str, char *end_str);
+
+t_cmd			*nullterm(t_cmd *cmd);
+t_cmd			*null_exec_cmd(t_cmd *cmd);
+t_cmd			*null_redir(t_cmd *cmd);
+t_cmd			*null_pipe(t_pipe_cmd *cmd);
+t_cmd			*null_list(t_cmd *cmd);
+t_cmd			*null_back(t_cmd *cmd);
+
+t_cmd			*exec_cmd(void);
+t_cmd			*redir_cmd(t_cmd *sub_cmd, char *file, char *end_file,
+					int mode);
+t_cmd			*pipe_cmd(t_cmd *left, t_cmd *right);
+t_cmd			*list_cmd(t_cmd *left, t_cmd *right);
+t_cmd			*back_cmd(t_cmd *sub_cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 12:34:29 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 16:09:33 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:30:58 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /// @brief Identifies the type of cmd passed and null terminates their strings
 /// @return pointer to the command struct
-struct cmd	*nullterm(t_cmd *cmd)
+t_cmd	*nullterm(t_cmd *cmd)
 {
 	if (cmd == NULL)
 		return (NULL);

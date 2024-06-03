@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/19 17:45:37 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:27:57 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ ToDo:
 
 const static char	*g_whitespace = " \t\r\n\v ";
 const static char	*g_symbols = "<|>&;()";
-
 
 /*
 STILL MISSING OPERATORS:
@@ -41,9 +40,9 @@ UNSURE:
 is $ sign interpreting available inside of ""?
 */
 
-struct s_cmd	*parse_pipe(char **ptr_str, char *end_str)
+t_cmd	*parse_pipe(char **ptr_str, char *end_str)
 {
-	struct s_cmd	*cmd;
+	t_cmd	*cmd;
 
 	cmd = parse_exec(ptr_str, end_str);
 	if (scan_skip_ws(ptr_str, end_str, "|"))
@@ -54,9 +53,9 @@ struct s_cmd	*parse_pipe(char **ptr_str, char *end_str)
 	return (cmd);
 }
 
-struct s_cmd	*parse_line(char **ptr_str, char *end_str)
+t_cmd	*parse_line(char **ptr_str, char *end_str)
 {
-	struct s_cmd	*cmd;
+	t_cmd	*cmd;
 
 	cmd = parse_pipe(ptr_str, end_str);
 	while (scan_skip_ws(ptr_str, end_str, "&"))
@@ -72,9 +71,9 @@ struct s_cmd	*parse_line(char **ptr_str, char *end_str)
 	return (cmd);
 }
 
-struct s_cmd	*parse_block(char **ptr_str, char *end_str)
+t_cmd	*parse_block(char **ptr_str, char *end_str)
 {
-	struct scmd	*cmd;
+	t_cmd	*cmd;
 
 	if (!scan_skip_ws(ptr_str, end_str, "("))
 		error("Parseblock"); // adjust for real error func
