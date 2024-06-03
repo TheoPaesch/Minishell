@@ -1,21 +1,27 @@
 # Minishell
-Fetch newest changes:
+
+## Table of Contents
+- [Fetch Changes](#fetch-changes)
+- [Useful Links](#useful-links)
+- [Must-haves](#musthaves)
+- [Allowed Functions Explained](#allowed-functions-explained)
+- [Tokenisation](#tokenisation)
+
+## Fetch Changes
+To fetch the newest changes, use the following commands:
+```bash
 git fetch origin
-change branch to specified name
 git checkout 1-parsing
-integrates changes from specified branch
 git merge <name>
-pulls newest version from remote repository (same branch)
 git pull
-
-
+```
 
 ## Useful Links
 
 https://www.gnu.org/software/bash/manual/bash.html
 
 
-##  Musthaves
+##  Must-haves
 • Display a prompt when waiting for a new command.
 
 • Have a working history.
@@ -66,13 +72,14 @@ foreground pipeline.
 ◦ env with no options or arguments
 ◦ exit with no options
 ____________________________________________________________________________________________________________
+
 The readline() function can cause memory leaks. You don’t have to fix them. But
 that doesn’t mean your own code, yes the code you wrote, can have memory
 leaks.
 ____________________________________________________________________________________________________________
 
 
-## allowed functions explained
+## Allowed Functions Explained
 
 
 readline: This function is used to read a line of text from the standard input. It's commonly used for creating interactive command-line interfaces.
