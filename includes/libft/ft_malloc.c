@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/21 22:45:26 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:53:41 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,29 @@
 
 int	ft_malloc(void *ptr, size_t size)
 {
-	static t_list	*allocs;
+	static t_list	**allocs;
+	t_mem			*mem;
 	void			**ext_ptr;
 
+	if (allocs == NULL && size == 0)
+		return (allocs = ptr, 2);
 	ext_ptr = (void **)ptr;
-	*ext_ptr = malloc(size);
-	if (*ext_ptr == NULL)
-		return (1);
-	if (!allocs)
-		allocs = ft_lstnew(*ext_ptr);
+	if (ext_ptr == NULL)
+		return (printf("Error: called malloc with a wrong param\n"), 0);
 	else
-		ft_lstadd_front(&allocs, ft_lstnew(*ext_ptr));
-	return (0);
-}
-
-int	main(void)
-{
-	char	*str;
-
-	ft_malloc(&str, 2);
-	return (0);
+	{
+		mem = malloc(sizeof(t_mem));
+		if (!mem)
+		{
+			printf("Malloc failed\n");
+			exit(1);
+		}
+		*ext_ptr = malloc(size);
+		mem->allocd_mem = *ext_ptr;
+		mem->ext_ptr = ext_ptr;
+		ft_lstadd_front(allocs, ft_lstnew(mem));
+	}
+	return (1);
 }
 
 /* -------------------------------------------------------------------------- */

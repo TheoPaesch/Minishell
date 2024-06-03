@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:08:57 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/18 18:50:06 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:53:08 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ t_list	*ft_lstnew(void *data)
 {
 	t_list	*sl1;
 
-	sl1 = (t_list *)ft_malloc(sizeof(t_list));
+	sl1 = malloc(sizeof(t_list));
 	if (sl1 == NULL)
-		return (0);
-	sl1->data = data;
+		exit(1);
+	sl1->content = data;
 	sl1->next = NULL;
 	return (sl1);
 }

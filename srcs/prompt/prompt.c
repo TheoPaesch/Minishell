@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 19:29:08 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/29 11:01:46 by tpaesch          ###   ########.fr       */
+/*   Created: 2024/05/21 11:25:48 by tpaesch           #+#    #+#             */
+/*   Updated: 2024/05/27 20:59:10 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include "../../includes/libft.h"
 
-/*fo ctrl + c*/
-
-void	handle_sigint(int sig)
+char	*ft_read_input(t_program *mushell)
 {
-	(void)sig;
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	char	*input;
+	char	*prompt;
+	char	*tmp;
+
+	if (mushell->isatty)
+	{
+		prompt = getcwd(NULL, 0);
+		if (prompt == NULL)
+			return (NULL);
+		input = readline(prompt);
+		free(prompt);
+	}
+	else
+	{
+		tmp = get_next_line(STDIN_FILENO);
+		input = ft_strtrim(tmp, "\n");
+		free(tmp);
+	}
+	return (input);
 }
+
+
+// getcwd is malloced keep in mind to free

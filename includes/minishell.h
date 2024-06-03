@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 19:33:47 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:50:13 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@
 #  include "libft.h"
 # endif
 # include <curses.h>
-# include <errno.h> // genug und ich brauche nicht 10 files oeffnen
+# include <errno.h>
 # include <fcntl.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <signal.h>
 # include <stdarg.h>
 # include <stdbool.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <term.h>
 # include <unistd.h>
@@ -43,6 +46,21 @@ typedef struct s_token
 {
 	char		*token;
 }				t_token;
+
+typedef struct s_env
+{
+	char		*key;
+	char		*value;
+}				t_env;
+
+typedef struct s_program
+{
+	t_list		*env;
+	t_list		*expo;
+	t_list		*mem;
+	bool		ex_status;
+	bool		isatty;
+}				t_program;
 
 typedef struct s_cmd
 {
@@ -114,6 +132,10 @@ void			splash_screen(void);
 
 /* -------------------------------- Get Input ------------------------------- */
 
+void			ft_empty_env(void);
+void			ft_get_input(char **envp, t_list **env, t_list **expo);
+void			fill_program(t_program *shell, char **envp);
+
 /* ---------------------------- Memory Management --------------------------- */
 
 typedef struct s_mem
@@ -126,7 +148,12 @@ void			ft_free(void **ptr);
 int				ft_malloc(void *ptr, size_t size);
 void			ft_del_mem(t_mem *mem);
 
+void			handle_sigint(int sig);
 /* -------------------------------- Execution ------------------------------- */
+
+void			print_export(t_list *expo);
+void			prtint_env(t_list *env);
+void			add_export(t_list *env, t_list *expo, char *key, char *value);
 
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
@@ -159,5 +186,7 @@ t_cmd			*redir_cmd(t_cmd *sub_cmd, char *file, char *end_file,
 t_cmd			*pipe_cmd(t_cmd *left, t_cmd *right);
 t_cmd			*list_cmd(t_cmd *left, t_cmd *right);
 t_cmd			*back_cmd(t_cmd *sub_cmd);
+
+char			*ft_read_input(t_program *mushell);
 
 #endif

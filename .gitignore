@@ -6,6 +6,7 @@
 *.ko
 *.obj
 *.elf
+obj
 
 # Linker output
 *.ilk
@@ -57,3 +58,7 @@ dkms.conf
 .gitignore
 .DS_Store
 trash
+
+# vscode
+.vscode/
+venv/
