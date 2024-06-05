@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/01 16:43:39 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/04 21:47:53 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_key(char *str)
 	i = 0;
 	while (str[i] != '=')
 		i++;
-	ft_malloc(&key, sizeof(char) * i);
+	ft_malloc(&key, sizeof(char) * i + 1);
 	i = 0;
 	while (str[i] != '=')
 	{

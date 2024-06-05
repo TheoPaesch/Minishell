@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:01:15 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/27 14:56:37 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/04 21:59:19 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@
 /// @param s2 	String 2
 /// @return 	New composite String
 ///				NULL if the allocation fails.
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	unsigned long	i;
-	unsigned long	j;
-	char			*ptr;
+	char	*ret;
+	size_t	len;
 
-	i = -1;
-	j = -1;
-	ptr = NULL;
-	if (ft_malloc(ptr, ft_strlen(s1) + ft_strlen(s2) + 1))
+	if (!s1)
+		return (NULL);
+	if (!s2)
+		return ((char *)s1);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	if (!ft_malloc(&ret, sizeof(char) * (len + 1)))
 		exit(1);
-	while (s1[++i])
-		ptr[i] = s1[i];
-	while (s2[++j])
-		ptr[i + j] = s2[j];
-	ptr[i + j] = '\0';
-	return (ptr);
+	if (!ret)
+		return (NULL);
+	ft_strlcpy(ret, s1, len + 1);
+	ft_strlcat(ret, s2, len + 1);
+	return (ret);
 }

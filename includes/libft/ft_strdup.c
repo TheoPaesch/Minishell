@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:08:24 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/27 14:56:19 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/04 21:57:27 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,16 @@
 /// @param s1 	String 1.
 /// @return 	Pointer to allocated memory.
 ///				if fail; return NULL and set errno to ENOMEM.
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *str)
 {
-	int		len;
-	int		i;
-	char	*ptr;
+	char	*ret;
+	size_t	len;
 
-	len = ft_strlen(s1) + 1;
-	i = -1;
-	ptr = NULL;
-	if (ft_malloc(ptr, len))
+	len = ft_strlen(str);
+	if (!ft_malloc(&ret, sizeof(char) * (len + 1)))
 		exit(1);
-	while (++i <= len && s1[i])
-		ptr[i] = s1[i];
-	ptr[i] = '\0';
-	return (ptr);
+	if (!ret)
+		return (NULL);
+	ft_strlcpy(ret, str, len + 1);
+	return (ret);
 }
