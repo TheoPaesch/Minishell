@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 19:50:13 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:14:53 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_exec_cmd
 typedef struct s_redir_cmd
 {
 	int			type;
-	struct cmd	*cmd;
+	t_cmd		*cmd;
 	char		*file;
 	char		*end_file;
 	int			mode;
@@ -88,21 +88,21 @@ typedef struct s_redir_cmd
 typedef struct s_pipe_cmd
 {
 	int			type;
-	struct cmd	*left;
-	struct cmd	*right;
+	t_cmd		*left;
+	t_cmd		*right;
 }				t_pipe_cmd;
 
 typedef struct s_list_cmd
 {
 	int			type;
-	struct cmd	*left;
-	struct cmd	*right;
+	t_cmd		*left;
+	t_cmd		*right;
 }				t_list_cmd;
 
 typedef struct s_back_cmd
 {
 	int			type;
-	struct cmd	*cmd;
+	t_cmd		*cmd;
 }				t_back_cmd;
 
 typedef struct s_parse_exec_vars
@@ -138,15 +138,9 @@ void			fill_program(t_program *shell, char **envp);
 
 /* ---------------------------- Memory Management --------------------------- */
 
-typedef struct s_mem
-{
-	void		**ext_ptr;
-	void		*allocd_mem;
-}				t_mem;
-
-void			ft_free(void **ptr);
-int				ft_malloc(void *ptr, size_t size);
-void			ft_del_mem(t_mem *mem);
+// void			ft_free(void **ptr);
+// int				ft_malloc(void *ptr, size_t size);
+// void			ft_del_mem(t_mem *mem);
 
 void			handle_sigint(int sig);
 /* -------------------------------- Execution ------------------------------- */
@@ -176,7 +170,7 @@ t_cmd			*parse_exec(char **ptr_str, char *end_str);
 t_cmd			*nullterm(t_cmd *cmd);
 t_cmd			*null_exec_cmd(t_cmd *cmd);
 t_cmd			*null_redir(t_cmd *cmd);
-t_cmd			*null_pipe(t_pipe_cmd *cmd);
+t_cmd			*null_pipe(t_cmd *cmd);
 t_cmd			*null_list(t_cmd *cmd);
 t_cmd			*null_back(t_cmd *cmd);
 

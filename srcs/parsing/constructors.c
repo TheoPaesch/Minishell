@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:57:53 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 19:34:20 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:10:00 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_cmd	*exec_cmd(void)
 {
 	t_exec_cmd	*cmd;
 
-	ft_calloc(cmd, sizeof(*cmd));
+	cmd = ft_calloc(1, sizeof(*cmd));
 	cmd->type = EXEC;
 	return ((t_cmd *)cmd);
 }

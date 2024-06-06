@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:56:30 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/25 17:08:51 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/03 20:03:22 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	if (lst == NULL)
 		return (NULL);
 	lstnext = ft_lstmap(lst->next, *f, *del);
-	data = f(lst->content);
+	data = f(lst->data);
 	lstnew = ft_lstnew(data);
 	if (lstnew == NULL)
 	{

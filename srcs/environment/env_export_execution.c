@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:49:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/29 16:15:43 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:06:45 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	print_export(t_list *expo)
 {
 	while (expo)
 	{
-		printf("declare -x %s=\"%s\"\n", ((t_env *)expo->content)->key,
-			((t_env *)expo->content)->value);
+		printf("declare -x %s=\"%s\"\n", ((t_env *)expo->data)->key,
+			((t_env *)expo->data)->value);
 		expo = expo->next;
 	}
 }
@@ -26,8 +26,8 @@ void	prtint_env(t_list *env)
 {
 	while (env)
 	{
-		printf("%s=%s\n", ((t_env *)env->content)->key,
-			((t_env *)env->content)->value);
+		printf("%s=%s\n", ((t_env *)env->data)->key,
+			((t_env *)env->data)->value);
 		env = env->next;
 	}
 }
@@ -42,12 +42,12 @@ void	add_export(t_list *env, t_list *expo, char *key, char *value)
 	data->value = value;
 	if (data->value[0] != '\0')
 	{
-		env->content = data;
+		env->data = data;
 		ft_lstadd_front(&env, ft_lstnew(env));
 	}
-	expo->content = data;
+	expo->data = data;
 	ft_lstadd_front(&expo, ft_lstnew(expo));
 }
 
-
-/* have to add, that if key is the same, overwrite the current value also have to handle unset to delete*/
+/* have to add, that if key is the same,
+	overwrite the current value also have to handle unset to delete*/

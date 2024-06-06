@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:46:55 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 17:18:07 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:14:12 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_cmd	*null_redir(t_cmd *cmd)
 	return (cmd);
 }
 
-t_cmd	*null_pipe(t_pipe_cmd *cmd)
+t_cmd	*null_pipe(t_cmd *cmd)
 {
 	nullterm(((t_pipe_cmd *)cmd)->left);
 	nullterm(((t_pipe_cmd *)cmd)->right);

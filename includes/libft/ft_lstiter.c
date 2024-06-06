@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:54:12 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/27 14:54:15 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/03 20:03:13 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 	while (lst != NULL)
 	{
 		lst = lst->next;
-		f(tmp->content);
+		f(tmp->data);
 		tmp = lst;
 	}
 }

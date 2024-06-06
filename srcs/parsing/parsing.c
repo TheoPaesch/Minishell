@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:24:33 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/21 13:59:27 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:17:07 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,52 +20,52 @@ The input is processed one symbol at a time:
 of the stack or the precedences are equal and the operator is left associative,
 then that operator is popped off the stack and added to the output.
 Finally,any remaining operators are popped off the stack and added to the output
-*/
+// */
 
-void	shunting_yard(void)
-{
-	t_list	*output;
-	t_list	*operators;
-	t_list	*input;
-	t_list	*tmp;
+// void	shunting_yard(void)
+// {
+// 	t_list	*output;
+// 	t_list	*operators;
+// 	t_list	*input;
+// 	t_list	*tmp;
 
-	output = NULL;
-	operators = NULL;
-	input = NULL;
-	tmp = NULL;
-	while (input)
-	{
-		if (input->type == OPERATOR)
-		{
-			if (operators == NULL)
-				ft_lstadd_back(&operators, ft_lstnew(input->data));
-			else if (precedence(input->data) > precedence(operators->data))
-				ft_lstadd_back(&operators, ft_lstnew(input->data));
-			else
-			{
-				while (operators
-					&& precedence(input->data) <= precedence(operators->data))
-				{
-					ft_lstadd_back(&output, ft_lstnew(operators->data));
-					tmp = operators;
-					operators = operators->next;
-					ft_free(tmp);
-				}
-				ft_lstadd_back(&operators, ft_lstnew(input->data));
-			}
-		}
-		else
-			ft_lstadd_back(&output, ft_lstnew(input->data));
-		input = input->next;
-	}
-	while (operators)
-	{
-		ft_lstadd_back(&output, ft_lstnew(operators->data));
-		tmp = operators;
-		operators = operators->next;
-		ft_free(tmp);
-	}
-}
+// 	output = NULL;
+// 	operators = NULL;
+// 	input = NULL;
+// 	tmp = NULL;
+// 	while (input)
+// 	{
+// 		if (input->type == OPERATOR)
+// 		{
+// 			if (operators == NULL)
+// 				ft_lstadd_back(&operators, ft_lstnew(input->data));
+// 			else if (precedence(input->data) > precedence(operators->data))
+// 				ft_lstadd_back(&operators, ft_lstnew(input->data));
+// 			else
+// 			{
+// 				while (operators
+// 					&& precedence(input->data) <= precedence(operators->data))
+// 				{
+// 					ft_lstadd_back(&output, ft_lstnew(operators->data));
+// 					tmp = operators;
+// 					operators = operators->next;
+// 					ft_free(tmp);
+// 				}
+// 				ft_lstadd_back(&operators, ft_lstnew(input->data));
+// 			}
+// 		}
+// 		else
+// 			ft_lstadd_back(&output, ft_lstnew(input->data));
+// 		input = input->next;
+// 	}
+// 	while (operators)
+// 	{
+// 		ft_lstadd_back(&output, ft_lstnew(operators->data));
+// 		tmp = operators;
+// 		operators = operators->next;
+// 		ft_free(tmp);
+// 	}
+// }
 
 // while there are tokens to be read:
 //     read a token
@@ -104,33 +104,33 @@ void	shunting_yard(void)
 //     {assert the operator on top of the stack is not a (left) parenthesis}
 //     pop the operator from the operator stack onto the output queue
 
-void	shunting_yard(t_list *input)
-{
-	t_list	*output;
-	t_list	*operators;
+// void	shunting_yard(t_list *input)
+// {
+// 	t_list	*output;
+// 	t_list	*operators;
 
-	output = NULL;
-	operators = NULL;
-	while (input)
-	{
-		if (input->type == NUMBER)
-		{
-		}
-		else if (input->type == FUNCTION)
-		{
-		}
-		else if (input->type == OPERATOR_1)
-		{
-			while (operator->type == OPERATOR_2 && operators->symbol != '(')
-			{
-				/* code */
-			}
-			// while (operators != NULL && operators->symbol != '(')
-			// {
-			// 	push(operators, output);
-			// 	ft_lstdelone(operator)
-			// }
-		}
-		input = input->next;
-	}
-}
+// 	output = NULL;
+// 	operators = NULL;
+// 	while (input)
+// 	{
+// 		if (input->type == NUMBER)
+// 		{
+// 		}
+// 		else if (input->type == FUNCTION)
+// 		{
+// 		}
+// 		else if (input->type == OPERATOR_1)
+// 		{
+// 			while (operator->type == OPERATOR_2 && operators->symbol != '(')
+// 			{
+// 				/* code */
+// 			}
+// 			// while (operators != NULL && operators->symbol != '(')
+// 			// {
+// 			// 	push(operators, output);
+// 			// 	ft_lstdelone(operator)
+// 			// }
+// 		}
+// 		input = input->next;
+// 	}
+// }

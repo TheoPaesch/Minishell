@@ -14,7 +14,8 @@ SRC_DIRS = ./srcs \
 		   ./srcs/environment \
 		   ./srcs/main \
 		   ./srcs/prompt \
-		   ./srcs/signal
+		   ./srcs/signal \
+		   ./srcs/parsing
 
 vpath %.c $(SRC_DIRS)
 
@@ -23,7 +24,13 @@ SRC = env_export_execution.c get_env.c \
 	  signal.c \
 	  ft_strcspn.c \
 	  ft_strspn.c \
-	  prompt.c 
+	  prompt.c \
+	  constructors.c \
+	  nullterm_utils.c \
+	  nullterm.c \
+	  parsing.c \
+	  parse_utils.c \
+	  parse_utils2.c
 
 OBJ_DIR	=	obj
 OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 19:52:37 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:06:05 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_mem
 	void			*allocd_mem;
 }					t_mem;
 
-t_list				*ft_lstnew(void *content);
+t_list				*ft_lstnew(void *data);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);

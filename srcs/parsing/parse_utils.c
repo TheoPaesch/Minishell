@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 19:27:57 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:24:48 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ ToDo:
 
 #include "../../includes/minishell.h"
 
-const static char	*g_whitespace = " \t\r\n\v ";
-const static char	*g_symbols = "<|>&;()";
+static const char	*g_whitespace = " \t\r\n\v ";
+// static const char	*g_symbols = "<|>&;()";
 
 /*
 STILL MISSING OPERATORS:
@@ -66,7 +66,7 @@ t_cmd	*parse_line(char **ptr_str, char *end_str)
 	if (scan_skip_ws(ptr_str, end_str, ";"))
 	{
 		get_token(ptr_str, end_str, 0, 0);
-		cmd = listcmd(cmd, parse_line(ptr_str, end_str));
+		cmd = list_cmd(cmd, parse_line(ptr_str, end_str));
 	}
 	return (cmd);
 }
@@ -76,13 +76,13 @@ t_cmd	*parse_block(char **ptr_str, char *end_str)
 	t_cmd	*cmd;
 
 	if (!scan_skip_ws(ptr_str, end_str, "("))
-		error("Parseblock"); // adjust for real error func
+		strerror(1); // adjust for real error func
 	get_token(ptr_str, end_str, 0, 0);
 	cmd = parse_line(ptr_str, end_str);
 	if (!scan_skip_ws(ptr_str, end_str, ")"))
-		error("SYNTAX: missing an ')'"); // adjust for real error func
+		strerror(1); // SYNTAX: missing an ')'"
 	get_token(ptr_str, end_str, 0, 0);
-	cmd = parse_redirs(cmd, ptr_str, end_str);
+	cmd = parse_redir(cmd, ptr_str, end_str);
 	return (cmd);
 }
 
