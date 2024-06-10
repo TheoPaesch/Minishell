@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:49:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/05 14:19:28 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/08 14:30:33 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,15 @@ void	change_value_both(t_list *expo, t_list *env, char *key, char *value)
 
 void	export_execution(t_list *env, t_list *expo, char *key, char *value)
 {
+	if (key == NULL && value == NULL)
+	{
+		print_export(expo);
+		return ;
+	}
 	if (check_key(expo, key))
 	{
 		if (value == NULL)
-			return(free(key));
+			return (free(key));
 		if (check_key(env, key))
 			change_value_both(expo, env, key, value);
 		else

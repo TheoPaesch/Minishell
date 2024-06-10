@@ -23,7 +23,9 @@ SRC = env_export_execution.c get_env.c \
 	  signal.c \
 	  ft_strcspn.c \
 	  ft_strspn.c \
-	  prompt.c 
+	  prompt.c \
+	  cd_and_exit.c \
+	  unset.c
 
 OBJ_DIR	=	obj
 OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
