@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:07:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/08 14:25:49 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:13:43 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	ft_free(void *ptr)
 {
 	void	**tmp;
 
-	tmp = ptr;
+	tmp = (void **)ptr;
 	if (tmp == NULL || *tmp == NULL)
 		return ;
-	free(*tmp);
+	free(ptr);
 	*tmp = NULL;
 }
 

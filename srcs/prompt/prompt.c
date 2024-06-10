@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:25:48 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/04 21:48:21 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:14:19 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ char	*ft_read_input(t_program *mushell)
 		if (prompt == NULL)
 			return (NULL);
 		input = readline(prompt);
-		free(prompt);
+		ft_free(prompt);
 	}
 	else
 	{
 		tmp = get_next_line(STDIN_FILENO);
 		input = ft_strtrim(tmp, "\n");
-		free(tmp);
+		ft_free(tmp);
 	}
 	return (input);
 }

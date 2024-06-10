@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/08 15:09:02 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/10 20:39:20 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 # include "libft.h"
-# include <errno.h> 
+# include <errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
@@ -58,8 +58,7 @@ typedef struct s_program
 /* -------------------------------- Get Input ------------------------------- */
 
 void					ft_empty_env(void);
-void					ft_get_input(char **envp, t_list **env,
-							t_list **expo);
+void					ft_get_input(char **envp, t_list **env, t_list **expo);
 void					fill_program(t_program *shell, char **envp);
 t_list					*pre_pointer(t_list *env, char *key);
 char					*get_value(char *str);
@@ -73,14 +72,17 @@ void					handle_sigint(int sig);
 /* -------------------------------- Execution ------------------------------- */
 
 void					print_export(t_list *expo);
-void 					prtint_env(t_list *env);
-void 					add_export(t_list *env, t_list *expo, char *key, char *value);
-void 					add_env(t_list *env, char *key, char *value);
-void 					change_value_both(t_list *expo, t_list *env, char *key, char *value);
-void 					export_execution(t_list *env, t_list *expo, char *key, char *value);
-bool 					check_key(t_list *tmp, char *key);
-
-
+void					prtint_env(t_list *env);
+void					add_export(t_list *env, t_list *expo, char *key,
+							char *value);
+void					add_env(t_list *env, char *key, char *value);
+void					change_value_both(t_list *expo, t_list *env, char *key,
+							char *value);
+void					export_execution(t_list *env, t_list *expo, char *key,
+							char *value);
+bool					check_key(t_list *tmp, char *key);
+void					cd(t_program *shell, char *path);
+void					ms_exit(t_program *shell);
 
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
