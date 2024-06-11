@@ -3,9 +3,9 @@ NAME = minishell
 LIBFT_DIR = ./includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-RM = rm -rf
+CC		=	cc
+CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address -O1
+RM		=	rm -rf
 
 LIB = -lreadline -L$(LIBFT_DIR)
 INC = -I includes

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/11 15:33:41 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/11 23:20:43 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	main(int ac, char **av, char **envp)
 		{
 			input = read_input(&shell);
 			if (input == NULL)
-				break ;
+				ms_exit(&shell);
 			add_history(input);
-			free(input);
+			ft_free(input);
 		}
 	}
 }

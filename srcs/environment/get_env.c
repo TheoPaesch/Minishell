@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/11 15:34:50 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/11 23:20:28 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_key(char *str)
 	i = 0;
 	while (str[i] != '=')
 		i++;
-	ft_malloc(&key, sizeof(char) * i);
+	ft_malloc(&key, sizeof(char) * i + 1);
 	i = 0;
 	while (str[i] != '=')
 	{
