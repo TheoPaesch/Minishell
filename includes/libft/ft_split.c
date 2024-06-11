@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:32:13 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/27 14:56:02 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 00:13:51 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_countdelim(char const *s, char c)
 	return (count);
 }
 
-/// @brief Frees a double pointer array and its content
+/// @brief Frees a double pointer array and its data
 /// @param arr The array to be freed
 /// @param amount The amount of entries to be freed
 /// @return

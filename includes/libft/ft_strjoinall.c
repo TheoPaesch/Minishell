@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoinall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:36:12 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/25 16:50:18 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 00:35:39 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../libft.h"
 
 /// @brief Joins a variable amount of strings to a single one.
 /// Frees the src strings if 'bool free' is 1.

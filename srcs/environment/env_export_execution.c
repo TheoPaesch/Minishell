@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_export_execution.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:49:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/11 23:19:42 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 00:14:20 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	check_key(t_list *tmp, char *key)
 {
 	while (tmp)
 	{
-		if (ft_strcmp(((t_env *)tmp->content)->key, key) == 0)
+		if (ft_strcmp(((t_env *)tmp->data)->key, key) == 0)
 			return (true);
 		tmp = tmp->next;
 	}
@@ -47,16 +47,16 @@ void	change_value_both(t_list *expo, t_list *env, char *key, char *value)
 {
 	while (expo)
 	{
-		if (ft_strcmp(((t_env *)expo->content)->key, key) == 0)
-			((t_env *)expo->content)->value = value;
+		if (ft_strcmp(((t_env *)expo->data)->key, key) == 0)
+			((t_env *)expo->data)->value = value;
 		expo = expo->next;
 	}
 	while (env)
 	{
-		if (ft_strcmp(((t_env *)env->content)->key, key) == 0)
+		if (ft_strcmp(((t_env *)env->data)->key, key) == 0)
 		{
-			ft_free(((t_env *)env->content)->value);
-			((t_env *)env->content)->value = value;
+			ft_free(((t_env *)env->data)->value);
+			((t_env *)env->data)->value = value;
 		}
 		env = env->next;
 	}
@@ -93,7 +93,7 @@ void	add_env(t_list *env, char *key, char *value)
 	data->value = value;
 	if (data->value != NULL)
 	{
-		env->content = data;
+		env->data = data;
 		ft_lstadd_front(&env, ft_lstnew(env));
 	}
 }

@@ -26,7 +26,9 @@ SRCS =  ft_atoi.c ft_calloc.c ft_isalnum.c \
         ft_lstadd_back.c ft_lstlast.c ft_lstdelone.c \
         ft_lstclear.c ft_lstiter.c ft_lstmap.c \
         ft_del_mem.c ft_free.c ft_malloc.c \
-        get_next_line_bonus.c get_next_line_utils_bonus.c
+        get_next_line_bonus.c get_next_line_utils_bonus.c \
+        ft_strcspn.c ft_strspn.c
+        # ft_strjoinall.c 
 
 OBJECTS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 CC = cc

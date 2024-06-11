@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:52:25 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/05 16:13:01 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 00:34:29 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ void	patch_list(t_list *tmp)
 
 void	free_content(t_list *tmp)
 {
-	ft_free(((t_env *)tmp->content)->key);
-	ft_free(((t_env *)tmp->content)->value);
-	ft_free(tmp->content);
-	tmp->content = NULL;
+	ft_free(((t_env *)tmp->data)->key);
+	ft_free(((t_env *)tmp->data)->value);
+	ft_free(tmp->data);
+	tmp->data = NULL;
 }
-
 
 void	unset_execution(t_list *env, t_list *expo, char *key)
 {
@@ -37,7 +36,7 @@ void	unset_execution(t_list *env, t_list *expo, char *key)
 	tmp = NULL;
 	while (env)
 	{
-		if (ft_strcmp(((t_env *)env->content)->key, key) == 0)
+		if (ft_strcmp(((t_env *)env->data)->key, key) == 0)
 		{
 			free_content(env);
 			patch_list(tmp);
@@ -47,30 +46,13 @@ void	unset_execution(t_list *env, t_list *expo, char *key)
 	}
 	while (expo)
 	{
-		if (ft_strcmp(((t_env *)expo->content)->key, key) == 0)
+		if (ft_strcmp(((t_env *)expo->data)->key, key) == 0)
 		{
 			free_content(expo);
 			patch_list(tmp);
 		}
 		tmp = env;
 		expo = expo->next;
-	}
-}
-
-void	del_env(t_list *env, char *key)
-{
-	t_list	*tmp;
-
-	tmp = NULL;
-	while (env)
-	{
-		if (ft_strcmp(((t_env *)env->content)->key, key) == 0)
-		{
-			tmp = pre_pointer(env, key);
-			free_content(env);
-			patch_list(tmp);
-		}
-		env = env->next;
 	}
 }
 
@@ -81,7 +63,7 @@ t_list	*pre_pointer(t_list *env, char *key)
 	tmp = NULL;
 	while (env)
 	{
-		if (ft_strcmp(((t_env *)env->next->content)->key, key) == 0)
+		if (ft_strcmp(((t_env *)env->next->data)->key, key) == 0)
 			return (tmp);
 		tmp = env;
 		env = env->next;
@@ -89,4 +71,22 @@ t_list	*pre_pointer(t_list *env, char *key)
 	return (NULL);
 }
 
-/*if strcmp finds string to remove, return pointer to previous list enrty for removal*/
+void	del_env(t_list *env, char *key)
+{
+	t_list	*tmp;
+
+	tmp = NULL;
+	while (env)
+	{
+		if (ft_strcmp(((t_env *)env->data)->key, key) == 0)
+		{
+			tmp = pre_pointer(env, key);
+			free_content(env);
+			patch_list(tmp);
+		}
+		env = env->next;
+	}
+}
+
+/*if strcmp finds string to remove,
+	return pointer to previous list enrty for removal*/

@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/12 00:08:28 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/12 00:34:40 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <readline/readline.h>
 # include <signal.h>
 # include <stdarg.h>
-# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
@@ -129,9 +128,8 @@ typedef struct s_parse_redir_vars
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 void			splash_screen(void);
-char			*ft_strjoinall(int count, bool free, ...);
-size_t			ft_strcspn(const char *str1, const char *str2);
-size_t			ft_strspn(const char *str1, const char *str2);
+
+void			handle_sigint(int sig);
 
 /* ---------------------------------- Pipes --------------------------------- */
 void			safe_pipe(int pipefd[2]);
@@ -143,18 +141,22 @@ void			get_input(char **envp, t_list **env, t_list **expo);
 void			fill_program(t_program *shell, char **envp);
 
 /* ---------------------------- Memory Management --------------------------- */
-void			handle_sigint(int sig);
+void			ms_exit(t_program *shell);
 
 /* -------------------------------- Execution ------------------------------- */
-
+t_list			*pre_pointer(t_list *env, char *key);
+void			change_value_both(t_list *expo, t_list *env, char *key,
+					char *value);
 void			print_export(t_list *expo);
 void			print_env(t_list *env);
+void			add_env(t_list *env, char *key, char *value);
 void			add_export(t_list *env, t_list *expo, char *key, char *value);
 void			exec_exec(t_cmd *cmd);
 void			exec_redir(t_cmd *cmd);
 void			exec_list(t_cmd *cmd);
 void			exec_pipe(t_cmd *cmd);
 void			exec_back(t_cmd *cmd);
+
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
 /* ------------------------------ Tokenization ------------------------------ */

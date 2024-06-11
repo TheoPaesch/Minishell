@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_exe.c                                         :+:      :+:    :+:   */
+/*   path_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/10 15:54:22 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 00:28:13 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	path_exe(t_program *shell, char *executable, char **args)
+void	path_exec(t_program *shell, char *executable, char **args)
 {
 	int		i;
 	char	**folders;
 
 	i = 0;
-	folders = ft_split(((t_env *)shell->env->content)->value, ':');
+	folders = ft_split(((t_env *)shell->env->data)->value, ':');
 	while (folders[i])
 	{
 		if (access(ft_strjoin(ft_strjoin(folders[i], "/"), executable),
@@ -30,11 +30,11 @@ void	path_exe(t_program *shell, char *executable, char **args)
 		}
 		i++;
 	}
-    while (i > -1)
-    {
-        ft_free(folders[i]);
-        i--;
-    }
+	while (i > -1)
+	{
+		ft_free(folders[i]);
+		i--;
+	}
 }
 
 // Path: srcs/execute/execute.c

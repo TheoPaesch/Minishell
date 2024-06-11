@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:07:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/11 23:14:35 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 00:17:40 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 void	ft_free(void *ptr)
 {
 	void	**tmp;
-	void	**tmp;
 
-	tmp = (void **)ptr;
 	tmp = (void **)ptr;
 	if (tmp == NULL || *tmp == NULL)
 		return ;
-	free(ptr);
+	free(*tmp);
 	*tmp = NULL;
 }
 

@@ -22,12 +22,13 @@ SRC_DIRS = ./srcs \
 vpath %.c $(SRC_DIRS)
 
 SRC = env_export_execution.c \
+      cd_and_exit.c \
+      unset.c \
+      path_exec.c \
       get_env.c \
       main.c \
       splash.c \
       signal.c \
-      ft_strcspn.c \
-      ft_strspn.c \
       ft_strtok.c \
       prompt.c \
       constructors.c \
@@ -36,9 +37,9 @@ SRC = env_export_execution.c \
       parse_utils.c \
       parse_utils_2.c \
       get_token.c \
-      scan_skip_ws.c \
       execute.c \
-      safe_utils.c
+      safe_utils.c \
+      scan_skip_ws.c
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

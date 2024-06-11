@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/11 23:13:05 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 00:37:01 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // LIBFT.H
 #ifndef LIBFT_H
 # define LIBFT_H
+# include <stdarg.h>
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -61,6 +63,9 @@ void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				**ft_split(char const *s, char c);
 int					ft_strcmp(const char *s1, const char *s2);
+char				*ft_strjoinall(int count, bool free, ...);
+size_t				ft_strcspn(const char *str1, const char *str2);
+size_t				ft_strspn(const char *str1, const char *str2);
 
 /* ------------------------------- LINKED LIST ------------------------------ */
 
