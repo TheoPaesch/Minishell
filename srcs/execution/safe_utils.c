@@ -1,11 +1,11 @@
 #include "../../includes/minishell.h"
 
-void	safe_fork(void)
+pid_t	safe_fork(void)
 {
 	pid_t	pid;
 
 	pid = fork();
-	if (pid = -1)
+	if (pid == -1)
 	{
 		perror("Forking failed.\n");
 		exit(1);
