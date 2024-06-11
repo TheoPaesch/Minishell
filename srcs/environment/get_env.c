@@ -6,13 +6,13 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/04 21:47:53 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/11 15:14:10 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_empty_env(void)
+void	empty_env(void)
 {
 	t_list	*env;
 	t_list	*expo;
@@ -96,7 +96,7 @@ char	*get_value(char *str)
 // 	return (new);
 // }
 
-void	ft_get_input(char **envp, t_list **env, t_list **expo)
+void	get_input(char **envp, t_list **env, t_list **expo)
 {
 	int		i;
 	t_env	*data;
@@ -121,9 +121,9 @@ void	fill_program(t_program *shell, char **envp)
 {
 	ft_malloc(&shell->mem, 0);
 	if (envp == NULL)
-		ft_empty_env();
+		empty_env();
 	else
-		ft_get_input(envp, &shell->env, &shell->expo);
+		get_input(envp, &shell->env, &shell->expo);
 	if (shell->env == NULL || shell->expo == NULL)
 		exit(1);
 	shell->ex_status = false;

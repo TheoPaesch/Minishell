@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/10 20:39:20 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/11 15:13:42 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_program
 
 /* -------------------------------- Get Input ------------------------------- */
 
-void					ft_empty_env(void);
-void					ft_get_input(char **envp, t_list **env, t_list **expo);
+void					empty_env(void);
+void					get_input(char **envp, t_list **env, t_list **expo);
 void					fill_program(t_program *shell, char **envp);
 t_list					*pre_pointer(t_list *env, char *key);
 char					*get_value(char *str);

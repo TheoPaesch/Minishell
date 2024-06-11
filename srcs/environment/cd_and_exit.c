@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/10 19:26:53 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/11 16:58:52 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ void	ms_exit(t_program *shell)
 		// ft_free(&(shell->mem));
 		tmp = tmp->next;
 	}
+	rl_clear_history();
 	exit(shell->ex_status);
 }
