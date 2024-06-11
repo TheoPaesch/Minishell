@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/11 23:13:54 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 00:08:28 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
-# include <errno.h>
 # ifndef LIBFT_H
 #  include "libft.h"
 # endif
@@ -140,9 +138,8 @@ void			safe_pipe(int pipefd[2]);
 pid_t			safe_fork(void);
 
 /* -------------------------------- Get Input ------------------------------- */
-
-void			ft_empty_env(void);
-void			ft_get_input(char **envp, t_list **env, t_list **expo);
+void			empty_env(void);
+void			get_input(char **envp, t_list **env, t_list **expo);
 void			fill_program(t_program *shell, char **envp);
 
 /* ---------------------------- Memory Management --------------------------- */
@@ -151,9 +148,13 @@ void			handle_sigint(int sig);
 /* -------------------------------- Execution ------------------------------- */
 
 void			print_export(t_list *expo);
-void			prtint_env(t_list *env);
+void			print_env(t_list *env);
 void			add_export(t_list *env, t_list *expo, char *key, char *value);
-
+void			exec_exec(t_cmd *cmd);
+void			exec_redir(t_cmd *cmd);
+void			exec_list(t_cmd *cmd);
+void			exec_pipe(t_cmd *cmd);
+void			exec_back(t_cmd *cmd);
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
 /* ------------------------------ Tokenization ------------------------------ */
