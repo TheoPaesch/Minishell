@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:49:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/03 20:06:45 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/11 15:33:06 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_export(t_list *expo)
 	}
 }
 
-void	prtint_env(t_list *env)
+void	print_env(t_list *env)
 {
 	while (env)
 	{

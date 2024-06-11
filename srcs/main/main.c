@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 19:56:55 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/11 15:33:41 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **envp)
 		fill_program(&shell, envp);
 		while (1)
 		{
-			input = ft_read_input(&shell);
+			input = read_input(&shell);
 			if (input == NULL)
 				break ;
 			add_history(input);

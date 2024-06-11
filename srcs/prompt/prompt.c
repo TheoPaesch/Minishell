@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:25:48 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/27 20:59:10 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/11 15:33:41 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_read_input(t_program *mushell)
+char	*read_input(t_program *mushell)
 {
 	char	*input;
 	char	*prompt;
@@ -34,6 +34,5 @@ char	*ft_read_input(t_program *mushell)
 	}
 	return (input);
 }
-
 
 // getcwd is malloced keep in mind to free
