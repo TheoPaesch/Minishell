@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 20:14:53 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:59:53 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <term.h>
 # include <unistd.h>
 
@@ -40,7 +41,7 @@
 /*                                   STRUCTS                                  */
 /* -------------------------------------------------------------------------- */
 
-# define MAXARGS 10
+# define MAXARGS 50
 
 typedef struct s_token
 {
@@ -105,6 +106,8 @@ typedef struct s_back_cmd
 	t_cmd		*cmd;
 }				t_back_cmd;
 
+/* --------------------------------- Helpers -------------------------------- */
+
 typedef struct s_parse_exec_vars
 {
 	t_cmd		*retrn_val;
@@ -117,7 +120,7 @@ typedef struct s_parse_exec_vars
 
 typedef struct s_parse_redir_vars
 {
-	int			*token;
+	int			token;
 	char		*quote;
 	char		*end_quote;
 }				t_parse_redir_vars;
@@ -125,40 +128,41 @@ typedef struct s_parse_redir_vars
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
-
 void			splash_screen(void);
+char			*ft_strjoinall(int count, bool free, ...);
+size_t			ft_strcspn(const char *str1, const char *str2);
+size_t			ft_strspn(const char *str1, const char *str2);
 
 /* ---------------------------------- Pipes --------------------------------- */
+void			safe_pipe(int pipefd[2]);
+pid_t			safe_fork(void);
 
 /* -------------------------------- Get Input ------------------------------- */
-
-void			ft_empty_env(void);
-void			ft_get_input(char **envp, t_list **env, t_list **expo);
+void			empty_env(void);
+void			get_input(char **envp, t_list **env, t_list **expo);
 void			fill_program(t_program *shell, char **envp);
 
 /* ---------------------------- Memory Management --------------------------- */
-
-// void			ft_free(void **ptr);
-// int				ft_malloc(void *ptr, size_t size);
-// void			ft_del_mem(t_mem *mem);
-
 void			handle_sigint(int sig);
+
 /* -------------------------------- Execution ------------------------------- */
 
 void			print_export(t_list *expo);
-void			prtint_env(t_list *env);
+void			print_env(t_list *env);
 void			add_export(t_list *env, t_list *expo, char *key, char *value);
-
+void			exec_exec(t_cmd *cmd);
+void			exec_redir(t_cmd *cmd);
+void			exec_list(t_cmd *cmd);
+void			exec_pipe(t_cmd *cmd);
+void			exec_back(t_cmd *cmd);
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
 /* ------------------------------ Tokenization ------------------------------ */
-
+int				get_token(char **ptr_str, char *end_str, char **quote,
+					char **end_quote);
 char			*ft_strtok(char *str, const char *delimiters);
 
 /* --------------------------------- Parsing -------------------------------- */
-
-size_t			ft_strspn(const char *str1, const char *str2);
-char			*ft_strjoinall(int count, bool free, ...);
 int				scan_skip_ws(char **ptr_str, char *end_str, char *tokens);
 t_cmd			*parse_block(char **ptr_str, char *end_str);
 t_cmd			*parse_line(char **ptr_str, char *end_str);
@@ -181,6 +185,6 @@ t_cmd			*pipe_cmd(t_cmd *left, t_cmd *right);
 t_cmd			*list_cmd(t_cmd *left, t_cmd *right);
 t_cmd			*back_cmd(t_cmd *sub_cmd);
 
-char			*ft_read_input(t_program *mushell);
+char			*read_input(t_program *mushell);
 
 #endif

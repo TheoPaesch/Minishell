@@ -6,11 +6,23 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 19:53:41 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/10 20:14:04 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static void	*ft_memnew(void *data)
+{
+	t_list	*sl1;
+
+	sl1 = malloc(sizeof(t_list));
+	if (sl1 == NULL)
+		exit(1);
+	sl1->data = data;
+	sl1->next = NULL;
+	return (sl1);
+}
 
 int	ft_malloc(void *ptr, size_t size)
 {
@@ -22,19 +34,19 @@ int	ft_malloc(void *ptr, size_t size)
 		return (allocs = ptr, 2);
 	ext_ptr = (void **)ptr;
 	if (ext_ptr == NULL)
-		return (printf("Error: called malloc with a wrong param\n"), 0);
+		return (printf("Error: called malloc with a wrong param.\n"), 0);
 	else
 	{
 		mem = malloc(sizeof(t_mem));
 		if (!mem)
 		{
-			printf("Malloc failed\n");
+			printf("Malloc failed.\n");
 			exit(1);
 		}
 		*ext_ptr = malloc(size);
 		mem->allocd_mem = *ext_ptr;
 		mem->ext_ptr = ext_ptr;
-		ft_lstadd_front(allocs, ft_lstnew(mem));
+		ft_lstadd_front(allocs, ft_memnew(mem));
 	}
 	return (1);
 }
