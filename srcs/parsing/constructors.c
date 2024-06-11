@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:57:53 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 20:10:00 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:30:32 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_cmd	*redir_cmd(t_cmd *sub_cmd, char *file, char *end_file, int mode)
 	cmd->file = file;
 	cmd->end_file = end_file;
 	cmd->mode = mode;
-	// cmd->fd = fd;
+	// cmd->fd = fd;	// handled outside of this func for NORM *4param max)
 	return ((t_cmd *)cmd);
 }
 
