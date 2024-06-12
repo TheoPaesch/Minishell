@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_export_execution.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:49:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/12 00:14:20 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:55:02 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	change_value_both(t_list *expo, t_list *env, char *key, char *value)
 	{
 		if (ft_strcmp(((t_env *)env->data)->key, key) == 0)
 		{
-			ft_free(((t_env *)env->data)->value);
+			ft_free(&((t_env *)env->data)->value);
 			((t_env *)env->data)->value = value;
 		}
 		env = env->next;
 	}
-	ft_free(key);
+	ft_free(&key);
 }
 
 void	export_execution(t_list *env, t_list *expo, char *key, char *value)
@@ -73,7 +73,7 @@ void	export_execution(t_list *env, t_list *expo, char *key, char *value)
 	if (check_key(expo, key))
 	{
 		if (value == NULL)
-			return (free(key));
+			return (ft_free(&key));
 		if (check_key(env, key))
 			change_value_both(expo, env, key, value);
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoinall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:36:12 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/12 00:35:39 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:53:05 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_strjoinall(int count, bool free, ...)
 		tmp = va_arg(args, char *);
 		ft_strcat(str, tmp);
 		if (free)
-			ft_free(tmp);
+			ft_free(&tmp);
 	}
 	return (va_end(args), str);
 }

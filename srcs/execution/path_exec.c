@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/12 00:28:13 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:57:23 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	path_exec(t_program *shell, char *executable, char **args)
 	}
 	while (i > -1)
 	{
-		ft_free(folders[i]);
+		ft_free(&folders[i]);
 		i--;
 	}
 }

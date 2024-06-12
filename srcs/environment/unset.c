@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:52:25 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/12 00:34:29 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:56:12 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	patch_list(t_list *tmp)
 
 	tmp2 = tmp->next;
 	tmp->next = tmp2->next;
-	ft_free(tmp2);
+	ft_free(&tmp2);
 }
 
 void	free_content(t_list *tmp)
 {
-	ft_free(((t_env *)tmp->data)->key);
-	ft_free(((t_env *)tmp->data)->value);
-	ft_free(tmp->data);
+	ft_free(&((t_env *)tmp->data)->key);
+	ft_free(&((t_env *)tmp->data)->value);
+	ft_free(&tmp->data);
 	tmp->data = NULL;
 }
 

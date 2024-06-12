@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:07:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/12 13:00:39 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 15:55:38 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 void	ft_free(void *ptr)
 {
-	if (ptr == NULL )
+	void	**tmp;
+
+	tmp = (void **)ptr;
+	if (tmp == NULL || *tmp == NULL)
 		return ;
 	printf("adress %p was freed\n", ptr);
-	free(ptr);
-	ptr = NULL;
+	free(*tmp);
+	*tmp = NULL;
 }
 
 /* -------------------------------------------------------------------------- */

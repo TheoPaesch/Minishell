@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:25:48 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/12 12:49:44 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 15:59:22 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ char	*read_input(t_program *mushell)
 	if (mushell->isatty)
 	{
 		tmp = getcwd(NULL, 0);
-		input = ft_strdup(" ");
-		prompt = ft_strjoin(tmp, input);
+		prompt = ft_strjoin(tmp, ft_strdup(" "));
 		if (prompt == NULL)
 			return (NULL);
 		input = readline(prompt);
-		ft_free(prompt);
+		free(tmp);
+		tmp = NULL;
 	}
 	else
 	{
 		tmp = get_next_line(STDIN_FILENO);
 		input = ft_strtrim(tmp, "\n");
-		ft_free(tmp);
+		ft_free(&tmp);
 	}
 	return (input);
 }

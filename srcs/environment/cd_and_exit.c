@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_and_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/12 00:14:06 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:03:56 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	ms_exit(t_program *shell)
 	while (tmp != NULL)
 	{
 		((t_mem *)(tmp->data))->ext_ptr = NULL;
-		ft_free(((t_mem *)(tmp->data))->allocd_mem);
+		ft_free(&((t_mem *)(tmp->data))->allocd_mem);
+		(((t_mem *)(tmp->data))->allocd_mem) = NULL;
 		ft_free(&(tmp->data));
 		// ft_free(&(shell->mem));
 		tmp = tmp->next;

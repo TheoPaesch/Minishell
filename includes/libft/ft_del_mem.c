@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_del_mem.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:28:52 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 15:47:45 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:51:44 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	ft_del_mem(t_mem *mem)
 {
 	if (mem->ext_ptr != NULL && mem->allocd_mem != NULL)
 	{
-		ft_free(mem->allocd_mem);
+		ft_free(&(mem->allocd_mem));
 		mem->ext_ptr = NULL;
 	}
 	else if (mem->ext_ptr != mem->allocd_mem && mem->allocd_mem != NULL)
 	{
-		ft_free(mem->allocd_mem);
+		ft_free(&(mem->allocd_mem));
 	}
 	else if (mem->ext_ptr == NULL)
 	{
