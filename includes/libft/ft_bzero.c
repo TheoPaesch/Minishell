@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:08:10 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/05/27 14:15:05 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/12 12:24:14 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t		i;
-	char	    *str;
+	size_t	i;
+	char	*str;
 
 	str = s;
 	i = 0;

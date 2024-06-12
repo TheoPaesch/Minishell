@@ -1,23 +1,23 @@
-NAME = minishell
+NAME 	= 	minishell
 
-LIBFT_DIR = ./includes/libft
-LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT_DIR =	./includes/libft
+LIBFT	=	./obj/libft/libft.a
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address -O1
 RM		=	rm -rf
 
-LIB = -lreadline -L$(LIBFT_DIR)
-INC = -I includes
+LIB		=	-lreadline -L$(LIBFT_DIR)
+INC		=	-I includes
 
-SRC_DIRS = ./srcs \
-           ./srcs/environment \
-           ./srcs/main \
-           ./srcs/prompt \
-           ./srcs/signal \
-           ./srcs/parsing \
-           ./srcs/tokenizer \
-		   ./srcs/execution
+SRC_DIRS =	./srcs \
+			./srcs/environment \
+			./srcs/main \
+			./srcs/prompt \
+			./srcs/signal \
+			./srcs/parsing \
+			./srcs/tokenizer \
+			./srcs/execution
 
 vpath %.c $(SRC_DIRS)
 
@@ -42,12 +42,12 @@ SRC = env_export_execution.c \
       scan_skip_ws.c
 
 OBJ_DIR = obj
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+OBJ 	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 # COLORS
-BLUE = \033[0;34m
-GREEN = \033[0;32m
-NO_COLOR = \033[0m
+BLUE 		= \033[0;34m
+GREEN 		= \033[0;32m
+NO_COLOR 	= \033[0m
 
 all: start_compile $(NAME) end_compile
 
@@ -57,7 +57,7 @@ start_compile:
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@ $(LIB)
 	@printf "$(GREEN)SUCCESS - $(NAME) has been successfully compiled$(NO_COLOR)\n"
 
 $(OBJ_DIR)/%.o: %.c

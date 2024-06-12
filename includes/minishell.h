@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/12 00:34:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/12 00:50:52 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
@@ -128,7 +127,6 @@ typedef struct s_parse_redir_vars
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 void			splash_screen(void);
-
 void			handle_sigint(int sig);
 
 /* ---------------------------------- Pipes --------------------------------- */

@@ -26,21 +26,22 @@ void	execute_cmd(t_cmd *cmd)
 				// otherwise no. FIX!!!!
 }
 
-// void	exec_exec(t_cmd *cmd)
-// {
-// 	t_exec_cmd	*exec_cmd;
+//  ONLY COMMENTED OUT IN ORDER TO COMPILE TO DEBUG OTHER STUFF!!!
+void	exec_exec(t_cmd *cmd)
+{
+	t_exec_cmd	*exec_cmd;
 
-// 	exec_cmd = (t_exec_cmd *)cmd;
-// 	if (exec_cmd->argv[0] == 0)
-// 	{
-// 		perror("Wrong routing / similar error during exec\n");
-// 		exit(1);
-// 	}
-// 	execve("placeholder path\n", exec_cmd->argv, envp);
-// 	// change once PATHfunc exists
-// 	printf("Executing %s failed\n", "placeholder path");
-// 	// change once PATHfunc exist
-// }
+	exec_cmd = (t_exec_cmd *)cmd;
+	if (exec_cmd->argv[0] == 0)
+	{
+		perror("Wrong routing / similar error during exec\n");
+		exit(1);
+	}
+	execve("placeholder path\n", exec_cmd->argv, envp);
+	// change once PATHfunc exists
+	printf("Executing %s failed\n", "placeholder path");
+	// change once PATHfunc exist
+}
 
 void	exec_redir(t_cmd *cmd)
 {
@@ -61,12 +62,13 @@ void	exec_list(t_cmd *cmd)
 {
 	t_list_cmd	*exec_list;
 	pid_t		pid;
+	int			status;
 
 	exec_list = (t_list_cmd *)cmd;
 	pid = safe_fork();
 	if (pid == 0)
 		execute_cmd(exec_list->left);
-	wait(pid);
+	waitpid(pid, &status, 0);
 	execute_cmd(exec_list->right);
 }
 
@@ -74,10 +76,13 @@ void	exec_pipe(t_cmd *cmd)
 {
 	t_pipe_cmd	*exec_pipe;
 	int			pipes[2];
+	pid_t		pid1;
+	pid_t		pid2;
 
 	exec_pipe = (t_pipe_cmd *)cmd;
 	safe_pipe(pipes);
-	if (safe_fork() == 0)
+	pid1 = safe_fork();
+	if (pid1 == 0)
 	{
 		close(1);
 		dup(pipes[1]);
@@ -85,18 +90,20 @@ void	exec_pipe(t_cmd *cmd)
 		close(pipes[1]);
 		execute_cmd(exec_pipe->left);
 	}
-	if (safe_fork() == 0)
+	pid2 = safe_fork();
+	if (pid2 == 0)
 	{
 		close(0);
 		dup(pipes[0]);
 		close(pipes[0]);
 		close(pipes[1]);
 		execute_cmd(exec_pipe->right);
+		exit(0);
 	}
 	close(pipes[0]);
 	close(pipes[1]);
-	wait();
-	wait();
+	waitpid(pid1, NULL, 0); // we may need exit status,
+	waitpid(pid2, NULL, 0); // change null to status
 }
 
 void	exec_back(t_cmd *cmd)
