@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:07:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/12 00:17:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:00:39 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 void	ft_free(void *ptr)
 {
-	void	**tmp;
-
-	tmp = (void **)ptr;
-	if (tmp == NULL || *tmp == NULL)
+	if (ptr == NULL )
 		return ;
-	free(*tmp);
-	*tmp = NULL;
+	printf("adress %p was freed\n", ptr);
+	free(ptr);
+	ptr = NULL;
 }
 
 /* -------------------------------------------------------------------------- */

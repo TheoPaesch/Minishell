@@ -60,7 +60,8 @@
     "minishell.h": "c",
     "libft.h": "c",
     "unistd.h": "c",
-    "errno.h": "c"
+    "errno.h": "c",
+    "history.h": "c"
   },
   "[c]": {
     "editor.defaultFormatter": "keyhr.42-c-format"

@@ -1,7 +1,7 @@
 NAME = minishell
 
 LIBFT_DIR = ./includes/libft
-LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT = ./obj/libft/libft.a
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address -O1
@@ -15,9 +15,8 @@ SRC_DIRS = ./srcs \
            ./srcs/main \
            ./srcs/prompt \
            ./srcs/signal \
-           ./srcs/parsing \
-           ./srcs/tokenizer \
-		   ./srcs/execution
+            ./srcs/execution
+
 
 vpath %.c $(SRC_DIRS)
 
@@ -29,17 +28,8 @@ SRC = env_export_execution.c \
       main.c \
       splash.c \
       signal.c \
-      ft_strtok.c \
-      prompt.c \
-      constructors.c \
-      nullterm_utils.c \
-      nullterm.c \
-      parse_utils.c \
-      parse_utils_2.c \
-      get_token.c \
-      execute.c \
-      safe_utils.c \
-      scan_skip_ws.c
+      prompt.c 
+
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
@@ -57,7 +47,7 @@ start_compile:
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@ $(LIB)
 	@printf "$(GREEN)SUCCESS - $(NAME) has been successfully compiled$(NO_COLOR)\n"
 
 $(OBJ_DIR)/%.o: %.c
