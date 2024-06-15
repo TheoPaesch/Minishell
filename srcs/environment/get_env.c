@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/11 23:20:28 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/14 22:45:02 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_key(char *str)
 	i = 0;
 	while (str[i] != '=')
 		i++;
-	ft_malloc(&key, sizeof(char) * i + 1);
+	key = ft_malloc(sizeof(char) * i + 1);
 	i = 0;
 	while (str[i] != '=')
 	{
@@ -60,7 +60,7 @@ char	*get_value(char *str)
 	j = i;
 	while (str[j] != '\0')
 		j++;
-	ft_malloc(&value, sizeof(char) * (j + 1 - i));
+	value = ft_malloc(sizeof(char) * (j + 1 - i));
 	j = 0;
 	while (str[i] != '\0')
 	{
@@ -104,7 +104,8 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		if (!ft_malloc(&data, sizeof(t_env)))
+		data = ft_malloc(sizeof(t_env));
+		if (!data)
 			printf("Error: malloc failed in get_env\n");
 		data->key = get_key(envp[i]);
 		data->value = get_value(envp[i]);
@@ -119,7 +120,10 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 
 void	fill_program(t_program *shell, char **envp)
 {
-	ft_malloc(&shell->mem, 0);
+	shell->mem = ft_malloc(0);
+	init_mem_man((t_list **)(&(shell->mem)));
+	ft_malloc(1);
+	ft_free(NULL);
 	if (envp == NULL)
 		empty_env();
 	else

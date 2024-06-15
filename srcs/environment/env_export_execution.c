@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:49:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/12 00:14:20 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/14 18:53:38 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	change_value_both(t_list *expo, t_list *env, char *key, char *value)
 		}
 		env = env->next;
 	}
-	ft_free(key);
+	key = ft_free(key);
 }
 
 void	export_execution(t_list *env, t_list *expo, char *key, char *value)
@@ -87,8 +87,7 @@ void	add_env(t_list *env, char *key, char *value)
 {
 	t_env	*data;
 
-	if (!ft_malloc((void **)&data, sizeof(t_env)))
-		exit(1);
+	data = ft_malloc(sizeof(t_env));
 	data->key = key;
 	data->value = value;
 	if (data->value != NULL)
@@ -102,8 +101,7 @@ void	add_export(t_list *env, t_list *expo, char *key, char *value)
 {
 	t_env	*data;
 
-	if (!ft_malloc((void **)&data, sizeof(t_env)))
-		exit(1);
+	data = ft_malloc(sizeof(t_env));
 	data->key = key;
 	data->value = value;
 	if (data->value != NULL)

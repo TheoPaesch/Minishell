@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/12 12:34:15 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/14 20:55:23 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ void			fill_program(t_program *shell, char **envp);
 
 /* ---------------------------- Memory Management --------------------------- */
 void			ms_exit(t_program *shell);
+t_list			**init_mem_man(t_list **shell_mem);
+t_list			**get_mem_lst(void);
 
 /* -------------------------------- Execution ------------------------------- */
 t_list			*pre_pointer(t_list *env, char *key);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 00:25:05 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/27 14:46:55 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/14 18:47:47 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,14 @@ char	*gnl_strjoin(char *s1, char *s2)
 	i = -1;
 	j = -1;
 	if (s1 == NULL)
-		return (ft_free(&s2), NULL);
-	ptr = NULL;
-	if (!ft_malloc(ptr, gnl_strlen(s1) + gnl_strlen(s2) + 1))
-		exit(1);
+		return (ft_free(s2), NULL);
+	ptr = ft_malloc(gnl_strlen(s1) + gnl_strlen(s2) + 1);
 	while (s1 && s1[++i])
 		ptr[i] = s1[i];
 	while (s2 && s2[++j])
 		ptr[i + j] = s2[j];
 	ptr[i + j] = '\0';
-	ft_free(&s1);
+	ft_free(s1);
 	s1 = NULL;
 	return (ptr);
 }
@@ -77,9 +75,7 @@ char	*gnl_strdup(char *s1)
 
 	len = gnl_strlen(s1);
 	i = -1;
-	ptr = NULL;
-	if (!ft_malloc(ptr, len + 1))
-		exit(1);
+	ptr = ft_malloc(len + 1);
 	while (++i <= len && s1[i])
 		ptr[i] = s1[i];
 	ptr[i] = '\0';
@@ -121,9 +117,7 @@ void	*gnl_calloc(size_t count, size_t size)
 	int				n;
 
 	n = count * size;
-	ptr = NULL;
-	if (!ft_malloc(ptr, n))
-		exit(1);
+	ptr = ft_malloc(n);
 	while (0 < n)
 		ptr[n-- - 1] = 0;
 	return (ptr);

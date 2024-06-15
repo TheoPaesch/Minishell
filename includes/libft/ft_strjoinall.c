@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:36:12 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/12 00:35:39 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/14 18:52:09 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_strjoinall(int count, bool free, ...)
 		tmp = va_arg(args, char *);
 		ft_strcat(str, tmp);
 		if (free)
-			ft_free(tmp);
+			tmp = ft_free(tmp);
 	}
 	return (va_end(args), str);
 }

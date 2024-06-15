@@ -1,10 +1,10 @@
 NAME = minishell
 
-LIBFT_DIR = ./includes/libft
+LIBFT_DIR = ./includes/libft/
 LIBFT = ./obj/libft/libft.a
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address -O1
+CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address,leak
 RM		=	rm -rf
 
 LIB = -lreadline -L$(LIBFT_DIR)
@@ -67,5 +67,7 @@ fclean:
 	@printf "$(GREEN)Cleaned up $(NAME)$(NO_COLOR)\n"
 
 re: fclean all
+
+# debug: CFLAGS += -fsanitize=address,leak
 
 .PHONY: all clean fclean re start_compile end_compile

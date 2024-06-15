@@ -8,8 +8,13 @@
 #   ╚══════╝╚═╝╚═════╝ ╚═╝        ╚═╝    #                            
 ##########################################
 
-NAME = ../../obj/libft/libft.a
-OBJ_DIR = ../../obj/libft
+NAME = libft.a
+OBJ_DIR = ../../obj/libft/
+
+SRC_DIRS = includes/ \
+			includes/libft/
+
+vpath %.c $(SRC_DIRS)
 
 SRCS =  ft_atoi.c ft_calloc.c ft_isalnum.c \
         ft_isalpha.c ft_isascii.c ft_isdigit.c \
@@ -25,14 +30,14 @@ SRCS =  ft_atoi.c ft_calloc.c ft_isalnum.c \
         ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
         ft_lstadd_back.c ft_lstlast.c ft_lstdelone.c \
         ft_lstclear.c ft_lstiter.c ft_lstmap.c \
-        ft_del_mem.c ft_free.c ft_malloc.c \
+        ft_free.c ft_malloc.c \
         get_next_line_bonus.c get_next_line_utils_bonus.c \
-        ft_strcspn.c ft_strspn.c ft_strcmp.c
+        ft_strcspn.c ft_strspn.c ft_strcmp.c \
         # ft_strjoinall.c 
 
 OBJECTS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address,leak
 
 # COLORS
 BLUE = \033[0;34m
@@ -40,7 +45,7 @@ YELLOW = \033[0;33m
 GREEN = \033[0;32m
 NO_COLOR = \033[0m
 
-all: start_compile $(NAME)
+all: start_compile $(OBJ_DIR)$(NAME)
 
 start_compile:
 	@mkdir -p $(OBJ_DIR)
@@ -48,8 +53,8 @@ start_compile:
 	@printf "$(BLUE)Compiler: $(CC)$(NO_COLOR)\n"
 	@printf "$(BLUE)C-Flags: $(CFLAGS)$(NO_COLOR)\n\n"
 
-$(NAME): $(OBJECTS)
-	@ar -rcs $(NAME) $(OBJECTS)
+$(OBJ_DIR)$(NAME): $(OBJECTS)
+	@ar -rcs $(OBJ_DIR)$(NAME) $(OBJECTS)
 	@printf "\n$(GREEN)SUCCESS - libft.a has been successfully compiled$(NO_COLOR)\n\n"
 
 $(OBJ_DIR)/%.o: %.c
@@ -60,8 +65,10 @@ clean:
 	@rm -rf $(OBJ_DIR) && printf "$(GREEN)Removing libft object files...$(NO_COLOR)\n"
 
 fclean: clean
-	@rm -f $(NAME) && printf "$(GREEN)Removing libft.a$(NO_COLOR)\n"
+	@rm -f $(OBJ_DIR)$(NAME) && printf "$(GREEN)Removing libft.a$(NO_COLOR)\n"
 
 re: fclean all
 
-.PHONY: clean fclean all re start_compile end_compile
+# debug: CFLAGS += -fsanitize=address,leak
+
+.PHONY: clean fclean all re start_compile end_compile debug

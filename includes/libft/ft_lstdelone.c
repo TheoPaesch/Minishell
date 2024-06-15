@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:24:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 20:03:01 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/15 01:06:15 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 /// @param del 	Address of the function used to delete the data.
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	del(lst->data);
-	ft_free(&lst);
+	if (lst != NULL)
+	{
+		del(lst->data);
+		ft_free(lst);
+		lst = NULL; // dbg, maybe change back
+	}
 }
