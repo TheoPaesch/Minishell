@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:25:48 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/14 19:00:13 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/16 18:03:30 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ char	*read_input(t_program *mushell)
 		if (prompt == NULL)
 			return (NULL);
 		input = readline(prompt);
-		// prompt = ft_free(prompt); // yeet this to get rid of dblfree
 	}
 	else
 	{
 		tmp = get_next_line(STDIN_FILENO);
 		input = ft_strtrim(tmp, "\n");
-		// tmp = ft_free(tmp);
 	}
 	return (input);
 }

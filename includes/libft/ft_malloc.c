@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:37:49 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/15 02:23:59 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/16 18:02:39 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,9 @@ void	*ft_malloc(size_t size)
 	void			*mem;
 	static t_list	**allocs = NULL;
 
-	if (allocs == NULL && size == 0)
-	{
-		mem = malloc(sizeof(t_list));
-		return (mem);
-	}
-	else if (allocs == NULL)
+	if (allocs == NULL)
 	{
 		allocs = get_mem_lst();
-		return (NULL);
 	}
 	mem = malloc(size);
 	if (!mem)

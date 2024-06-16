@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/14 22:45:02 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/16 17:46:46 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,24 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 
 /* build linked list for env ad fill with befor "=" and after*/
 
+static t_list *new_list(void)
+{
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
+	{
+		printf("Error: malloc failed in get_env\n");
+		exit(1);
+	}
+	new->data = NULL;
+	new->next = NULL;
+	return (new);
+}
+
 void	fill_program(t_program *shell, char **envp)
 {
-	shell->mem = ft_malloc(0);
+	shell->mem = new_list();
 	init_mem_man((t_list **)(&(shell->mem)));
 	ft_malloc(1);
 	ft_free(NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:07:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/15 02:00:52 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/16 18:03:19 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	remove_mem_entry(t_list **lst, void *ptr)
 	t_list	*tmp;
 	t_list	*prev;
 
-	if (*lst == NULL)
+	if (*lst == NULL || ptr == NULL || lst == NULL)
 		return ;
 	tmp = *lst;
 	prev = NULL;
@@ -34,6 +34,8 @@ void	remove_mem_entry(t_list **lst, void *ptr)
 			return ;
 		}
 		prev = tmp;
+		if (tmp->next == NULL)
+			return ;
 		tmp = tmp->next;
 	}
 }
@@ -47,7 +49,6 @@ void	*ft_free(void *ptr)
 
 	if (allocs == NULL && ptr == NULL)
 		return (allocs = get_mem_lst(), NULL);
-	printf("freeing PTR %p 	String \"%s\" ...\n manually", ptr, (char *)ptr);
 	remove_mem_entry(allocs, ptr);
 	return (NULL);
 }
