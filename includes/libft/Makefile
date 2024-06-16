@@ -37,7 +37,7 @@ SRCS =  ft_atoi.c ft_calloc.c ft_isalnum.c \
 
 OBJECTS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address,leak
+CFLAGS = -Wall -Werror -Wextra # -g -fsanitize=address,leak
 
 # COLORS
 BLUE = \033[0;34m
@@ -57,8 +57,9 @@ $(OBJ_DIR)$(NAME): $(OBJECTS)
 	@ar -rcs $(OBJ_DIR)$(NAME) $(OBJECTS)
 	@printf "\n$(GREEN)SUCCESS - libft.a has been successfully compiled$(NO_COLOR)\n\n"
 
-$(OBJ_DIR)/%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ && printf "$(GREEN)Compiled $<$(NO_COLOR)\n" || printf "$(RED)ERROR in $<$(NO_COLOR)\n"
+$(OBJ_DIR)/%.o: %.c	
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "$(GREEN)Compiled $<$(NO_COLOR)\n"
 
 
 clean:

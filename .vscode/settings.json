@@ -57,14 +57,14 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-	"minishell.h": "c",
-	"libft.h": "c",
-	"unistd.h": "c",
-	"errno.h": "c",
-	"history.h": "c",
-	"cstdlib": "c",
-	"charconv": "c"
-},
+    "minishell.h": "c",
+    "libft.h": "c",
+    "unistd.h": "c",
+    "errno.h": "c",
+    "history.h": "c",
+    "cstdlib": "c",
+    "charconv": "c"
+  },
   "[c]": {
     "editor.defaultFormatter": "keyhr.42-c-format"
   }

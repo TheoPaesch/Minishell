@@ -6,12 +6,16 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/16 17:59:44 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/16 18:37:02 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 # ifndef LIBFT_H
 #  include "libft.h"
