@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_export_execution.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:49:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/14 18:53:38 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:32:12 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	print_export(t_list *expo)
 {
