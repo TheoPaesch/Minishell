@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:33:58 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/15 02:15:37 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	tmp = ptr;
 	while (ptr != NULL)
 	{
-		ptr = ptr->next;
-		ft_lstdelone(tmp, del);
-		tmp = ptr;
+		tmp = ptr->next;
+		ft_lstdelone(ptr, del);
+		ptr = tmp;
 	}
 	*lst = NULL;
 }

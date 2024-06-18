@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd_and_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/12 00:14:06 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:38:27 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	cd(t_program *shell, char *path)
 {
@@ -25,17 +25,7 @@ void	cd(t_program *shell, char *path)
 
 void	ms_exit(t_program *shell)
 {
-	t_list	*tmp;
-
-	tmp = shell->mem;
-	while (tmp != NULL)
-	{
-		((t_mem *)(tmp->data))->ext_ptr = NULL;
-		ft_free(((t_mem *)(tmp->data))->allocd_mem);
-		ft_free(&(tmp->data));
-		// ft_free(&(shell->mem));
-		tmp = tmp->next;
-	}
+	ft_lstclear(&(shell->mem), free);
 	rl_clear_history();
 	exit(shell->ex_status);
 }

@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/12 00:50:52 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:42:17 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 # ifndef LIBFT_H
 #  include "libft.h"
@@ -24,6 +28,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <sys/wait.h>
 # include <term.h>
 # include <unistd.h>
@@ -140,6 +145,8 @@ void			fill_program(t_program *shell, char **envp);
 
 /* ---------------------------- Memory Management --------------------------- */
 void			ms_exit(t_program *shell);
+t_list			**init_mem_man(t_list **shell_mem);
+t_list			**get_mem_lst(void);
 
 /* -------------------------------- Execution ------------------------------- */
 t_list			*pre_pointer(t_list *env, char *key);

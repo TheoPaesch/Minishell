@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:45:42 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/27 20:57:42 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/14 18:08:40 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,23 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	s_len = ft_strlen(s);
 	if ((len == 0 || s_len == 0) || start >= s_len)
 	{
-		dst = NULL;
-		if (ft_malloc(dst, 1))
-			exit(1);
+		dst = ft_malloc(1);
 		*dst = '\0';
 		return (dst);
 	}
 	else if (len > s_len - start)
 	{
-		dst = NULL;
-		if (ft_malloc(dst, s_len - start + 1))
-			exit(1);
+		dst = ft_malloc(s_len - start + 1);
 		len = s_len;
 	}
 	else
 	{
-		dst = NULL;
-		if (ft_malloc(dst, len + 1))
-			exit(1);
+		dst = ft_malloc(len + 1);
 	}
 	if (dst == NULL)
 		return (NULL);
 	ft_strlcpy(dst, &s[start], len + 1);
 	return (dst);
 }
-
 
 // pulll again from intra to be sure this is right

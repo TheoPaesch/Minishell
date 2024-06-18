@@ -3,49 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:07:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/12 00:17:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/16 18:03:19 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_free(void *ptr)
+void	remove_mem_entry(t_list **lst, void *ptr)
 {
-	void	**tmp;
+	t_list	*tmp;
+	t_list	*prev;
 
-	tmp = (void **)ptr;
-	if (tmp == NULL || *tmp == NULL)
+	if (*lst == NULL || ptr == NULL || lst == NULL)
 		return ;
-	free(*tmp);
-	*tmp = NULL;
+	tmp = *lst;
+	prev = NULL;
+	while (tmp != NULL)
+	{
+		if (tmp->data == ptr)
+		{
+			if (prev == NULL)
+				*lst = tmp->next;
+			else
+				prev->next = tmp->next;
+			free(tmp->data);
+			free(tmp);
+			return ;
+		}
+		prev = tmp;
+		if (tmp->next == NULL)
+			return ;
+		tmp = tmp->next;
+	}
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                 EXPLANATION                                */
-/* -------------------------------------------------------------------------- */
+/// @brief
+/// @param ptr
+/// @return ALWAYS returns Nll in order to enable freeing and nulling in oneline
+void	*ft_free(void *ptr)
+{
+	static t_list	**allocs = NULL;
+
+	if (allocs == NULL && ptr == NULL)
+		return (allocs = get_mem_lst(), NULL);
+	remove_mem_entry(allocs, ptr);
+	return (NULL);
+}
+
 /*
-
-malloc takes the PTR as an argument.
-	it allocates the requested memory.
-	it remembers which memory it allocated by writing its address to s_garbage
-		in a list.
-	it remembers the pointer it assigned the allocated memory to (in s_garbage)
-
-No matter how freeing is done (manual first, then garbage collection / reverse)
-there will be no double frees due to all pointers being set to NULL afterfreein
-
-
-EXAMPLE:
+EXAMPLE
 int	main(void)
 {
-	void	*extern_ptr;
+	void	*ptr;
 
-	ft_malloc(size, &extern_ptr);
-	if (!extern_ptr)				// malloc fail checks still possible
-		error();
-	ft_free(&extern_ptr);			// normal freeing still possible
+	ptr = ft_malloc(size);
+	ptr = ft_free(ptr);	// ft_free() ALWAYS returns null in order to enable
+						// freeing and nulling in one line.
 }
 */

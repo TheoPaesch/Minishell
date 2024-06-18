@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:32:13 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/12 00:13:51 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/14 18:51:30 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static int	ft_countdelim(char const *s, char c)
 static void	ft_clean(char **arr, int amount)
 {
 	while (amount >= 0)
-		ft_free((void **)&arr[amount--]);
-	ft_free((void **)arr);
+		ft_free((void **)arr[amount--]);
+	arr = ft_free((void **)arr);
 }
 
 char	**ft_split_malloc_helper(int wrdcnt)
@@ -53,7 +53,8 @@ char	**ft_split_malloc_helper(int wrdcnt)
 	char	**arr;
 
 	arr = NULL;
-	if (ft_malloc(arr, sizeof(char *) * (wrdcnt + 1)))
+	arr = ft_malloc(sizeof(char *) * (wrdcnt + 1));
+	if (!arr)
 		exit(1);
 	arr[wrdcnt] = NULL;
 	return (arr);
