@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/18 18:33:27 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:46:37 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,5 @@ void	fill_program(t_program *shell, char **envp)
 	if (shell->env == NULL || shell->expo == NULL)
 		exit(1);
 	shell->ex_status = false;
-	shell->isatty = isatty(STDIN_FILENO);
+	shell->isatty = isatty(fileno(stdin));
 }
