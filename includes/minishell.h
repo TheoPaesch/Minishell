@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/18 20:17:15 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/19 17:10:16 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ int				get_token(char **ptr_str, char *end_str, char **quote,
 					char **end_quote);
 
 /* ---------------------------------- Pipes --------------------------------- */
+void			exec_pipe_right(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd);
+void			exec_pipe_left(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd);
 void			safe_pipe(int pipefd[2]);
 pid_t			safe_fork(void);
 

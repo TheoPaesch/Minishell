@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/18 20:38:01 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:02:39 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*get_path(char *executable)
 	folders = ft_split(((t_env *)(tmp->data))->value, ':');
 	while (folders[i])
 	{
-		printf("%s\n", folders[i]);
 		if (access(ft_strjoin(ft_strjoin(folders[i], "/"), executable),
 				F_OK | X_OK) == 0)
 			return (ft_strjoin(ft_strjoin(folders[i], "/"), executable));
