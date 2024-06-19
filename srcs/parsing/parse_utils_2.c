@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:53:13 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/10 13:41:39 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/18 20:20:54 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ t_cmd	*parse_cmd(char *str)
 	char	*end_str;
 	t_cmd	*cmd;
 
-	end_str = str + ft_strlen(str);
+	end_str = str + ft_strlen(str) + 1; // dbg [+1]
 	cmd = parse_line(&str, end_str);
 	scan_skip_ws(&str, end_str, "\0");
-	if (str != end_str)
-	{
-		// printf(2, "Leftovers: %s\n", str); // debugging, remove later
-		strerror(1); // add error function
-	}
+	// if (str != end_str)
+	// {
+	// 	// printf(2, "Leftovers: %s\n", str); // debugging, remove later
+	// 	strerror(1); // add error function
+	// }
 	nullterm(cmd);
 	return (cmd);
 }

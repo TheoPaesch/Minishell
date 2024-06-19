@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 // DISCUSS with partner how to route here, + get path
 // either pass it in or have a full path lookup function
@@ -37,10 +37,8 @@ void	exec_exec(t_cmd *cmd)
 		perror("Wrong routing / similar error during exec\n");
 		exit(1);
 	}
-	execve("placeholder path\n", exec_cmd->argv, envp);
-	// change once PATHfunc exists
-	printf("Executing %s failed\n", "placeholder path");
-	// change once PATHfunc exist
+	execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL);
+	printf("Executing %s failed\n", get_path(exec_cmd->argv[0]));
 }
 
 void	exec_redir(t_cmd *cmd)

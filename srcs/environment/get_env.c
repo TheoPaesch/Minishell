@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/18 16:32:18 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/18 18:33:27 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 
 /* build linked list for env ad fill with befor "=" and after*/
 
-static t_list *new_list(void)
+static t_list	*new_list(void)
 {
 	t_list	*new;
 
@@ -139,6 +139,7 @@ void	fill_program(t_program *shell, char **envp)
 	init_mem_man((t_list **)(&(shell->mem)));
 	ft_malloc(1);
 	ft_free(NULL);
+	get_path((char *)(&(shell->env)));
 	if (envp == NULL)
 		empty_env();
 	else

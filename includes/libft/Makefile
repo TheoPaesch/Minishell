@@ -37,7 +37,7 @@ SRCS =  ft_atoi.c ft_calloc.c ft_isalnum.c \
 
 OBJECTS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 CC = cc
-CFLAGS = -Wall -Werror -Wextra # -g -fsanitize=address,leak
+CFLAGS = -Wall -Werror -Wextra -g # -g -fsanitize=address,leak
 
 # COLORS
 BLUE = \033[0;34m

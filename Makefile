@@ -4,7 +4,7 @@ LIBFT_DIR =	./includes/libft
 LIBFT	=	./obj/libft/libft.a
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -g
 RM		=	rm -rf
 
 LIB		=	-lreadline -L$(LIBFT_DIR)
@@ -31,7 +31,16 @@ SRC = env_export_execution.c \
       main.c \
       splash.c \
       signal.c \
-      prompt.c 
+      prompt.c \
+	  constructors.c \
+	  nullterm.c \
+	  nullterm_utils.c \
+	  parse_utils.c \
+	  parse_utils_2.c \
+	  scan_skip_ws.c \
+	  execute.c \
+	  safe_utils.c \
+	  get_token.c
 
 HEADERS = minishell.h
 

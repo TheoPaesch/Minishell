@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static const char	*g_whitespace = " \t\r\n\v";
 

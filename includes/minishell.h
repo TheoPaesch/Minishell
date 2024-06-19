@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/18 16:42:17 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/18 20:17:15 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,9 @@ typedef struct s_parse_redir_vars
 /* -------------------------------------------------------------------------- */
 void			splash_screen(void);
 void			handle_sigint(int sig);
+char			*get_path(char *executable);
+int				get_token(char **ptr_str, char *end_str, char **quote,
+					char **end_quote);
 
 /* ---------------------------------- Pipes --------------------------------- */
 void			safe_pipe(int pipefd[2]);
@@ -161,6 +164,7 @@ void			exec_redir(t_cmd *cmd);
 void			exec_list(t_cmd *cmd);
 void			exec_pipe(t_cmd *cmd);
 void			exec_back(t_cmd *cmd);
+void			execute_cmd(t_cmd *cmd);
 
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
