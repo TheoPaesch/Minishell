@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 18:33:44 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/15 00:41:04 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:25:12 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (new == NULL)
-	{
-		ft_putstr_fd("ERROR IN LSTADDFRONT. RECEIVED NULL INSTEAD OF NODE\n",
-			2);
-		return ;
-	}
+		ft_putstr_fd("ft_lastaddfront received NULL", 2);
 	new->next = *lst;
 	*lst = new;
 }

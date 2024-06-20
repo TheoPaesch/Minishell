@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/19 19:02:39 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:03:38 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_path(char *executable)
 	while (ft_strcmp(((t_env *)(tmp->data))->key, "PATH"))
 		tmp = tmp->next;
 	if (tmp == NULL)
-		printf("Error: PATH not contained in env\n");
+		ft_panic("PATH not found in env", 3);
 	folders = ft_split(((t_env *)(tmp->data))->value, ':');
 	while (folders[i])
 	{
@@ -38,7 +38,7 @@ char	*get_path(char *executable)
 			return (ft_strjoin(ft_strjoin(folders[i], "/"), executable));
 		i++;
 	}
-	return (printf("Error: command not found\n"), NULL);
+	return (ft_panic("command not found", 4), NULL);
 }
 
 // Path: srcs/execute/execute.c

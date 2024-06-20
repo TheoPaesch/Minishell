@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/20 17:23:00 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:54:37 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_program
 	t_list		*mem;
 	bool		ex_status;
 	bool		isatty;
+	bool		is_dbg;
 }				t_program;
 
 typedef struct s_cmd
@@ -136,6 +137,10 @@ void			handle_sigint(int sig);
 char			*get_path(char *executable);
 int				get_token(char **ptr_str, char *end_str, char **quote,
 					char **end_quote);
+
+/* ----------------------------- Error Handling ----------------------------- */
+// void			ft_panic(char *err_msg, int exit_stat);
+// void			ft_set_errno(int exit_stat);
 
 /* ---------------------------------- Pipes --------------------------------- */
 void			exec_pipe_right(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd);

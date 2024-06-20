@@ -22,6 +22,7 @@ void	execute_cmd(t_cmd *cmd)
 		exec_pipe(cmd);
 	else if (cmd->type == BACK)
 		exec_back(cmd);
+	ft_debug_msg("execute_cmd is exiting the shell");
 	exit(100); // are we already in a subprocess? if yes exit
 				// otherwise no. FIX!!!!
 }
@@ -33,13 +34,25 @@ void	exec_exec(t_cmd *cmd)
 
 	exec_cmd = (t_exec_cmd *)cmd;
 	if (exec_cmd->argv[0] == 0)
-	{
-		perror("Wrong routing / similar error during exec\n");
-		exit(1);
-	}
+		ft_panic("Wrong routing / similar error during exec", 99);
+	// if (check_builtin(cmd))
+	// 	return ;
 	execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL);
 	printf("Executing %s failed\n", get_path(exec_cmd->argv[0]));
 }
+
+// /// @brief Checks if command is a builtin and executes it.
+// /// @param exec_cmd cmd table
+// /// @return 1 on is_builtin true
+// ///			0 on is_builtin false
+// int	is_builtin(t_exec_cmd *exec_cmd)
+// {
+// 	if (ft_strcmp(exec_cmd, "cmd"))
+// 	{
+// 		/* code */
+// 	}
+
+// }
 
 void	exec_redir(t_cmd *cmd)
 {

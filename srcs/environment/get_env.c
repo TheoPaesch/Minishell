@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/19 19:46:37 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:03:45 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	empty_env(void)
 	env = NULL;
 	expo = NULL;
 	if (ft_lstnew(env) == NULL)
-		printf("Error: malloc failed in get_env\n");
+		ft_panic("malloc failed in get_env", 1);
 	if (ft_lstnew(expo) == NULL)
-		printf("Error: malloc failed in get_env\n");
+		ft_panic("malloc failed in get_env", 1);
 	add_export(env, expo, "OLDPWD", NULL);
 	add_export(env, expo, "PWD", getcwd(NULL, 0));
 	add_export(env, expo, "SHLVL", "1");
@@ -106,7 +106,7 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 	{
 		data = ft_malloc(sizeof(t_env));
 		if (!data)
-			printf("Error: malloc failed in get_env\n");
+			ft_panic("malloc failed in get_env", 1);
 		data->key = get_key(envp[i]);
 		data->value = get_value(envp[i]);
 		if (data->value[0] != '\0')
@@ -124,10 +124,7 @@ static t_list	*new_list(void)
 
 	new = malloc(sizeof(t_list));
 	if (!new)
-	{
-		printf("Error: malloc failed in get_env\n");
-		exit(1);
-	}
+		ft_panic("malloc failed in get_env", 1);
 	new->data = NULL;
 	new->next = NULL;
 	return (new);
