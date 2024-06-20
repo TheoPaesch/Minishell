@@ -89,6 +89,9 @@ re: fclean all
 debug: CFLAGS += -g -fsanitize=address,leak
 debug: re
 
+test:
+	bash 42_minishell_tester/tester.sh m
+
 # debug: CFLAGS += -fsanitize=address,leak
 
-.PHONY: all clean fclean re start_compile -DDEBUG=1
+.PHONY: all test clean fclean re start_compile -DDEBUG=1
