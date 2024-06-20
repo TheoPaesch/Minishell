@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/19 17:10:16 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:23:00 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct s_parse_redir_vars
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
-void			splash_screen(void);
+void			splash_screen(t_program *shell);
 void			handle_sigint(int sig);
 char			*get_path(char *executable);
 int				get_token(char **ptr_str, char *end_str, char **quote,

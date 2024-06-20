@@ -6,14 +6,16 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 19:15:58 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/02 18:35:27 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:59:06 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	splash_screen(void)
+void	splash_screen(t_program *shell)
 {
+	if (shell->isatty)
+		return ;
 	printf("\033[0;33m  ,ggg, ,ggg,_,ggg,                                  \
                                    _.-''|''-._          \033[0m\n");
 	printf("\033[0;33m dP\"\"Y8dP\"\"Y88P\"\"Y8b                        ,dP\
