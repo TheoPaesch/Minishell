@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/20 19:03:45 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:47:37 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,11 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 	}
 }
 
-/* build linked list for env ad fill with befor "=" and after*/
+/* build linked list for env ad fill with before "=" and after*/
 
-static t_list	*new_list(void)
+static t_list	*new_list(void) // @theo: can we use the normal ft_lstnew here?
 {
-	t_list	*new;
+	t_list *new;
 
 	new = malloc(sizeof(t_list));
 	if (!new)
