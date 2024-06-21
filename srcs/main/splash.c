@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 19:15:58 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/20 16:59:06 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/21 15:24:38 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	splash_screen(t_program *shell)
 {
-	if (shell->isatty)
+	(void)shell;
+	if (!isatty(fileno(stdin)))
 		return ;
 	printf("\033[0;33m  ,ggg, ,ggg,_,ggg,                                  \
                                    _.-''|''-._          \033[0m\n");
