@@ -23,8 +23,8 @@ void	execute_cmd(t_cmd *cmd)
 	else if (cmd->type == BACK)
 		exec_back(cmd);
 	ft_debug_msg("execute_cmd is exiting the shell");
-	exit(100); // are we already in a subprocess? if yes exit
-				// otherwise no. FIX!!!!
+	// exit(100); // are we already in a subprocess? if yes exit
+	// otherwise no. FIX!!!!
 }
 
 //  ONLY COMMENTED OUT IN ORDER TO COMPILE TO DEBUG OTHER STUFF!!!
