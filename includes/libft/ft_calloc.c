@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 13:19:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/14 18:00:12 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:57:30 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ void	*ft_calloc(size_t count, size_t size)
 
 	ptr = ft_malloc(count * size);
 	if (!ptr)
-	{
-		printf("Error: malloc failed in calloc\n");
-		exit(1);
-	}
+		ft_panic("malloc failed in calloc", 1);
 	return (ft_bzero(ptr, count * size), ptr);
 }

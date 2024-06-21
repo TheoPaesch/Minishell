@@ -6,13 +6,14 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/15 02:21:54 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:04:22 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // LIBFT.H
 #ifndef LIBFT_H
 # define LIBFT_H
+# include <errno.h>
 # include <stdarg.h>
 # include <stdbool.h>
 # include <stddef.h>
@@ -116,5 +117,10 @@ int					gnl_strlen(const char *s);
 int					gnl_strchr(char *s, int c);
 // void				gnl_bzero(void *s, size_t n);
 size_t				gnl_strlcpy(char *dst, char *src, size_t dstsize);
+
+/* ----------------------------- Error Handling ----------------------------- */
+void				ft_panic(char *err_msg, int exit_stat);
+void				ft_set_errno(int exit_stat);
+void				ft_debug_msg(char *msg);
 
 #endif

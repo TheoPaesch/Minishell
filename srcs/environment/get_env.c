@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/18 18:33:27 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:47:37 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	empty_env(void)
 	env = NULL;
 	expo = NULL;
 	if (ft_lstnew(env) == NULL)
-		printf("Error: malloc failed in get_env\n");
+		ft_panic("malloc failed in get_env", 1);
 	if (ft_lstnew(expo) == NULL)
-		printf("Error: malloc failed in get_env\n");
+		ft_panic("malloc failed in get_env", 1);
 	add_export(env, expo, "OLDPWD", NULL);
 	add_export(env, expo, "PWD", getcwd(NULL, 0));
 	add_export(env, expo, "SHLVL", "1");
@@ -106,7 +106,7 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 	{
 		data = ft_malloc(sizeof(t_env));
 		if (!data)
-			printf("Error: malloc failed in get_env\n");
+			ft_panic("malloc failed in get_env", 1);
 		data->key = get_key(envp[i]);
 		data->value = get_value(envp[i]);
 		if (data->value[0] != '\0')
@@ -116,18 +116,15 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 	}
 }
 
-/* build linked list for env ad fill with befor "=" and after*/
+/* build linked list for env ad fill with before "=" and after*/
 
-static t_list	*new_list(void)
+static t_list	*new_list(void) // @theo: can we use the normal ft_lstnew here?
 {
-	t_list	*new;
+	t_list *new;
 
 	new = malloc(sizeof(t_list));
 	if (!new)
-	{
-		printf("Error: malloc failed in get_env\n");
-		exit(1);
-	}
+		ft_panic("malloc failed in get_env", 1);
 	new->data = NULL;
 	new->next = NULL;
 	return (new);
@@ -147,5 +144,5 @@ void	fill_program(t_program *shell, char **envp)
 	if (shell->env == NULL || shell->expo == NULL)
 		exit(1);
 	shell->ex_status = false;
-	shell->isatty = isatty(STDIN_FILENO);
+	shell->isatty = isatty(fileno(stdin));
 }
