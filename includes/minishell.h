@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/20 18:54:37 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/21 21:37:08 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define PIPE 3
 # define LIST 4
 # define BACK 5
+
+#
 
 /* -------------------------------------------------------------------------- */
 /*                                   STRUCTS                                  */
@@ -132,62 +134,64 @@ typedef struct s_parse_redir_vars
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
-void			splash_screen(t_program *shell);
-void			handle_sigint(int sig);
 char			*get_path(char *executable);
 int				get_token(char **ptr_str, char *end_str, char **quote,
 					char **end_quote);
+void			handle_sigint(int sig);
+void			splash_screen(t_program *shell);
+
+/* -------------------------------- Builtins -------------------------------- */
+void			cd(t_program *shell, char *path);
+void			print_env(t_list *env);
+void			print_export(t_list *expo);
+void			ms_exit(t_program *shell);
 
 /* ----------------------------- Error Handling ----------------------------- */
 // void			ft_panic(char *err_msg, int exit_stat);
 // void			ft_set_errno(int exit_stat);
 
 /* ---------------------------------- Pipes --------------------------------- */
-void			exec_pipe_right(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd);
 void			exec_pipe_left(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd);
-void			safe_pipe(int pipefd[2]);
+void			exec_pipe_right(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd);
 pid_t			safe_fork(void);
+void			safe_pipe(int pipefd[2]);
 
 /* -------------------------------- Get Input ------------------------------- */
 void			empty_env(void);
-void			get_input(char **envp, t_list **env, t_list **expo);
 void			fill_program(t_program *shell, char **envp);
+void			get_input(char **envp, t_list **env, t_list **expo);
 
 /* ---------------------------- Memory Management --------------------------- */
-void			ms_exit(t_program *shell);
 t_list			**init_mem_man(t_list **shell_mem);
 t_list			**get_mem_lst(void);
 
 /* -------------------------------- Execution ------------------------------- */
-t_list			*pre_pointer(t_list *env, char *key);
-void			change_value_both(t_list *expo, t_list *env, char *key,
-					char *value);
-void			print_export(t_list *expo);
-void			print_env(t_list *env);
 void			add_env(t_list *env, char *key, char *value);
 void			add_export(t_list *env, t_list *expo, char *key, char *value);
+void			change_value_both(t_list *expo, t_list *env, char *key,
+					char *value);
 void			exec_exec(t_cmd *cmd);
 void			exec_redir(t_cmd *cmd);
 void			exec_list(t_cmd *cmd);
 void			exec_pipe(t_cmd *cmd);
 void			exec_back(t_cmd *cmd);
 void			execute_cmd(t_cmd *cmd);
+int				is_builtin(t_exec_cmd *exec_cmd);
+t_list			*pre_pointer(t_list *env, char *key);
 
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
 /* ------------------------------ Tokenization ------------------------------ */
 int				get_token(char **ptr_str, char *end_str, char **quote,
 					char **end_quote);
-char			*ft_strtok(char *str, const char *delimiters);
+// char			*ft_strtok(char *str, const char *delimiters);
 
 /* --------------------------------- Parsing -------------------------------- */
-int				scan_skip_ws(char **ptr_str, char *end_str, char *tokens);
-t_cmd			*parse_block(char **ptr_str, char *end_str);
-t_cmd			*parse_line(char **ptr_str, char *end_str);
-t_cmd			*parse_pipe(char **ptr_str, char *end_str);
-t_cmd			*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str);
-t_cmd			*parse_cmd(char *str);
-t_cmd			*parse_exec(char **ptr_str, char *end_str);
+t_cmd			*init_back_cmd(t_cmd *sub_cmd);
+t_cmd			*list_cmd(t_cmd *left, t_cmd *right);
+t_cmd			*init_exec_cmd(void);
+t_cmd			*init_redir_cmd(t_cmd *sub_cmd, char *file, char *end_file,
+					int mode);
 
 t_cmd			*nullterm(t_cmd *cmd);
 t_cmd			*null_exec_cmd(t_cmd *cmd);
@@ -196,13 +200,15 @@ t_cmd			*null_pipe(t_cmd *cmd);
 t_cmd			*null_list(t_cmd *cmd);
 t_cmd			*null_back(t_cmd *cmd);
 
-t_cmd			*exec_cmd(void);
-t_cmd			*redir_cmd(t_cmd *sub_cmd, char *file, char *end_file,
-					int mode);
+t_cmd			*parse_block(char **ptr_str, char *end_str);
+t_cmd			*parse_line(char **ptr_str, char *end_str);
+t_cmd			*parse_pipe(char **ptr_str, char *end_str);
+t_cmd			*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str);
+t_cmd			*parse_cmd(char *str);
+t_cmd			*parse_exec(char **ptr_str, char *end_str);
 t_cmd			*pipe_cmd(t_cmd *left, t_cmd *right);
-t_cmd			*list_cmd(t_cmd *left, t_cmd *right);
-t_cmd			*back_cmd(t_cmd *sub_cmd);
 
 char			*read_input(t_program *mushell);
+int				scan_skip_ws(char **ptr_str, char *end_str, char *tokens);
 
 #endif

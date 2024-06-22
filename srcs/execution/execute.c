@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
+/*   Updated: 2024/06/21 22:30:40 by mstrauss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 // DISCUSS with partner how to route here, + get path
@@ -35,9 +47,11 @@ void	exec_exec(t_cmd *cmd)
 	exec_cmd = (t_exec_cmd *)cmd;
 	if (exec_cmd->argv[0] == 0)
 		ft_panic("Wrong routing / similar error during exec", 99);
-	// if (check_builtin(cmd))
-	// 	return ;
-	execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL);
+	if (is_builtin(exec_cmd))
+		return ;
+	else
+		execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL); // FIX HERE
+			/ CONTINUE HERE
 	printf("Executing %s failed\n", get_path(exec_cmd->argv[0]));
 }
 
@@ -81,50 +95,6 @@ void	exec_list(t_cmd *cmd)
 		execute_cmd(exec_list->left);
 	waitpid(pid, &status, 0);
 	execute_cmd(exec_list->right);
-}
-
-inline void	exec_pipe_left(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd)
-{
-	if (pid == 0)
-	{
-		dup2((*pipes)[1], 1);
-		close((*pipes)[0]);
-		close((*pipes)[1]);
-		execute_cmd(p_cmd->left);
-		exit(0);
-	}
-}
-
-inline void	exec_pipe_right(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd)
-{
-	if (pid == 0)
-	{
-		close(0);
-		dup2((*pipes)[0], 0);
-		close((*pipes)[0]);
-		close((*pipes)[1]);
-		execute_cmd(p_cmd->right);
-		exit(0);
-	}
-}
-
-void	exec_pipe(t_cmd *cmd)
-{
-	t_pipe_cmd	*exec_pipe;
-	int			pipes[2];
-	pid_t		pid1;
-	pid_t		pid2;
-
-	exec_pipe = (t_pipe_cmd *)cmd;
-	safe_pipe(pipes);
-	pid1 = safe_fork();
-	exec_pipe_left(pid1, &pipes, exec_pipe);
-	pid2 = safe_fork();
-	exec_pipe_right(pid2, &pipes, exec_pipe);
-	close(pipes[0]);
-	close(pipes[1]);
-	waitpid(pid1, NULL, 0); // we may need exit status,
-	waitpid(pid2, NULL, 0); // change null to status
 }
 
 void	exec_back(t_cmd *cmd)

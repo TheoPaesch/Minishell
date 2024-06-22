@@ -11,36 +11,42 @@ LIB		=	-lreadline -L$(LIBFT_DIR)
 INC		=	-I includes
 
 SRC_DIRS =	./srcs \
+			./srcs/builtins \
 			./srcs/environment \
+			./srcs/execution \
 			./srcs/main \
+			./srcs/parsing \
 			./srcs/prompt \
 			./srcs/signal \
-			./srcs/parsing \
-			./srcs/tokenizer \
-			./srcs/execution
-
+			./srcs/tokenizer
 
 vpath %.c $(SRC_DIRS)
 vpath %.h includes
 
-SRC = env_export_execution.c \
-      cd_and_exit.c \
-      unset.c \
-      path_exec.c \
-      get_env.c \
-      main.c \
-      splash.c \
-      signal.c \
-      prompt.c \
+SRC = cd.c \
 	  constructors.c \
+	  echo.c \
+	  env_export_execution.c \
+	  env.c \
+	  execute.c \
+	  exec_pipe.c \
+	  export.c \
+      get_env.c \
+	  get_token.c \
+	  is_builtin.c \
+	  main.c \
+	  ms_exit.c \
 	  nullterm.c \
 	  nullterm_utils.c \
 	  parse_utils.c \
 	  parse_utils_2.c \
+      path_exec.c \
+      prompt.c \
+      splash.c \
+      signal.c \
 	  scan_skip_ws.c \
-	  execute.c \
 	  safe_utils.c \
-	  get_token.c
+      unset.c \
 
 HEADERS = minishell.h
 

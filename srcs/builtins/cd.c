@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_and_exit.c                                      :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/18 16:38:27 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/21 21:36:56 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,4 @@ void	cd(t_program *shell, char *path)
 		printf("minishell: cd: %s: %s\n", path, strerror(errno));
 	else
 		change_value_both(shell->env, shell->expo, "PWD", getcwd(NULL, 0));
-}
-
-void	ms_exit(t_program *shell)
-{
-	ft_lstclear(&(shell->mem), free);
-	rl_clear_history();
-	exit(shell->ex_status);
 }
