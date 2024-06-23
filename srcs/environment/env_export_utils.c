@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_export_execution.c                             :+:      :+:    :+:   */
+/*   env_export_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:49:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/21 22:19:20 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/22 19:15:04 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool	check_key(t_list *tmp, char *key)
+{
+	while (tmp)
+	{
+		if (ft_strcmp(((t_env *)tmp->data)->key, key) == 0)
+			return (true);
+		tmp = tmp->next;
+	}
+	return (false);
+}
 
 void	change_value_both(t_list *expo, t_list *env, char *key, char *value)
 {

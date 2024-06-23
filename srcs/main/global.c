@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 12:14:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/23 12:15:13 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/23 12:37:50 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ t_program	*init_global(t_program *shell)
 
 t_program	*get_shell(void)
 {
-	return (init_mem_man(NULL));
+	return (init_global(NULL));
 }

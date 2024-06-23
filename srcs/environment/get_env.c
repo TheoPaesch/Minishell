@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/21 16:47:37 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/23 12:20:58 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ static t_list	*new_list(void) // @theo: can we use the normal ft_lstnew here?
 
 void	fill_program(t_program *shell, char **envp)
 {
+	init_global(shell);
 	shell->mem = new_list();
 	init_mem_man((t_list **)(&(shell->mem)));
 	ft_malloc(1);

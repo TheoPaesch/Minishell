@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/23 12:17:09 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/23 12:34:09 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ void			add_env(t_list *env, char *key, char *value);
 void			add_export(t_list *env, t_list *expo, char *key, char *value);
 void			change_value_both(t_list *expo, t_list *env, char *key,
 					char *value);
+void			exec_builtin(t_cmd *cmd);
 void			exec_exec(t_cmd *cmd);
 void			exec_redir(t_cmd *cmd);
 void			exec_list(t_cmd *cmd);
