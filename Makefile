@@ -26,13 +26,14 @@ vpath %.h includes
 SRC = cd.c \
 	  constructors.c \
 	  echo.c \
-	  env_export_execution.c \
+	  env_export_utils.c \
 	  env.c \
 	  execute.c \
 	  exec_pipe.c \
 	  export.c \
       get_env.c \
 	  get_token.c \
+	  global.c \
 	  is_builtin.c \
 	  main.c \
 	  ms_exit.c \
