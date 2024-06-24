@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:45:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 14:33:37 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:54:17 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,18 @@ void	add_env(t_list *env, char *key, char *value)
 		env->data = data;
 		ft_lstadd_front(&env, ft_lstnew(env));
 	}
+}
+
+// ENV does NOT support options or arguments
+void	env(t_cmd *cmd)
+{
+	char	**argv;
+
+	argv = ((t_exec_cmd *)cmd)->argv;
+	if (argv[1] != NULL)
+	{
+		printf("env command does not support options or arguments\n");
+	}
+	else
+		print_env((get_shell())->env);
 }
