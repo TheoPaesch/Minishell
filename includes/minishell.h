@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 14:39:42 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:28:51 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ void			change_value_both(t_list *expo, t_list *env, char *key,
 
 /* -------------------------------- Builtins -------------------------------- */
 void			cd(t_program *shell, char *path);
+void			env(t_cmd *cmd);
+void			export(t_list *env, t_list *expo, char *key, char *value);
 void			print_env(t_list *env);
 void			print_export(t_list *expo);
 void			ms_echo(t_cmd *cmd);

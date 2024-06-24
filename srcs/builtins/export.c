@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 14:45:50 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:28:42 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ void	add_export(t_list *env, t_list *expo, char *key, char *value)
 	ft_lstadd_front(&expo, ft_lstnew(expo));
 }
 
-void	export_execution(t_list *env, t_list *expo, char *key, char *value)
+void	export(t_list *env, t_list *expo, char *key, char *value)
 {
+	t_list	*env;
+	t_list	*expo;
+
 	if (key == NULL && value == NULL)
 	{
 		print_export(expo);
