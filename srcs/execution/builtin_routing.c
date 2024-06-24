@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 21:20:47 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/23 13:58:07 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/23 14:15:31 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	exec_builtin(t_cmd *cmd)
 {
 	t_exec_cmd	*exec_cmd;
 
+	// DOES THIS NEED EXIT CODE / STATUS ROUTING / SETTING?
 	exec_cmd = (t_exec_cmd *)cmd;
 	if (ft_strnstr(exec_cmd->argv[0], "cd", ft_strlen(exec_cmd->argv[0])))
 		cd(get_shell(), exec_cmd->argv[1]);
@@ -50,6 +51,5 @@ void	exec_builtin(t_cmd *cmd)
 		pwd(); // fill params
 	if (ft_strnstr(exec_cmd->argv[0], "unset", ft_strlen(exec_cmd->argv[0])))
 		unset(); // fill params
-}
-// do exit value handling here?
+	// do exit value handling here?
 }
