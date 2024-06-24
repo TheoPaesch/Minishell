@@ -24,6 +24,7 @@ vpath %.c $(SRC_DIRS)
 vpath %.h includes
 
 SRC = env_exp_utils.c \
+	  builtin_routing.c \
 	  cd.c \
 	  constructors.c \
 	  echo.c \
@@ -33,7 +34,7 @@ SRC = env_exp_utils.c \
 	  export.c \
       get_env.c \
 	  get_token.c \
-	  is_builtin.c \
+	  global.c \
 	  main.c \
 	  ms_exit.c \
 	  nullterm.c \

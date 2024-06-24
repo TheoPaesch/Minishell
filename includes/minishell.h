@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 13:55:12 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:39:42 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ typedef struct s_parse_redir_vars
 char			*get_path(char *executable);
 int				get_token(char **ptr_str, char *end_str, char **quote,
 					char **end_quote);
+t_program		*get_shell(void);
+t_program		*init_global(t_program *shell);
 void			handle_sigint(int sig);
 void			splash_screen(t_program *shell);
 bool			check_key(t_list *tmp, char *key);
@@ -147,7 +149,9 @@ void			change_value_both(t_list *expo, t_list *env, char *key,
 void			cd(t_program *shell, char *path);
 void			print_env(t_list *env);
 void			print_export(t_list *expo);
+void			ms_echo(t_cmd *cmd);
 void			ms_exit(t_program *shell);
+void			unset_one(t_list *env, t_list *expo, char *key);
 
 /* ----------------------------- Error Handling ----------------------------- */
 // void			ft_panic(char *err_msg, int exit_stat);
@@ -171,6 +175,9 @@ t_list			**get_mem_lst(void);
 /* -------------------------------- Execution ------------------------------- */
 void			add_env(t_list *env, char *key, char *value);
 void			add_export(t_list *env, t_list *expo, char *key, char *value);
+void			change_value_both(t_list *expo, t_list *env, char *key,
+					char *value);
+void			exec_builtin(t_cmd *cmd);
 void			exec_exec(t_cmd *cmd);
 void			exec_redir(t_cmd *cmd);
 void			exec_list(t_cmd *cmd);

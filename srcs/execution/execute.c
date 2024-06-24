@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 14:33:06 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:43:55 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	exec_exec(t_cmd *cmd)
 	if (exec_cmd->argv[0] == 0) // maybe switch to conditional exit if child
 		ft_panic("Wrong routing / similar error during exec", 99);
 	if (is_builtin(exec_cmd))
+	{
+		exec_builtin(cmd);
 		return ;
+	}
 	else
 		execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL);
 	printf("Executing %s failed\n", get_path(exec_cmd->argv[0]));
@@ -74,11 +77,7 @@ void	exec_redir(t_cmd *cmd)
 	exec_redir = (t_redir_cmd *)cmd;
 	close(exec_redir->fd);
 	if (open(exec_redir->file, exec_redir->mode) < 0)
-	{
-		printf("Opening the %s file failed.\n", exec_redir->file);
-		// change to fd2
-		exit(1);
-	}
+		ft_panic("opening the file failed.\n", 2);
 	execute_cmd(exec_redir->cmd);
 }
 

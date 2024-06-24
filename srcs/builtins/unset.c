@@ -6,9 +6,10 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:52:25 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/24 14:34:02 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:47:50 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -29,7 +30,7 @@ void	free_content(t_list *tmp)
 	tmp->data = NULL;
 }
 
-void	unset_execution(t_list *env, t_list *expo, char *key)
+void	unset_one(t_list *env, t_list *expo, char *key)
 {
 	t_list	*tmp;
 
@@ -53,6 +54,22 @@ void	unset_execution(t_list *env, t_list *expo, char *key)
 		}
 		tmp = env;
 		expo = expo->next;
+	}
+}
+
+void	unset(t_exec_cmd *exec_cmd)
+{
+	t_program	*shell;
+	char		**keys;
+	int			i;
+
+	i = 0;
+	shell = get_shell();
+	keys = exec_cmd->argv;
+	while (keys[i])
+	{
+		unset_one(shell->env, shell->expo, *keys);
+		i++;
 	}
 }
 
