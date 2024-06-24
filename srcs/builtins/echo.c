@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:07:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/22 17:22:43 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:33:03 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ms_echo(t_cmd *cmd)
 	bool			n_flag;
 	unsigned int	i;
 
-	exec_cmd = (t_exec_cmd **)cmd;
+	exec_cmd = (t_exec_cmd *)cmd;
 	n_flag = false;
 	i = 0;
 	if (ft_strcmp(exec_cmd->argv[0], "echo") != 0)

@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/21 16:47:37 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:33:04 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,30 +72,6 @@ char	*get_value(char *str)
 	return (value);
 }
 
-// static char	*ft_strcdup(char *str, char c, bool side)
-// {
-// 	int		j;
-// 	int		i;
-// 	char	*new;
-
-// 	new = NULL;
-// 	j = 0;
-// 	i = 0;
-// 	if (side == 0)
-// 		while (str[i] != c || str[i] != '\0')
-// 			new[j++] = str[i++];
-// 	else
-// 	{
-// 		while (str[i] != c)
-// 			i++;
-// 		i++;
-// 		while (str[i] != '\0')
-// 			new[j++] = str[i++];
-// 	}
-// 	new[i] = '\0';
-// 	return (new);
-// }
-
 void	get_input(char **envp, t_list **env, t_list **expo)
 {
 	int		i;
@@ -116,11 +92,12 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 	}
 }
 
-/* build linked list for env ad fill with before "=" and after*/
-
-static t_list	*new_list(void) // @theo: can we use the normal ft_lstnew here?
+// CONSTRUCTOR
+// uses normal MALLOC
+// does so because it is initialized before ft_malloc
+static t_list	*new_list(void)
 {
-	t_list *new;
+	t_list	*new;
 
 	new = malloc(sizeof(t_list));
 	if (!new)

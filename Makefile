@@ -23,10 +23,10 @@ SRC_DIRS =	./srcs \
 vpath %.c $(SRC_DIRS)
 vpath %.h includes
 
-SRC = cd.c \
+SRC = env_exp_utils.c \
+	  cd.c \
 	  constructors.c \
 	  echo.c \
-	  env_export_execution.c \
 	  env.c \
 	  execute.c \
 	  exec_pipe.c \

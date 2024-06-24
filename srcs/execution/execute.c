@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/21 22:30:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:33:06 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,12 @@ void	exec_exec(t_cmd *cmd)
 	t_exec_cmd	*exec_cmd;
 
 	exec_cmd = (t_exec_cmd *)cmd;
-	if (exec_cmd->argv[0] == 0)
+	if (exec_cmd->argv[0] == 0) // maybe switch to conditional exit if child
 		ft_panic("Wrong routing / similar error during exec", 99);
 	if (is_builtin(exec_cmd))
 		return ;
 	else
-		execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL); // FIX HERE
-			/ CONTINUE HERE
+		execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL);
 	printf("Executing %s failed\n", get_path(exec_cmd->argv[0]));
 }
 
