@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:07:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 14:44:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:01:18 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ms_echo(t_cmd *cmd)
+int	echo_builtin(t_cmd *cmd)
 {
 	t_exec_cmd		*exec_cmd;
 	bool			n_flag;
@@ -36,7 +36,7 @@ void	ms_echo(t_cmd *cmd)
 	}
 	if (n_flag == true)
 		ft_putchar_fd('\n', 1);
-	return ;
+	return (0);
 }
 
 // typedef struct s_exec_cmd

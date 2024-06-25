@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 14:39:42 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:03:51 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,12 +146,15 @@ void			change_value_both(t_list *expo, t_list *env, char *key,
 					char *value);
 
 /* -------------------------------- Builtins -------------------------------- */
-void			cd(t_program *shell, char *path);
+int				cd_builtin(t_program *shell, char *path);
 void			print_env(t_list *env);
 void			print_export(t_list *expo);
-void			ms_echo(t_cmd *cmd);
+int				echo_builtin(t_cmd *cmd);
 void			ms_exit(t_program *shell);
+int				unset_builtin(t_exec_cmd *exec_cmd);
 void			unset_one(t_list *env, t_list *expo, char *key);
+int				export_builtin(t_list *env, t_list *expo, char **args);
+int				env_builtin(t_cmd *cmd);
 
 /* ----------------------------- Error Handling ----------------------------- */
 // void			ft_panic(char *err_msg, int exit_stat);

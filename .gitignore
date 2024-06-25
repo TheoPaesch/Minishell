@@ -38,6 +38,7 @@ obj
 *.hex
 
 # Debug files
+42_minishell_tester/
 *.dSYM/
 *.su
 *.idb

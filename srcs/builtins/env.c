@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:45:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 15:54:17 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:03:35 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	add_env(t_list *env, char *key, char *value)
 }
 
 // ENV does NOT support options or arguments
-void	env(t_cmd *cmd)
+int	env_builtin(t_cmd *cmd)
 {
 	char	**argv;
 
@@ -45,7 +45,9 @@ void	env(t_cmd *cmd)
 	if (argv[1] != NULL)
 	{
 		printf("env command does not support options or arguments\n");
+		return (1);
 	}
 	else
 		print_env((get_shell())->env);
+	return (0);
 }

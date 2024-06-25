@@ -3,22 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/21 21:36:56 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:47:08 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cd(t_program *shell, char *path)
+int	cd_builtin(t_program *shell, char *path)
 {
 	int	ret;
 
+	if (path == NULL)
+	{
+		if (!check_key(shell->expo, "HOME"))
+		{
+			printf("minishell: cd: HOME not set\n");
+			return (1);
+		}
+	}
 	ret = chdir(path);
 	if (ret == -1)
-		printf("minishell: cd: %s: %s\n", path, strerror(errno));
+		return (printf("minishell: cd: %s: %s\n", path, strerror(errno)), 1);
 	else
 		change_value_both(shell->env, shell->expo, "PWD", getcwd(NULL, 0));
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/24 14:46:08 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:16:31 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,22 +105,4 @@ static t_list	*new_list(void)
 	new->data = NULL;
 	new->next = NULL;
 	return (new);
-}
-
-void	fill_program(t_program *shell, char **envp)
-{
-	init_global(shell);
-	shell->mem = new_list();
-	init_mem_man((t_list **)(&(shell->mem)));
-	ft_malloc(1);
-	ft_free(NULL);
-	get_path((char *)(&(shell->env)));
-	if (envp == NULL)
-		empty_env();
-	else
-		get_input(envp, &shell->env, &shell->expo);
-	if (shell->env == NULL || shell->expo == NULL)
-		exit(1);
-	shell->ex_status = false;
-	shell->isatty = isatty(fileno(stdin));
 }

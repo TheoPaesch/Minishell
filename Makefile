@@ -48,6 +48,7 @@ SRC = env_exp_utils.c \
 	  scan_skip_ws.c \
 	  safe_utils.c \
       unset.c \
+	  unset_utils.c
 
 HEADERS = minishell.h
 
