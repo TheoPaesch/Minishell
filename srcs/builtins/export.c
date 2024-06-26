@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 16:10:08 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/26 13:09:09 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,28 @@ void	export_execution(t_list *env, t_list *expo, char *key, char *value)
 /*export buildin checks if there are arguments 
 	to export and executes them in order*/
 
-int	export_builtin(t_list *env, t_list *expo, char **args)
+int	export_builtin(t_cmd *cmd)
 {
-	int		i;
-	char	*key;
-	char	*value;
+	t_program	*shell;
+	int			i;
+	char		*key;
+	char		*value;
+	char		**args;
 
+
+	shell = get_shell();
+	args = ((t_exec_cmd *)cmd)->argv;
 	i = 1;
 	if (args[i] == NULL)
 	{
-		export_execution(env, expo, NULL, NULL);
+		export_execution(shell->env, shell->expo, NULL, NULL);
 		return (0);
 	}
 	while (args[i])
 	{
 		key = get_key(args[i]);
 		value = get_value(args[i]);
-		export_execution(env, expo, key, value);
+		export_execution(shell->env, shell->expo, key, value);
 		i++;
 	}
 	return (0);

@@ -6,16 +6,20 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/25 16:47:08 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/26 13:05:11 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cd_builtin(t_program *shell, char *path)
+int	cd_builtin(t_cmd *cmd)
 {
-	int	ret;
+	t_program	*shell;
+	char		*path;
+	int			ret;
 
+	shell = get_shell();
+	path = ((t_exec_cmd *)cmd)->argv[1];
 	if (path == NULL)
 	{
 		if (!check_key(shell->expo, "HOME"))
