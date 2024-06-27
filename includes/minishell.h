@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 18:28:51 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:57:42 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_program
 	bool		ex_status;
 	bool		isatty;
 	bool		is_dbg;
+	int			last_exit_code;
 }				t_program;
 
 typedef struct s_cmd

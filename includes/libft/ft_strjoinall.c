@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:36:12 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/14 18:52:09 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:22:18 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /// Frees the src strings if 'bool free' is 1.
 /// @param count amount of strings to be joined
 /// @param free deletes src strings after joining
-/// @param
+/// @param ... The strings to be joined
 /// @return One big STR
 char	*ft_strjoinall(int count, bool free, ...)
 {
@@ -37,7 +37,7 @@ char	*ft_strjoinall(int count, bool free, ...)
 		return (NULL);
 	i = 0;
 	va_start(args, free);
-	while (i < count)
+	while (i++ < count)
 	{
 		tmp = va_arg(args, char *);
 		ft_strcat(str, tmp);
@@ -46,3 +46,5 @@ char	*ft_strjoinall(int count, bool free, ...)
 	}
 	return (va_end(args), str);
 }
+
+// DOES NOT check if incoming strs are NULL

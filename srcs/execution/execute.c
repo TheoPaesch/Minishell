@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 18:09:33 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:14:42 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	exec_exec(t_cmd *cmd)
 	exec_cmd = (t_exec_cmd *)cmd;
 	if (exec_cmd->argv[0] == 0) // maybe switch to conditional exit if child
 		ft_panic("Wrong routing / similar error during exec", 99);
+	// expand(exec_cmd) // EXPAND HERE
 	if (is_builtin(exec_cmd))
 	{
 		exec_builtin(cmd);
