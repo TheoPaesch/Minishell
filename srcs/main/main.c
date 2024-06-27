@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 16:16:42 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/27 16:41:44 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	fill_program(t_program *shell, char **envp)
 		get_input(envp, &shell->env, &shell->expo);
 	if (shell->env == NULL || shell->expo == NULL)
 		exit(1);
-	shell->ex_status = false;
+	shell->ex_status = 0;
 	shell->isatty = isatty(fileno(stdin));
 }
 

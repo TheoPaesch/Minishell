@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/24 16:16:31 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/27 17:16:58 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 // CONSTRUCTOR
 // uses normal MALLOC
 // does so because it is initialized before ft_malloc
-static t_list	*new_list(void)
+t_list	*new_list(void)
 {
 	t_list	*new;
 

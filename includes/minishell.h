@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/25 17:03:51 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/27 17:17:36 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_program
 	t_list		*env;
 	t_list		*expo;
 	t_list		*mem;
-	bool		ex_status;
+	int			ex_status;
 	bool		isatty;
 	bool		is_dbg;
 }				t_program;
@@ -146,15 +146,17 @@ void			change_value_both(t_list *expo, t_list *env, char *key,
 					char *value);
 
 /* -------------------------------- Builtins -------------------------------- */
-int				cd_builtin(t_program *shell, char *path);
+int				cd_builtin(t_cmd *cmd);
 void			print_env(t_list *env);
 void			print_export(t_list *expo);
 int				echo_builtin(t_cmd *cmd);
 void			ms_exit(t_program *shell);
-int				unset_builtin(t_exec_cmd *exec_cmd);
+int				unset_builtin(t_cmd *cmd);
 void			unset_one(t_list *env, t_list *expo, char *key);
-int				export_builtin(t_list *env, t_list *expo, char **args);
+int				export_builtin(t_cmd *cmd);
 int				env_builtin(t_cmd *cmd);
+void			exit_builtin(t_cmd *cmd);
+int				pwd_builtin(t_cmd *cmd);
 
 /* ----------------------------- Error Handling ----------------------------- */
 // void			ft_panic(char *err_msg, int exit_stat);
@@ -170,10 +172,13 @@ void			safe_pipe(int pipefd[2]);
 void			empty_env(void);
 void			fill_program(t_program *shell, char **envp);
 void			get_input(char **envp, t_list **env, t_list **expo);
+char			*get_value(char *str);
+char			*get_key(char *str);
 
 /* ---------------------------- Memory Management --------------------------- */
 t_list			**init_mem_man(t_list **shell_mem);
 t_list			**get_mem_lst(void);
+t_list			*new_list(void);
 
 /* -------------------------------- Execution ------------------------------- */
 void			add_env(t_list *env, char *key, char *value);
