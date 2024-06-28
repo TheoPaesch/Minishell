@@ -1,5 +1,10 @@
 #include <minishell.h>
 
+/*
+IDEAS:
+- while iterating over word, use ft_isalnum instead?
+*/
+
 /// @brief Parses the Input, optional pointers for the start and end of a
 /// token can be returned by passing appropriate pointers. Pass NULL if
 /// you don't want that.
@@ -21,7 +26,9 @@ int	get_token(char **ptr_str, char *end_str, char **quote, char **end_quote)
 	if (quote)
 		*quote = tmp;
 	return_val = *tmp;
-	if (strchr("|();&<", *tmp))
+	if (*tmp == '\0')
+		;
+	else if (ft_strchr("|();&<", *tmp)) // DBG: CHECK WHY TRUE WHEN ptr@endstr
 		tmp++;
 	else if (*tmp == '>')
 	{
@@ -32,13 +39,12 @@ int	get_token(char **ptr_str, char *end_str, char **quote, char **end_quote)
 			tmp++;
 		}
 	}
-	if (*tmp != 0)
+	else
 	{
 		return_val = 'x';
 		while (tmp < end_str && !ft_strchr(" \t\r\n\v<|>&;()", *tmp))
 			tmp++;
 	}
-	//
 	if (end_quote)
 		*end_quote = tmp;
 	while (tmp < end_str && ft_strchr(" \t\r\n\v", *tmp))
