@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_routing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 21:20:47 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/27 17:12:45 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/06/28 18:02:41 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	is_builtin(t_exec_cmd *exec_cmd)
 	i = 0;
 	while (i <= 6)
 	{
-		if (ft_strnstr(builtins[i], exec_cmd->argv[1], ft_strlen(builtins[i])))
+		if (ft_strnstr(builtins[i], exec_cmd->argv[0], ft_strlen(builtins[i])))
 			return (1);
+		i++;
 	}
 	return (0);
 }
@@ -51,5 +52,5 @@ void	exec_builtin(t_cmd *cmd)
 		pwd_builtin(cmd);
 	if (ft_strnstr(exec_cmd->argv[0], "unset", ft_strlen(exec_cmd->argv[0])))
 		unset_builtin(cmd);
-					// do exit value handling here?
+	// do exit value handling here?
 }
