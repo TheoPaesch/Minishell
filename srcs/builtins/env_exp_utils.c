@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:27:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/24 14:44:20 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:49:52 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,26 @@
 
 void	change_value_both(t_list *expo, t_list *env, char *key, char *value)
 {
+	t_env	*test;
+
 	while (expo)
 	{
-		if (ft_strcmp(((t_env *)expo->data)->key, key) == 0)
-			((t_env *)expo->data)->value = value;
+		test = expo->data;
+		if (test != NULL)
+			if (ft_strcmp(test->key, key) == 0)
+				((t_env *)expo->data)->value = value;
+		if (test == NULL || ft_strcmp(test->key, key) == 0)
+			break ;
 		expo = expo->next;
 	}
 	while (env)
 	{
-		if (ft_strcmp(((t_env *)env->data)->key, key) == 0)
-		{
-			ft_free(((t_env *)env->data)->value);
-			((t_env *)env->data)->value = value;
-		}
+		test = env->data;
+		if (test != NULL)
+			if (ft_strcmp(test->key, key) == 0)
+				((t_env *)env->data)->value = value;
+		if (test == NULL || ft_strcmp(test->key, key) == 0)
+			break ;
 		env = env->next;
 	}
 	key = ft_free(key);
