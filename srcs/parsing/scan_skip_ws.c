@@ -10,8 +10,10 @@ int	scan_skip_ws(char **ptr_str, char *end_str, char *tokens)
 	while (str < end_str && ft_strchr(g_whitespace, *str))
 		str++;
 	*ptr_str = str;
-	if (*str && ft_strchr(tokens, *str)) // check behaviour later
+	if (*str && ft_strchr(tokens, *str))
 		return (true);
 	else
 		return (false);
 }
+
+// check behaviour later

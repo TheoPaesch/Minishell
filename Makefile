@@ -48,6 +48,8 @@ SRC = env_exp_utils.c \
 	  scan_skip_ws.c \
 	  safe_utils.c \
       unset.c \
+	  unset_utils.c \
+	  pwd.c
 
 HEADERS = minishell.h
 
@@ -61,7 +63,7 @@ YELLOW = \033[0;33m
 GREEN = \033[0;32m
 NO_COLOR = \033[0m
 
-all: $(NAME) 
+all: $(NAME)
 
 start_compile:
 	@printf "$(BLUE)Compiling Minishell...$(NO_COLOR)\n"

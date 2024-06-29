@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:53:13 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/22 16:59:31 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/28 19:26:15 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 		v.cmd->end_argv[v.argc] = v.end_quote;
 		v.argc++;
 		if (v.argc >= MAXARGS)
-			strerror(1); //"Amount of Arguments > MAXARGS"); // change
+			ft_panic("Amount of Arguments > MAXARGS", 505);
 		v.retrn_val = parse_redir(v.retrn_val, ptr_str, end_str);
 	}
 	v.cmd->argv[v.argc] = 0;
@@ -46,7 +46,7 @@ t_cmd	*parse_cmd(char *str)
 	char	*end_str;
 	t_cmd	*cmd;
 
-	end_str = str + ft_strlen(str) + 1; // dbg [+1]
+	end_str = str + ft_strlen(str);
 	cmd = parse_line(&str, end_str);
 	scan_skip_ws(&str, end_str, "\0");
 	// if (str != end_str)
