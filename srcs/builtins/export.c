@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/29 15:16:43 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:17:53 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,14 @@ void	add_export(t_list *env, t_list *expo, char *key, char *value)
 	ft_lstadd_front(&expo, ft_lstnew(expo));
 }
 
-/*export_execution prints export if no argument 
+/*export_execution prints export if no argument
 	was provided or checks if the key already exitsts
 	if so it will change the values,
-	if not it will be added to export, if there is a value 
+	if not it will be added to export, if there is a value
 	it will also be added to env*/
 
 void	export_execution(t_list *env, t_list *expo, char *key, char *value)
 {
-	t_list	*env;
-	t_list	*expo;
-
 	if (key == NULL && value == NULL)
 	{
 		print_export(expo);
@@ -67,7 +64,7 @@ void	export_execution(t_list *env, t_list *expo, char *key, char *value)
 		add_export(env, expo, key, value);
 }
 
-/*export buildin checks if there are arguments 
+/*export buildin checks if there are arguments
 	to export and executes them in order*/
 
 int	export_builtin(t_cmd *cmd)
@@ -77,7 +74,6 @@ int	export_builtin(t_cmd *cmd)
 	char		*key;
 	char		*value;
 	char		**args;
-
 
 	shell = get_shell();
 	args = ((t_exec_cmd *)cmd)->argv;

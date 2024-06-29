@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/27 16:58:49 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/29 19:37:08 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	expand(t_exec_cmd *exec_cmd)
 		if (start != NULL)
 		{
 			end = start;
-			while (ft_isalnum(*end))
+			while (*end == '$' || ft_isalnum(*end))
 				end++;
 			expanded_var = expand_var(start);
 			*start = '\0';

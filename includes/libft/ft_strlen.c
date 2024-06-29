@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:09:58 by mstrauss          #+#    #+#             */
-/*   Updated: 2023/11/16 23:50:45 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/29 16:41:14 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /// @brief Determines char string length
 /// @param s String to measure
-/// @return Length of string including Nul-terminator
+/// @return Length of string EXCLUDING Nul-terminator
 int	ft_strlen(const char *s)
 {
 	int	i;
 
-	i = -1;
-	while (s[++i] != '\0')
-		;
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
 	return (i);
 }

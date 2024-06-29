@@ -33,12 +33,12 @@ SRCS =  ft_atoi.c ft_calloc.c ft_isalnum.c \
         ft_free.c ft_malloc.c \
         get_next_line_bonus.c get_next_line_utils_bonus.c \
         ft_strcspn.c ft_strspn.c ft_strcmp.c \
-		ft_debug_msg.c ft_panic.c
-        # ft_strjoinall.c 
+		ft_debug_msg.c ft_panic.c \
+        ft_strjoinall.c 
 
 OBJECTS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g # -g -fsanitize=address,leak
+CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address -fsanitize=undefined -g
 
 # COLORS
 BLUE = \033[0;34m

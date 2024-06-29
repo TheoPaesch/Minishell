@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/20 19:04:22 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:33:33 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				**ft_split(char const *s, char c);
 int					ft_strcmp(const char *s1, const char *s2);
-char				*ft_strjoinall(int count, bool free, ...);
+char				*ft_strjoinall(int count, int del, ...);
 size_t				ft_strcspn(const char *str1, const char *str2);
 size_t				ft_strspn(const char *str1, const char *str2);
 

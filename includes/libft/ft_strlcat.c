@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:55:01 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/29 16:45:05 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,17 @@ size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 	unsigned long	dst_len;
 
 	i = 0;
-	j = -1;
+	j = 0;
 	dst_len = ft_strlen(dst);
 	if (dstsize < dst_len || dstsize == 0)
 		return (ft_strlen(src) + dstsize);
 	while (dst[i] != '\0' && i < dstsize)
 		i++;
-	while (i + ++j < dstsize - 1 && src[j])
+	while (src[j] && (i + j < dstsize - 1))
+	{
 		dst[i + j] = src[j];
+		j++;
+	}
 	dst[i + j] = '\0';
 	return (dst_len + ft_strlen(src));
 }

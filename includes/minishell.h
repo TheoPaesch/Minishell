@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/29 14:49:59 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:27:10 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,14 @@ int				export_builtin(t_cmd *cmd);
 int				env_builtin(t_cmd *cmd);
 void			exit_builtin(t_cmd *cmd);
 int				pwd_builtin(t_cmd *cmd);
+
+/* -------------------------------- Expander -------------------------------- */
+int				check_valid_quotes(char *str);
+// move to lexer?
+void			expand(t_exec_cmd *exec_cmd);
+char			*expand_exit_stat(void);
+char			*expand_var(char *str);
+char			*get_value_of_key(t_list *lst, char *key);
 
 /* ----------------------------- Error Handling ----------------------------- */
 // void			ft_panic(char *err_msg, int exit_stat);

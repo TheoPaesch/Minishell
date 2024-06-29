@@ -2,7 +2,7 @@
 
 void	ft_debug_msg(char *msg)
 {
-	// if (shell->is_dbg == true)
+	// if (get_shell()->debug_flag == true)
 	// {
 	ft_putstr_fd("DEBUG: ", 2);
 	ft_putstr_fd(msg, 2);

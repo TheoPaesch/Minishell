@@ -4,7 +4,7 @@ LIBFT_DIR =	./includes/libft
 LIBFT	=	./obj/libft/libft.a
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g
+CFLAGS	=	-Wall -Wextra -Werror -g #-fsanitize=address -fsanitize=undefined -g
 RM		=	rm -rf
 
 LIB		=	-lreadline -L$(LIBFT_DIR)
@@ -14,6 +14,7 @@ SRC_DIRS =	./srcs \
 			./srcs/builtins \
 			./srcs/environment \
 			./srcs/execution \
+			./srcs/expander \
 			./srcs/main \
 			./srcs/parsing \
 			./srcs/prompt \
@@ -31,6 +32,7 @@ SRC = env_exp_utils.c \
 	  env.c \
 	  execute.c \
 	  exec_pipe.c \
+	  expander.c \
 	  export.c \
       get_env.c \
 	  get_token.c \
@@ -95,7 +97,7 @@ fclean:
 
 re: fclean all
 
-debug: CFLAGS += -g -fsanitize=address,leak
+debug: CFLAGS += -g -fsanitize=address -fsanitize=undefined
 debug: re
 
 test:
