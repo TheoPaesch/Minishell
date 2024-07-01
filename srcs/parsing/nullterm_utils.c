@@ -6,15 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:46:55 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/10 16:34:34 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:01:39 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// ToDo
-// Check if return value is necessary
-// rn nice to have, but I think its not
 
 t_cmd	*null_exec_cmd(t_cmd *cmd)
 {

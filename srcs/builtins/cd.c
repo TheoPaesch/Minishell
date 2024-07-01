@@ -6,11 +6,20 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/29 14:50:51 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/01 14:53:00 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+@tpaesch : cd updated noch nicht $OLDPWD
+
+Testcase:
+cd ..
+cd $OLDPWD
+pwd
+*/
 
 char	*key_value(t_list *env, char *key)
 {

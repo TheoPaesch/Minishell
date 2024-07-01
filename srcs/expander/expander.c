@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/29 19:37:08 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/06/29 21:59:12 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 /* ---------------------------------- TODO: --------------------------------- */
 /*
 - currently expanding without consideration of being inside of quotes.
-
+- ~
+- $?
 */
 
 /// @brief Iterates over a STR, checking if there is an Even Number of
