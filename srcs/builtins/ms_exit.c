@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 17:02:17 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/01 15:32:59 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,23 @@ void	ms_exit(t_program *shell)
 	exit(shell->ex_status);
 }
 
-void	parse_exit(char *arg)
+void	parse_exit(char *arg, t_program *shell)
 {
 	int	i;
+
 	i = 0;
-	while (arg[1][i] != '\0')
+	if (arg[i] == '+' || arg[i] == '-')
+		i++;
+	while (arg[i] != '\0')
 	{
-		if (!ft_isdigit(arg[1][i]))
-			else i++;
+		if (!ft_isdigit(arg[i]))
+		{
+			prtinf("minishell: exit: %s: numeric argument required\n", arg);
+			shell->ex_status = 255;
+			ms_exit(shell);
+		}
+		else
+			i++;
 	}
 }
 
@@ -41,7 +50,8 @@ void	exit_builtin(t_cmd *cmd)
 	if (args != NULL)
 	{
 		if (args[2] != NULL)
-			
+			return (printf("exit\nminishell: exit: too many arguments\n"));
+		parse_exit(args[1], shell);
 		tmp = ft_atoi(args[1]);
 		tmp = tmp % 255;
 		shell->ex_status = tmp;

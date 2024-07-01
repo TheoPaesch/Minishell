@@ -18,5 +18,6 @@
       "binaryPath": "/Users/mstrauss/Projects/minishell/minishell",
       "binaryArgs": []
     }
-  ]
+  ],
+  "C_Cpp_Runner.msvcBatchPath": ""
 }
