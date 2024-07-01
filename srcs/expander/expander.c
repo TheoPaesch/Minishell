@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/29 21:59:12 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:30:13 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*expand_var(char *str)
 	return (NULL); // check if expanding to empty string is more correct ""
 }
 
-void	expand(t_exec_cmd *exec_cmd)
+void	expand_argv(t_exec_cmd *exec_cmd)
 {
 	int		i;
 	char	**argv;
@@ -127,6 +127,34 @@ void	expand(t_exec_cmd *exec_cmd)
 		}
 	}
 }
+
+// char	*parse_quotes(char *input)
+// {
+// 	bool	in_single_quote;
+// 	bool	in_double_quote;
+// 	int		i;
+// 	char	*return_value;
+
+// 	in_single_quote = false;
+// 	in_double_quote = false;
+// 	i = 0;
+// 	while (input[i])
+// 	{
+// 		if (input[i] == '\'' && !in_double_quote)
+// 			in_single_quote = !in_single_quote;
+// 		else if (input[i] == '"' && !in_single_quote)
+// 			in_double_quote = !in_double_quote;
+// 		if (input[i] == '~' && !in_single_quote && !in_double_quote)
+// 			expand_tilde(input);
+// 		else if (input[i] == '$' && !in_single_quote)
+// 			expand_var();
+// 		else
+// 			return_value[i] = input[i]; // realloc if neccessary
+// 		i++;
+// 	}
+// 	return_value[i] = '\0';
+// 	return (return_value);
+// }
 
 // BONUS
 // void	expand_wildcards(void)
