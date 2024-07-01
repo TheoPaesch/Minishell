@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 14:50:53 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:02:17 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ void	ms_exit(t_program *shell)
 	exit(shell->ex_status);
 }
 
+void	parse_exit(char *arg)
+{
+	int	i;
+	i = 0;
+	while (arg[1][i] != '\0')
+	{
+		if (!ft_isdigit(arg[1][i]))
+			else i++;
+	}
+}
+
 void	exit_builtin(t_cmd *cmd)
 {
 	t_program	*shell;
@@ -29,7 +40,9 @@ void	exit_builtin(t_cmd *cmd)
 	args = ((t_exec_cmd *)cmd)->argv;
 	if (args != NULL)
 	{
-		tmp = atoi(args[1]);
+		if (args[2] != NULL)
+			
+		tmp = ft_atoi(args[1]);
 		tmp = tmp % 255;
 		shell->ex_status = tmp;
 	}

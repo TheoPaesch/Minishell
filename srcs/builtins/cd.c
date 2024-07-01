@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/01 14:53:00 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:47:04 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int	cd_builtin(t_cmd *cmd)
 	if (ret == -1)
 		return (printf("minishell: cd: %s: %s\n", path, strerror(errno)), 1);
 	else
+	{
+		change_value_both(shell->env, shell->expo, "OLDPWD", key_value(shell->expo, "PWD"));
 		change_value_both(shell->env, shell->expo, "PWD", getcwd(NULL, 0));
+	}
 	return (0);
 }
