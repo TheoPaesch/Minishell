@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 19:31:36 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:52:48 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	print_export(t_list *expo)
 	{
 		key = ((t_env *)expo->data)->key;
 		value = ((t_env *)expo->data)->value;
-		printf("declare -x %s=\"%s\"\n", key, value);
+		if (value != NULL)
+			printf("declare -x %s=\"%s\"\n", key, value);
+		else
+			printf("declare -x %s\n", key);
 		expo = expo->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:27:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 19:36:43 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:33:11 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	change_value_both(t_list *expo, t_list *env, char *key, char *value)
 
 bool	check_key(t_list *tmp, char *key)
 {
-	while (tmp)
+	while (tmp && tmp->data != NULL && tmp->next != NULL)
 	{
 		if (ft_strcmp(((t_env *)tmp->data)->key, key) == 0)
 			return (true);

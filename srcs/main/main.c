@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 19:55:54 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/02 20:56:27 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	fill_program(t_program *shell, char **envp)
 	ft_free(NULL);
 	shell->env = ft_lstnew(NULL);
 	shell->expo = ft_lstnew(NULL);
-	if (envp == NULL)
+	if (envp[0] == NULL)
 		empty_env();
 	else
 		get_input(envp, &shell->env, &shell->expo);
@@ -55,6 +55,9 @@ int	main(int ac, char **av, char **envp)
 		add_history(input);
 		execute_cmd(parse_cmd(ft_strdup(input)));
 	}
-	return(shell.last_exit_code);
+	return (shell.last_exit_code);
 	// }
 }
+
+
+//have to check that export with no env stll creates env
