@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:45:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/29 15:15:42 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/01 19:47:15 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_env(t_list *env)
 {
-	while (env)
+	while (env && env->data != NULL && env->next != NULL)
 	{
 		printf("%s=%s\n", ((t_env *)env->data)->key,
 			((t_env *)env->data)->value);
