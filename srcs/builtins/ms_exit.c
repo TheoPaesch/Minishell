@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/02 10:27:48 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:14:21 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	parse_exit(char *arg, t_program *shell)
 	{
 		if (!ft_isdigit(arg[i]))
 		{
-			printf("minishell: exit: %s: numeric argument required\n", arg);
+			printf("exit\nminishell: exit: %s: numeric argument required\n",
+				arg);
 			shell->ex_status = 256;
 			ms_exit(shell);
 		}
