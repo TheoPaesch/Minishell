@@ -6,11 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:57:53 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/21 21:37:16 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:58:46 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /* ---------------------- BOILERPLATE FOR CONSTRUCTORS ---------------------- */
 /*

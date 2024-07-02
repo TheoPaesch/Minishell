@@ -6,11 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 20:38:54 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:21:05 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 t_cmd	*parse_cmd(char *str)
 {
@@ -72,8 +72,11 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 		v.token = get_token(ptr_str, end_str, &v.quote, &v.end_quote);
 		if (v.token == 0)
 			break ;
-		if (v.token != 'x') // get_token return value for non op
-			strerror(1);    //"SYNTAX"); // change
+		if (v.token == '"' || v.token == '\'')
+			parse_quotes(v.quote, v.end_quote); // CONTINUE HERE
+		if (v.token != 'x')
+			// get_token return value for non op
+			strerror(1); //"SYNTAX"); // change
 		v.cmd->argv[v.argc] = v.quote;
 		v.cmd->end_argv[v.argc] = v.end_quote;
 		v.argc++;
@@ -84,6 +87,43 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 	v.cmd->argv[v.argc] = 0;
 	v.cmd->end_argv[v.argc] = 0;
 	return (v.retrn_val);
+}
+
+/*
+PLAN:
+allocate long string in return_val
+iterate over string, copying if no special condition is met
+DONT copy the current quote type if within quotes
+expand $ and ~
+advance start_ptr past the expanded var / symbol
+continue copying to end
+*/
+char	*parse_quotes(char *start, char *end)
+{
+	bool	in_single_quote;
+	bool	in_double_quote;
+	int		i;
+
+	char *return_value; // ALLOCATE A STR TO THIS AND THEN RETURN IT?
+	in_single_quote = false;
+	in_double_quote = false;
+	i = 0;
+	while (*start)
+	{
+		if (*start == '\'' && !in_double_quote)
+			in_single_quote = !in_single_quote;
+		else if (*start == '"' && !in_single_quote)
+			in_double_quote = !in_double_quote;
+		if (*start == '~' && !in_single_quote && !in_double_quote)
+			expand_tilde(&start);
+		else if (*start == '$' && !in_single_quote)
+			expand_var(&start);
+		else
+			return_value[i] = *start;
+		i++;
+	}
+	return_value[i] = '\0';
+	return (return_value);
 }
 
 t_cmd	*parse_block(char **ptr_str, char *end_str)
@@ -129,7 +169,7 @@ t_cmd	*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str)
 	return (cmd);
 }
 
-t_cmd	*parse_quotes(char **ptr_str, char *end_str)
-{
-	t_cmd	*cmd;
-}
+// t_cmd	*parse_quotes(char **ptr_str, char *end_str)
+// {
+// 	t_cmd	*cmd;
+// }

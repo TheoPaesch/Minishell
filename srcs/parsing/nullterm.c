@@ -6,11 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 12:34:29 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/03 19:30:58 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:58:46 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /// @brief Identifies the type of cmd passed and null terminates their strings
 /// @return pointer to the command struct

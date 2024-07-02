@@ -10,26 +10,16 @@
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
       "environment": [],
-      "externalConsole": true,
+      "externalConsole": false,
       "MIMode": "lldb"
     },
     {
-      "name": "minishell dbg",
+      "name": "(lldb) Attach",
       "type": "cppdbg",
-      "request": "launch",
+      "request": "attach",
       "program": "${workspaceFolder}/minishell",
-      "args": [],
-      "stopAtEntry": true,
-      "cwd": "${workspaceFolder}",
-      "MIMode": "lldb",
-      "miDebuggerPath": "/usr/bin/lldb"
-      //   "setupCommands": [
-      //     {
-      //       "description": "Enable pretty-printing for gdb",
-      //       "text": "-enable-pretty-printing",
-      //       "ignoreFailures": true
-      //     }
-      //   ]
+      "processId": "${command:pickProcess}",
+      "MIMode": "lldb"
     }
   ]
 }

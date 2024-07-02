@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 19:30:13 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:09:01 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,64 +99,40 @@ char	*expand_var(char *str)
 	return (NULL); // check if expanding to empty string is more correct ""
 }
 
-void	expand_argv(t_exec_cmd *exec_cmd)
-{
-	int		i;
-	char	**argv;
-	char	*start;
-	char	*end;
-	char	*expanded_var;
-
-	argv = exec_cmd->argv;
-	i = -1;
-	while (argv[++i])
-	{
-		if (check_valid_quotes(argv[i]) != 1)
-			ft_panic("unclosed quotes", 420);
-		start = ft_strchr(argv[i], '$');
-		if (start != NULL)
-		{
-			end = start;
-			while (*end == '$' || ft_isalnum(*end))
-				end++;
-			expanded_var = expand_var(start);
-			*start = '\0';
-			if (*end != '\0')
-				*end++ = '\0';
-			argv[i] = ft_strjoinall(3, 0, argv[i], expanded_var, end);
-		}
-	}
-}
-
-// char	*parse_quotes(char *input)
+// void	expand_argv(t_exec_cmd *exec_cmd)
 // {
-// 	bool	in_single_quote;
-// 	bool	in_double_quote;
 // 	int		i;
-// 	char	*return_value;
+// 	char	**argv;
+// 	char	*start;
+// 	char	*end;
+// 	char	*expanded_var;
 
-// 	in_single_quote = false;
-// 	in_double_quote = false;
-// 	i = 0;
-// 	while (input[i])
+// 	argv = exec_cmd->argv;
+// 	i = -1;
+// 	while (argv[++i])
 // 	{
-// 		if (input[i] == '\'' && !in_double_quote)
-// 			in_single_quote = !in_single_quote;
-// 		else if (input[i] == '"' && !in_single_quote)
-// 			in_double_quote = !in_double_quote;
-// 		if (input[i] == '~' && !in_single_quote && !in_double_quote)
-// 			expand_tilde(input);
-// 		else if (input[i] == '$' && !in_single_quote)
-// 			expand_var();
-// 		else
-// 			return_value[i] = input[i]; // realloc if neccessary
-// 		i++;
+// 		if (check_valid_quotes(argv[i]) != 1)
+// 			ft_panic("unclosed quotes", 420);
+// 		start = ft_strchr(argv[i], '$');
+// 		if (start != NULL)
+// 		{
+// 			end = start;
+// 			while (*end == '$' || ft_isalnum(*end))
+// 				end++;
+// 			expanded_var = expand_var(start);
+// 			*start = '\0';
+// 			if (*end != '\0')
+// 				*end++ = '\0';
+// 			argv[i] = ft_strjoinall(3, 0, argv[i], expanded_var, end);
+// 		}
 // 	}
-// 	return_value[i] = '\0';
-// 	return (return_value);
 // }
+
 
 // BONUS
 // void	expand_wildcards(void)
 // {
 // }
+
+// whitespace beachten / fehlender whitespace / nicht splitten
+// echo hallo"$test123"

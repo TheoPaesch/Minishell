@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/29 15:27:10 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:13:28 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,11 @@ void			splash_screen(t_program *shell);
 bool			check_key(t_list *tmp, char *key);
 void			change_value_both(t_list *expo, t_list *env, char *key,
 					char *value);
+
+/* --------------------------------- Quotes --------------------------------- */
+void			gt_handle_quote(char **tmp, char *end_str, int *return_val);
+void			gt_handle_redir(char **tmp, int *return_val);
+char			*parse_quotes(char *start, char *end);
 
 /* -------------------------------- Builtins -------------------------------- */
 int				cd_builtin(t_cmd *cmd);
