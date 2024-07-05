@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/02 20:21:05 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/05 18:28:00 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 		if (v.token == '"' || v.token == '\'')
 			parse_quotes(v.quote, v.end_quote); // CONTINUE HERE
 		if (v.token != 'x')
-			// get_token return value for non op
-			strerror(1); //"SYNTAX"); // change
+			ft_panic("get_token returned UNKNOWN type", 100);
 		v.cmd->argv[v.argc] = v.quote;
 		v.cmd->end_argv[v.argc] = v.end_quote;
 		v.argc++;
@@ -103,23 +102,26 @@ char	*parse_quotes(char *start, char *end)
 	bool	in_single_quote;
 	bool	in_double_quote;
 	int		i;
+	char	*return_value;
 
-	char *return_value; // ALLOCATE A STR TO THIS AND THEN RETURN IT?
+	// ALLOCATE A STR TO THIS AND THEN RETURN IT?
+	return_value = ft_malloc(sizeof(char) * 1024);
+	// change size to macro or similar
 	in_single_quote = false;
 	in_double_quote = false;
 	i = 0;
-	while (*start)
+	while (start[i] && &start[i] < end)
 	{
-		if (*start == '\'' && !in_double_quote)
+		if (start[i] == '\'' && !in_double_quote)
 			in_single_quote = !in_single_quote;
-		else if (*start == '"' && !in_single_quote)
+		else if (start[i] == '"' && !in_single_quote)
 			in_double_quote = !in_double_quote;
-		if (*start == '~' && !in_single_quote && !in_double_quote)
-			expand_tilde(&start);
-		else if (*start == '$' && !in_single_quote)
-			expand_var(&start);
+		if (start[i] == '~' && !in_single_quote && !in_double_quote)
+			expand_tilde();
+		else if (start[i] == '$' && !in_single_quote)
+			expand_var(start);
 		else
-			return_value[i] = *start;
+			return_value[i] = start[i];
 		i++;
 	}
 	return_value[i] = '\0';

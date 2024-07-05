@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/02 20:09:01 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/05 16:49:55 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,27 @@ char	*get_value_of_key(t_list *lst, char *key)
 char	*expand_exit_stat(void)
 {
 	return (ft_itoa(get_shell()->last_exit_code));
+}
+
+char	*expand_tilde(void)
+{
+	t_list	*env;
+	char	*exp_str;
+	int		len;
+
+	env = (t_list *)(get_shell()->env);
+	while (env)
+	{
+		if (ft_strcmp(((t_env *)(env->data))->key, "HOME"))
+		// check if strcmp best sol
+		{
+			len = ft_strlen(((t_env *)(env->data))->value);
+			exp_str = ft_malloc(sizeof(char) * len + 1);
+			ft_strlcpy(exp_str, ((t_env *)(env->data))->value, len);
+		}
+		env = env->next;
+	}
+	return (exp_str);
 }
 
 // NOTES:
@@ -127,7 +148,6 @@ char	*expand_var(char *str)
 // 		}
 // 	}
 // }
-
 
 // BONUS
 // void	expand_wildcards(void)
