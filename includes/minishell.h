@@ -6,15 +6,17 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/02 21:13:28 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/05 18:46:47 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# ifndef DEBUG
-#  define DEBUG 0
+# ifdef DEBUG
+#  define DEBUG_FLAG true
+# else
+#  define DEBUG_FLAG false
 # endif
 
 # ifndef LIBFT_H
@@ -132,6 +134,13 @@ typedef struct s_parse_redir_vars
 	char		*end_quote;
 }				t_parse_redir_vars;
 
+/* ---------------------------------- DEBUG --------------------------------- */
+t_cmd			*print_tree(t_cmd *root);
+t_cmd			*print_tree_util(t_cmd *node, int space);
+void			process_and_print_node(t_cmd *node, int space);
+void			print_spaces(int space);
+const char		*get_node_type_str(int type);
+
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
@@ -168,6 +177,7 @@ int				pwd_builtin(t_cmd *cmd);
 int				check_valid_quotes(char *str);
 // move to lexer?
 void			expand(t_exec_cmd *exec_cmd);
+char			*expand_tilde(void);
 char			*expand_exit_stat(void);
 char			*expand_var(char *str);
 char			*get_value_of_key(t_list *lst, char *key);

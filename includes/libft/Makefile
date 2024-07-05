@@ -62,6 +62,8 @@ $(OBJ_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "$(GREEN)Compiled $<$(NO_COLOR)\n"
 
+debug: CFLAGS += -g -fsanitize=address -fsanitize=undefined -DDEBUG=true
+debug: re
 
 clean:
 	@rm -rf $(OBJ_DIR) && printf "$(GREEN)Removing libft object files...$(NO_COLOR)\n"

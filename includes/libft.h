@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/29 15:33:33 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/05 17:55:12 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# ifdef DEBUG
+#  define DEBUG_FLAG true
+# else
+#  define DEBUG_FLAG false
+# endif
 
 /* -------------------------------------------------------------------------- */
 /*                                    LIBFT                                   */

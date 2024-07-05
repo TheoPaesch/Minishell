@@ -51,7 +51,8 @@ SRC = env_exp_utils.c \
 	  safe_utils.c \
       unset.c \
 	  unset_utils.c \
-	  pwd.c
+	  pwd.c \
+	  print_bin_tree.c
 
 HEADERS = minishell.h
 
@@ -97,7 +98,7 @@ fclean:
 
 re: fclean all
 
-debug: CFLAGS += -g -fsanitize=address -fsanitize=undefined
+debug: CFLAGS += -g -fsanitize=address -fsanitize=undefined -DDEBUG=true
 debug: re
 
 test:
