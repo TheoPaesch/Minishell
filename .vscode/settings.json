@@ -35,5 +35,9 @@
       "binaryPath": "/Users/mstrauss/Projects/minishell/minishell",
       "binaryArgs": []
     }
-  ]
+  ],
+  "lldb.displayFormat": "auto",
+  "lldb.showDisassembly": "auto",
+  "lldb.dereferencePointers": true,
+  "lldb.consoleMode": "commands"
 }

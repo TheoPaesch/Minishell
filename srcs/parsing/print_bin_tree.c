@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 16:12:00 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/05 18:45:37 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/07 13:47:04 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ void	print_spaces(int space)
 	int	i;
 
 	i = 10;
-	while (i < space)
-	{
+	while (i++ < space)
 		printf(" ");
-		i++;
-	}
 }
 
 void	process_and_print_node(t_cmd *node, int space)
@@ -47,15 +44,11 @@ t_cmd	*print_tree_util(t_cmd *node, int space)
 		return (node);
 	space += 10;
 	if (node->type == PIPE || node->type == LIST)
-	{
 		print_tree_util(((t_pipe_cmd *)node)->right, space);
-	}
 	printf("\n");
 	process_and_print_node(node, space);
 	if (node->type == PIPE || node->type == LIST)
-	{
 		print_tree_util(((t_pipe_cmd *)node)->left, space);
-	}
 	return (node);
 }
 

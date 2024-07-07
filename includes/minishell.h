@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/05 18:46:47 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/07 18:15:41 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 /* -------------------------------------------------------------------------- */
 
 # define MAXARGS 50
+# define MAX_STR_LEN 2048
 
 typedef struct s_token
 {
@@ -121,7 +122,7 @@ typedef struct s_parse_exec_vars
 {
 	t_cmd		*retrn_val;
 	t_exec_cmd	*cmd;
-	int			token;
+	int			type;
 	int			argc;
 	char		*quote;
 	char		*end_quote;
@@ -129,7 +130,7 @@ typedef struct s_parse_exec_vars
 
 typedef struct s_parse_redir_vars
 {
-	int			token;
+	int			type;
 	char		*quote;
 	char		*end_quote;
 }				t_parse_redir_vars;
@@ -158,7 +159,7 @@ void			change_value_both(t_list *expo, t_list *env, char *key,
 /* --------------------------------- Quotes --------------------------------- */
 void			gt_handle_quote(char **tmp, char *end_str, int *return_val);
 void			gt_handle_redir(char **tmp, int *return_val);
-char			*parse_quotes(char *start, char *end);
+char			*parse_quotes(char **quote, char **end_quote, int *type);
 
 /* -------------------------------- Builtins -------------------------------- */
 int				cd_builtin(t_cmd *cmd);
@@ -177,7 +178,7 @@ int				pwd_builtin(t_cmd *cmd);
 int				check_valid_quotes(char *str);
 // move to lexer?
 void			expand(t_exec_cmd *exec_cmd);
-char			*expand_tilde(void);
+char			*expand_tilde(char **ptr);
 char			*expand_exit_stat(void);
 char			*expand_var(char *str);
 char			*get_value_of_key(t_list *lst, char *key);

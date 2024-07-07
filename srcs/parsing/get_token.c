@@ -40,12 +40,8 @@ int	get_token(char **ptr_str, char *end_str, char **quote, char **end_quote)
 		while (tmp < end_str && !ft_strchr(" \t\r\n\v<|>&;()", *tmp))
 		{
 			if (*tmp == '\'' || *tmp == '\"')
-			{
 				gt_handle_quote(&tmp, end_str, &return_val);
-				tmp++;
-			}
-			else
-				tmp++;
+			tmp++;
 		}
 	}
 	if (end_quote)

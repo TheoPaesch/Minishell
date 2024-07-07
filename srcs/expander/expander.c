@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/05 16:49:55 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/07 18:54:45 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,29 @@ char	*expand_exit_stat(void)
 	return (ft_itoa(get_shell()->last_exit_code));
 }
 
-char	*expand_tilde(void)
+// currently only gets called in quote handling
+// needs to be called outside of quotes too.
+char	*expand_tilde(char **ptr)
 {
 	t_list	*env;
 	char	*exp_str;
 	int		len;
 
+	exp_str = NULL;
 	env = (t_list *)(get_shell()->env);
 	while (env)
 	{
-		if (ft_strcmp(((t_env *)(env->data))->key, "HOME"))
-		// check if strcmp best sol
+		if (ft_strcmp(((t_env *)(env->data))->key, "HOME") == 0)
 		{
 			len = ft_strlen(((t_env *)(env->data))->value);
 			exp_str = ft_malloc(sizeof(char) * len + 1);
-			ft_strlcpy(exp_str, ((t_env *)(env->data))->value, len);
+			ft_strlcpy(exp_str, ((t_env *)(env->data))->value, len + 1);
+			break ;
 		}
 		env = env->next;
 	}
+	if (ptr)
+		(*ptr)++;
 	return (exp_str);
 }
 
