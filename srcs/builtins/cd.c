@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/08 16:50:26 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/09 17:51:32 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,24 @@ int	cd_builtin(t_cmd *cmd)
 	ret = chdir(path);
 	if (ret == -1)
 		return (printf("minishell: cd: %s: %s\n", path, strerror(errno)), 1);
-	update_dir(shell->env, shell->expo);
+	update_dir(&shell->env, &shell->expo);
 	return (0);
 }
 
 
-void	update_dir(t_list *env, t_list *expo)
+void	update_dir(t_list **env, t_list **expo)
 {
 	char	*tmp;
 	char	*path;
 	char	*old_path;
 
-	ft_free(key_value(expo, "OLDPWD"));
-	old_path = key_value(expo, "PWD");
+	ft_free(key_value(*expo, "OLDPWD"));
+	old_path = key_value(*expo, "PWD");
 	tmp = getcwd(NULL, 0);
 	path = ft_strdup(tmp);
 	free(tmp);
-	if (!check_key(env, "OLDPWD"))
+	if (!check_key(*env, "OLDPWD"))
 		add_env(env, ft_strdup("OLDPWD"), old_path);
-	change_value_both(env, expo, "OLDPWD", old_path);
-	change_value_both(env, expo, "PWD", path);
+	change_value_both(*env, *expo, "OLDPWD", old_path);
+	change_value_both(*env, *expo, "PWD", path);
 }

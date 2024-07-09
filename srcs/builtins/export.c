@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/08 18:25:52 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/09 17:54:42 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,24 @@ void	add_export(t_list **env, t_list **expo, char *key, char *value)
 	if not it will be added to export, if there is a value
 	it will also be added to env*/
 
-void	export_execution(t_list *env, t_list *expo, char *key, char *value)
+void	export_execution(t_list **env, t_list **expo, char *key, char *value)
 {
 	if (key == NULL && value == NULL)
 	{
-		print_export(expo);
+		print_export(*expo);
 		return ;
 	}
-	if (check_key(expo, key))
+	if (check_key(*expo, key))
 	{
 		if (value == NULL)
 			return (free(key));
-		if (check_key(env, key))
-			change_value_both(expo, env, key, value);
+		if (check_key(*env, key))
+			change_value_both(*expo, *env, key, value);
 		else
 			add_env(env, key, value);
 	}
 	else
-		add_export(&env, &expo, key, value);
+		add_export(env, expo, key, value);
 }
 
 /*export buildin checks if there are arguments
@@ -83,15 +83,14 @@ int	export_builtin(t_cmd *cmd)
 	i = 1;
 	if (args[i] == NULL)
 	{
-		export_execution(shell->env, shell->expo, NULL, NULL);
+		export_execution(&shell->env, &shell->expo, NULL, NULL);
 		return (0);
 	}
 	while (args[i])
 	{
-		printf("reached_builtin\n");
 		key = get_key(args[i]);
 		value = get_value(args[i]);
-		export_execution(shell->env, shell->expo, key, value);
+		export_execution(&shell->env, &shell->expo, key, value);
 		i++;
 	}
 	return (0);

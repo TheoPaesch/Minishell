@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/08 17:27:17 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/09 18:09:12 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_path(char *executable)
 	}
 	i = 0;
 	tmp = env_lst;
-	while (ft_strcmp(((t_env *)(tmp->data))->key, "PATH") && tmp->data != NULL) // accesses data that is NULL see so that it won't
+	while (tmp->data != NULL && ft_strcmp(((t_env *)(tmp->data))->key, "PATH"))
 		tmp = tmp->next;
 	if (tmp == NULL)
 		ft_panic("PATH not found in env", 3);

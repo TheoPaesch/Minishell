@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:27:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/08 17:51:28 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/09 17:43:08 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ void	change_value_both(t_list *expo, t_list *env, char *key, char *value)
 {
 	t_env	*test;
 
-	printf("reached_change\n");
-	printf("key: %s\n", key);
-	printf("value: %s\n", value);
 	while (expo)
 	{
 		test = expo->data;

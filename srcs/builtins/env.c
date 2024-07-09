@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:45:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/08 16:58:53 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/09 17:51:58 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ void	print_env(t_list *env)
 	}
 }
 
-void	add_env(t_list *env, char *key, char *value)
+void	add_env(t_list **env, char *key, char *value)
 {
 	t_env	*data;
 
-	printf("reached\n");
 	data = ft_malloc(sizeof(t_env));
 	data->key = key;
 	data->value = value;
 	if (data->value != NULL)
-		ft_lstadd_front(&env, ft_lstnew(data));
+		ft_lstadd_front(env, ft_lstnew(data));
 }
 
 // ENV does NOT support options or arguments
