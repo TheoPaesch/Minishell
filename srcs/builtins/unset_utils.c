@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:52:25 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/01 15:08:01 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:56:43 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	unset_one(t_list *env, t_list *expo, char *key)
 	t_list	*tmp;
 
 	tmp = NULL;
-	while (env)
+	while (env && env->data != NULL && env->next != NULL)
 	{
-		if (ft_strcmp(((t_env *)env->data)->key, key) == 0) // segfault
+		if (ft_strcmp(((t_env *)env->data)->key, key) == 0)
 		{
 			free_content(env);
 			patch_list(tmp);
@@ -44,7 +44,7 @@ void	unset_one(t_list *env, t_list *expo, char *key)
 		tmp = env;
 		env = env->next;
 	}
-	while (expo)
+	while (expo && expo->data != NULL && expo->next != NULL)
 	{
 		if (ft_strcmp(((t_env *)expo->data)->key, key) == 0)
 		{

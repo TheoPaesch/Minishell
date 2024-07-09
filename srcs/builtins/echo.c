@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:07:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/30 15:48:42 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:37:15 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	echo_builtin(t_cmd *cmd)
 	bool				n_flag;
 	unsigned int		i;
 	unsigned int		j;
-	const static char	*remove = "";
+	static const char	*remove = "";
 
 	argv = ((t_exec_cmd *)cmd)->argv;
 	n_flag = false;

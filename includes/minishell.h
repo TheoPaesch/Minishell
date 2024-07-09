@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/09 17:50:13 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/09 18:52:04 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,7 @@ t_program		*init_global(t_program *shell);
 void			handle_sigint(int sig);
 void			splash_screen(t_program *shell);
 bool			check_key(t_list *tmp, char *key);
-void			change_value_both(t_list *expo, t_list *env, char *key,
-					char *value);
+void			update_dir(t_list **env, t_list **expo);
 
 /* --------------------------------- Quotes --------------------------------- */
 void			gt_handle_quote(char **tmp, char *end_str, int *return_val);
@@ -206,8 +205,8 @@ t_list			**get_mem_lst(void);
 t_list			*new_list(void);
 
 /* -------------------------------- Execution ------------------------------- */
-void			add_env(t_list *env, char *key, char *value);
-void			add_export(t_list *env, t_list *expo, char *key, char *value);
+void			add_env(t_list **env, char *key, char *value);
+void			add_export(t_list **env, t_list **expo, char *key, char *value);
 void			change_value_both(t_list *expo, t_list *env, char *key,
 					char *value);
 void			exec_builtin(t_cmd *cmd);

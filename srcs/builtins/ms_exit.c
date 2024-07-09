@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 14:50:53 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/02 14:14:21 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,31 @@ void	ms_exit(t_program *shell)
 {
 	ft_lstclear(&(shell->mem), free);
 	rl_clear_history();
-	exit(shell->ex_status);
+	if (shell->last_exit_code != 0)
+		exit(shell->last_exit_code);
+	else
+		exit(shell->ex_status);
+}
+
+void	parse_exit(char *arg, t_program *shell)
+{
+	int	i;
+
+	i = 0;
+	if (arg[i] == '+' || arg[i] == '-')
+		i++;
+	while (arg[i] != '\0')
+	{
+		if (!ft_isdigit(arg[i]))
+		{
+			printf("exit\nminishell: exit: %s: numeric argument required\n",
+				arg);
+			shell->ex_status = 256;
+			ms_exit(shell);
+		}
+		else
+			i++;
+	}
 }
 
 void	exit_builtin(t_cmd *cmd)
@@ -27,9 +51,15 @@ void	exit_builtin(t_cmd *cmd)
 
 	shell = get_shell();
 	args = ((t_exec_cmd *)cmd)->argv;
-	if (args != NULL)
+	if (args[1] != NULL)
 	{
-		tmp = atoi(args[1]);
+		parse_exit(args[1], shell);
+		if (args[2] != NULL)
+		{
+			printf("exit\nminishell: exit: too many arguments\n");
+			return ;
+		}
+		tmp = ft_atoi(args[1]);
 		tmp = tmp % 255;
 		shell->ex_status = tmp;
 	}

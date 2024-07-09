@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/06/27 17:16:58 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/07 20:27:41 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 void	empty_env(void)
 {
-	t_list	*env;
-	t_list	*expo;
+	t_program	*shell;
+	char		*pwd;
+	char		*tmp;
 
-	env = NULL;
-	expo = NULL;
-	if (ft_lstnew(env) == NULL)
-		ft_panic("malloc failed in get_env", 1);
-	if (ft_lstnew(expo) == NULL)
-		ft_panic("malloc failed in get_env", 1);
-	add_export(env, expo, "OLDPWD", NULL);
-	add_export(env, expo, "PWD", getcwd(NULL, 0));
-	add_export(env, expo, "SHLVL", "1");
+	tmp = getcwd(NULL, 0);
+	pwd = ft_strdup(tmp);
+	free(tmp);
+	shell = get_shell();
+	add_export(&shell->env, &shell->expo, ft_strdup("OLDPWD"), NULL);
+	add_export(&shell->env, &shell->expo, ft_strdup("PWD"), pwd);
+	add_export(&shell->env, &shell->expo, ft_strdup("SHLVL"), ft_strdup("1"));
 }
 
 char	*get_key(char *str)
@@ -34,11 +33,11 @@ char	*get_key(char *str)
 	char	*key;
 
 	i = 0;
-	while (str[i] != '=')
+	while (str[i] != '=' && str[i] != '\0')
 		i++;
 	key = ft_malloc(sizeof(char) * i + 1);
 	i = 0;
-	while (str[i] != '=')
+	while (str[i] != '=' && str[i] != '\0')
 	{
 		key[i] = str[i];
 		i++;
@@ -54,8 +53,10 @@ char	*get_value(char *str)
 	char	*value;
 
 	i = 0;
-	while (str[i] != '=')
+	while (str[i] != '=' && str[i] != '\0')
 		i++;
+	if (str[i] == '\0')
+		return (ft_strdup(""));
 	i++;
 	j = i;
 	while (str[j] != '\0')

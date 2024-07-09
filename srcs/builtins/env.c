@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:45:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/29 15:15:42 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:51:58 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void	print_env(t_list *env)
 {
-	while (env)
+	char	*key;
+	char	*value;
+
+	while (env && env->data != NULL)
 	{
-		printf("%s=%s\n", ((t_env *)env->data)->key,
-			((t_env *)env->data)->value);
+		key = ((t_env *)env->data)->key;
+		value = ((t_env *)env->data)->value;
+		printf("%s=%s\n", key, value);
 		env = env->next;
 	}
 }
 
-void	add_env(t_list *env, char *key, char *value)
+void	add_env(t_list **env, char *key, char *value)
 {
 	t_env	*data;
 
@@ -30,10 +34,7 @@ void	add_env(t_list *env, char *key, char *value)
 	data->key = key;
 	data->value = value;
 	if (data->value != NULL)
-	{
-		env->data = data;
-		ft_lstadd_front(&env, ft_lstnew(env));
-	}
+		ft_lstadd_front(env, ft_lstnew(data));
 }
 
 // ENV does NOT support options or arguments

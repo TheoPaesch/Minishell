@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 15:08:01 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:54:42 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 
 void	print_export(t_list *expo)
 {
-	while (expo)
+	char	*key;
+	char	*value;
+
+	while (expo && expo->data != NULL)
 	{
-		printf("declare -x %s=\"%s\"\n", ((t_env *)expo->data)->key,
-			((t_env *)expo->data)->value);
+		key = ((t_env *)expo->data)->key;
+		value = ((t_env *)expo->data)->value;
+		if (value != NULL)
+			printf("declare -x %s=\"%s\"\n", key, value);
+		else
+			printf("declare -x %s\n", key);
 		expo = expo->next;
 	}
 }
 
-void	add_export(t_list *env, t_list *expo, char *key, char *value)
+void	add_export(t_list **env, t_list **expo, char *key, char *value)
 {
 	t_env	*data;
 
@@ -30,12 +37,8 @@ void	add_export(t_list *env, t_list *expo, char *key, char *value)
 	data->key = key;
 	data->value = value;
 	if (data->value != NULL)
-	{
-		env->data = data;
-		ft_lstadd_front(&env, ft_lstnew(env));
-	}
-	expo->data = data;
-	ft_lstadd_front(&expo, ft_lstnew(expo));
+		ft_lstadd_front(env, ft_lstnew(data));
+	ft_lstadd_front(expo, ft_lstnew(data));
 }
 
 /*export_execution prints export if no argument
@@ -44,19 +47,19 @@ void	add_export(t_list *env, t_list *expo, char *key, char *value)
 	if not it will be added to export, if there is a value
 	it will also be added to env*/
 
-void	export_execution(t_list *env, t_list *expo, char *key, char *value)
+void	export_execution(t_list **env, t_list **expo, char *key, char *value)
 {
 	if (key == NULL && value == NULL)
 	{
-		print_export(expo);
+		print_export(*expo);
 		return ;
 	}
-	if (check_key(expo, key))
+	if (check_key(*expo, key))
 	{
 		if (value == NULL)
 			return (free(key));
-		if (check_key(env, key))
-			change_value_both(expo, env, key, value);
+		if (check_key(*env, key))
+			change_value_both(*expo, *env, key, value);
 		else
 			add_env(env, key, value);
 	}
@@ -80,14 +83,14 @@ int	export_builtin(t_cmd *cmd)
 	i = 1;
 	if (args[i] == NULL)
 	{
-		export_execution(shell->env, shell->expo, NULL, NULL);
+		export_execution(&shell->env, &shell->expo, NULL, NULL);
 		return (0);
 	}
 	while (args[i])
 	{
 		key = get_key(args[i]);
 		value = get_value(args[i]);
-		export_execution(shell->env, shell->expo, key, value);
+		export_execution(&shell->env, &shell->expo, key, value);
 		i++;
 	}
 	return (0);
