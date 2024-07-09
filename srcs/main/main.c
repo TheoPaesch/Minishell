@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/05 17:05:45 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:50:10 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	main(int ac, char **av, char **envp)
 		input = read_input(&shell);
 		if (input == NULL)
 			ms_exit(&shell);
+		if (*input == '\0')
+			continue ;
 		execute_cmd(print_tree(parse_cmd(ft_strdup(input))));
 		add_history(input);
 	}

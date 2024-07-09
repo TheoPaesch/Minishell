@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/07 18:38:34 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/09 18:17:06 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,13 +132,13 @@ char	*parse_quotes(char **quote, char **end_quote, int *type)
 			tmp_str = expand_tilde(&tmp_ptr);
 		else if (*tmp_ptr == '$' && !in_single_quote)
 			// add condition for not in either quotes
-			tmp_str = expand_var(tmp_ptr);
-		else if (tmp_str != NULL)
+			tmp_str = expand_var(&tmp_ptr);
+		if (tmp_str != NULL)
 			return_value += ft_strlcpy(return_value, tmp_str, MAX_STR_LEN);
 		else
 			*return_value++ = *tmp_ptr;
 		tmp_ptr++;
-		tmp_str = ft_free(tmp_str);
+		tmp_str = NULL;
 	}
 	*return_value = '\0';
 	*end_quote = return_value;

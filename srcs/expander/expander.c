@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/07 18:54:45 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:58:27 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*expand_tilde(char **ptr)
 // NOTES:
 // prefers values from export over environment.
 // if key found in exp immediately returns
-char	*expand_var(char *str)
+char	*expand_var(char **str)
 {
 	t_list	*env;
 	t_list	*exp;
@@ -102,27 +102,28 @@ char	*expand_var(char *str)
 	env = get_shell()->env;
 	exp = get_shell()->expo;
 	i = 0;
-	if (str[i] != '$')
+	if ((*str)[i] != '$')
 		ft_panic("expand_var received string without $", 420);
 	i++;
-	if (str[i] == '?')
-		return (expand_exit_stat());
-	while (ft_isalnum(str[i]))
+	if ((*str)[i] == '?')
+		return (*str = *str + i, expand_exit_stat());
+	while (ft_isalnum((*str)[i]))
 		i++;
-	trimmed = ft_substr(str, 1, i - 1);
+	trimmed = ft_substr(*str, 1, i - 1);
 	while (exp)
 	{
-		if (ft_strcmp(((t_env *)exp->data)->key, trimmed) == 0)
-			return (((t_env *)exp->data)->value);
+		if (exp->data != NULL && ft_strcmp(((t_env *)exp->data)->key, trimmed) == 0)
+			return (*str = *str + i, ((t_env *)exp->data)->value);
 		exp = exp->next;
 	}
 	while (env)
 	{
-		if (ft_strcmp(((t_env *)env->data)->key, trimmed) == 0)
-			return (((t_env *)env->data)->value);
+		if (env->data != NULL && ft_strcmp(((t_env *)env->data)->key, trimmed) == 0)
+			return (*str = *str + i, ((t_env *)env->data)->value);
 		env = env->next;
 	}
-	return (NULL); // check if expanding to empty string is more correct ""
+	return (*str = *str + i, NULL);
+	// check if expanding to empty string is more correct ""
 }
 
 // void	expand_argv(t_exec_cmd *exec_cmd)

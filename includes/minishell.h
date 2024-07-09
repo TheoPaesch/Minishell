@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/07 18:15:41 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:50:13 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ typedef struct s_program
 	t_list		*expo;
 	t_list		*mem;
 	int			ex_status;
+	int			last_exit_code;
 	bool		isatty;
 	bool		is_dbg;
-	int			last_exit_code;
 }				t_program;
 
 typedef struct s_cmd
@@ -122,17 +122,17 @@ typedef struct s_parse_exec_vars
 {
 	t_cmd		*retrn_val;
 	t_exec_cmd	*cmd;
-	int			type;
-	int			argc;
 	char		*quote;
 	char		*end_quote;
+	int			type;
+	int			argc;
 }				t_parse_exec_vars;
 
 typedef struct s_parse_redir_vars
 {
-	int			type;
 	char		*quote;
 	char		*end_quote;
+	int			type;
 }				t_parse_redir_vars;
 
 /* ---------------------------------- DEBUG --------------------------------- */
@@ -180,7 +180,7 @@ int				check_valid_quotes(char *str);
 void			expand(t_exec_cmd *exec_cmd);
 char			*expand_tilde(char **ptr);
 char			*expand_exit_stat(void);
-char			*expand_var(char *str);
+char			*expand_var(char **str);
 char			*get_value_of_key(t_list *lst, char *key);
 
 /* ----------------------------- Error Handling ----------------------------- */
