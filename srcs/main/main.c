@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/02 20:56:27 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/08 15:07:29 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ int	main(int ac, char **av, char **envp)
 	{
 		input = read_input(&shell);
 		if (input == NULL)
+		{
+			free(input);
 			ms_exit(&shell);
+		}
 		add_history(input);
 		execute_cmd(parse_cmd(ft_strdup(input)));
+		free(input);
 	}
 	return (shell.last_exit_code);
 	// }

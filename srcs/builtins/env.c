@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:45:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 19:47:15 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/08 16:58:53 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	print_env(t_list *env)
 {
-	while (env && env->data != NULL && env->next != NULL)
+	char	*key;
+	char	*value;
+
+	while (env && env->data != NULL)
 	{
-		printf("%s=%s\n", ((t_env *)env->data)->key,
-			((t_env *)env->data)->value);
+		key = ((t_env *)env->data)->key;
+		value = ((t_env *)env->data)->value;
+		printf("%s=%s\n", key, value);
 		env = env->next;
 	}
 }
@@ -26,14 +30,12 @@ void	add_env(t_list *env, char *key, char *value)
 {
 	t_env	*data;
 
+	printf("reached\n");
 	data = ft_malloc(sizeof(t_env));
 	data->key = key;
 	data->value = value;
 	if (data->value != NULL)
-	{
-		env->data = data;
-		ft_lstadd_front(&env, ft_lstnew(env));
-	}
+		ft_lstadd_front(&env, ft_lstnew(data));
 }
 
 // ENV does NOT support options or arguments

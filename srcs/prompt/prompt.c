@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:25:48 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/01 19:59:00 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/07 20:10:07 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ char	*read_input(t_program *mushell)
 		prompt = ft_strjoin(tmp, " ");
 		if (prompt == NULL)
 			return (ft_free(tmp), NULL);
-		input = readline(prompt);
 		free(tmp);
+		input = readline(prompt);
 	}
 	else
 	{

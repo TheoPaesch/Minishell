@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/02 19:52:48 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/08 18:25:52 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_export(t_list *expo)
 	char	*key;
 	char	*value;
 
-	while (expo && expo->data != NULL && expo->next != NULL)
+	while (expo && expo->data != NULL)
 	{
 		key = ((t_env *)expo->data)->key;
 		value = ((t_env *)expo->data)->value;
@@ -29,7 +29,7 @@ void	print_export(t_list *expo)
 	}
 }
 
-void	add_export(t_list *env, t_list *expo, char *key, char *value)
+void	add_export(t_list **env, t_list **expo, char *key, char *value)
 {
 	t_env	*data;
 
@@ -37,12 +37,8 @@ void	add_export(t_list *env, t_list *expo, char *key, char *value)
 	data->key = key;
 	data->value = value;
 	if (data->value != NULL)
-	{
-		env->data = data;
-		ft_lstadd_front(&env, ft_lstnew(env));
-	}
-	expo->data = data;
-	ft_lstadd_front(&expo, ft_lstnew(expo));
+		ft_lstadd_front(env, ft_lstnew(data));
+	ft_lstadd_front(expo, ft_lstnew(data));
 }
 
 /*export_execution prints export if no argument
@@ -68,7 +64,7 @@ void	export_execution(t_list *env, t_list *expo, char *key, char *value)
 			add_env(env, key, value);
 	}
 	else
-		add_export(env, expo, key, value);
+		add_export(&env, &expo, key, value);
 }
 
 /*export buildin checks if there are arguments
@@ -92,6 +88,7 @@ int	export_builtin(t_cmd *cmd)
 	}
 	while (args[i])
 	{
+		printf("reached_builtin\n");
 		key = get_key(args[i]);
 		value = get_value(args[i]);
 		export_execution(shell->env, shell->expo, key, value);

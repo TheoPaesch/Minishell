@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/02 20:21:44 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/07 20:27:41 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 void	empty_env(void)
 {
 	t_program	*shell;
+	char		*pwd;
+	char		*tmp;
 
+	tmp = getcwd(NULL, 0);
+	pwd = ft_strdup(tmp);
+	free(tmp);
 	shell = get_shell();
-	add_export(shell->env, shell->expo, "OLDPWD", NULL);
-	add_export(shell->env, shell->expo, "PWD", getcwd(NULL, 0));
-	add_export(shell->env, shell->expo, "SHLVL", "1");
+	add_export(&shell->env, &shell->expo, ft_strdup("OLDPWD"), NULL);
+	add_export(&shell->env, &shell->expo, ft_strdup("PWD"), pwd);
+	add_export(&shell->env, &shell->expo, ft_strdup("SHLVL"), ft_strdup("1"));
 }
 
 char	*get_key(char *str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/29 15:27:10 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:18:26 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void			splash_screen(t_program *shell);
 bool			check_key(t_list *tmp, char *key);
 void			change_value_both(t_list *expo, t_list *env, char *key,
 					char *value);
+void			update_dir(t_list *env, t_list *expo);
 
 /* -------------------------------- Builtins -------------------------------- */
 int				cd_builtin(t_cmd *cmd);
@@ -191,7 +192,7 @@ t_list			*new_list(void);
 
 /* -------------------------------- Execution ------------------------------- */
 void			add_env(t_list *env, char *key, char *value);
-void			add_export(t_list *env, t_list *expo, char *key, char *value);
+void			add_export(t_list **env, t_list **expo, char *key, char *value);
 void			change_value_both(t_list *expo, t_list *env, char *key,
 					char *value);
 void			exec_builtin(t_cmd *cmd);
