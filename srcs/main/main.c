@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/08 15:07:29 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/09 20:16:44 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	// if (ac > 1 && av[1] != NULL)
 	// 	printf("minishell: no arguments needed\n");
-	// else
-	// {
 	fill_program(&shell, envp);
 	splash_screen(&shell);
 	signal(SIGINT, handle_sigint);
@@ -60,7 +58,6 @@ int	main(int ac, char **av, char **envp)
 		free(input);
 	}
 	return (shell.last_exit_code);
-	// }
 }
 
 
