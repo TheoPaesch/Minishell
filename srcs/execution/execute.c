@@ -6,21 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/09 17:50:12 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:22:58 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// DISCUSS with partner how to route here, + get path
-// either pass it in or have a full path lookup function
-// that gets called here
-
-// ToDo: 	replace error func
-// 			add path to execve
-//			get envp
-//			-> getter func?
-//			check if safety wrappers break anything
 
 void	execute_cmd(t_cmd *cmd)
 {
@@ -56,19 +46,6 @@ void	exec_exec(t_cmd *cmd)
 		execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL);
 	printf("Executing %s failed\n", get_path(exec_cmd->argv[0]));
 }
-
-// /// @brief Checks if command is a builtin and executes it.
-// /// @param exec_cmd cmd table
-// /// @return 1 on is_builtin true
-// ///			0 on is_builtin false
-// int	is_builtin(t_exec_cmd *exec_cmd)
-// {
-// 	if (ft_strcmp(exec_cmd, "cmd"))
-// 	{
-// 		/* code */
-// 	}
-
-// }
 
 void	exec_redir(t_cmd *cmd)
 {

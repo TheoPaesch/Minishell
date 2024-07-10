@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/09 18:17:06 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:04:26 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 		v.type = get_token(ptr_str, end_str, &v.quote, &v.end_quote);
 		if (v.type == 0)
 			break ;
-		if (v.type == '"' || v.type == '\'')
+		if (v.type == '"' || v.type == '\'') // have return type for $ instead?
+												// eg. $"HOME"$USER would become 3 tokens
+												// ""
+												// HOME
+												// mstrauss
 			parse_quotes(&v.quote, &v.end_quote, &v.type);
 		if (v.type != 'x')
 			ft_panic("get_token returned UNKNOWN type", 100);
@@ -113,32 +117,38 @@ char	*parse_quotes(char **quote, char **end_quote, int *type)
 	*quote = start_rtrn;
 	in_single_quote = false;
 	in_double_quote = false;
-	tmp_str = NULL;
 	while (tmp_ptr < *end_quote)
 	{
-		if (*tmp_ptr == '\'' && !in_double_quote)
+		tmp_str = NULL;
+		if (*tmp_ptr == '\'')
 		{
-			in_single_quote = !in_single_quote;
-			tmp_ptr++;
-			continue ;
+			if (!in_double_quote)
+			{
+				in_single_quote = !in_single_quote;
+				tmp_ptr++;
+				continue ;
+			}
 		}
-		else if (*tmp_ptr == '"' && !in_single_quote)
+		else if (*tmp_ptr == '"')
 		{
-			in_double_quote = !in_double_quote;
-			tmp_ptr++;
-			continue ;
+			if (!in_single_quote)
+			{
+				in_double_quote = !in_double_quote;
+				tmp_ptr++;
+				continue ;
+			}
 		}
 		if (*tmp_ptr == '~' && !in_single_quote && !in_double_quote)
 			tmp_str = expand_tilde(&tmp_ptr);
 		else if (*tmp_ptr == '$' && !in_single_quote)
-			// add condition for not in either quotes
 			tmp_str = expand_var(&tmp_ptr);
 		if (tmp_str != NULL)
+		{
 			return_value += ft_strlcpy(return_value, tmp_str, MAX_STR_LEN);
+			tmp_ptr++;
+		}
 		else
-			*return_value++ = *tmp_ptr;
-		tmp_ptr++;
-		tmp_str = NULL;
+			*return_value++ = *tmp_ptr++;
 	}
 	*return_value = '\0';
 	*end_quote = return_value;

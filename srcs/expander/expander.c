@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/09 17:58:27 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:50:44 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,42 +89,90 @@ char	*expand_tilde(char **ptr)
 	return (exp_str);
 }
 
-// NOTES:
-// prefers values from export over environment.
-// if key found in exp immediately returns
 char	*expand_var(char **str)
 {
 	t_list	*env;
 	t_list	*exp;
-	char	*trimmed;
-	int		i;
+	char	*start;
+	char	*trmd;
 
 	env = get_shell()->env;
 	exp = get_shell()->expo;
-	i = 0;
-	if ((*str)[i] != '$')
+	if (**str != '$')
 		ft_panic("expand_var received string without $", 420);
-	i++;
-	if ((*str)[i] == '?')
-		return (*str = *str + i, expand_exit_stat());
-	while (ft_isalnum((*str)[i]))
-		i++;
-	trimmed = ft_substr(*str, 1, i - 1);
-	while (exp)
+	if (*(*str + 1) == '?')
 	{
-		if (exp->data != NULL && ft_strcmp(((t_env *)exp->data)->key, trimmed) == 0)
-			return (*str = *str + i, ((t_env *)exp->data)->value);
+		*str += 2;
+		return (expand_exit_stat());
+	}
+	*str += 1;
+	start = *str;
+	while (ft_isalnum(**str))
+		(*str)++;
+	trmd = ft_substr(start, 0, *str - start);
+	while (exp && *trmd != '\0')
+	{
+		if (exp->data != NULL && ft_strcmp(((t_env *)exp->data)->key,
+				trmd) == 0)
+		{
+			free(trmd);
+			return (((t_env *)exp->data)->value);
+		}
 		exp = exp->next;
 	}
-	while (env)
+	while (env && *trmd != '\0')
 	{
-		if (env->data != NULL && ft_strcmp(((t_env *)env->data)->key, trimmed) == 0)
-			return (*str = *str + i, ((t_env *)env->data)->value);
+		if (env->data != NULL && ft_strcmp(((t_env *)env->data)->key,
+				trmd) == 0)
+		{
+			free(trmd);
+			return (((t_env *)env->data)->value);
+		}
 		env = env->next;
 	}
-	return (*str = *str + i, NULL);
-	// check if expanding to empty string is more correct ""
+	free(trmd);
+	return (NULL);
 }
+
+// NOTES:
+// prefers values from export over environment.
+// if key found in exp immediately returns
+// char	*expand_var(char **str)
+// {
+// 	t_list	*env;
+// 	t_list	*exp;
+// 	char	*trmd;
+// 	int		i;
+
+// 	// CHANGE TO ACTUALLY CHANGE THE POINTER INSTEAD OF USING [i]!!!
+// 	env = get_shell()->env;
+// 	exp = get_shell()->expo;
+// 	i = 0;
+// 	if ((*str)[i] != '$')
+// 		ft_panic("expand_var received string without $", 420);
+// 	if ((*str)[i + 1] == '?')
+// 		return (*str = *str + 2, expand_exit_stat());
+// 	i++;
+// 	while (ft_isalnum((*str)[i]))
+// 		i++;
+// 	trmd = ft_substr(*str, 1, i - 1);
+// 	while (exp && *trmd != '\0')
+// 	{
+// 		if (exp->data != NULL && ft_strcmp(((t_env *)exp->data)->key,
+// 				trmd) == 0)
+// 			return (*str = *str + i, ((t_env *)exp->data)->value);
+// 		exp = exp->next;
+// 	}
+// 	while (env && *trmd != '\0')
+// 	{
+// 		if (env->data != NULL && ft_strcmp(((t_env *)env->data)->key,
+// 				trmd) == 0)
+// 			return (*str = *str + i, ((t_env *)env->data)->value);
+// 		env = env->next;
+// 	}
+// 	return (*str = *str + i, NULL);
+// 	// check if expanding to empty string is more correct ""
+// }
 
 // void	expand_argv(t_exec_cmd *exec_cmd)
 // {

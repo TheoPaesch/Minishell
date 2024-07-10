@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/09 18:09:12 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/09 19:36:54 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 char	*get_path(char *executable)
 {
-	int				i;
-	char			**folders;
 	static t_list	*env_lst;
 	t_list			*tmp;
+	int				i;
+	char			**folders;
+	char			*rtrn;
 
 	if (!env_lst)
 	{
@@ -33,12 +34,14 @@ char	*get_path(char *executable)
 	folders = ft_split(((t_env *)(tmp->data))->value, ':');
 	while (folders[i])
 	{
-		if (access(ft_strjoin(ft_strjoin(folders[i], "/"), executable),
-				F_OK | X_OK) == 0)
-			return (ft_strjoin(ft_strjoin(folders[i], "/"), executable));
+		rtrn = ft_strjoin(ft_strjoin(folders[i], "/"), executable);
+		if (access(rtrn, F_OK | X_OK) == 0)
+			return (rtrn);
 		i++;
 	}
-	return (ft_panic("command not found", 4), NULL);
+	// printf("%s\n", executable);
+	// ft_panic("command not found", 4);
+	return (executable);
 }
 
 // Path: srcs/execute/execute.c
