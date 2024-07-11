@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/10 20:04:26 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/11 18:29:09 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ char	*parse_quotes(char **quote, char **end_quote, int *type)
 	char	*return_value;
 	char	*start_rtrn;
 	char	*tmp_ptr;
-	char	*tmp_str;
 	bool	in_single_quote;
 	bool	in_double_quote;
 
@@ -119,7 +118,6 @@ char	*parse_quotes(char **quote, char **end_quote, int *type)
 	in_double_quote = false;
 	while (tmp_ptr < *end_quote)
 	{
-		tmp_str = NULL;
 		if (*tmp_ptr == '\'')
 		{
 			if (!in_double_quote)
@@ -139,13 +137,16 @@ char	*parse_quotes(char **quote, char **end_quote, int *type)
 			}
 		}
 		if (*tmp_ptr == '~' && !in_single_quote && !in_double_quote)
-			tmp_str = expand_tilde(&tmp_ptr);
+			return_value += ft_strlcpy(return_value, expand_tilde(&tmp_ptr),
+					MAX_STR_LEN);
 		else if (*tmp_ptr == '$' && !in_single_quote)
-			tmp_str = expand_var(&tmp_ptr);
-		if (tmp_str != NULL)
 		{
-			return_value += ft_strlcpy(return_value, tmp_str, MAX_STR_LEN);
-			tmp_ptr++;
+			if (in_double_quote && !ft_isalnum(*(tmp_ptr + 1)) && *(tmp_ptr
+					+ 1) != '?')
+				*return_value++ = *tmp_ptr++;
+			else
+				return_value += ft_strlcpy(return_value, expand_var(&tmp_ptr),
+						MAX_STR_LEN);
 		}
 		else
 			*return_value++ = *tmp_ptr++;
@@ -155,6 +156,8 @@ char	*parse_quotes(char **quote, char **end_quote, int *type)
 	*type = 'x';
 	return (start_rtrn);
 }
+
+// && ft_isalnum(*(tmp_ptr + 1))
 
 // if (quote)
 // 	*quote = tmp_ptr;

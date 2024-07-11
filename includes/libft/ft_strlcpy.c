@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 19:47:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:47:36 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	unsigned long	i;
 
 	i = 0;
-	if (dstsize == 0)
+	if (dstsize == 0 || !src)
 		return (ft_strlen(src));
 	while (i < dstsize - 1 && src[i])
 	{

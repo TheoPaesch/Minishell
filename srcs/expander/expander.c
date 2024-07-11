@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/10 19:50:44 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/11 18:25:07 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ char	*expand_tilde(char **ptr)
 	return (exp_str);
 }
 
+// NOTES:
+// prefers values from export over environment.
+// if key found in exp immediately returns
 char	*expand_var(char **str)
 {
 	t_list	*env;
@@ -130,13 +133,10 @@ char	*expand_var(char **str)
 		}
 		env = env->next;
 	}
-	free(trmd);
+	ft_free(trmd);
 	return (NULL);
 }
 
-// NOTES:
-// prefers values from export over environment.
-// if key found in exp immediately returns
 // char	*expand_var(char **str)
 // {
 // 	t_list	*env;
