@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/09 19:36:52 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:24:27 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ void			expand(t_exec_cmd *exec_cmd);
 char			*expand_tilde(char **ptr);
 char			*expand_exit_stat(void);
 char			*expand_var(char **str);
+char			*expand_word(char **start, char **end, int *type);
 char			*get_value_of_key(t_list *lst, char *key);
 
 /* ----------------------------- Error Handling ----------------------------- */

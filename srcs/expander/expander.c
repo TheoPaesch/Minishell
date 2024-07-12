@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/11 18:25:07 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:48:44 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,29 @@ char	*expand_tilde(char **ptr)
 	char	*exp_str;
 	int		len;
 
+	if (**ptr != '~')
+		ft_panic("expand_tilde received string without ~", 420);
 	exp_str = NULL;
 	env = (t_list *)(get_shell()->env);
-	while (env)
+	if (*(*ptr + 1) == '/' || *(*ptr + 1) == '\0' || ft_strchr(" \t\r\n\v ",
+			**ptr))
 	{
-		if (ft_strcmp(((t_env *)(env->data))->key, "HOME") == 0)
+		while (env)
 		{
-			len = ft_strlen(((t_env *)(env->data))->value);
-			exp_str = ft_malloc(sizeof(char) * len + 1);
-			ft_strlcpy(exp_str, ((t_env *)(env->data))->value, len + 1);
-			break ;
+			if (ft_strcmp(((t_env *)(env->data))->key, "HOME") == 0)
+			{
+				len = ft_strlen(((t_env *)(env->data))->value);
+				exp_str = ft_malloc(sizeof(char) * len + 1);
+				ft_strlcpy(exp_str, ((t_env *)(env->data))->value, len + 1);
+				break ;
+			}
+			env = env->next;
 		}
-		env = env->next;
+	}
+	else
+	{
+		exp_str = ft_malloc(sizeof(char) * 2);
+		ft_strlcpy(exp_str, "~", 2);
 	}
 	if (ptr)
 		(*ptr)++;

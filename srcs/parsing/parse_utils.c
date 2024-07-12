@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/11 18:29:09 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:56:40 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,12 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 		v.type = get_token(ptr_str, end_str, &v.quote, &v.end_quote);
 		if (v.type == 0)
 			break ;
-		if (v.type == '"' || v.type == '\'') // have return type for $ instead?
-												// eg. $"HOME"$USER would become 3 tokens
-												// ""
-												// HOME
-												// mstrauss
+		if (v.type == '"' || v.type == '\'')
 			parse_quotes(&v.quote, &v.end_quote, &v.type);
-		if (v.type != 'x')
+		if (!(v.type == 'x' || v.type == '"' || v.type == '\''))
 			ft_panic("get_token returned UNKNOWN type", 100);
+		if (v.type == 'x')
+			expand_word(&v.quote, &v.end_quote, &v.type);
 		v.cmd->argv[v.argc] = v.quote;
 		v.cmd->end_argv[v.argc] = v.end_quote;
 		v.argc++;
@@ -90,6 +88,33 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 	v.cmd->argv[v.argc] = 0;
 	v.cmd->end_argv[v.argc] = 0;
 	return (v.retrn_val);
+}
+
+char	*expand_word(char **start, char **end, int *type)
+{
+	char	*tmp;
+	char	*return_value;
+	char	*start_rtrn;
+
+	tmp = *start;
+	return_value = ft_malloc(sizeof(char) * MAX_STR_LEN);
+	*start = return_value;
+	start_rtrn = *start;
+	while (tmp < *end)
+	{
+		if (*tmp == '$' && *(tmp + 1) != '\0')
+			return_value += ft_strlcpy(return_value, expand_var(&tmp),
+					MAX_STR_LEN);
+		else if (*tmp == '~')
+			return_value += ft_strlcpy(return_value, expand_tilde(&tmp),
+					MAX_STR_LEN);
+		else
+			*return_value++ = *tmp++;
+	}
+	*return_value = '\0';
+	*end = return_value;
+	*type = 'x';
+	return (start_rtrn);
 }
 
 /*
@@ -153,7 +178,8 @@ char	*parse_quotes(char **quote, char **end_quote, int *type)
 	}
 	*return_value = '\0';
 	*end_quote = return_value;
-	*type = 'x';
+	// *type = 'x';
+	(void)type;
 	return (start_rtrn);
 }
 
