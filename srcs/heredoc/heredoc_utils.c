@@ -6,17 +6,13 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/12 17:47:47 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/13 15:47:37 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*trim_input(char *input)
-{
-	
-}
-
+//have to also add that you can have more quotes than two, so muliple strings attached to each other
 int	def_arg_len(char *eof, int *identifier)
 {
 	int	i;
@@ -51,20 +47,24 @@ int	def_arg_len(char *eof, int *identifier)
 
 // use identifier to see == 0 not in quotes, == 1 in single quotes, == 2 in double quotes
 
-char	*get_eof(char *input)
-{
-
-}
-
 void	arg_check(char *eof)
 {
 	char	*arg;
 	int		size;
 	int		identifier;
 
-	if (eof == NULL)
-		return (ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2), 0); // have to exit fork here
+	if (eof == NULL || *eof == '\0')
+		return (ft_putstr_fd("minishell: syntax error\n", 2), 0); // have to exit fork here
 	size = def_arg_len(eof, &identifier);
-	if ()
-	
+	if (identifier == 0)
+		arg = in_none(eof, size);
+	if (identifier == 1)
+		arg = in_single(eof, size);
+	if (identifier == 2)
+		arg = in_double(eof, size);
+}
+
+char	*trim_output(char *arg)
+{
+
 }

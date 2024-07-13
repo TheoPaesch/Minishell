@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/12 18:08:06 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/13 18:51:38 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,3 +76,5 @@ void	heredoc_loop(char *eof)
 
 
 // have to create fork and wait for signals through readline...
+// have to create a file and put the input into the file, maybe to do multiple string
+// put them into the file and then stop after string and continue after putting it into the file

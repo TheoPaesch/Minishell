@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:36:38 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/12 17:43:19 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/13 15:46:05 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*in_double(char *input, int len)
 		str[i] = input[i];
 		i++;
 	}
+
 	str[i] = '\0';
 	return (str);
 }
@@ -67,3 +68,27 @@ char	*in_none(char *input, int len)
 	str[i] = '\0';
 	return (str);
 }
+
+
+// trim arg doesnt work like this, have to use identifier to know which quotes to eliminate and then return the string without the quotes
+char	*trim_input(char *arg)
+{
+	char	*str;
+	int		len;
+	int		i;
+	int		j;
+
+	i = 1;
+	j = 0;
+	len = ft_strlen(arg);
+	str = ft_malloc(len - 1);
+	while (i < len - 1)
+	{
+		str[j] = arg[i];
+		i++;
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
+}
+
