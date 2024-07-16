@@ -6,30 +6,11 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/13 18:51:38 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/16 10:10:52 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*get_arg(char *input)
-{
-	char	*str;
-	int		len;
-	char	tmp;
-
-	len = 0;
-	str = NULL;
-	while (input[len] != ' ' && input[len] != '\0')
-		len++;
-	if (input[len] == '\0')
-		return (ft_strdup(input));
-	tmp = input[len];
-	input[len] = '\0';
-	str = ft_strdup(input);
-	input[len] = tmp;
-	return (str);
-}
 
 void	heredoc_scan(t_program *shell, char *input)
 {
@@ -37,6 +18,7 @@ void	heredoc_scan(t_program *shell, char *input)
 	char	*eof;
 
 	i = 0;
+	eof = ft_strdup(input);
 	while (input[i] != '\0')
 	{
 		if (input[i] == '<' && input[i + 1] == '<')
@@ -44,11 +26,6 @@ void	heredoc_scan(t_program *shell, char *input)
 			i += 2;
 			if (input[i] == '<')
 				//error and exit fork here
-			while (input[i] == ' ')
-				i++;
-			eof = get_arg(input + i);
-			if (eof == NULL)
-				return (NULL);
 			arg_check(eof);
 			heredoc_loop(eof);
 			free(eof);

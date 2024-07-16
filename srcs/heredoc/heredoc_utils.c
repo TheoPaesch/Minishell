@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/14 20:44:19 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/16 10:29:38 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,17 @@ int	def_arg_len(char *eof)
 	return (i);
 }
 
-// use identifier to see == 0 not in quotes, == 1 in single quotes, == 2 in double quotes
-
 void	arg_check(char *eof)
 {
-	char	*arg;
+	char	*delimiter;
+	char	*out;
 	int		size;
 
 	if (eof == NULL || *eof == '\0')
 		return (ft_putstr_fd("minishell: syntax error\n", 2), 0); // have to exit fork here
 	size = def_arg_len(eof);
-	in_none(eof, size);
+	delimiter = in_none(eof, size);
+	out = ft_strdup(&eof[size]);
 }
 
-char	*trim_output(char *arg)
-{
 
-}

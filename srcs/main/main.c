@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/10 16:16:18 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/14 07:37:13 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int ac, char **av, char **envp)
 			ms_exit(&shell);
 		}
 		add_history(input);
-		heredoc_scan(&shell, ft_strdup(input)); // have to return input so I take the delimiter from the input and then pass the rest
+		//heredoc_scan(&shell, ft_strdup(input)); // have to return input so I take the delimiter from the input and then pass the rest
 		execute_cmd(parse_cmd(ft_strdup(input)));
 		free(input);
 	}
