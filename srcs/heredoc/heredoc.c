@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/16 10:10:52 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/16 11:07:06 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 void	heredoc_scan(t_program *shell, char *input)
 {
 	int		i;
+	char	*delim;
 	char	*eof;
+	char	*out;
 
 	i = 0;
-	eof = ft_strdup(input);
 	while (input[i] != '\0')
 	{
 		if (input[i] == '<' && input[i + 1] == '<')
@@ -26,8 +27,10 @@ void	heredoc_scan(t_program *shell, char *input)
 			i += 2;
 			if (input[i] == '<')
 				//error and exit fork here
-			arg_check(eof);
+			eof = ft_strdup(&input[i]);
+			delim = arg_check(eof);
 			heredoc_loop(eof);
+			out = ft_strdup(&eof[size]);
 			free(eof);
 		}
 		i++;

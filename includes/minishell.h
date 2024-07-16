@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/09 17:50:55 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/16 11:05:57 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,12 @@ int				export_builtin(t_cmd *cmd);
 int				env_builtin(t_cmd *cmd);
 void			exit_builtin(t_cmd *cmd);
 int				pwd_builtin(t_cmd *cmd);
+
+/* -------------------------------- Heredoc --------------------------------- */
+void			heredoc_scan(t_program *shell, char *input);
+char			*arg_check(char *eof);
+int				def_arg_len(char *eof);
+char			*in_none(char *input, int len);
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);

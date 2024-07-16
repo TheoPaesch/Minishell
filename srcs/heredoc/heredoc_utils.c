@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/16 10:29:38 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/16 11:07:39 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,18 @@ int	def_arg_len(char *eof)
 	return (i);
 }
 
-void	arg_check(char *eof)
+char	*arg_check(char *eof)
 {
 	char	*delimiter;
-	char	*out;
 	int		size;
+	char	*out;
 
 	if (eof == NULL || *eof == '\0')
 		return (ft_putstr_fd("minishell: syntax error\n", 2), 0); // have to exit fork here
 	size = def_arg_len(eof);
 	delimiter = in_none(eof, size);
 	out = ft_strdup(&eof[size]);
+	return (delimiter);
 }
 
 
