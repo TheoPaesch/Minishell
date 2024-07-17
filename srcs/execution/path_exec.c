@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/09 19:36:54 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:01:30 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*get_path(char *executable)
 		i++;
 	}
 	// printf("%s\n", executable);
-	// ft_panic("command not found", 4);
+	// ft_panic("command not found", 1);
 	return (executable);
 }
 

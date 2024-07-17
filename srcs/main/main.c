@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/10 15:23:08 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:04:01 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int ac, char **av, char **envp)
 		if (input == NULL)
 		{
 			free(input);
-			ms_exit(&shell);
+			ms_exit();
 		}
 		if (*input == '\0')
 			continue ;

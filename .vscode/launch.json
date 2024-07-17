@@ -14,7 +14,7 @@
       "environment": []
     },
     {
-      "name": "LLDB",
+      "name": "LLDB launch",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/minishell",

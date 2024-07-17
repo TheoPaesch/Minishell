@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 19:15:58 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/09 19:58:18 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/12 17:03:39 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ Yb,              ,dPYb, ,dPYb,        .-'     |     `-.       \033[0m\n");
 	printf("\n");
 	printf("\033[0;36m                                             by\n");
 	printf("                             Theo Paesch             Matthias \
-	Strauss                                        \033[0m\n");
+Strauss                                        \033[0m\n");
 }

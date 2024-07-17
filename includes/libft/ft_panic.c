@@ -1,4 +1,5 @@
 #include "../libft.h"
+#include "../minishell.h"
 
 void	ft_panic(char *err_msg, int exit_stat)
 {
@@ -6,7 +7,7 @@ void	ft_panic(char *err_msg, int exit_stat)
 	ft_putstr_fd(err_msg, 2);
 	ft_putchar_fd('\n', 2);
 	ft_set_errno(exit_stat);
-	exit(exit_stat);
+	ms_exit();
 }
 
 void	ft_set_errno(int exit_stat)

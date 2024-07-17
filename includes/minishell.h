@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/12 16:24:27 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:02:57 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 /*                                   STRUCTS                                  */
 /* -------------------------------------------------------------------------- */
 
-# define MAXARGS 50
+# define MAXARGS 255
 # define MAX_STR_LEN 2048
 
 typedef struct s_token
@@ -165,7 +165,7 @@ int				cd_builtin(t_cmd *cmd);
 void			print_env(t_list *env);
 void			print_export(t_list *expo);
 int				echo_builtin(t_cmd *cmd);
-void			ms_exit(t_program *shell);
+void			ms_exit(void);
 int				unset_builtin(t_cmd *cmd);
 void			unset_one(t_list *env, t_list *expo, char *key);
 int				export_builtin(t_cmd *cmd);
