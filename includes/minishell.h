@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/19 15:49:39 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:46:07 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,12 @@ int				export_builtin(t_cmd *cmd);
 int				env_builtin(t_cmd *cmd);
 void			exit_builtin(t_cmd *cmd);
 int				pwd_builtin(t_cmd *cmd);
+
+/* -------------------------------- Heredoc --------------------------------- */
+void			heredoc_scan(t_program *shell, char *input);
+char			*arg_check(char *eof);
+int				def_arg_len(char *eof);
+char			*in_none(char *input, int len);
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);
