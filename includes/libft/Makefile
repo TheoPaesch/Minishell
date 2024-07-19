@@ -5,7 +5,7 @@
 #   ██║     ██║██████╔╝█████╗     ██║    #
 #   ██║     ██║██╔══██╗██╔══╝     ██║    #
 #   ███████╗██║██████╔╝██║        ██║    #
-#   ╚══════╝╚═╝╚═════╝ ╚═╝        ╚═╝    #                            
+#   ╚══════╝╚═╝╚═════╝ ╚═╝        ╚═╝    #
 ##########################################
 
 NAME = libft.a
@@ -34,7 +34,7 @@ SRCS =  ft_atoi.c ft_calloc.c ft_isalnum.c \
         get_next_line_bonus.c get_next_line_utils_bonus.c \
         ft_strcspn.c ft_strspn.c ft_strcmp.c \
 		ft_debug_msg.c ft_panic.c \
-        ft_strjoinall.c 
+        ft_strjoinall.c ft_strcpy.c
 
 OBJECTS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 CC = cc
@@ -58,7 +58,7 @@ $(OBJ_DIR)$(NAME): $(OBJECTS)
 	@ar -rcs $(OBJ_DIR)$(NAME) $(OBJECTS)
 	@printf "\n$(GREEN)SUCCESS - libft.a has been successfully compiled$(NO_COLOR)\n\n"
 
-$(OBJ_DIR)/%.o: %.c	
+$(OBJ_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "$(GREEN)Compiled $<$(NO_COLOR)\n"
 

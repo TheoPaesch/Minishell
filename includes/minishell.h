@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/17 18:24:59 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/19 14:34:28 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,14 @@ typedef struct s_parse_redir_vars
 	char		*end_quote;
 }				t_parse_redir_vars;
 
+typedef struct s_heredoc
+{
+	char		*delim;
+	char		*full_arg;
+	char		*out;
+	int			size;
+}				t_heredoc;
+
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
@@ -162,8 +170,8 @@ int				pwd_builtin(t_cmd *cmd);
 
 /* -------------------------------- Heredoc --------------------------------- */
 char			*heredoc_scan(t_program *shell, char *input);
-char			*arg_check(char *eof);
-int				def_arg_len(char *eof);
+char			*arg_check(char *eof, t_heredoc *hrdc);
+int				def_arg_len(char *eof, t_heredoc *hrdc);
 char			*in_none(char *input, int len);
 
 /* -------------------------------- Expander -------------------------------- */
@@ -177,6 +185,7 @@ char			*get_value_of_key(t_list *lst, char *key);
 /* ----------------------------- Error Handling ----------------------------- */
 // void			ft_panic(char *err_msg, int exit_stat);
 // void			ft_set_errno(int exit_stat);
+void			p_err(int i);
 
 /* ---------------------------------- Pipes --------------------------------- */
 void			exec_pipe_left(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd);

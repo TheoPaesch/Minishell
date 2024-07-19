@@ -3,47 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/18 16:32:30 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/19 14:44:11 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*heredoc_scan(t_program *shell, char *input)
+void	adjust_output(t_heredoc *hrdc, char *input)
 {
 	int		i;
-	char	*delim;
-	char	*eof;
 	char	*out;
-	int		size;
 
 	i = 0;
+	out = ft_calloc(ft_strlen(input), sizeof(char));
+	while (input[i] != '\0')
+	{
+		out[i] = input[i];
+		if (input[i] == '<' && input[i + 1] == '<')
+		{
+			ft_strcpy(&out[i], "< heredoc.txt ");
+			i += hrdc->size;
+			out = ft_strjoin(out, &input[i]);
+			break ;
+		}
+		i++;
+	}
+	hrdc->out = out;
+}
+
+char	*heredoc_scan(t_program *shell, char *input)
+{
+	t_heredoc	*hrdc;
+	int			i;
+
+	i = 0;
+	hrdc = ft_malloc(sizeof(t_heredoc));
 	while (input[i] != '\0')
 	{
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
 			i += 2;
 			if (input[i] == '<')
-				return (ft_putstr_fd("minishell: syntax error\n", 2), NULL);
+				return (p_err(0), ft_free(hrdc), NULL);
 			while (input[i] == ' ')
 				i++;
-			eof = ft_strdup(&input[i]);
-			delim = arg_check(eof);
-			if (delim == NULL)
+			hrdc->full_arg = ft_strdup(&input[i]);
+			hrdc->delim = arg_check(hrdc->full_arg, hrdc);
+			if (hrdc->delim == NULL)
 				return (NULL);
-			heredoc_loop(delim);
-			out = ft_strdup(&eof[size]);
-			free(eof);
+			heredoc_loop(hrdc->delim);
+			adjust_output(hrdc, input);
+			free(hrdc->full_arg);
 		}
 		i++;
 	}
-	return (out);
+	return (hrdc->out);
 }
 
-void	heredoc_loop(char *eof)
+void	heredoc_loop(char *delim)
 {
 	char	*line;
 	int		fd;
@@ -52,14 +72,16 @@ void	heredoc_loop(char *eof)
 	while (1)
 	{
 		line = readline("> ");
-		if (ft_strcmp(line, eof) == 0)
+		fd = open("heredoc.txt", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+		if (fd == -1 || ft_strcmp(line, delim) == 0)
 		{
-			free(line);
+			if (ft_strcmp(line, delim) == 0)
+				close(fd);
+			else
+				p_err(1);
+			ft_free(line);
 			break ;
 		}
-		fd = open("heredoc.txt", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-		if (fd == -1)
-			ft_putstr_fd("minishell: error\n", 2); // have to exit fork here
 		if (line != NULL)
 			write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
@@ -69,6 +91,9 @@ void	heredoc_loop(char *eof)
 }
 
 
+// have to be able to do multiple heredocs
+// set right size in struct for heredoc
+// adjust the true output for further exec
 // have to create heredoc struct to save lines
 // have to parce the output and adjust the output so it will be to matthias liking
 // have to create fork and wait for signals through readline...
