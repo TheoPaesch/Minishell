@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/17 13:17:06 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/18 16:15:28 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,50 @@
 
 //have to also add that you can have more quotes than two, so muliple strings attached to each other
 // have to check if the rihgt length is returned for malloc
-int	count_in_single(char *eof)
+bool	count_in_single(char *eof, int *i, int *amount)
 {
-	int	i;
-
-	i = 0;
-	while (eof[i] != 39)
+	while (eof[*i] != 39)
 	{
-		if (eof[i] == '\0')
-			return (ft_putstr_fd("minishell: syntax error\n", 2), 0); // have to exit fork here
-		i++;
+		if (eof[*i] == '\0')
+			return (ft_putstr_fd("minishell: syntax error\n", 2), 0);
+		*i++;
 	}
-	return (i);
+	*i++;
+	*amount += 2;
+	return (1);
 }
 
-int	count_in_double(char *eof)
+bool	count_in_double(char *eof, int *i, int *amount)
 {
-	int	i;
-
-	i = 0;
-	while (eof[i] != 34)
+	while (eof[*i] != 34)
 	{
-		if (eof[i] == '\0')
-			return (ft_putstr_fd("minishell: syntax error\n", 2), 0); // have to exit fork here
-		i++;
+		if (eof[*i] == '\0')
+			return (ft_putstr_fd("minishell: syntax error\n", 2), 0);
+		*i++;
 	}
-	return (i);
+	*i++;
+	*amount += 2;
+	return (1);
 }
 
 int	def_arg_len(char *eof)
 {
 	int	i;
+	int	amount;
 
 	i = 0;
+	amount = 0;
 	while (eof[i] != ' ' && eof[i] != '\0')
 	{
 		if (eof[i] == 39)
-			i += count_in_single(&eof[i]);
+			if (!count_in_single(eof, &i, &amount))
+				return (-1);
 		if (eof[i] == 34)
-			i += count_in_double(&eof[i]);
+			if (!count_in_double(eof, &i, &amount))
+				return (-1);
 		i++;
 	}
-	return (i);
+	return (i - amount);
 }
 
 char	*arg_check(char *eof)
@@ -64,10 +66,10 @@ char	*arg_check(char *eof)
 	int		size;
 
 	if (eof == NULL || *eof == '\0')
-		return (ft_putstr_fd("minishell: syntax error\n", 2), 0); // have to exit fork here
+		return (ft_putstr_fd("minishell: syntax error\n", 2), NULL);
 	size = def_arg_len(eof);
+	if (size == -1)
+		return (NULL);
 	delimiter = in_none(eof, size);
 	return (delimiter);
 }
-
-

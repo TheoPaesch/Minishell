@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/17 18:24:31 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/18 16:32:30 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ char	*heredoc_scan(t_program *shell, char *input)
 		{
 			i += 2;
 			if (input[i] == '<')
-				//error and exit fork here
+				return (ft_putstr_fd("minishell: syntax error\n", 2), NULL);
 			while (input[i] == ' ')
 				i++;
 			eof = ft_strdup(&input[i]);
 			delim = arg_check(eof);
+			if (delim == NULL)
+				return (NULL);
 			heredoc_loop(delim);
 			out = ft_strdup(&eof[size]);
 			free(eof);
@@ -66,6 +68,8 @@ void	heredoc_loop(char *eof)
 	}
 }
 
+
+// have to create heredoc struct to save lines
 // have to parce the output and adjust the output so it will be to matthias liking
 // have to create fork and wait for signals through readline...
 // have to create a file and put the input into the file, maybe to do multiple string
