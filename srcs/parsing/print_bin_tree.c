@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 16:12:00 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/07 13:47:04 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:39:40 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ const char	*get_node_type_str(int type) // DBG ONLY, REMOVE FILE!!!
 	static const char *types[] = {"EXEC", "REDIR", "PIPE", "LIST", "BACK",
 		"UNKNOWN"};
 	int typeCount;
-
+	type--;
 	typeCount = sizeof(types) / sizeof(types[0]);
 	return ((type >= 0 && type < typeCount - 1) ? types[type] : types[typeCount
 		- 1]);

@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/12 16:48:44 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:11:06 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ char	*expand_var(char **str)
 		if (exp->data != NULL && ft_strcmp(((t_env *)exp->data)->key,
 				trmd) == 0)
 		{
-			free(trmd);
+			trmd = ft_free(trmd);
 			return (((t_env *)exp->data)->value);
 		}
 		exp = exp->next;
@@ -139,7 +139,7 @@ char	*expand_var(char **str)
 		if (env->data != NULL && ft_strcmp(((t_env *)env->data)->key,
 				trmd) == 0)
 		{
-			free(trmd);
+			trmd = ft_free(trmd);
 			return (((t_env *)env->data)->value);
 		}
 		env = env->next;

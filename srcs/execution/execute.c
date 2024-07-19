@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/12 13:08:04 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:32:07 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,26 @@ void	execute_cmd(t_cmd *cmd)
 void	exec_exec(t_cmd *cmd)
 {
 	t_exec_cmd	*exec_cmd;
+	pid_t		pid;
+	int			status;
 
 	exec_cmd = (t_exec_cmd *)cmd;
-	if (exec_cmd->argv[0] == 0) // maybe switch to conditional exit if child
+	if (exec_cmd->argv[0] == 0 && getpid() == 0)
 		ft_panic("Wrong routing / similar error during exec", 99);
-	// expand(exec_cmd); // EXPAND HERE
 	if (is_builtin(exec_cmd))
+		return (exec_builtin(cmd));
+	pid = safe_fork();
+	if (pid == 0)
 	{
-		exec_builtin(cmd);
-		return ;
+		execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL);
+		printf("Executing %s failed\n", get_path(exec_cmd->argv[0]));
+		ms_exit();
 	}
 	else
-		execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL);
-	printf("Executing %s failed\n", get_path(exec_cmd->argv[0]));
+	{
+		waitpid(pid, &status, 0);
+		set_exit_status(status);
+	}
 }
 
 void	exec_redir(t_cmd *cmd)
@@ -54,7 +61,14 @@ void	exec_redir(t_cmd *cmd)
 	exec_redir = (t_redir_cmd *)cmd;
 	close(exec_redir->fd);
 	if (open(exec_redir->file, exec_redir->mode) < 0)
-		ft_panic("No such file or directory\n", 2);
+	{
+		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd(exec_redir->file, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putchar_fd('\n', 2);
+		return ;
+	}
 	execute_cmd(exec_redir->cmd);
 }
 

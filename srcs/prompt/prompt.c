@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:25:48 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/07 20:10:07 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/18 16:39:02 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*read_input(t_program *mushell)
 	if (mushell->isatty)
 	{
 		tmp = getcwd(NULL, 0);
-		prompt = ft_strjoin(tmp, " ");
+		prompt = ft_strjoin(tmp, "$ ");
 		if (prompt == NULL)
 			return (ft_free(tmp), NULL);
 		free(tmp);
@@ -29,9 +29,9 @@ char	*read_input(t_program *mushell)
 	}
 	else
 	{
-		tmp = get_next_line(fileno(stdin));
-		input = ft_strtrim(tmp, "\n");
-		ft_free(tmp);
+		input = get_next_line(fileno(stdin));
+		if (input)
+			input[ft_strlen(input) - 1] = '\0';
 	}
 	return (input);
 }

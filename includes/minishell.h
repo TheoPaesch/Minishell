@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/16 17:02:57 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:49:39 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@
 # define PIPE 3
 # define LIST 4
 # define BACK 5
-
-#
 
 /* -------------------------------------------------------------------------- */
 /*                                   STRUCTS                                  */
@@ -184,6 +182,7 @@ char			*expand_word(char **start, char **end, int *type);
 char			*get_value_of_key(t_list *lst, char *key);
 
 /* ----------------------------- Error Handling ----------------------------- */
+void			set_exit_status(int status);
 // void			ft_panic(char *err_msg, int exit_stat);
 // void			ft_set_errno(int exit_stat);
 

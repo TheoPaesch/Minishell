@@ -2,27 +2,31 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "minishell dbg",
+      "name": "TTY MuShell DBG",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/minishell",
       "args": [],
-      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "cwd": "${fileDirname}",
       "externalConsole": true,
+      "stopAtEntry": true,
       "MIMode": "lldb",
-      "miDebuggerPath": "/usr/bin/lldb",
-      "environment": []
+      "miDebuggerPath": "/Users/mstrauss/.vscode/extensions/ms-vscode.cpptools-1.20.5-darwin-x64/debugAdapters/lldb-mi/bin/lldb-mi"
     },
     {
-      "name": "LLDB launch",
+      "name": "Non-TTY MuShell DBG",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/minishell",
-      "args": [],
-      "stopAtEntry": false,
-      "cwd": "${fileDirname}",
+      "program": "/bin/bash",
+      "args": ["-c", "${workspaceFolder}/minishell < input.txt"],
       "environment": [],
-      "MIMode": "lldb"
+      "cwd": "${workspaceFolder}",
+      "externalConsole": false,
+      "stopAtEntry": true,
+      "preLaunchTask": "promptForInput",
+      "MIMode": "lldb",
+      "miDebuggerPath": "/Users/mstrauss/.vscode/extensions/ms-vscode.cpptools-1.20.5-darwin-x64/debugAdapters/lldb-mi/bin/lldb-mi"
     },
     {
       "name": "Attach to Process",
@@ -30,7 +34,8 @@
       "request": "attach",
       "program": "${workspaceFolder}/minishell",
       "processId": "${command:pickProcess}",
-      "MIMode": "lldb"
+      "MIMode": "lldb",
+      "miDebuggerPath": "/Users/mstrauss/.vscode/extensions/ms-vscode.cpptools-1.20.5-darwin-x64/debugAdapters/lldb-mi/bin/lldb-mi"
     }
   ]
 }

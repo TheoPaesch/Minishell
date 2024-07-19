@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 12:14:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/23 12:37:50 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:42:43 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,12 @@ t_program	*init_global(t_program *shell)
 t_program	*get_shell(void)
 {
 	return (init_global(NULL));
+}
+
+void	set_exit_status(int status)
+{
+	t_program	*shell;
+
+	shell = get_shell();
+	shell->last_exit_code = status;
 }
