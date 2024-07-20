@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/20 18:15:49 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:33:28 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ int	cd_builtin(t_cmd *cmd)
 	new_path = ((t_exec_cmd *)cmd)->argv[1];
 	if (new_path == NULL || ft_strcmp(new_path, "~") == 0)
 	{
-		if (shell->expo && !check_key(shell->expo, "HOME"))
+		if (shell->expo && check_key(shell->expo, "HOME") == false)
 			return (printf("minishell: cd: HOME not set\n"));
 		else
 			new_path = key_value(shell->expo, "HOME");
 	}
-	if (ft_strcmp(new_path, "-") == 0)
+	else if (ft_strcmp(new_path, "-") == 0)
 	{
-		if (shell->expo && !check_key(shell->expo, "OLDPWD"))
+		if (shell->expo && check_key(shell->expo, "OLDPWD") == false)
 			return (printf("minishell: cd: OLDPWD not set\n"));
 		else
 			new_path = key_value(shell->expo, "OLDPWD");
@@ -71,9 +71,12 @@ void	update_dir(t_list **env, t_list **expo, char *new, char *old)
 
 	new_pwd = ft_strdup(new);
 	old_pwd = old;
-	// ft_free(key_value(*expo, "OLDPWD"));
-	if (!check_key(*env, "OLDPWD"))
+	ft_free(key_value(*expo, "OLDPWD"));
+	if (check_key(*env, "OLDPWD") == false)
 		add_env(env, ft_strdup("OLDPWD"), old_pwd);
-	change_value_both(*env, *expo, "OLDPWD", old_pwd);
-	change_value_both(*env, *expo, "PWD", new_pwd);
+	if (check_key(*expo, "OLDPWD") == false)
+		// does OLDPWD even get added to expo? / is this correct behavior?
+		add_env(expo, ft_strdup("OLDPWD"), old_pwd);
+	change_value_both(*expo, *env, "OLDPWD", old_pwd);
+	change_value_both(*expo, *env, "PWD", new_pwd);
 }
