@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/19 17:46:07 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:12:54 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ t_program		*init_global(t_program *shell);
 void			handle_sigint(int sig);
 void			splash_screen(t_program *shell);
 bool			check_key(t_list *tmp, char *key);
-void			update_dir(t_list **env, t_list **expo);
+void			update_dir(t_list **env, t_list **expo, char *new, char *old);
 
 /* --------------------------------- Quotes --------------------------------- */
 void			gt_handle_quote(char **tmp, char *end_str, int *return_val);
@@ -163,7 +163,7 @@ int				cd_builtin(t_cmd *cmd);
 void			print_env(t_list *env);
 void			print_export(t_list *expo);
 int				echo_builtin(t_cmd *cmd);
-void			ms_exit(void);
+void			ms_exit(int code);
 int				unset_builtin(t_cmd *cmd);
 void			unset_one(t_list *env, t_list *expo, char *key);
 int				export_builtin(t_cmd *cmd);

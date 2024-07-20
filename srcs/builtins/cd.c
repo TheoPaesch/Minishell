@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/09 17:51:32 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/20 18:15:49 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,42 +35,45 @@ char	*key_value(t_list *env, char *key)
 int	cd_builtin(t_cmd *cmd)
 {
 	t_program	*shell;
-	char		*path;
+	char		*new_path;
+	char		*old_path;
 	int			ret;
 
 	shell = get_shell();
-	path = ((t_exec_cmd *)cmd)->argv[1];
-	if (path == NULL)
+	new_path = ((t_exec_cmd *)cmd)->argv[1];
+	if (new_path == NULL || ft_strcmp(new_path, "~") == 0)
 	{
-		if (!check_key(shell->expo, "HOME"))
-		{
-			printf("minishell: cd: HOME not set\n");
-			return (1);
-		}
+		if (shell->expo && !check_key(shell->expo, "HOME"))
+			return (printf("minishell: cd: HOME not set\n"));
 		else
-			path = key_value(shell->expo, "HOME");
+			new_path = key_value(shell->expo, "HOME");
 	}
-	ret = chdir(path);
-	if (ret == -1)
-		return (printf("minishell: cd: %s: %s\n", path, strerror(errno)), 1);
-	update_dir(&shell->env, &shell->expo);
+	if (ft_strcmp(new_path, "-") == 0)
+	{
+		if (shell->expo && !check_key(shell->expo, "OLDPWD"))
+			return (printf("minishell: cd: OLDPWD not set\n"));
+		else
+			new_path = key_value(shell->expo, "OLDPWD");
+	}
+	old_path = getcwd(NULL, 1);
+	ret = chdir(new_path);
+	if (ret != 0)
+		return (printf("minishell: cd: %s: %s\n", new_path, strerror(errno)),
+			2);
+	update_dir(&shell->env, &shell->expo, new_path, old_path);
 	return (0);
 }
 
-
-void	update_dir(t_list **env, t_list **expo)
+void	update_dir(t_list **env, t_list **expo, char *new, char *old)
 {
-	char	*tmp;
-	char	*path;
-	char	*old_path;
+	char	*new_pwd;
+	char	*old_pwd;
 
-	ft_free(key_value(*expo, "OLDPWD"));
-	old_path = key_value(*expo, "PWD");
-	tmp = getcwd(NULL, 0);
-	path = ft_strdup(tmp);
-	free(tmp);
+	new_pwd = ft_strdup(new);
+	old_pwd = old;
+	// ft_free(key_value(*expo, "OLDPWD"));
 	if (!check_key(*env, "OLDPWD"))
-		add_env(env, ft_strdup("OLDPWD"), old_path);
-	change_value_both(*env, *expo, "OLDPWD", old_path);
-	change_value_both(*env, *expo, "PWD", path);
+		add_env(env, ft_strdup("OLDPWD"), old_pwd);
+	change_value_both(*env, *expo, "OLDPWD", old_pwd);
+	change_value_both(*env, *expo, "PWD", new_pwd);
 }

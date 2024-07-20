@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:27:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/09 17:43:08 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/20 18:12:36 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,22 @@ void	change_value_both(t_list *expo, t_list *env, char *key, char *value)
 	while (expo)
 	{
 		test = expo->data;
-		if (test != NULL)
-			if (ft_strcmp(test->key, key) == 0)
-				((t_env *)expo->data)->value = value;
-		if (test == NULL || ft_strcmp(test->key, key) == 0)
-			break ;
+		if (test != NULL && ft_strcmp(test->key, key) == 0)
+			test->value = value;
 		expo = expo->next;
 	}
 	while (env)
 	{
 		test = env->data;
-		if (test != NULL)
-			if (ft_strcmp(test->key, key) == 0)
-				((t_env *)env->data)->value = value;
-		if (test == NULL || ft_strcmp(test->key, key) == 0)
-			break ;
+		if (test != NULL && ft_strcmp(test->key, key) == 0)
+			((t_env *)env->data)->value = value;
 		env = env->next;
 	}
-	key = ft_free(key);
 }
 
 bool	check_key(t_list *tmp, char *key)
 {
-	while (tmp && tmp->data != NULL)
+	while (tmp && tmp->data)
 	{
 		if (ft_strcmp(((t_env *)tmp->data)->key, key) == 0)
 			return (true);

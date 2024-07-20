@@ -6,17 +6,19 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/16 17:05:08 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:12:40 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ms_exit(void)
+void	ms_exit(int code)
 {
 	t_program	*shell;
 
 	shell = get_shell();
+	if (code != -128)
+		shell->ex_status = code;
 	ft_lstclear(&(shell->mem), free);
 	rl_clear_history();
 	if (shell->last_exit_code != 0)
@@ -39,7 +41,7 @@ void	parse_exit(char *arg, t_program *shell)
 			printf("exit\nminishell: exit: %s: numeric argument required\n",
 				arg);
 			shell->ex_status = 256;
-			ms_exit();
+			ms_exit(-128);
 		}
 		else
 			i++;
@@ -66,7 +68,7 @@ void	exit_builtin(t_cmd *cmd)
 		tmp = tmp % 255;
 		shell->ex_status = tmp;
 	}
-	ms_exit();
+	ms_exit(0); // ADD ACTUAL EXIT CODE
 }
 
 /* ---------- EXIT TEST CASES --------- */
