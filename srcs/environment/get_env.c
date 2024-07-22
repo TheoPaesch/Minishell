@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/21 19:09:36 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:40:48 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,27 @@ char	*get_value(char *str)
 void	get_input(char **envp, t_list **env, t_list **expo)
 {
 	int		i;
-	t_env	*data;
+	t_env	*data1;
+	t_env	*data2;
 
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		data = ft_malloc(sizeof(t_env));
-		if (!data)
-			ft_panic("malloc failed in get_env", 1);
-		data->key = get_key(envp[i]);
-		data->value = get_value(envp[i]);
-		if (data->value[0] != '\0')
-			ft_lstadd_back(env, ft_lstnew(data));
-		ft_lstadd_back(expo, ft_lstnew(data));
+		data1 = ft_malloc(sizeof(t_env));
+		data2 = ft_malloc(sizeof(t_env));
+		if (!data1 || !data2)
+			ft_panic("malloc failed in get_env", 2);
+		data1->key = get_key(envp[i]);
+		data2->key = get_key(envp[i]);
+		data1->value = get_value(envp[i]);
+		data2->value = get_value(envp[i]);
+		if (data1->value[0] != '\0')
+			ft_lstadd_back(env, ft_lstnew(data1));
+		ft_lstadd_back(expo, ft_lstnew(data2));
 		i++;
 	}
 }
+// putting the same mem node in both env and expo. pls fix
 
 // CONSTRUCTOR
 // uses normal MALLOC

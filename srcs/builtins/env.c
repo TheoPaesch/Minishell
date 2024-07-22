@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:45:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/21 20:05:29 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:30:08 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 void	print_env(t_list *env)
 {
-	char	*key;
-	char	*value;
-
-	while (env && env->data != NULL)
+	while (env)
 	{
-		key = ((t_env *)env->data)->key;
-		value = ((t_env *)env->data)->value;
-		printf("%s=%s\n", key, value);
+		if (env->data == NULL)
+			continue ;
+		printf("%s=%s\n", ((t_env *)env->data)->key,
+			((t_env *)env->data)->value);
 		env = env->next;
 	}
 }
