@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/19 14:41:55 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/21 19:23:02 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//have to also add that you can have more quotes than two, so muliple strings attached to each other
 // have to check if the rihgt length is returned for malloc
 bool	count_in_single(char *eof, int *i, int *amount)
 {
@@ -20,9 +19,9 @@ bool	count_in_single(char *eof, int *i, int *amount)
 	{
 		if (eof[*i] == '\0')
 			return (p_err(0), 0);
-		*i++;
+		*i += 1;
 	}
-	*i++;
+	*i += 1;
 	*amount += 2;
 	return (1);
 }
@@ -33,9 +32,9 @@ bool	count_in_double(char *eof, int *i, int *amount)
 	{
 		if (eof[*i] == '\0')
 			return (p_err(0), 0);
-		*i++;
+		*i += 1;
 	}
-	*i++;
+	*i += 1;
 	*amount += 2;
 	return (1);
 }

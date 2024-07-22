@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/19 14:44:11 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/22 12:53:29 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ void	adjust_output(t_heredoc *hrdc, char *input)
 	char	*out;
 
 	i = 0;
-	out = ft_calloc(ft_strlen(input), sizeof(char));
+	out = ft_calloc(ft_strlen(input) + 16, sizeof(char));
 	while (input[i] != '\0')
 	{
 		out[i] = input[i];
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
+			i += 2;
+			while (input[i] == ' ')
+				i++;
 			ft_strcpy(&out[i], "< heredoc.txt ");
 			i += hrdc->size;
 			out = ft_strjoin(out, &input[i]);
@@ -34,7 +37,7 @@ void	adjust_output(t_heredoc *hrdc, char *input)
 	hrdc->out = out;
 }
 
-char	*heredoc_scan(t_program *shell, char *input)
+char	*heredoc_scan(char *input)
 {
 	t_heredoc	*hrdc;
 	int			i;
@@ -79,23 +82,15 @@ void	heredoc_loop(char *delim)
 				close(fd);
 			else
 				p_err(1);
-			ft_free(line);
+			free(line);
 			break ;
 		}
 		if (line != NULL)
 			write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		close(fd);
-		ft_free(line);
+		free(line);
 	}
 }
 
-
 // have to be able to do multiple heredocs
-// set right size in struct for heredoc
-// adjust the true output for further exec
-// have to create heredoc struct to save lines
-// have to parce the output and adjust the output so it will be to matthias liking
-// have to create fork and wait for signals through readline...
-// have to create a file and put the input into the file, maybe to do multiple string
-// put them into the file and then stop after string and continue after putting it into the file

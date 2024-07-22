@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/18 15:12:33 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/22 12:29:56 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	main(int ac, char **av, char **envp)
 			ms_exit(&shell);
 		}
 		add_history(input);
-		(input = heredoc_scan(&shell, input));
+		(input = heredoc_scan(input));
+		printf("%s\n", input);
 		if (input != NULL)
 			execute_cmd(parse_cmd(ft_strdup(input)));
 		free(input);
