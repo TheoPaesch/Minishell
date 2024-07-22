@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/21 19:23:02 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/22 18:21:38 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ int	def_arg_len(char *eof, t_heredoc *hrdc)
 
 	i = 0;
 	amount = 0;
+	printf("eof = %s \n", eof);
 	while (eof[i] != ' ' && eof[i] != '\0')
 	{
+		printf(" i = %d", i);
 		if (eof[i] == 39)
 			if (!count_in_single(eof, &i, &amount))
 				return (-1);
@@ -71,6 +73,7 @@ char	*arg_check(char *eof, t_heredoc *hrdc)
 	if (size == -1)
 		return (NULL);
 	delimiter = in_none(eof, size);
+	get_txt(hrdc);
 	return (delimiter);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/19 16:20:45 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/22 17:03:17 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ typedef struct s_heredoc
 	char		*delim;
 	char		*full_arg;
 	char		*out;
+	char		*file;
 	int			size;
 }				t_heredoc;
 
@@ -173,7 +174,8 @@ char			*heredoc_scan(char *input);
 char			*arg_check(char *eof, t_heredoc *hrdc);
 int				def_arg_len(char *eof, t_heredoc *hrdc);
 char			*in_none(char *input, int len);
-void			heredoc_loop(char *delim);
+void			heredoc_loop(t_heredoc *hrdc);
+void			get_txt(t_heredoc *hrdc);
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);
