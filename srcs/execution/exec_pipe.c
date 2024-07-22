@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:22 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/18 15:57:10 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/20 22:35:51 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	exec_pipe(t_cmd *cmd)
 	pid_t		pid2;
 	int			stat_pid1;
 	int			stat_pid2;
-	int			exitStatus;
+	int			exit_status;
 
-	exitStatus = 0;
+	exit_status = 0;
 	shell = get_shell();
 	exec_pipe = (t_pipe_cmd *)cmd;
 	safe_pipe(pipes);
@@ -63,7 +63,7 @@ void	exec_pipe(t_cmd *cmd)
 	if (WIFEXITED(stat_pid1))
 		shell->ex_status = WEXITSTATUS(stat_pid1);
 	if (WIFEXITED(stat_pid2))
-		exitStatus = WEXITSTATUS(stat_pid2);
-	if (exitStatus != 0 || shell->ex_status == 0)
-		shell->ex_status = exitStatus;
+		exit_status = WEXITSTATUS(stat_pid2);
+	if (exit_status != 0 || shell->ex_status == 0)
+		shell->ex_status = exit_status;
 }

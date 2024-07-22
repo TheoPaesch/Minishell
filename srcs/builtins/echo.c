@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:07:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 15:37:15 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/22 13:25:18 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	echo_print(char **argv, bool *n_flag)
+void	echo_print(char **argv, bool *n_flag, int first_word)
 {
 	int	i;
 
-	i = 1;
+	i = first_word;
 	while (argv[i] != NULL)
 	{
 		ft_putstr_fd(argv[i], 1);
-		if (argv[i + 1] != NULL && *argv[i] != '\0')
+		if (argv[i + 1] != NULL)
 			ft_putchar_fd(' ', 1);
 		i++;
 	}
@@ -28,37 +28,46 @@ void	echo_print(char **argv, bool *n_flag)
 		ft_putchar_fd('\n', 1);
 }
 
-// removed for Norm:
-/*
-	if (!ft_strnstr(argv[0], "echo", ft_strlen(argv[0])))
-		ft_panic("routed to builtin echo, but argv[0] is not '*echo'", 99);
-*/
 int	echo_builtin(t_cmd *cmd)
 {
-	char				**argv;
-	bool				n_flag;
-	unsigned int		i;
-	unsigned int		j;
-	static const char	*remove = "";
+	char			**argv;
+	bool			n_flag;
+	unsigned int	i;
+	unsigned int	j;
 
 	argv = ((t_exec_cmd *)cmd)->argv;
+	if (argv[1] == NULL)
+		return (ft_putchar_fd('\n', 1), 0);
 	n_flag = false;
 	i = 1;
-	while (argv[i])
+	while (argv[i] && argv[i][0] == '-' && argv[i][1] == 'n')
 	{
-		if (*argv[i] == '-')
+		j = 1;
+		while (argv[i][j] == 'n')
+			j++;
+		if (argv[i][j] == '\0')
 		{
-			j = 1;
-			while (argv[i][j] == 'n')
-				j++;
-			if (argv[i][j] == '\0')
-			{
-				n_flag = true;
-				argv[i] = (char *)remove;
-			}
+			n_flag = true;
+			i++;
 		}
-		i++;
+		else
+			break ;
 	}
-	return (echo_print(argv, &n_flag), 0);
-	// add return/exit value handling here?
+	return (echo_print(argv, &n_flag, i), 0);
 }
+
+// while (argv[++i])
+// {
+// 	if (*argv[i] == '-')
+// 	{
+// 		j = 1;
+// 		while (argv[i][j] == 'n')
+// 			j++;
+// 		if (argv[i][j] == '\0' && argv[i][j - 1] == 'n')
+// 		{
+// 			n_flag = true;
+// 			argv[i] = (char *)remove;
+// 			break ;
+// 		}
+// 	}
+// }

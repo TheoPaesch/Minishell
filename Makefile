@@ -98,7 +98,7 @@ fclean:
 
 re: fclean all
 
-debug: CFLAGS += -g -fsanitize=address -fsanitize=undefined -DDEBUG=true
+debug: CFLAGS += -fsanitize=address -fsanitize=undefined -DDEBUG=true
 debug: re
 
 test:

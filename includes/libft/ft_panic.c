@@ -47,7 +47,7 @@ ERRNOS:
 14.	EDQUOT = 122 : Disk quota exceeded
 15.	EEXIST = 17 : File exists
 16.	EFAULT = 14 : Bad address
-17.	EFBIG = 27 : File too large
+17.	EFBIG = 27 : File too larges
 18.	EHOSTUNREACH = 113 : Host is unreachable
 19.	EIDRM = 43 : Identifier removed
 20.	EILSEQ = 84 : Illegal byte sequence

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/09 17:54:42 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/21 20:23:41 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	add_export(t_list **env, t_list **expo, char *key, char *value)
 	data->key = key;
 	data->value = value;
 	if (data->value != NULL)
-		ft_lstadd_front(env, ft_lstnew(data));
-	ft_lstadd_front(expo, ft_lstnew(data));
+		ft_lstadd_back(env, ft_lstnew(data));
+	ft_lstadd_back(expo, ft_lstnew(data));
 }
 
 /*export_execution prints export if no argument

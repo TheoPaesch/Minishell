@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/20 18:12:37 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/20 23:13:56 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	fill_program(t_program *shell, char **envp)
 	get_path((char *)(&(shell->env)));
 	shell->last_exit_code = 0;
 	shell->ex_status = 0;
-	shell->isatty = isatty(fileno(stdin));
+	shell->isatty = isatty(STDIN_FILENO);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -57,7 +57,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		input = read_input(&shell);
-		if (input == NULL)
+		if (input == NULL /*&& !isatty(STDIN_FILENO)*/)
 		{
 			input = ft_free(input);
 			ms_exit(shell.ex_status); // ADD ACTUAL EXIT CODE

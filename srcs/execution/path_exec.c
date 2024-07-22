@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/12 18:01:30 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/21 14:54:03 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ char	*get_path(char *executable)
 	char			*rtrn;
 
 	if (!env_lst)
-	{
-		env_lst = (t_list *)executable;
-		return (NULL);
-	}
+		return (env_lst = (t_list *)executable, NULL);
 	i = 0;
 	tmp = env_lst;
 	while (tmp->data != NULL && ft_strcmp(((t_env *)(tmp->data))->key, "PATH"))
@@ -34,13 +31,10 @@ char	*get_path(char *executable)
 	folders = ft_split(((t_env *)(tmp->data))->value, ':');
 	while (folders[i])
 	{
-		rtrn = ft_strjoin(ft_strjoin(folders[i], "/"), executable);
+		rtrn = ft_strjoin(ft_strjoin(folders[i++], "/"), executable);
 		if (access(rtrn, F_OK | X_OK) == 0)
 			return (rtrn);
-		i++;
 	}
-	// printf("%s\n", executable);
-	// ft_panic("command not found", 1);
 	return (executable);
 }
 

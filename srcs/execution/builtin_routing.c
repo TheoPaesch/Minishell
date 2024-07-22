@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_routing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 21:20:47 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/01 15:53:03 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/21 18:49:39 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,24 @@ int	is_builtin(t_exec_cmd *exec_cmd)
 	static const char	*builtins[7] = {"cd", "echo", "env", "export", "exit",
 			"pwd", "unset"};
 	int					i;
+	int					j;
+	char				*lower_str;
 
+	i = -1;
+	lower_str = ft_malloc(sizeof(char) * ft_strlen(exec_cmd->argv[0]) + 1);
+	while (exec_cmd->argv[0][++i])
+		lower_str[i] = ft_tolower(exec_cmd->argv[0][i]);
 	i = 0;
 	while (i <= 6)
 	{
-		if (ft_strnstr(builtins[i], exec_cmd->argv[0], ft_strlen(builtins[i])))
+		if (ft_strnstr(builtins[i], lower_str, ft_strlen(builtins[i])))
+		{
+			j = -1;
+			while (exec_cmd->argv[0][++j])
+				exec_cmd->argv[0][j] = ft_tolower(exec_cmd->argv[0][j]);
+			exec_cmd->argv[0][j] = '\0';
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -38,7 +50,6 @@ void	exec_builtin(t_cmd *cmd)
 	t_program	*shell;
 
 	shell = get_shell();
-	// DOES THIS NEED EXIT CODE / STATUS ROUTING / SETTING?
 	exec_cmd = (t_exec_cmd *)cmd;
 	if (ft_strnstr(exec_cmd->argv[0], "cd", ft_strlen(exec_cmd->argv[0])))
 		shell->last_exit_code = cd_builtin(cmd);
@@ -54,5 +65,4 @@ void	exec_builtin(t_cmd *cmd)
 		shell->last_exit_code = pwd_builtin(cmd);
 	if (ft_strnstr(exec_cmd->argv[0], "unset", ft_strlen(exec_cmd->argv[0])))
 		shell->last_exit_code = unset_builtin(cmd);
-	// do exit value handling here?
 }

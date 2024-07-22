@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/07 20:27:41 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/21 19:09:36 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 		data->key = get_key(envp[i]);
 		data->value = get_value(envp[i]);
 		if (data->value[0] != '\0')
-			ft_lstadd_front(env, ft_lstnew(data));
-		ft_lstadd_front(expo, ft_lstnew(data));
+			ft_lstadd_back(env, ft_lstnew(data));
+		ft_lstadd_back(expo, ft_lstnew(data));
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/20 18:12:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/20 23:16:02 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,25 @@ void	ms_exit(int code)
 	t_program	*shell;
 
 	shell = get_shell();
-	if (code != -128)
+	if (code != -124)
 		shell->ex_status = code;
 	ft_lstclear(&(shell->mem), free);
 	rl_clear_history();
 	if (shell->last_exit_code != 0)
-		exit(shell->last_exit_code);
+	{
+		// ft_putstr_fd("exit: using last_exit_code: ", shell->last_exit_code);
+		// // dbg
+		// ft_putstr_fd(ft_itoa(shell->last_exit_code), 2);
+		// ft_putchar_fd('\n', 2);
+		exit(shell->last_exit_code); // not dbg
+	}
 	else
-		exit(shell->ex_status);
+	{
+		// ft_putstr_fd("exit: using ex_status: ", 2); // dbg
+		// ft_putstr_fd(ft_itoa(shell->ex_status), 2);
+		// ft_putchar_fd('\n', 2);
+		exit(shell->ex_status); // not dbg
+	}
 }
 
 void	parse_exit(char *arg, t_program *shell)

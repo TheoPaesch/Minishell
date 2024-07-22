@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:55:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/01 15:08:03 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/21 20:13:31 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	pwd_builtin(t_cmd *cmd)
 	char	*str;
 
 	args = ((t_exec_cmd *)cmd)->argv;
-	if (args[1] != NULL)
-		return (printf("pwd does not allow options\n"), 1);
 	str = getcwd(NULL, 0);
 	if (!str)
 		return (1);

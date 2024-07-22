@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/20 18:12:39 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:24:35 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,18 @@ void	exec_exec(t_cmd *cmd)
 	if (pid == 0)
 	{
 		execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL);
-		errno = 127;
+		// errno = 127;
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(exec_cmd->argv[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
-		ms_exit(127); // ADD ACTUAL EXIT CODE
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putchar_fd('\n', 2);
+		ms_exit(errno); // ADD ACTUAL EXIT CODE
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
-		set_exit_status(status);
+		set_exit_status(WEXITSTATUS(status));
 	}
 }
 
@@ -86,6 +88,7 @@ void	exec_list(t_cmd *cmd)
 	if (pid == 0)
 		execute_cmd(exec_list->left);
 	waitpid(pid, &status, 0);
+	set_exit_status(WEXITSTATUS(status));
 	execute_cmd(exec_list->right);
 }
 

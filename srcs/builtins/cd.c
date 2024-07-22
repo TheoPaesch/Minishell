@@ -6,20 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/20 20:33:28 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/21 19:27:52 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-@tpaesch : cd updated noch nicht $OLDPWD
-
-Testcase:
-cd ..
-cd $OLDPWD
-pwd
-*/
 
 char	*key_value(t_list *env, char *key)
 {
@@ -44,24 +35,25 @@ int	cd_builtin(t_cmd *cmd)
 	if (new_path == NULL || ft_strcmp(new_path, "~") == 0)
 	{
 		if (shell->expo && check_key(shell->expo, "HOME") == false)
-			return (printf("minishell: cd: HOME not set\n"));
+			return (ft_putstr_fd("bash: cd: HOME not set\n", 2),
+				set_exit_status(1), 1);
 		else
 			new_path = key_value(shell->expo, "HOME");
 	}
 	else if (ft_strcmp(new_path, "-") == 0)
 	{
 		if (shell->expo && check_key(shell->expo, "OLDPWD") == false)
-			return (printf("minishell: cd: OLDPWD not set\n"));
-		else
-			new_path = key_value(shell->expo, "OLDPWD");
+			return (ft_putstr_fd("bash: cd: OLDPWD not set\n", 2),
+				set_exit_status(1), 1);
+		new_path = key_value(shell->expo, "OLDPWD");
+		printf("%s\n", new_path);
 	}
-	old_path = getcwd(NULL, 1);
+	old_path = getcwd(NULL, 0);
 	ret = chdir(new_path);
 	if (ret != 0)
-		return (printf("minishell: cd: %s: %s\n", new_path, strerror(errno)),
-			2);
-	update_dir(&shell->env, &shell->expo, new_path, old_path);
-	return (0);
+		return (ft_putstr_fd("bash: cd: ", 2), ft_putstr_fd(new_path, 2),
+			ft_putstr_fd(strerror(errno), 2), ft_putchar_fd('\n', 2), 1);
+	return (update_dir(&shell->env, &shell->expo, new_path, old_path), 0);
 }
 
 void	update_dir(t_list **env, t_list **expo, char *new, char *old)
