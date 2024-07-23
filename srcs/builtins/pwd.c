@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:55:53 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/21 20:13:31 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:35:06 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	pwd_builtin(t_cmd *cmd)
 	char	*str;
 
 	args = ((t_exec_cmd *)cmd)->argv;
+	(void)args;
 	str = getcwd(NULL, 0);
 	if (!str)
 		return (1);
