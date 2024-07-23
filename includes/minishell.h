@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/23 15:19:03 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/23 16:27:39 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ char			*in_none(char *input, int len);
 void			heredoc_loop(t_heredoc *hrdc);
 void			get_txt(t_heredoc *hrdc);
 bool			hrdc_line_check(char *line, t_heredoc *hrdc);
+char			*heredoc_base(char *input);
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);

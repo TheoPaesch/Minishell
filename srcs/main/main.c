@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/23 16:07:17 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/23 17:40:57 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int	main(int ac, char **av, char **envp)
 		if (*input == '\0')
 			continue ;
 		add_history(input);
-		// (input = heredoc_scan(input));
+		// (input = heredoc_base(input));
 		if (input != NULL)
 			execute_cmd(print_tree(parse_cmd(ft_strdup(input))));
-		free(input);
+		input = ft_free(input);
 	}
 	return (shell.last_exit_code);
 }
