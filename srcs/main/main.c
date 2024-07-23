@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/22 16:54:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:26:55 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,15 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		execute_cmd(print_tree(parse_cmd(ft_strdup(input))));
 		add_history(input);
-		input = ft_free(input);
+		(input = heredoc_scan(input));
+		if (input != NULL)
+			execute_cmd(parse_cmd(ft_strdup(input)));
+		free(input);
 	}
 	return (shell.last_exit_code);
 }
 
-// have to check that export with no env stll creates env
+// have to return input so I take the delimiter from the input and then pass the rest
+//have to check that export with no env stll creates env
+	// if (ac > 1 && av[1] != NULL)
+	// 	printf("minishell: no arguments needed\n");

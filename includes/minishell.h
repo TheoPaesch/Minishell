@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/22 20:10:43 by mstrauss         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/07/23 15:44:15 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -34,6 +35,8 @@
 # include <sys/wait.h>
 # include <term.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
 /* -------------------------- Command / token type -------------------------- */
 # define EXEC 1
@@ -133,6 +136,15 @@ typedef struct s_parse_redir_vars
 	int			type;
 }				t_parse_redir_vars;
 
+typedef struct s_heredoc
+{
+	char		*delim;
+	char		*full_arg;
+	char		*out;
+	char		*file;
+	int			size;
+}				t_heredoc;
+
 /* ---------------------------------- DEBUG --------------------------------- */
 t_cmd			*print_tree(t_cmd *root);
 t_cmd			*print_tree_util(t_cmd *node, int space);
@@ -173,10 +185,13 @@ void			exit_builtin(t_cmd *cmd);
 int				pwd_builtin(t_cmd *cmd);
 
 /* -------------------------------- Heredoc --------------------------------- */
-void			heredoc_scan(t_program *shell, char *input);
-char			*arg_check(char *eof);
-int				def_arg_len(char *eof);
+char			*heredoc_scan(char *input);
+char			*arg_check(char *eof, t_heredoc *hrdc);
+int				def_arg_len(char *eof, t_heredoc *hrdc);
 char			*in_none(char *input, int len);
+void			heredoc_loop(t_heredoc *hrdc);
+void			get_txt(t_heredoc *hrdc);
+bool			hrdc_line_check(char *line, t_heredoc *hrdc);
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);
@@ -192,6 +207,7 @@ char			*get_value_of_key(t_list *lst, char *key);
 void			set_exit_status(int status);
 // void			ft_panic(char *err_msg, int exit_stat);
 // void			ft_set_errno(int exit_stat);
+void			p_err(int i);
 
 /* ---------------------------------- Pipes --------------------------------- */
 void			exec_pipe_left(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd);
