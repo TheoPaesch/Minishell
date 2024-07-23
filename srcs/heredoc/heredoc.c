@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/23 15:05:59 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/23 15:58:43 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*heredoc_scan(char *input)
 				return (NULL);
 			heredoc_loop(hrdc);
 			adjust_output(hrdc, input);
-			free(hrdc->full_arg);
+			ft_free(hrdc->full_arg);
 		}
 		i++;
 	}
