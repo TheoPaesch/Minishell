@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/20 18:12:54 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:10:43 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,8 @@ void			print_export(t_list *expo);
 int				echo_builtin(t_cmd *cmd);
 void			ms_exit(int code);
 int				unset_builtin(t_cmd *cmd);
-void			unset_one(t_list *env, t_list *expo, char *key);
+void			unset_both(t_list **env, t_list **expo, char *key);
+void			unset_one(t_list **lst, char *key);
 int				export_builtin(t_cmd *cmd);
 int				env_builtin(t_cmd *cmd);
 void			exit_builtin(t_cmd *cmd);

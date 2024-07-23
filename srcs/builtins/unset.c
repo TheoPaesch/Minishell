@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:49:17 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/21 20:50:24 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:11:08 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	unset_builtin(t_cmd *cmd)
 	keys = ((t_exec_cmd *)cmd)->argv;
 	while (keys[i])
 	{
-		unset_one(shell->env, shell->expo, *keys);
+		unset_both(&(shell->env), &(shell->expo), keys[i]);
 		i++;
 	}
 	return (0);
