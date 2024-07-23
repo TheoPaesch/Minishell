@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:00:02 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/22 17:03:17 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/23 15:08:10 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # include <sys/wait.h>
 # include <term.h>
 # include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
 /* -------------------------- Command / token type -------------------------- */
 # define EXEC 1
@@ -176,6 +176,7 @@ int				def_arg_len(char *eof, t_heredoc *hrdc);
 char			*in_none(char *input, int len);
 void			heredoc_loop(t_heredoc *hrdc);
 void			get_txt(t_heredoc *hrdc);
+bool			hrdc_line_check(char *line, t_heredoc *hrdc);
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);

@@ -55,7 +55,8 @@ SRC = env_exp_utils.c \
 	  pwd.c \
 	  heredoc.c \
 	  heredoc_utils.c \
-	  heredoc_arg.c 
+	  heredoc_arg.c \
+	  heredoc_utils_for_len.c
 
 HEADERS = minishell.h
 

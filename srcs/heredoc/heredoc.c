@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/22 17:02:53 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/23 15:05:59 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void	heredoc_loop(t_heredoc *hrdc)
 		line = readline("> ");
 		if (line == NULL)
 			return (close(fd), free(line));
-		if (fd == -1 || ft_strcmp(line, hrdc->delim) == 0)
+		if (fd == -1 || hrdc_line_check(line, hrdc))
 		{
-			if (ft_strcmp(line, hrdc->delim) == 0)
+			if (hrdc_line_check(line, hrdc))
 				close(fd);
 			else
 				p_err(1);

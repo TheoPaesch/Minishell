@@ -6,61 +6,12 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/22 18:21:38 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/23 15:06:05 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// have to check if the rihgt length is returned for malloc
-bool	count_in_single(char *eof, int *i, int *amount)
-{
-	while (eof[*i] != 39)
-	{
-		if (eof[*i] == '\0')
-			return (p_err(0), 0);
-		*i += 1;
-	}
-	*i += 1;
-	*amount += 2;
-	return (1);
-}
-
-bool	count_in_double(char *eof, int *i, int *amount)
-{
-	while (eof[*i] != 34)
-	{
-		if (eof[*i] == '\0')
-			return (p_err(0), 0);
-		*i += 1;
-	}
-	*i += 1;
-	*amount += 2;
-	return (1);
-}
-
-int	def_arg_len(char *eof, t_heredoc *hrdc)
-{
-	int	i;
-	int	amount;
-
-	i = 0;
-	amount = 0;
-	printf("eof = %s \n", eof);
-	while (eof[i] != ' ' && eof[i] != '\0')
-	{
-		printf(" i = %d", i);
-		if (eof[i] == 39)
-			if (!count_in_single(eof, &i, &amount))
-				return (-1);
-		if (eof[i] == 34)
-			if (!count_in_double(eof, &i, &amount))
-				return (-1);
-		i++;
-	}
-	hrdc->size = i;
-	return (i - amount);
-}
 
 char	*arg_check(char *eof, t_heredoc *hrdc)
 {
@@ -83,4 +34,14 @@ void	p_err(int i)
 		ft_putstr_fd("minishell: syntax error\n", 2);
 	if (i == 1)
 		ft_putstr_fd("minishell: error\n", 2);
+}
+
+bool	hrdc_line_check(char *line, t_heredoc *hrdc)
+{
+	if (line == NULL)
+		return (1);
+	else if (ft_strcmp(line, hrdc->delim) == 0)
+		return (1);
+	else
+		return (0);
 }
