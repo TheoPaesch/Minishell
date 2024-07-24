@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:36:38 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/22 19:11:42 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/24 14:23:49 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	in_double(char *input, char *output, int *i, int *j)
 	}
 	(*i)++;
 }
-
 
 char	*in_none(char *input, int len)
 {

@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/23 17:46:48 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/24 18:18:40 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -32,11 +31,11 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 # include <sys/wait.h>
 # include <term.h>
 # include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
 
 /* -------------------------- Command / token type -------------------------- */
 # define EXEC 1
@@ -179,7 +178,9 @@ void			ms_exit(int code);
 int				unset_builtin(t_cmd *cmd);
 void			unset_both(t_list **env, t_list **expo, char *key);
 void			unset_one(t_list **lst, char *key);
+int				unset_verify_key(char *key);
 int				export_builtin(t_cmd *cmd);
+int				expo_verify_arg(char *arg);
 int				env_builtin(t_cmd *cmd);
 void			exit_builtin(t_cmd *cmd);
 int				pwd_builtin(t_cmd *cmd);
@@ -206,6 +207,7 @@ char			*get_value_of_key(t_list *lst, char *key);
 
 /* ----------------------------- Error Handling ----------------------------- */
 void			set_exit_status(int status);
+void			print_err(char *str);
 // void			ft_panic(char *err_msg, int exit_stat);
 // void			ft_set_errno(int exit_stat);
 void			p_err(int i);

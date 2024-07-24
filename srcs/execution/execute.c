@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/22 18:50:59 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:44:10 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	execute_cmd(t_cmd *cmd)
 	else if (cmd->type == BACK)
 		exec_back(cmd);
 	// ft_debug_msg("execute_cmd is exiting the shell");
+	// if ()
 	// exit(100); // are we already in a subprocess? if yes exit
 	// otherwise no. FIX!!!!
 }
@@ -37,7 +38,7 @@ void	exec_exec(t_cmd *cmd)
 
 	exec_cmd = (t_exec_cmd *)cmd;
 	if (exec_cmd->argv[0] == 0 /*&& getpid() == 0*/)
-		ft_panic("Wrong routiexpanng / similar error during exec", 99);
+		ft_panic("Wrong routing / similar error during exec", 2);
 	if (is_builtin(exec_cmd))
 		return (exec_builtin(cmd));
 	pid = safe_fork();

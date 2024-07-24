@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/12 16:56:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/24 14:47:16 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ char	*parse_quotes(char **quote, char **end_quote, int *type)
 		else if (*tmp_ptr == '$' && !in_single_quote)
 		{
 			if (in_double_quote && !ft_isalnum(*(tmp_ptr + 1)) && *(tmp_ptr
-					+ 1) != '?')
+					+ 1) != '?' && *(tmp_ptr + 1) != '\0')
 				*return_value++ = *tmp_ptr++;
 			else
 				return_value += ft_strlcpy(return_value, expand_var(&tmp_ptr),
@@ -217,17 +217,17 @@ t_cmd	*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str)
 			ft_panic("Can't redirect. Filename missing.", 2);
 		if (v.type == '<')
 		{
-			init_redir_cmd(cmd, v.quote, v.end_quote, O_RDONLY);
+			cmd = init_redir_cmd(cmd, v.quote, v.end_quote, O_RDONLY);
 			((t_redir_cmd *)cmd)->fd = 0;
 		}
 		else if (v.type == '>')
 		{
-			init_redir_cmd(cmd, v.quote, v.end_quote, O_WRONLY | O_CREAT);
+			cmd = init_redir_cmd(cmd, v.quote, v.end_quote, O_WRONLY | O_CREAT);
 			((t_redir_cmd *)cmd)->fd = 1;
 		}
 		else if (v.type == '+') // '+' is >>
 		{
-			init_redir_cmd(cmd, v.quote, v.end_quote, O_WRONLY | O_CREAT);
+			cmd = init_redir_cmd(cmd, v.quote, v.end_quote, O_WRONLY | O_CREAT);
 			((t_redir_cmd *)cmd)->fd = 1;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:25:48 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/23 15:22:42 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/23 20:59:16 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*read_input(t_program *mushell)
 	char	*prompt;
 	char	*tmp;
 
-	if (mushell->isatty)
+	(void)mushell;
+	if (isatty(STDIN_FILENO))
 	{
 		tmp = getcwd(NULL, 0);
 		prompt = ft_strjoin(tmp, "$ ");

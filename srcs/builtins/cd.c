@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/21 19:27:52 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/24 14:49:04 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	cd_builtin(t_cmd *cmd)
 	ret = chdir(new_path);
 	if (ret != 0)
 		return (ft_putstr_fd("bash: cd: ", 2), ft_putstr_fd(new_path, 2),
-			ft_putstr_fd(strerror(errno), 2), ft_putchar_fd('\n', 2), 1);
+			ft_putstr_fd(": ", 2), ft_putstr_fd(strerror(errno), 2),
+			ft_putchar_fd('\n', 2), 1);
 	return (update_dir(&shell->env, &shell->expo, new_path, old_path), 0);
 }
 

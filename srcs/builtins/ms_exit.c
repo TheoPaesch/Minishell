@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/20 23:16:02 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:50:12 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	parse_exit(char *arg, t_program *shell)
 	{
 		if (!ft_isdigit(arg[i]))
 		{
-			printf("exit\nminishell: exit: %s: numeric argument required\n",
-				arg);
-			shell->ex_status = 256;
-			ms_exit(-128);
+			ft_putstr_fd("bash: ", 2);
+			ft_putstr_fd(arg, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd("numeric argument required\n", 2);
+			shell->ex_status = 255;
+			ms_exit(shell->ex_status);
 		}
 		else
 			i++;
@@ -76,7 +78,7 @@ void	exit_builtin(t_cmd *cmd)
 			return ;
 		}
 		tmp = ft_atoi(args[1]);
-		tmp = tmp % 255;
+		tmp = tmp % 256;
 		shell->ex_status = tmp;
 	}
 	ms_exit(0); // ADD ACTUAL EXIT CODE
