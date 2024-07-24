@@ -4,7 +4,7 @@ LIBFT_DIR =	./includes/libft
 LIBFT	=	./obj/libft/libft.a
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g # -fsanitize=address -fsanitize=undefined
+CFLAGS	=	-Wall -Wextra -Werror -g # -Ofast -ffast-math -march=native -mtune=native -funroll-loops # -fsanitize=address -fsanitize=undefined
 RM		=	rm -rf
 
 LIB		=	-lreadline -L$(LIBFT_DIR)

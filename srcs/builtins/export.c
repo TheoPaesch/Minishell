@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/21 20:23:41 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:21:17 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,55 @@ int	export_builtin(t_cmd *cmd)
 	char		*value;
 	char		**args;
 
+	errno = 0;
 	shell = get_shell();
 	args = ((t_exec_cmd *)cmd)->argv;
 	i = 1;
-	if (args[i] == NULL)
-	{
-		export_execution(&shell->env, &shell->expo, NULL, NULL);
-		return (0);
-	}
+	if (args[i] == NULL || (!ft_strcmp("-p", args[i]) && args[i + 1] == NULL))
+		return (print_export(shell->expo), errno);
 	while (args[i])
 	{
+		if (!expo_verify_arg(args[i]))
+		{
+			errno = 1; // set errno here for illegal arg
+			if (*args[i] == '-')
+				errno = 2;
+			print_err(args[i++]);
+			continue ;
+		}
 		key = get_key(args[i]);
-		value = get_value(args[i]);
+		value = get_value(args[i++]);
 		export_execution(&shell->env, &shell->expo, key, value);
-		i++;
 	}
+	return (errno);
+}
+
+void	print_err(char *str)
+{
+	if (errno != 0)
+	{
+		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putchar_fd('\n', 2);
+	}
+}
+
+// maybe add '+=' case
+int	expo_verify_arg(char *arg)
+{
+	if (!ft_isalpha(*arg) && *arg != '_')
+		return (0);
+	while (*arg && (ft_isalnum(*arg) || *arg == '_'))
+		arg++;
+	if (*arg == '\0')
+		return (1);
+	if (*arg && *arg == '=' && (ft_isprint_no_space((*(arg + 1))) || *(arg
+				+ 1) == '\0'))
+		return (1);
+	if (*arg && *arg == '+' && *(arg + 1) && *(arg + 1) == '='
+		&& (ft_isprint_no_space((*(arg + 2))) || *(arg + 2) == '\0'))
+		return (1);
 	return (0);
 }
