@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/23 16:34:47 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/24 12:48:14 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	adjust_output(t_heredoc *hrdc, char *input)
 		}
 		i++;
 	}
+	ft_free(hrdc->full_arg);
 	hrdc->out = out;
 }
 
@@ -85,7 +86,7 @@ char	*heredoc_scan(char *input)
 				return (NULL);
 			heredoc_loop(hrdc);
 			adjust_output(hrdc, input);
-			ft_free(hrdc->full_arg);
+			break;
 		}
 		i++;
 	}
@@ -99,9 +100,17 @@ void	heredoc_loop(t_heredoc *hrdc)
 
 	signal(SIGINT, handle_sigint);
 	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+	t_program *shell = get_shell();
 	while (1)
 	{
-		line = readline("> ");
+		if (shell->isatty)
+			line = readline("> ");
+		else
+		{
+			line = get_next_line(fileno(stdin));
+			if (line)
+				line[ft_strlen(line) - 1] = '\0';
+		}
 		if (line == NULL)
 			return (close(fd), free(line));
 		if (fd == -1 || hrdc_line_check(line, hrdc))
@@ -127,6 +136,7 @@ char	*heredoc_base(char *input)
 	char	*out;
 	int		i;
 
+	out = input;
 	i = 0;
 	while (input[i] != '\0')
 	{
@@ -134,13 +144,16 @@ char	*heredoc_base(char *input)
 		{
 			out = heredoc_scan(input);
 			if (out == NULL)
-				return (input);
-			else
 				return (out);
+			else
+			{
+				input = out;
+				i = 0;
+			}
 		}
 		i++;
 	}
-	return (input);
+	return (out);
 }
 
 // have to be able to do multiple heredocs
