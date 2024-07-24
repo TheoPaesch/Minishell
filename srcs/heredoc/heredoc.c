@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/23 17:35:38 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/24 12:48:14 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	adjust_output(t_heredoc *hrdc, char *input)
 		}
 		i++;
 	}
+	ft_free(hrdc->full_arg);
 	hrdc->out = out;
 }
 
@@ -85,7 +86,7 @@ char	*heredoc_scan(char *input)
 				return (NULL);
 			heredoc_loop(hrdc);
 			adjust_output(hrdc, input);
-			ft_free(hrdc->full_arg);
+			break;
 		}
 		i++;
 	}
@@ -135,6 +136,7 @@ char	*heredoc_base(char *input)
 	char	*out;
 	int		i;
 
+	out = input;
 	i = 0;
 	while (input[i] != '\0')
 	{
@@ -142,13 +144,16 @@ char	*heredoc_base(char *input)
 		{
 			out = heredoc_scan(input);
 			if (out == NULL)
-				return (input);
-			else
 				return (out);
+			else
+			{
+				input = out;
+				i = 0;
+			}
 		}
 		i++;
 	}
-	return (input);
+	return (out);
 }
 
 // have to be able to do multiple heredocs

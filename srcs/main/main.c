@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/23 17:46:29 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/23 18:14:10 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int ac, char **av, char **envp)
 		if (*input == '\0')
 			continue ;
 		add_history(input);
-		// (input = heredoc_base(input));
+		(input = heredoc_base(input));
 		if (input != NULL)
 			execute_cmd(print_tree(parse_cmd(ft_strdup(input))));
 		input = ft_free(input);
