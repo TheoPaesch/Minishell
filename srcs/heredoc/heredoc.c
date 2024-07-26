@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/26 17:04:17 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/26 22:30:17 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	get_txt(t_heredoc *hrdc)
 		if (access(hrdc->file, F_OK) == 0)
 		{
 			i++;
-			ft_free(tmp);
-			ft_free(hrdc->file);
+			tmp = ft_free(tmp);
+			hrdc->file = ft_free(hrdc->file);
 		}
 		else
 			break ;
 	}
-	ft_free(tmp);
+	tmp = ft_free(tmp);
 }
 
 char	*adjust_output(t_heredoc *hrdc, char *input)
@@ -49,9 +49,12 @@ char	*adjust_output(t_heredoc *hrdc, char *input)
 		return (ft_strjoin(out, &input[i]));
 	while (input[i] != '\0')
 	{
+		i += output_quotes(&input[i], &out[i]);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
-			i += fill_out(out, i, input, hrdc);
+			printf("input in adjust = %s\n", input);
+			printf("out in adjust = %s\n", out);
+			out = fill_out(out, i, input, hrdc);
 			break ;
 		}
 		out[i] = input[i];
@@ -77,10 +80,12 @@ char	*heredoc_scan(char *input, t_heredoc *hrdc)
 				i++;
 			hrdc->full_arg = ft_strdup(&input[i]);
 			hrdc->delim = arg_check(hrdc->full_arg, hrdc);
+			printf("delim = %s\n", hrdc->delim);
 			if (hrdc->delim == NULL)
 				return (NULL);
 			heredoc_loop(hrdc);
 			hrdc->out = adjust_output(hrdc, input);
+			printf("out =%s\n", hrdc->out);
 			break ;
 		}
 		i++;
@@ -137,17 +142,19 @@ char	*heredoc_base(char *input)
 	i = 0;
 	while (input[i] != '\0')
 	{
+		printf("i = %d\n", i);
 		i += in_quotes(&input[i]);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
 			out = heredoc_scan(input, hrdc);
-			printf("out = %s\n", out);
 			if (out == NULL || out[0] == '\0')
 				return (NULL);
 			else
 			{
-				input = out;
+				input = ft_strdup(out);
+				printf("input on base = %s\n", input);
 				i = 0;
+				continue ;
 			}
 		}
 		i++;

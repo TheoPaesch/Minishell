@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils_for_len.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:47:44 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/26 12:31:51 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/26 18:40:02 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	def_arg_len(char *eof, t_heredoc *hrdc)
 	amount = 0;
 	while (eof[i] != ' ' && eof[i] != '\0')
 	{
+		if (eof[i] == '<' && eof[i + 1] == '<')
+			break ;
 		if (eof[i] == 39)
 			if (!count_in_single(eof, &i, &amount))
 				return (-1);
