@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/23 17:46:48 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/26 12:27:14 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,12 @@ void			heredoc_loop(t_heredoc *hrdc);
 void			get_txt(t_heredoc *hrdc);
 bool			hrdc_line_check(char *line, t_heredoc *hrdc);
 char			*heredoc_base(char *input);
+int				len_adjust(char *eof, t_heredoc *hrdc);
+bool			heredoc_placement(char *input, int *i, t_heredoc *hrdc);
+int				fill_out(char *out, int i, char *input, t_heredoc *hrdc);
+
+
+
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/23 15:20:39 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/26 09:21:30 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,14 @@ bool	hrdc_line_check(char *line, t_heredoc *hrdc)
 		return (1);
 	else
 		return (0);
+}
+
+int	fill_out(char *out, int i, char *input, t_heredoc *hrdc)
+{
+	ft_strcpy(&out[i], "< ");
+	i += 2;
+	ft_strcpy(&out[i], hrdc->file);
+	i += len_adjust(&input[i], hrdc);
+	out = ft_strjoin(out, &input[i]);
+	return (i);
 }

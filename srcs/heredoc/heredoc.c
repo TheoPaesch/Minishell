@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/24 12:48:14 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/26 12:45:48 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,29 @@ void	get_txt(t_heredoc *hrdc)
 	ft_free(tmp);
 }
 
-void	adjust_output(t_heredoc *hrdc, char *input)
+char	*adjust_output(t_heredoc *hrdc, char *input)
 {
 	int		i;
 	char	*out;
+	bool	condition;
 
 	i = ft_strlen(input) + ft_strlen(hrdc->file) + 2;
 	out = ft_calloc(i, sizeof(char));
-	i = 0;
+	condition = heredoc_placement(input, &i, hrdc);
+	if (condition)
+		return (ft_strjoin(out, &input[i]));
 	while (input[i] != '\0')
 	{
-		out[i] = input[i];
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
-			ft_strcpy(&out[i], "< ");
-			i += 2;
-			ft_strcpy(&out[i], hrdc->file);
-			while (input[i] == ' ')
-				i++;
-			i += hrdc->size;
-			out = ft_strjoin(out, &input[i]);
+			i += fill_out(out, i, input, hrdc);
 			break ;
 		}
+		out[i] = input[i];
 		i++;
 	}
 	ft_free(hrdc->full_arg);
-	hrdc->out = out;
+	return (out);
 }
 
 char	*heredoc_scan(char *input)
@@ -85,8 +82,8 @@ char	*heredoc_scan(char *input)
 			if (hrdc->delim == NULL)
 				return (NULL);
 			heredoc_loop(hrdc);
-			adjust_output(hrdc, input);
-			break;
+			hrdc->out = adjust_output(hrdc, input);
+			break ;
 		}
 		i++;
 	}
@@ -138,6 +135,8 @@ char	*heredoc_base(char *input)
 
 	out = input;
 	i = 0;
+	if (input == NULL)
+		return (NULL);
 	while (input[i] != '\0')
 	{
 		if (input[i] == '<' && input[i + 1] == '<')
