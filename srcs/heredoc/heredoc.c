@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/26 12:45:48 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/26 17:04:17 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,15 @@ char	*adjust_output(t_heredoc *hrdc, char *input)
 		out[i] = input[i];
 		i++;
 	}
-	ft_free(hrdc->full_arg);
+	hrdc->full_arg = ft_free(hrdc->full_arg);
 	return (out);
 }
 
-char	*heredoc_scan(char *input)
+char	*heredoc_scan(char *input, t_heredoc *hrdc)
 {
-	t_heredoc	*hrdc;
 	int			i;
 
 	i = 0;
-	hrdc = ft_malloc(sizeof(t_heredoc));
 	while (input[i] != '\0')
 	{
 		if (input[i] == '<' && input[i + 1] == '<')
@@ -130,20 +128,22 @@ void	heredoc_loop(t_heredoc *hrdc)
 
 char	*heredoc_base(char *input)
 {
-	char	*out;
-	int		i;
+	char		*out;
+	int			i;
+	t_heredoc	*hrdc;
 
+	hrdc = ft_malloc(sizeof(t_heredoc));
 	out = input;
 	i = 0;
-	if (input == NULL)
-		return (NULL);
 	while (input[i] != '\0')
 	{
+		i += in_quotes(&input[i]);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
-			out = heredoc_scan(input);
-			if (out == NULL)
-				return (out);
+			out = heredoc_scan(input, hrdc);
+			printf("out = %s\n", out);
+			if (out == NULL || out[0] == '\0')
+				return (NULL);
 			else
 			{
 				input = out;

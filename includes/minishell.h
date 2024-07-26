@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/26 12:27:14 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/26 17:06:01 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,6 @@ void			exit_builtin(t_cmd *cmd);
 int				pwd_builtin(t_cmd *cmd);
 
 /* -------------------------------- Heredoc --------------------------------- */
-char			*heredoc_scan(char *input);
 char			*arg_check(char *eof, t_heredoc *hrdc);
 int				def_arg_len(char *eof, t_heredoc *hrdc);
 char			*in_none(char *input, int len);
@@ -196,6 +195,10 @@ char			*heredoc_base(char *input);
 int				len_adjust(char *eof, t_heredoc *hrdc);
 bool			heredoc_placement(char *input, int *i, t_heredoc *hrdc);
 int				fill_out(char *out, int i, char *input, t_heredoc *hrdc);
+int				in_quotes(char *input);
+bool			count_in_single(char *eof, int *i, int *amount);
+bool			count_in_double(char *eof, int *i, int *amount);
+
 
 
 
