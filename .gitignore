@@ -65,3 +65,4 @@ trash
 venv/
 minishell
 heredoc*.txt
+rsrch.md

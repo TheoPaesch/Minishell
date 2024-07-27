@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/24 14:47:16 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/26 20:45:20 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 	}
 	v.cmd->argv[v.argc] = 0;
 	v.cmd->end_argv[v.argc] = 0;
+	// if(argv[0] = ) for '| grep hello' handle errror here? output:
+	// bash: syntax error near unexpected token `|'
 	return (v.retrn_val);
 }
 
@@ -206,6 +208,7 @@ t_cmd	*parse_block(char **ptr_str, char *end_str)
 	return (cmd);
 }
 
+// '+' is >>
 t_cmd	*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str)
 {
 	t_parse_redir_vars	v;
@@ -217,7 +220,7 @@ t_cmd	*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str)
 			ft_panic("Can't redirect. Filename missing.", 2);
 		if (v.type == '<')
 		{
-			cmd = init_redir_cmd(cmd, v.quote, v.end_quote, O_RDONLY);
+			cmd = init_redir_cmd(cmd, v.quote, v.end_quote, O_RDONLY | O_CREAT);
 			((t_redir_cmd *)cmd)->fd = 0;
 		}
 		else if (v.type == '>')
@@ -225,7 +228,7 @@ t_cmd	*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str)
 			cmd = init_redir_cmd(cmd, v.quote, v.end_quote, O_WRONLY | O_CREAT);
 			((t_redir_cmd *)cmd)->fd = 1;
 		}
-		else if (v.type == '+') // '+' is >>
+		else if (v.type == '+')
 		{
 			cmd = init_redir_cmd(cmd, v.quote, v.end_quote, O_WRONLY | O_CREAT);
 			((t_redir_cmd *)cmd)->fd = 1;

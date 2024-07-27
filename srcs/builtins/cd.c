@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/24 14:49:04 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:17:18 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	cd_builtin(t_cmd *cmd)
 	{
 		if (shell->expo && check_key(shell->expo, "HOME") == false)
 			return (ft_putstr_fd("bash: cd: HOME not set\n", 2),
-				set_exit_status(1), 1);
+				set_exit_code(1), 1);
 		else
 			new_path = key_value(shell->expo, "HOME");
 	}
@@ -44,7 +44,7 @@ int	cd_builtin(t_cmd *cmd)
 	{
 		if (shell->expo && check_key(shell->expo, "OLDPWD") == false)
 			return (ft_putstr_fd("bash: cd: OLDPWD not set\n", 2),
-				set_exit_status(1), 1);
+				set_exit_code(1), 1);
 		new_path = key_value(shell->expo, "OLDPWD");
 		printf("%s\n", new_path);
 	}

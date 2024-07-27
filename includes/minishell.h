@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/24 18:18:40 by mstrauss         ###   ########.fr       */
+/*   Created: 2024/07/26 15:32:01 by mstrauss          #+#    #+#             */
+/*   Updated: 2024/07/27 14:57:28 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@
 # include <sys/wait.h>
 # include <term.h>
 # include <unistd.h>
+
+/* ------------------------------- Shell Name ------------------------------- */
+
+# define NAME bash
 
 /* -------------------------- Command / token type -------------------------- */
 # define EXEC 1
@@ -67,7 +71,6 @@ typedef struct s_program
 	t_list		*env;
 	t_list		*expo;
 	t_list		*mem;
-	int			ex_status;
 	int			last_exit_code;
 	bool		isatty;
 	bool		is_dbg;
@@ -155,6 +158,7 @@ const char		*get_node_type_str(int type);
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 char			*get_path(char *executable);
+char			*path_cwd_fallback(char *executable);
 int				get_token(char **ptr_str, char *end_str, char **quote,
 					char **end_quote);
 t_program		*get_shell(void);
@@ -183,6 +187,8 @@ int				export_builtin(t_cmd *cmd);
 int				expo_verify_arg(char *arg);
 int				env_builtin(t_cmd *cmd);
 void			exit_builtin(t_cmd *cmd);
+int				errno_to_exitcode(int err);
+int				calc_exit_code(int code);
 int				pwd_builtin(t_cmd *cmd);
 
 /* -------------------------------- Heredoc --------------------------------- */
@@ -204,9 +210,11 @@ char			*expand_exit_stat(void);
 char			*expand_var(char **str);
 char			*expand_word(char **start, char **end, int *type);
 char			*get_value_of_key(t_list *lst, char *key);
+char			*early_expand(char *input);
+void			copy_through_pair(char **output, char **input, char sym);
 
 /* ----------------------------- Error Handling ----------------------------- */
-void			set_exit_status(int status);
+void			set_exit_code(int status);
 void			print_err(char *str);
 // void			ft_panic(char *err_msg, int exit_stat);
 // void			ft_set_errno(int exit_stat);

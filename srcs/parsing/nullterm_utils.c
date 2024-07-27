@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 13:46:55 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/02 19:58:46 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:30:27 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ t_cmd	*null_exec_cmd(t_cmd *cmd)
 
 t_cmd	*null_redir(t_cmd *cmd)
 {
+	t_redir_cmd *redir_cmd;         // dbg
+	redir_cmd = (t_redir_cmd *)cmd; // dbg
+	(void)redir_cmd;                // dbg
 	nullterm(((t_redir_cmd *)cmd)->cmd);
-	((t_redir_cmd *)cmd)->end_file = 0;
+	*(((t_redir_cmd *)cmd)->end_file) = 0;
 	return (cmd);
 }
 

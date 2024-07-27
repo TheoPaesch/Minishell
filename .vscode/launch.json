@@ -19,10 +19,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "/bin/bash",
-      "args": [
-        "-c",
-        "${workspaceFolder}/minishell < input.txt"
-      ],
+      "args": ["-c", "${workspaceFolder}/minishell < input.txt"],
       "environment": [],
       "cwd": "${workspaceFolder}",
       "externalConsole": false,
@@ -38,7 +35,7 @@
       "program": "${workspaceFolder}/minishell",
       "processId": "${command:pickProcess}",
       "MIMode": "lldb",
-      "miDebuggerPath": "/Users/mstrauss/.vscode/extensions/ms-vscode.cpptools-1.21.2-darwin-x64/debugAdapters/lldb-mi/bin/lldb-mi"
+      "miDebuggerPath": "/Users/mstrauss/.vscode/extensions/ms-vscode.cpptools-1.20.5-darwin-x64/debugAdapters/lldb-mi/bin/lldb-mi"
     },
     {
       "name": "C/C++ Runner: Debug Session",

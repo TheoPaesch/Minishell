@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:29:08 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/23 19:37:32 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/25 18:43:39 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-/*fo ctrl + c*/
+/*for ctrl + c*/
 
 void	handle_sigint(int sig)
 {

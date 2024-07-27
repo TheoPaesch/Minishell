@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:52:25 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/22 20:26:13 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:58:17 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,11 @@ void	unset_one(t_list **lst, char *key)
 		if (ft_strcmp(((t_env *)tmp->data)->key, key) == 0)
 		{
 			free_content(tmp);
-			if (prev_node == NULL && tmp->next) // may be useless,
-				// next condition should be enough
-				*lst = NULL;
-			else if (prev_node == NULL)
+			if (prev_node == NULL)
 				*lst = tmp->next;
 			else
 				prev_node->next = tmp->next;
-			ft_free(tmp);
+			tmp = ft_free(tmp);
 			break ;
 		}
 		prev_node = tmp;

@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/24 17:21:17 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:49:45 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,5 @@ int	expo_verify_arg(char *arg)
 	if (*arg && *arg == '+' && *(arg + 1) && *(arg + 1) == '='
 		&& (ft_isprint_no_space((*(arg + 2))) || *(arg + 2) == '\0'))
 		return (1);
-	return (0);
+	return (1);
 }

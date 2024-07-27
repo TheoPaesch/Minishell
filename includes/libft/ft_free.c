@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:07:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/06/16 18:03:19 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/26 15:34:17 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	remove_mem_entry(t_list **lst, void *ptr)
 	t_list	*tmp;
 	t_list	*prev;
 
-	if (*lst == NULL || ptr == NULL || lst == NULL)
+	if (lst == NULL || ptr == NULL || *lst == NULL)
 		return ;
 	tmp = *lst;
 	prev = NULL;

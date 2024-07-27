@@ -8,7 +8,7 @@ CFLAGS	=	-Wall -Wextra -Werror -g # -Ofast -ffast-math -march=native -mtune=nati
 RM		=	rm -rf
 
 LIB		=	-lreadline -L$(LIBFT_DIR)
-INC		=	-I includes
+INC		=	-Iincludes/
 
 SRC_DIRS =	./srcs \
 			./srcs/builtins \

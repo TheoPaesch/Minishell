@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/19 17:11:06 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/26 21:19:40 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,7 @@ char	*expand_var(char **str)
 	if (**str != '$')
 		ft_panic("expand_var received string without $", 420);
 	if (*(*str + 1) == '?')
-	{
-		*str += 2;
-		return (expand_exit_stat());
-	}
+		return (*str += 2, expand_exit_stat());
 	*str += 1;
 	start = *str;
 	while (ft_isalnum(**str))
@@ -128,24 +125,17 @@ char	*expand_var(char **str)
 	{
 		if (exp->data != NULL && ft_strcmp(((t_env *)exp->data)->key,
 				trmd) == 0)
-		{
-			trmd = ft_free(trmd);
-			return (((t_env *)exp->data)->value);
-		}
+			return (ft_free(trmd), ((t_env *)exp->data)->value);
 		exp = exp->next;
 	}
 	while (env && *trmd != '\0')
 	{
 		if (env->data != NULL && ft_strcmp(((t_env *)env->data)->key,
 				trmd) == 0)
-		{
-			trmd = ft_free(trmd);
-			return (((t_env *)env->data)->value);
-		}
+			return (ft_free(trmd), ((t_env *)env->data)->value);
 		env = env->next;
 	}
-	ft_free(trmd);
-	return (NULL);
+	return (ft_free(trmd), NULL);
 }
 
 // char	*expand_var(char **str)

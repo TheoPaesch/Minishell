@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 16:12:00 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/18 15:39:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:54:10 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_cmd	*print_tree_util(t_cmd *node, int space)
 		print_tree_util(((t_pipe_cmd *)node)->right, space);
 	printf("\n");
 	process_and_print_node(node, space);
+	if(node->type == REDIR)
+		print_tree_util(((t_redir_cmd *)node)->cmd, space);
 	if (node->type == PIPE || node->type == LIST)
 		print_tree_util(((t_pipe_cmd *)node)->left, space);
 	return (node);

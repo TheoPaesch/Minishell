@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/24 18:27:43 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/27 15:54:30 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	null_shell(t_program *shell)
 	shell->env = NULL;
 	shell->expo = NULL;
 	shell->mem = NULL;
-	shell->ex_status = 0;
 	shell->last_exit_code = 0;
 	shell->isatty = 0;
 }
@@ -26,12 +25,9 @@ void	fill_program(t_program *shell, char **envp)
 {
 	null_shell(shell);
 	init_global(shell);
-	// shell->mem = new_list(); // wtf
 	init_mem_man((t_list **)(&(shell->mem)));
 	ft_malloc(1);
 	ft_free(NULL);
-	// shell->env = ft_lstnew(NULL);
-	// shell->expo = ft_lstnew(NULL);
 	if (envp[0] == NULL)
 		empty_env();
 	else
@@ -40,7 +36,6 @@ void	fill_program(t_program *shell, char **envp)
 		exit(1);
 	get_path((char *)(&(shell->env)));
 	shell->last_exit_code = 0;
-	shell->ex_status = 0;
 	shell->isatty = isatty(STDIN_FILENO);
 }
 
@@ -57,15 +52,16 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		input = read_input(&shell);
-		if (input == NULL /*&& !isatty(STDIN_FILENO)*/)
-		{
-			input = ft_free(input);
-			ms_exit(shell.ex_status); // ADD ACTUAL EXIT CODE
-		}
+		if (input == NULL)
+			ms_exit(shell.last_exit_code);
 		if (*input == '\0')
 			continue ;
 		add_history(input);
-		(input = heredoc_base(input));
+		// printf("initial: %s\n", input);
+		input = heredoc_base(input);
+		// printf("post heredoc: %s\n", input);
+		input = early_expand(input);
+		// printf("post expansion: %s\n", input);
 		if (input != NULL)
 			execute_cmd(print_tree(parse_cmd(ft_strdup(input))));
 		input = ft_free(input);
@@ -74,6 +70,41 @@ int	main(int ac, char **av, char **envp)
 }
 
 // have to return input so I take the delimiter from the input and then pass the rest
-// have to check that export with no env stll creates env
+// have to check that export with no env still creates env
 // if (ac > 1 && av[1] != NULL)
 // 	printf("minishell: no arguments needed\n");
+
+char	*early_expand(char *input)
+{
+	char	*output;
+	char	*start;
+
+	output = ft_calloc(sizeof(char), MAX_STR_LEN);
+	start = output;
+	while (*input)
+	{
+		if (*input == '\'')
+			copy_through_pair(&output, &input, '\'');
+		else if (*input == '"')
+			copy_through_pair(&output, &input, '\"');
+		else if (*input == '$')
+			output += ft_strlcpy(output, expand_var(&input), MAX_STR_LEN);
+		else if (*input == '~')
+			output += ft_strlcpy(output, expand_tilde(&input), MAX_STR_LEN);
+		else
+			*output++ = *input++;
+	}
+	return (start);
+}
+
+void	copy_through_pair(char **output, char **input, char sym)
+{
+	if (*input && **input == sym)
+	{
+		*(*output)++ = *(*input)++;
+		while (*input && **input != sym)
+			*(*output)++ = *(*input)++;
+		if (*input)
+			*(*output)++ = *(*input)++;
+	}
+}

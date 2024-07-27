@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:22 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/20 22:35:51 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:30:43 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ void	exec_pipe(t_cmd *cmd)
 	waitpid(pid1, &stat_pid1, 0); // WNOHANG |
 	waitpid(pid2, &stat_pid2, 0);
 	if (WIFEXITED(stat_pid1))
-		shell->ex_status = WEXITSTATUS(stat_pid1);
+		shell->last_exit_code = WEXITSTATUS(stat_pid1);
 	if (WIFEXITED(stat_pid2))
-		exit_status = WEXITSTATUS(stat_pid2);
-	if (exit_status != 0 || shell->ex_status == 0)
-		shell->ex_status = exit_status;
+		shell->last_exit_code = WEXITSTATUS(stat_pid2);
+	ms_exit(shell->last_exit_code);
 }

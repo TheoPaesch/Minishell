@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/24 12:48:14 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/25 16:40:58 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ void	get_txt(t_heredoc *hrdc)
 	}
 	ft_free(tmp);
 }
+
+// HINT: use unlink() to
+// void	get_txt(t_heredoc *hrdc)
+// {
+// 	static int	i = 1;
+
+// 	return (ft_strjoinall("/tmp/heredoc", ft_itoa(i++), ".txt"));
+// }
 
 void	adjust_output(t_heredoc *hrdc, char *input)
 {
@@ -86,7 +94,7 @@ char	*heredoc_scan(char *input)
 				return (NULL);
 			heredoc_loop(hrdc);
 			adjust_output(hrdc, input);
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -95,12 +103,13 @@ char	*heredoc_scan(char *input)
 
 void	heredoc_loop(t_heredoc *hrdc)
 {
-	char	*line;
-	int		fd;
+	char		*line;
+	int			fd;
+	t_program	*shell;
 
 	signal(SIGINT, handle_sigint);
 	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
-	t_program *shell = get_shell();
+	shell = get_shell();
 	while (1)
 	{
 		if (shell->isatty)
@@ -129,7 +138,6 @@ void	heredoc_loop(t_heredoc *hrdc)
 	}
 	close(fd);
 }
-
 
 char	*heredoc_base(char *input)
 {
