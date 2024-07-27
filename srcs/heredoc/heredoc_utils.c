@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/23 15:20:39 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/27 15:29:57 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ char	*arg_check(char *eof, t_heredoc *hrdc)
 void	p_err(int i)
 {
 	if (i == 0)
-		ft_putstr_fd("minishell: syntax error\n", 2);
+		ft_putstr_fd("bash: syntax error\n", 2);
 	if (i == 1)
-		ft_putstr_fd("minishell: error\n", 2);
+		ft_putstr_fd("bash: error\n", 2);
 }
 
 bool	hrdc_line_check(char *line, t_heredoc *hrdc)
@@ -44,4 +44,14 @@ bool	hrdc_line_check(char *line, t_heredoc *hrdc)
 		return (1);
 	else
 		return (0);
+}
+
+char	*fill_out(char *out, int i, char *input, t_heredoc *hrdc)
+{
+	ft_strcpy(&out[i], "< ");
+	i += 2;
+	ft_strcpy(&out[i], hrdc->file);
+	i += len_adjust(&input[i], hrdc);
+	out = ft_strjoin(out, &input[i]);
+	return (out);
 }
