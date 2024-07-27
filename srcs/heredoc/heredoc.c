@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/27 15:59:15 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/27 22:26:53 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ char	*heredoc_scan(char *input, t_heredoc *hrdc)
 			if (hrdc->delim == NULL)
 				return (NULL);
 			heredoc_loop(hrdc);
-			adjust_output(hrdc, input);
-			break;
+			hrdc->out = adjust_output(hrdc, input);
+			break ;
 		}
 		i++;
 	}

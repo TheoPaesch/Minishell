@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/27 15:58:36 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/27 22:25:55 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,12 @@ int	main(int ac, char **av, char **envp)
 		// printf("initial: %s\n", input);
 		input = heredoc_base(input);
 		// printf("post heredoc: %s\n", input);
-		input = early_expand(input);
 		// printf("post expansion: %s\n", input);
 		if (input != NULL)
+		{
+			input = early_expand(input);
 			execute_cmd(print_tree(parse_cmd(ft_strdup(input))));
+		}
 		input = ft_free(input);
 	}
 	return (shell.last_exit_code);

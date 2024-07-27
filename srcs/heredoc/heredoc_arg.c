@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:36:38 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/27 15:50:41 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/27 20:52:33 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ char	*in_none(char *input, int len)
 			in_double(input, str, &i, &j);
 		else
 			str[j++] = input[i++];
-
-		if (input[i] == ' ' || input[i] == '\0')
+		if (ft_strchr("() |$;>", input[i]) || input[i] == '\0')
 			break ;
 	}
 	return (str);
