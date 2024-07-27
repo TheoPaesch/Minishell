@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/26 15:32:01 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/27 14:57:28 by mstrauss         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/07/27 15:58:42 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,6 @@ int				calc_exit_code(int code);
 int				pwd_builtin(t_cmd *cmd);
 
 /* -------------------------------- Heredoc --------------------------------- */
-char			*heredoc_scan(char *input);
 char			*arg_check(char *eof, t_heredoc *hrdc);
 int				def_arg_len(char *eof, t_heredoc *hrdc);
 char			*in_none(char *input, int len);
@@ -200,6 +199,17 @@ void			heredoc_loop(t_heredoc *hrdc);
 void			get_txt(t_heredoc *hrdc);
 bool			hrdc_line_check(char *line, t_heredoc *hrdc);
 char			*heredoc_base(char *input);
+int				len_adjust(char *eof, t_heredoc *hrdc);
+bool			heredoc_placement(char *input, int *i, t_heredoc *hrdc);
+char			*fill_out(char *out, int i, char *input, t_heredoc *hrdc);
+int				in_quotes(char *input);
+bool			count_in_single(char *eof, int *i, int *amount);
+bool			count_in_double(char *eof, int *i, int *amount);
+int				output_quotes(char *input, char *output);
+
+
+
+
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);
