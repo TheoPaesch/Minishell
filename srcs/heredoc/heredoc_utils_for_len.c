@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:47:44 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/26 18:40:02 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/27 15:29:42 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ int	def_arg_len(char *eof, t_heredoc *hrdc)
 	amount = 0;
 	while (eof[i] != ' ' && eof[i] != '\0')
 	{
-		if (eof[i] == '<' && eof[i + 1] == '<')
-			break ;
 		if (eof[i] == 39)
 			if (!count_in_single(eof, &i, &amount))
 				return (-1);
 		if (eof[i] == 34)
 			if (!count_in_double(eof, &i, &amount))
 				return (-1);
+		if (eof[i] == '<' && eof[i + 1] == '<')
+			break ;
 		if (eof[i] != '\0')
 			i++;
 	}
@@ -81,6 +81,7 @@ bool	heredoc_placement(char *input, int *i, t_heredoc *hrdc)
 	j = 0;
 	while ((input[*i] != '<' && input[*i + 1] != '<') && input[*i] != '\0')
 	{
+		*i += in_quotes(&input[*i]);
 		if (input[*i] == ' ')
 			j++;
 		(*i)++;

@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/26 22:26:25 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/27 15:29:57 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*arg_check(char *eof, t_heredoc *hrdc)
 	if (size == -1)
 		return (NULL);
 	delimiter = in_none(eof, size);
-	printf("delim arg_check = %s\n", delimiter);
 	get_txt(hrdc);
 	return (delimiter);
 }
@@ -53,9 +52,6 @@ char	*fill_out(char *out, int i, char *input, t_heredoc *hrdc)
 	i += 2;
 	ft_strcpy(&out[i], hrdc->file);
 	i += len_adjust(&input[i], hrdc);
-	// printf("	try to join %s", &input[i]);
-	printf("	out pre%s\n", out);
 	out = ft_strjoin(out, &input[i]);
-	printf("	out post%s\n", out);
 	return (out);
 }

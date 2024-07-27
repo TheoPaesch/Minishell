@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/26 22:30:17 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/27 15:29:15 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ char	*adjust_output(t_heredoc *hrdc, char *input)
 		i += output_quotes(&input[i], &out[i]);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
-			printf("input in adjust = %s\n", input);
-			printf("out in adjust = %s\n", out);
 			out = fill_out(out, i, input, hrdc);
 			break ;
 		}
@@ -71,6 +69,7 @@ char	*heredoc_scan(char *input, t_heredoc *hrdc)
 	i = 0;
 	while (input[i] != '\0')
 	{
+		i += in_quotes(&input[i]);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
 			i += 2;
@@ -80,12 +79,10 @@ char	*heredoc_scan(char *input, t_heredoc *hrdc)
 				i++;
 			hrdc->full_arg = ft_strdup(&input[i]);
 			hrdc->delim = arg_check(hrdc->full_arg, hrdc);
-			printf("delim = %s\n", hrdc->delim);
 			if (hrdc->delim == NULL)
 				return (NULL);
 			heredoc_loop(hrdc);
 			hrdc->out = adjust_output(hrdc, input);
-			printf("out =%s\n", hrdc->out);
 			break ;
 		}
 		i++;
@@ -142,7 +139,6 @@ char	*heredoc_base(char *input)
 	i = 0;
 	while (input[i] != '\0')
 	{
-		printf("i = %d\n", i);
 		i += in_quotes(&input[i]);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
@@ -152,7 +148,6 @@ char	*heredoc_base(char *input)
 			else
 			{
 				input = ft_strdup(out);
-				printf("input on base = %s\n", input);
 				i = 0;
 				continue ;
 			}
@@ -162,5 +157,4 @@ char	*heredoc_base(char *input)
 	return (out);
 }
 
-// have to be able to do multiple heredocs
-// have to be able to quit with ctrl + d
+// have to be able to check signals!!!

@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:36:38 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/26 21:16:28 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/27 15:28:33 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ int	output_quotes(char *input, char *output)
 
 	if (input[0] != 39 && input[0] != 34)
 		return (0);
-	i = 1;
-	*output++ = *input++;
+	i = 0;
+	output[i] = input[i];
+	i++;
 	if (input[0] == 39)
 	{
 		while (input[i] != 39)
