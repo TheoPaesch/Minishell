@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/27 15:59:15 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 00:50:13 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*heredoc_scan(char *input, t_heredoc *hrdc)
 				return (NULL);
 			heredoc_loop(hrdc);
 			adjust_output(hrdc, input);
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -104,7 +104,8 @@ void	heredoc_loop(t_heredoc *hrdc)
 	int			fd;
 	t_program	*shell;
 
-	signal(SIGINT, handle_sigint);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_IGN);
 	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 	shell = get_shell();
 	while (1)

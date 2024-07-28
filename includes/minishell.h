@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/27 15:58:42 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 00:45:46 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ int				in_quotes(char *input);
 bool			count_in_single(char *eof, int *i, int *amount);
 bool			count_in_double(char *eof, int *i, int *amount);
 int				output_quotes(char *input, char *output);
+void			handle_sigint_heredoc(int sig);
 
 
 
