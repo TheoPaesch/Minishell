@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/22 19:40:48 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/28 00:08:19 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,15 @@ char	*get_value(char *str)
 	j = i;
 	while (str[j] != '\0')
 		j++;
+	if ((str[i] == '"' && str[j] == '"') || (str[i] == 39 && str[j] == 39))
+	{
+		i++;
+		str[--j] = '\0';
+	}
 	value = ft_malloc(sizeof(char) * (j + 1 - i));
 	j = 0;
 	while (str[i] != '\0')
-	{
-		value[j] = str[i];
-		i++;
-		j++;
-	}
+		value[j++] = str[i++];
 	value[j] = '\0';
 	return (value);
 }

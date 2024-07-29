@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/26 20:45:20 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/28 18:16:22 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ t_cmd	*parse_pipe(char **ptr_str, char *end_str)
 	return (cmd);
 }
 
+// IDEA:
+// export R="   R"
+// check if word contains a var "WO"$R"D
+// expand $VAR
+// return to beginning and treat expanded str as seperate tokens
 t_cmd	*parse_exec(char **ptr_str, char *end_str)
 {
 	t_parse_exec_vars	v;
@@ -87,8 +92,9 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 	}
 	v.cmd->argv[v.argc] = 0;
 	v.cmd->end_argv[v.argc] = 0;
-	// if(argv[0] = ) for '| grep hello' handle errror here? output:
+	// if(argv[0] = ?) for '| grep hello' handle errror here? output:
 	// bash: syntax error near unexpected token `|'
+	// using scan_skip_ws();
 	return (v.retrn_val);
 }
 
@@ -163,20 +169,22 @@ char	*parse_quotes(char **quote, char **end_quote, int *type)
 				continue ;
 			}
 		}
+		else if (*tmp_ptr == '$' && ft_strchr("\'\"", *(tmp_ptr + 1))
+				&& !in_single_quote && !in_double_quote)
+		{
+			tmp_ptr++;
+			continue ;
+		}
 		if (*tmp_ptr == '~' && !in_single_quote && !in_double_quote)
 			return_value += ft_strlcpy(return_value, expand_tilde(&tmp_ptr),
 					MAX_STR_LEN);
-		else if (*tmp_ptr == '$' && !in_single_quote)
-		{
-			if (in_double_quote && !ft_isalnum(*(tmp_ptr + 1)) && *(tmp_ptr
-					+ 1) != '?' && *(tmp_ptr + 1) != '\0')
-				*return_value++ = *tmp_ptr++;
-			else
-				return_value += ft_strlcpy(return_value, expand_var(&tmp_ptr),
-						MAX_STR_LEN);
-		}
+		else if (*tmp_ptr == '$' && !in_single_quote && ((in_double_quote
+					|| !in_double_quote) && (*(tmp_ptr + 1) == '_'
+					|| isalpha(*(tmp_ptr + 1)) || *(tmp_ptr + 1) == '?')))
+			return_value += ft_strlcpy(return_value, expand_var(&tmp_ptr),
+					MAX_STR_LEN);
 		else
-			*return_value++ = *tmp_ptr++;
+			*return_value++ = *tmp_ptr++;gi
 	}
 	*return_value = '\0';
 	*end_quote = return_value;

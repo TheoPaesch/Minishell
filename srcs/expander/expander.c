@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:33:20 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/26 21:19:40 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/27 23:46:03 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,16 @@ char	*expand_var(char **str)
 	exp = get_shell()->expo;
 	if (**str != '$')
 		ft_panic("expand_var received string without $", 420);
-	if (*(*str + 1) == '?')
-		return (*str += 2, expand_exit_stat());
+	if (*(*str + 1) == '?' || *(*str + 1) == '\0' || !ft_isalnum(*(*str + 1)))
+	{
+		if (*(*str + 1) == '?')
+			return (*str += 2, expand_exit_stat());
+		else
+			return (*str += 1, ft_strdup("$"));
+	}
 	*str += 1;
 	start = *str;
-	while (ft_isalnum(**str))
+	while (ft_isalnum(**str) || **str == '_')
 		(*str)++;
 	trmd = ft_substr(start, 0, *str - start);
 	while (exp && *trmd != '\0')

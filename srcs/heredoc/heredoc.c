@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/27 15:59:15 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/28 16:46:01 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*adjust_output(t_heredoc *hrdc, char *input)
 
 char	*heredoc_scan(char *input, t_heredoc *hrdc)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (input[i] != '\0')
@@ -90,8 +90,8 @@ char	*heredoc_scan(char *input, t_heredoc *hrdc)
 			if (hrdc->delim == NULL)
 				return (NULL);
 			heredoc_loop(hrdc);
-			adjust_output(hrdc, input);
-			break;
+			hrdc->out = adjust_output(hrdc, input);
+			break ;
 		}
 		i++;
 	}

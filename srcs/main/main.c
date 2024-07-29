@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/27 15:58:36 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/28 00:16:26 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int ac, char **av, char **envp)
 		// printf("initial: %s\n", input);
 		input = heredoc_base(input);
 		// printf("post heredoc: %s\n", input);
-		input = early_expand(input);
+		// input = early_expand(input);
 		// printf("post expansion: %s\n", input);
 		if (input != NULL)
 			execute_cmd(print_tree(parse_cmd(ft_strdup(input))));
@@ -79,6 +79,8 @@ char	*early_expand(char *input)
 	char	*output;
 	char	*start;
 
+	if (input == NULL)
+		return (NULL);
 	output = ft_calloc(sizeof(char), MAX_STR_LEN);
 	start = output;
 	while (*input)
