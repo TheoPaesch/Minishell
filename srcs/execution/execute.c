@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/29 18:04:24 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:29:06 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,15 @@ void	exec_exec(t_cmd *cmd)
 		ms_exit((get_shell())->last_exit_code);
 }
 
-void	exec_redir(t_cmd *cmd) // fix for theos early exit
+// fix for theos early exit
 // just add fork b4 redir
+void	exec_redir(t_cmd *cmd)
 {
-	t_redir_cmd *exec_redir;
+	t_redir_cmd	*exec_redir;
 
 	exec_redir = (t_redir_cmd *)cmd;
 	close(exec_redir->fd);
-	if (open(exec_redir->file, exec_redir->mode /*, 0777*/) < 0)
+	if (open(exec_redir->file, exec_redir->mode, 0644) < 0)
 	// CONTINUE HERE
 	{
 		ft_putstr_fd("bash: ", 2);

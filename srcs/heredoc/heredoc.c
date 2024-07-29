@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/29 19:45:22 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:30:25 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void	heredoc_loop(t_heredoc *hrdc)
 	t_program	*shell;
 
 	signal(SIGINT, handle_sigint);
-	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, 0644);
+		// keep at 0644 for max permissions
 	shell = get_shell();
 	while (1)
 	{
@@ -142,7 +143,7 @@ char	*heredoc_base(char *input)
 	int			i;
 	t_heredoc	*hrdc;
 
-	hrdc = ft_malloc(sizeof(t_heredoc));
+	hrdc = ft_calloc(sizeof(t_heredoc), 1);
 	out = input;
 	i = 0;
 	while (input[i] != '\0')
@@ -150,6 +151,7 @@ char	*heredoc_base(char *input)
 		i += in_quotes(&input[i]);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
+			out = NULL;
 			out = heredoc_scan(input, hrdc);
 			if (out == NULL || out[0] == '\0')
 				return (NULL);
