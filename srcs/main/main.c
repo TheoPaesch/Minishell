@@ -19,7 +19,7 @@ void	null_shell(t_program *shell)
 	shell->expo = NULL;
 	shell->mem = NULL;
 	shell->last_exit_code = 0;
-	shell->isatty = 0;
+	shell->isatty = isatty(fileno(stdin));
 }
 
 void	fill_program(t_program *shell, char **envp)
@@ -38,6 +38,8 @@ void	fill_program(t_program *shell, char **envp)
 	get_path((char *)(&(shell->env)));
 	shell->last_exit_code = 0;
 	shell->isatty = isatty(STDIN_FILENO);
+	shell->orig_stdin = dup(STDIN_FILENO);
+	shell->orig_stdout = dup(STDOUT_FILENO);
 }
 
 int	main(int ac, char **av, char **envp)

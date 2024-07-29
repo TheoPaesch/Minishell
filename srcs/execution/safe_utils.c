@@ -10,6 +10,8 @@ pid_t	safe_fork(void)
 		perror("Forking failed.\n");
 		exit(1);
 	}
+	if (pid == 0)
+		get_shell()->isatty = false;
 	return (pid);
 }
 

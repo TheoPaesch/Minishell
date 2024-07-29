@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:22 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/26 18:30:43 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 19:56:27 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	exec_pipe(t_cmd *cmd)
 		shell->last_exit_code = WEXITSTATUS(stat_pid1);
 	if (WIFEXITED(stat_pid2))
 		shell->last_exit_code = WEXITSTATUS(stat_pid2);
-	ms_exit(shell->last_exit_code);
+	if ((get_shell())->isatty == false)
+		ms_exit(shell->last_exit_code);
 }

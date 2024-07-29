@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/28 21:43:05 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 19:20:24 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_program
 	t_list		*expo;
 	t_list		*mem;
 	int			last_exit_code;
+	int			orig_stdin;
+	int			orig_stdout;
 	bool		isatty;
 	bool		is_dbg;
 }				t_program;
@@ -167,6 +169,7 @@ void			handle_sigint(int sig);
 void			splash_screen(t_program *shell);
 bool			check_key(t_list *tmp, char *key);
 void			update_dir(t_list **env, t_list **expo, char *new, char *old);
+void			restore_fds(t_program *shell);
 
 /* --------------------------------- Quotes --------------------------------- */
 void			gt_handle_quote(char **tmp, char *end_str, int *return_val);
