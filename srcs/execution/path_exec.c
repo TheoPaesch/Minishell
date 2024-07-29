@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/25 18:13:57 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 23:18:37 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*path_cwd_fallback(char *executable)
 	cwd_exe = ft_strjoin(cwd, executable);
 	if (access(cwd_exe, F_OK | X_OK) == 0)
 		return (free(cwd), cwd_exe);
-	return (executable);
+	return (NULL);
 }
 
 // Path: srcs/execute/execute.c

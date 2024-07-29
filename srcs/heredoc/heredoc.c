@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/29 21:30:25 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:50:16 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	heredoc_loop(t_heredoc *hrdc)
 
 	signal(SIGINT, handle_sigint);
 	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, 0644);
-		// keep at 0644 for max permissions
+	// keep at 0644 for max permissions
 	shell = get_shell();
 	while (1)
 	{
@@ -115,8 +115,8 @@ void	heredoc_loop(t_heredoc *hrdc)
 		else
 		{
 			line = get_next_line(fileno(stdin));
-			if (line)
-				line[ft_strlen(line) - 1] = '\0';
+			if (line != NULL)
+				line = ft_strtrim(line, "\n");
 		}
 		if (line == NULL)
 			return (close(fd), free(line));

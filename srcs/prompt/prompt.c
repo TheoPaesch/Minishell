@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:25:48 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/29 19:22:42 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:49:34 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char	*read_input(t_program *shell)
 	else
 	{
 		input = get_next_line(fileno(stdin));
-		if (input)
-			input[ft_strlen(input) - 1] = '\0'; // revisit this
+		if (input != NULL)
+			input = ft_strtrim(input, "\n");
 	}
 	return (input);
 }

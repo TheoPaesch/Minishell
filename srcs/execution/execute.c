@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/29 21:29:06 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:21:01 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	exec_exec(t_cmd *cmd)
 	// {
 	if (exec_cmd->argv[0] && is_builtin(exec_cmd))
 		return (exec_builtin(cmd));
+	// printf("%s\n", exec_cmd->argv[0]);
 	pid = safe_fork();
 	if (pid == 0)
 	{
