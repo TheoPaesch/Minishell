@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:29:08 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/29 00:46:45 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/29 20:13:58 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,4 @@ void	handle_sigint(int sig)
 	rl_redisplay();
 }
 
+// void	heredoc_signal()

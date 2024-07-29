@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/29 00:50:13 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/29 20:15:00 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_txt(t_heredoc *hrdc)
 	while (1)
 	{
 		c = ft_itoa(i);
-		tmp = ft_strjoin("heredoc", c);
+		tmp = ft_strjoin("tmp/heredoc", c);
 		hrdc->file = ft_strjoin(tmp, ".txt");
 		if (access(hrdc->file, F_OK) == 0)
 		{
