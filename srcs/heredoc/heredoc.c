@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/30 00:07:52 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/30 00:14:14 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	heredoc_loop(t_heredoc *hrdc)
 		{
 			line = get_next_line(fileno(stdin));
 			if (line != NULL)
-				line = ft_strtrim(line, '\n');
+				line = ft_strtrim(line, "\n");
 		}
 		if (line == NULL || g_sig_break)
 			return (close(fd), free(line));
