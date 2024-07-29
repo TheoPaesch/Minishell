@@ -7,11 +7,13 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/28 00:16:26 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 23:13:48 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+volatile sig_atomic_t	g_sig_break = 0;
 
 void	null_shell(t_program *shell)
 {
@@ -51,7 +53,8 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	fill_program(&shell, envp);
 	splash_screen(&shell);
-	signal(SIGINT, handle_sigint);
+	signals_init();
+	g_sig_break = 0;
 	while (1)
 	{
 		input = read_input(&shell);
@@ -85,7 +88,7 @@ char	*early_expand(char *input)
 	char	*output;
 	char	*start;
 
-	if (input == NULL)
+	if (!input)
 		return (NULL);
 	output = ft_calloc(sizeof(char), MAX_STR_LEN);
 	start = output;

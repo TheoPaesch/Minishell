@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/29 23:50:54 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/30 00:11:34 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/ioctl.h>
 # include <term.h>
 # include <unistd.h>
 
@@ -165,11 +166,18 @@ int				get_token(char **ptr_str, char *end_str, char **quote,
 					char **end_quote);
 t_program		*get_shell(void);
 t_program		*init_global(t_program *shell);
-void			handle_sigint(int sig);
 void			splash_screen(t_program *shell);
 bool			check_key(t_list *tmp, char *key);
 void			update_dir(t_list **env, t_list **expo, char *new, char *old);
 void			restore_fds(t_program *shell);
+/* --------------------------------- Siganl --------------------------------- */
+extern volatile sig_atomic_t	g_sig_break;
+void			set_signal_handler(int signum, void (*handler)(int));
+void			handle_sigint(int sig);
+void			set_normal_signal(void);
+void			heredoc_signal(int sig);
+void			set_heredoc_signal(void);
+void			signals_init(void);
 
 /* --------------------------------- Quotes --------------------------------- */
 void			gt_handle_quote(char **tmp, char *end_str, int *return_val);
@@ -209,6 +217,11 @@ int				in_quotes(char *input);
 bool			count_in_single(char *eof, int *i, int *amount);
 bool			count_in_double(char *eof, int *i, int *amount);
 int				output_quotes(char *input, char *output);
+void			handle_sigint_heredoc(int sig);
+
+
+
+
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);

@@ -57,7 +57,8 @@ SRC = env_exp_utils.c \
 	  heredoc_utils.c \
 	  heredoc_arg.c \
 	  heredoc_utils_for_len.c \
-	  print_bin_tree.c
+	  print_bin_tree.c \
+	  signal_utils.c
 
 HEADERS = minishell.h
 
