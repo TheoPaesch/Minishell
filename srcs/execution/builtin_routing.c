@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 21:20:47 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/24 16:48:20 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/28 21:42:15 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	exec_builtin(t_cmd *cmd)
 	if (ft_strnstr(exec_cmd->argv[0], "export", ft_strlen(exec_cmd->argv[0])))
 		shell->last_exit_code = export_builtin(cmd);
 	if (ft_strnstr(exec_cmd->argv[0], "exit", ft_strlen(exec_cmd->argv[0])))
-		exit_builtin(cmd);
+		shell->last_exit_code = exit_builtin(cmd);
 	if (ft_strnstr(exec_cmd->argv[0], "pwd", ft_strlen(exec_cmd->argv[0])))
 		shell->last_exit_code = pwd_builtin(cmd);
 	if (ft_strnstr(exec_cmd->argv[0], "unset", ft_strlen(exec_cmd->argv[0])))

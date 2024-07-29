@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/27 23:39:01 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:12:50 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ void	exec_exec(t_cmd *cmd)
 	int			status;
 
 	exec_cmd = (t_exec_cmd *)cmd;
-	if (exec_cmd->argv[0] == 0 /*&& getpid() == 0*/)
-		ft_panic("Wrong routing / similar error during exec", 2);
-	// add error checking here with argv[0], or in parsing
+	// if (!validate_exec_table())
+	// {
 	if (is_builtin(exec_cmd))
 		return (exec_builtin(cmd));
 	pid = safe_fork();
@@ -53,10 +52,11 @@ void	exec_exec(t_cmd *cmd)
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putchar_fd('\n', 2);
-		ms_exit(errno_to_exitcode(errno));
+		ms_exit(127);
 	}
 	waitpid(pid, &status, 0);
 	set_exit_code(WEXITSTATUS(status));
+	// }
 	if (!isatty(STDIN_FILENO))
 		ms_exit((get_shell())->last_exit_code);
 }
@@ -69,7 +69,7 @@ void	exec_redir(t_cmd *cmd) // fix for theos early exit
 	exec_redir = (t_redir_cmd *)cmd;
 	close(exec_redir->fd);
 	if (open(exec_redir->file, exec_redir->mode /*, 0777*/) < 0)
-		// CONTINUE HERE
+	// CONTINUE HERE
 	{
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(exec_redir->file, 2);

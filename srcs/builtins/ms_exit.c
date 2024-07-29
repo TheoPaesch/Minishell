@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/27 14:20:26 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/28 23:20:31 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	parse_exit(char *arg, t_program *shell)
 	{
 		if (!ft_isdigit(arg[i]))
 		{
+			if (isatty(fileno(stdin)))
+				ft_putstr_fd("exit", 1);
 			ft_putstr_fd("bash: ", 2);
 			ft_putstr_fd(arg, 2);
 			ft_putstr_fd(": ", 2);
@@ -76,7 +78,7 @@ void	parse_exit(char *arg, t_program *shell)
 	}
 }
 
-void	exit_builtin(t_cmd *cmd)
+int	exit_builtin(t_cmd *cmd)
 {
 	t_program	*shell;
 	char		**args;
@@ -89,16 +91,21 @@ void	exit_builtin(t_cmd *cmd)
 		parse_exit(args[1], shell);
 		if (args[2] != NULL)
 		{
-			ft_putstr_fd("exit\nbash: ", 2);
+			if (isatty(fileno(stdin)))
+				ft_putstr_fd("exit\n", 1);
+			ft_putstr_fd("bash: ", 2);
 			ft_putstr_fd(args[0], 2);
 			ft_putstr_fd(": too many arguments\n", 2);
-			return ;
+			return (1);
 		}
 		tmp = ft_atoi(args[1]);
+		// tmp = ft_atod(args[1]);
+		// add atod to libft for exit 9223372036854775807 testcase (%256 = 255)
 		tmp = tmp % 256;
 		shell->last_exit_code = tmp;
 	}
-	ms_exit(0); // ADD ACTUAL EXIT CODE
+	ms_exit(shell->last_exit_code);
+	return (0);
 }
 
 /* ---------- EXIT TEST CASES --------- */

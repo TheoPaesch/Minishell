@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/27 14:17:18 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 00:10:28 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ int	cd_builtin(t_cmd *cmd)
 	if (ret != 0)
 		return (ft_putstr_fd("bash: cd: ", 2), ft_putstr_fd(new_path, 2),
 			ft_putstr_fd(": ", 2), ft_putstr_fd(strerror(errno), 2),
-			ft_putchar_fd('\n', 2), 1);
-	return (update_dir(&shell->env, &shell->expo, new_path, old_path), 0);
+			ft_putchar_fd('\n', 2), free(old_path), 1);
+	new_path = getcwd(NULL, 0);
+	return (update_dir(&shell->env, &shell->expo, new_path, old_path),
+		free(old_path), free(new_path), errno_to_exitcode(errno));
 }
 
 void	update_dir(t_list **env, t_list **expo, char *new, char *old)
@@ -64,7 +66,7 @@ void	update_dir(t_list **env, t_list **expo, char *new, char *old)
 
 	new_pwd = ft_strdup(new);
 	old_pwd = old;
-	ft_free(key_value(*expo, "OLDPWD"));
+	// ft_free(key_value(*expo, "OLDPWD"));
 	if (check_key(*env, "OLDPWD") == false)
 		add_env(env, ft_strdup("OLDPWD"), old_pwd);
 	if (check_key(*expo, "OLDPWD") == false)
