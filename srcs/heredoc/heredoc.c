@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/28 22:31:32 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/29 23:49:44 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*adjust_output(t_heredoc *hrdc, char *input)
 
 char	*heredoc_scan(char *input, t_heredoc *hrdc)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (input[i] != '\0')
@@ -105,7 +105,8 @@ void	heredoc_loop(t_heredoc *hrdc)
 	t_program	*shell;
 
 	signal(SIGINT, handle_sigint);
-	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, 0644);
+	// keep at 0644 for max permissions
 	shell = get_shell();
 	while (1)
 	{
@@ -114,8 +115,8 @@ void	heredoc_loop(t_heredoc *hrdc)
 		else
 		{
 			line = get_next_line(fileno(stdin));
-			if (line)
-				line[ft_strlen(line) - 1] = '\0';
+			if (line != NULL)
+				line = ft_strtrim(line, "\n");
 		}
 		if (line == NULL)
 			return (close(fd), free(line));
@@ -142,7 +143,7 @@ char	*heredoc_base(char *input)
 	int			i;
 	t_heredoc	*hrdc;
 
-	hrdc = ft_malloc(sizeof(t_heredoc));
+	hrdc = ft_calloc(sizeof(t_heredoc), 1);
 	out = input;
 	i = 0;
 	while (input[i] != '\0')
@@ -150,6 +151,7 @@ char	*heredoc_base(char *input)
 		i += in_quotes(&input[i]);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
+			out = NULL;
 			out = heredoc_scan(input, hrdc);
 			if (out == NULL || out[0] == '\0')
 				return (NULL);

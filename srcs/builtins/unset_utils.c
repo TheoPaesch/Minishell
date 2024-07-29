@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:52:25 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/26 18:58:17 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/28 20:32:30 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 /// @brief Takes the PREVIOUS node to the one to be deleted as an argument
 /// @param tmp
-void	patch_list(t_list *tmp)
-{
-	t_list	*tmp2;
+// void	patch_list(t_list *tmp)
+// {
+// 	t_list	*tmp2;
 
-	tmp2 = tmp->next;
-	tmp->next = tmp2->next;
-	ft_free(tmp2);
-}
+// 	tmp2 = tmp->next;
+// 	tmp->next = tmp2->next;
+// 	ft_free(tmp2);
+// }
 
 void	free_content(t_list *tmp)
 {
@@ -65,37 +65,39 @@ void	unset_one(t_list **lst, char *key)
 	}
 }
 
-t_list	*pre_pointer(t_list *env, char *key)
-{
-	t_list	*tmp;
+// t_list	*pre_pointer(t_list *env, char *key)
+// {
+// 	t_list	*tmp;
 
-	tmp = NULL;
-	while (env)
-	{
-		if (ft_strcmp(((t_env *)env->next->data)->key, key) == 0)
-			return (tmp);
-		tmp = env;
-		env = env->next;
-	}
-	return (NULL);
-}
+// 	tmp = NULL;
+// 	while (env)
+// 	{
+// 		if (ft_strcmp(((t_env *)env->next->data)->key, key) == 0)
+// 			return (tmp);
+// 		tmp = env;
+// 		env = env->next;
+// 	}
+// 	return (NULL);
+// }
 
-void	del_env(t_list *env, char *key)
-{
-	t_list	*tmp;
+// void	del_env(t_list **env, char **key)
+// {
+// 	t_list	*prev_node;
+// 	t_list	*tmp;
 
-	tmp = NULL;
-	while (env)
-	{
-		if (ft_strcmp(((t_env *)env->data)->key, key) == 0)
-		{
-			tmp = pre_pointer(env, key);
-			free_content(env);
-			patch_list(tmp); // check if edge case works
-		}
-		env = env->next;
-	}
-}
+// 	prev_node = NULL;
+// 	tmp = *env;
+// 	while (tmp)
+// 	{
+// 		if (ft_strcmp(((t_env *)tmp->data)->key, key) == 0)
+// 		{
+// 			prev_node = pre_pointer(tmp, key);
+// 			free_content(env);
+// 			patch_list(prev_node); // check if edge case works
+// 		}
+// 		env = env->next;
+// 	}
+// }
 
 /*if strcmp finds string to remove,
 	return pointer to previous list enrty for removal*/

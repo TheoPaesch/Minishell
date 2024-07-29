@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/28 22:31:49 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/29 23:50:54 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_program
 	t_list		*expo;
 	t_list		*mem;
 	int			last_exit_code;
+	int			orig_stdin;
+	int			orig_stdout;
 	bool		isatty;
 	bool		is_dbg;
 }				t_program;
@@ -167,6 +169,7 @@ void			handle_sigint(int sig);
 void			splash_screen(t_program *shell);
 bool			check_key(t_list *tmp, char *key);
 void			update_dir(t_list **env, t_list **expo, char *new, char *old);
+void			restore_fds(t_program *shell);
 
 /* --------------------------------- Quotes --------------------------------- */
 void			gt_handle_quote(char **tmp, char *end_str, int *return_val);
@@ -186,7 +189,7 @@ int				unset_verify_key(char *key);
 int				export_builtin(t_cmd *cmd);
 int				expo_verify_arg(char *arg);
 int				env_builtin(t_cmd *cmd);
-void			exit_builtin(t_cmd *cmd);
+int				exit_builtin(t_cmd *cmd);
 int				errno_to_exitcode(int err);
 int				calc_exit_code(int code);
 int				pwd_builtin(t_cmd *cmd);
@@ -206,10 +209,6 @@ int				in_quotes(char *input);
 bool			count_in_single(char *eof, int *i, int *amount);
 bool			count_in_double(char *eof, int *i, int *amount);
 int				output_quotes(char *input, char *output);
-
-
-
-
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);
