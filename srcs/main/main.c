@@ -69,10 +69,7 @@ int	main(int ac, char **av, char **envp)
 		// input = early_expand(input);
 		// printf("post expansion: %s\n", input);
 		if (input != NULL)
-		{
-			input = early_expand(input);
 			execute_cmd(print_tree(parse_cmd(ft_strdup(input))));
-		}
 		input = ft_free(input);
 	}
 	return (shell.last_exit_code);
