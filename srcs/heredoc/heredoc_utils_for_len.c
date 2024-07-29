@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:47:44 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/27 15:29:42 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/29 23:08:41 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bool	heredoc_placement(char *input, int *i, t_heredoc *hrdc)
 
 	*i = 0;
 	j = 0;
-	while ((input[*i] != '<' && input[*i + 1] != '<') && input[*i] != '\0')
+	while (input[*i] != '\0' && !(input[*i] == '<' && input[*i + 1] == '<'))
 	{
 		*i += in_quotes(&input[*i]);
 		if (input[*i] == ' ')

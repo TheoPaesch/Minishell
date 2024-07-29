@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/29 20:15:00 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/29 23:12:36 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	get_txt(t_heredoc *hrdc)
 // {
 // 	static int	i = 1;
 
-// 	return (ft_strjoinall("/tmp/heredoc", ft_itoa(i++), ".txt"));
+// 	return (ft_strjoinall("tmp/heredoc", ft_itoa(i++), ".txt"));
 // }
 
 char	*adjust_output(t_heredoc *hrdc, char *input)
@@ -90,11 +90,12 @@ char	*heredoc_scan(char *input, t_heredoc *hrdc)
 			if (hrdc->delim == NULL)
 				return (NULL);
 			heredoc_loop(hrdc);
-			adjust_output(hrdc, input);
+			hrdc->out = adjust_output(hrdc, input);
 			break ;
 		}
 		i++;
 	}
+	set_normal_signal();
 	return (hrdc->out);
 }
 
@@ -104,12 +105,13 @@ void	heredoc_loop(t_heredoc *hrdc)
 	int			fd;
 	t_program	*shell;
 
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_IGN);
+	set_heredoc_signal();
 	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 	shell = get_shell();
 	while (1)
 	{
+		if (g_sig_break)
+			break ;
 		if (shell->isatty)
 			line = readline("> ");
 		else
@@ -118,7 +120,7 @@ void	heredoc_loop(t_heredoc *hrdc)
 			if (line)
 				line[ft_strlen(line) - 1] = '\0';
 		}
-		if (line == NULL)
+		if (line == NULL || g_sig_break)
 			return (close(fd), free(line));
 		if (fd == -1 || hrdc_line_check(line, hrdc))
 		{
