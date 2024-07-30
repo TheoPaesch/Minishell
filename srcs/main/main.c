@@ -63,11 +63,7 @@ int	main(int ac, char **av, char **envp)
 		if (*input == '\0')
 			continue ;
 		add_history(input);
-		// printf("initial: %s\n", input);
 		input = heredoc_base(input);
-		// printf("post heredoc: %s\n", input);
-		// input = early_expand(input);
-		// printf("post expansion: %s\n", input);
 		if (input != NULL)
 			execute_cmd(print_tree(parse_cmd(ft_strdup(input))));
 		input = ft_free(input);

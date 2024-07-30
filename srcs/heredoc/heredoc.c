@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/30 16:18:22 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/30 19:27:13 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,25 +108,25 @@ void	heredoc_loop(t_heredoc *hrdc)
 			line = readline("> ");
 		else
 		{
-			line = get_next_line(fileno(stdin));
+			line = get_next_line(STDIN_FILENO);
 			if (line != NULL)
 				line = ft_strtrim(line, "\n");
 		}
 		if (line == NULL || g_sig_break)
-			return (close(fd), free(line));
+			return (close(fd), ft_free(line), free(NULL));
 		if (fd == -1 || hrdc_line_check(line, hrdc))
 		{
 			if (hrdc_line_check(line, hrdc))
 				close(fd);
 			else
 				p_err(1);
-			free(line);
+			ft_free(line);
 			break ;
 		}
 		if (line != NULL)
 			write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
-		free(line);
+		line = ft_free(line);
 	}
 	close(fd);
 }
