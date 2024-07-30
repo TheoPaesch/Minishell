@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/30 00:14:14 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/30 16:18:22 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ void	get_txt(t_heredoc *hrdc)
 	}
 	tmp = ft_free(tmp);
 }
-
-// HINT: use unlink() to
-// void	get_txt(t_heredoc *hrdc)
-// {
-// 	static int	i = 1;
-
-// 	return (ft_strjoinall("tmp/heredoc", ft_itoa(i++), ".txt"));
-// }
 
 char	*adjust_output(t_heredoc *hrdc, char *input)
 {
@@ -153,7 +145,6 @@ char	*heredoc_base(char *input)
 		i += in_quotes(&input[i]);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
-			out = NULL;
 			out = heredoc_scan(input, hrdc);
 			if (out == NULL || out[0] == '\0')
 				return (NULL);
@@ -168,5 +159,3 @@ char	*heredoc_base(char *input)
 	}
 	return (out);
 }
-
-// have to be able to check signals!!!

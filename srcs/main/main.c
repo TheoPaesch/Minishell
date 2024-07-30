@@ -75,7 +75,6 @@ int	main(int ac, char **av, char **envp)
 	return (shell.last_exit_code);
 }
 
-// have to return input so I take the delimiter from the input and then pass the rest
 // have to check that export with no env still creates env
 // if (ac > 1 && av[1] != NULL)
 // 	printf("minishell: no arguments needed\n");

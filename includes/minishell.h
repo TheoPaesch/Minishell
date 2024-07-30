@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/30 00:11:34 by tpaesch          ###   ########.fr       */
+/*   Created: 2024/07/12 16:36:38 by tpaesch           #+#    #+#             */
+/*   Updated: 2024/07/30 16:19:50 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,10 +218,6 @@ bool			count_in_single(char *eof, int *i, int *amount);
 bool			count_in_double(char *eof, int *i, int *amount);
 int				output_quotes(char *input, char *output);
 void			handle_sigint_heredoc(int sig);
-
-
-
-
 
 /* -------------------------------- Expander -------------------------------- */
 int				check_valid_quotes(char *str);
