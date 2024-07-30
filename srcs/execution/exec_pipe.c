@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:22 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/29 19:56:27 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:00:50 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,23 @@ inline void	exec_pipe_right(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd)
 
 void	exec_pipe(t_cmd *cmd)
 {
-	t_program	*shell;
-	t_pipe_cmd	*exec_pipe;
-	int			pipes[2];
-	pid_t		pid1;
-	pid_t		pid2;
-	int			stat_pid1;
-	int			stat_pid2;
-	int			exit_status;
+	t_pipe_vars	v;
 
-	exit_status = 0;
-	shell = get_shell();
-	exec_pipe = (t_pipe_cmd *)cmd;
-	safe_pipe(pipes);
-	pid1 = safe_fork();
-	exec_pipe_left(pid1, &pipes, exec_pipe);
-	pid2 = safe_fork();
-	exec_pipe_right(pid2, &pipes, exec_pipe);
-	close(pipes[0]);
-	close(pipes[1]);
-	waitpid(pid1, &stat_pid1, 0); // WNOHANG |
-	waitpid(pid2, &stat_pid2, 0);
-	if (WIFEXITED(stat_pid1))
-		shell->last_exit_code = WEXITSTATUS(stat_pid1);
-	if (WIFEXITED(stat_pid2))
-		shell->last_exit_code = WEXITSTATUS(stat_pid2);
+	v.shell = get_shell();
+	v.exec_pipe = (t_pipe_cmd *)cmd;
+	safe_pipe(v.pipes);
+	v.pid1 = safe_fork();
+	exec_pipe_left(v.pid1, &v.pipes, v.exec_pipe);
+	v.pid2 = safe_fork();
+	exec_pipe_right(v.pid2, &v.pipes, v.exec_pipe);
+	close(v.pipes[0]);
+	close(v.pipes[1]);
+	waitpid(v.pid1, &v.stat_pid1, 0);
+	waitpid(v.pid2, &v.stat_pid2, 0);
+	if (WIFEXITED(v.stat_pid1))
+		v.shell->last_exit_code = WEXITSTATUS(v.stat_pid1);
+	if (WIFEXITED(v.stat_pid2))
+		v.shell->last_exit_code = WEXITSTATUS(v.stat_pid2);
 	if ((get_shell())->isatty == false)
-		ms_exit(shell->last_exit_code);
+		ms_exit(v.shell->last_exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/28 23:20:31 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:57:36 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	errno_to_exitcode(int err)
 		return (131);
 	if (err == 0)
 		return (0);
-	return (0); // AHHHH FIX THIS
+	return (0);
 }
 
 void	set_exit_code(int status)

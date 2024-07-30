@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_panic.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/30 15:08:02 by mstrauss          #+#    #+#             */
+/*   Updated: 2024/07/30 15:08:18 by mstrauss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft.h"
 #include "../minishell.h"
 
@@ -14,8 +26,8 @@ void	ft_set_errno(int exit_stat)
 {
 	if (exit_stat == 1)
 		errno = ENOMEM;
-	// add additional exit_stats using 'else if'
 }
+// add additional exit_stats using 'else if'
 
 /*
 OUR OWN CODES
@@ -26,7 +38,6 @@ OUR OWN CODES
 4	=	EXEC_FAILURE
 5	=
 6	=
-
 */
 
 /*

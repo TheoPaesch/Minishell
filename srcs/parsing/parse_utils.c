@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/28 19:35:34 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:18:39 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ t_cmd	*parse_cmd(char *str)
 	nullterm(cmd);
 	return (cmd);
 }
+
+/*
+ATTENTION:
+Due to the way the subject is formulated, it seems as if handling
+lists and background execution is EXPLICITLY FORBIDDEN.
+So we removed it.
+Clarification in the subject would be appreciated.
+
+*/
 
 t_cmd	*parse_line(char **ptr_str, char *end_str)
 {

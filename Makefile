@@ -31,6 +31,7 @@ SRC = env_exp_utils.c \
 	  constructors.c \
 	  echo.c \
 	  env.c \
+	  error_funcs.c \
 	  execute.c \
 	  exec_pipe.c \
 	  expander.c \

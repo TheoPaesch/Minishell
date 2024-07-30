@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/28 23:18:29 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:16:16 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,6 @@ int	export_builtin(t_cmd *cmd)
 	return (errno);
 }
 
-void	print_err(char *str)
-{
-	if (errno != 0)
-	{
-		ft_putstr_fd("bash: ", 2);
-		ft_putstr_fd(str, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putchar_fd('\n', 2);
-	}
-}
-
-// maybe add '+=' case
 int	expo_verify_arg(char *arg)
 {
 	if (!ft_isalpha(*arg) && *arg != '_')

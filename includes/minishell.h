@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/29 23:50:54 by tpaesch          ###   ########.fr       */
+/*   Created: 2024/07/30 15:07:01 by mstrauss          #+#    #+#             */
+/*   Updated: 2024/07/30 17:35:58 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,18 @@ typedef struct s_parse_redir_vars
 	int			type;
 }				t_parse_redir_vars;
 
+typedef struct s_pipe_vars
+{
+	t_program	*shell;
+	t_pipe_cmd	*exec_pipe;
+	int			pipes[2];
+	pid_t		pid1;
+	pid_t		pid2;
+	int			stat_pid1;
+	int			stat_pid2;
+
+}				t_pipe_vars;
+
 typedef struct s_heredoc
 {
 	char		*delim;
@@ -170,7 +182,8 @@ void			splash_screen(t_program *shell);
 bool			check_key(t_list *tmp, char *key);
 void			update_dir(t_list **env, t_list **expo, char *new, char *old);
 void			restore_fds(t_program *shell);
-
+void			cd_print_err(char *str);
+void			print_err_unset(char *str);
 /* --------------------------------- Quotes --------------------------------- */
 void			gt_handle_quote(char **tmp, char *end_str, int *return_val);
 void			gt_handle_redir(char **tmp, int *return_val);
@@ -185,7 +198,6 @@ void			ms_exit(int code);
 int				unset_builtin(t_cmd *cmd);
 void			unset_both(t_list **env, t_list **expo, char *key);
 void			unset_one(t_list **lst, char *key);
-int				unset_verify_key(char *key);
 int				export_builtin(t_cmd *cmd);
 int				expo_verify_arg(char *arg);
 int				env_builtin(t_cmd *cmd);

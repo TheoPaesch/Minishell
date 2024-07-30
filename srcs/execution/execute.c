@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/29 22:21:01 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:01:10 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	execute_cmd(t_cmd *cmd)
 		exec_pipe(cmd);
 	else if (cmd->type == BACK)
 		exec_back(cmd);
-	// ft_debug_msg("execute_cmd is exiting the shell");
-	// if ()
-	// exit(100); // are we already in a subprocess? if yes exit
-	// otherwise no. FIX!!!!
 }
+// ft_debug_msg("execute_cmd is exiting the shell");
+// if ()
+// exit(100); // are we already in a subprocess? if yes exit
+// otherwise no. FIX!!!!
 
 void	exec_exec(t_cmd *cmd)
 {
