@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:47:44 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/30 00:12:03 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/30 20:34:34 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	def_arg_len(char *eof, t_heredoc *hrdc)
 				return (-1);
 		if (eof[i] == '<' && eof[i + 1] == '<')
 			break ;
-		if (ft_strchr("() |$;>", eof[i]))
+		if (ft_strchr("() |;>", eof[i]))
 			break ;
 		if (eof[i] != '\0')
 			i++;

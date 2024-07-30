@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/28 23:18:29 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:27:21 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ void	export_execution(t_list **env, t_list **expo, char *key, char *value)
 		add_export(env, expo, key, value);
 }
 
+int	set_errno_export(char *arg)
+{
+	if (arg[0] == '-')
+		return (2);
+	return (1);
+}
+
 /*export buildin checks if there are arguments
 	to export and executes them in order*/
 
@@ -88,9 +95,7 @@ int	export_builtin(t_cmd *cmd)
 	{
 		if (!expo_verify_arg(args[i]))
 		{
-			errno = 1; // set errno here for illegal arg
-			if (*args[i] == '-')
-				errno = 2;
+			errno = set_errno_export(args[i]);
 			print_err(args[i++]);
 			continue ;
 		}
@@ -99,34 +104,4 @@ int	export_builtin(t_cmd *cmd)
 		export_execution(&shell->env, &shell->expo, key, value);
 	}
 	return (errno);
-}
-
-void	print_err(char *str)
-{
-	if (errno != 0)
-	{
-		ft_putstr_fd("bash: ", 2);
-		ft_putstr_fd(str, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putchar_fd('\n', 2);
-	}
-}
-
-// maybe add '+=' case
-int	expo_verify_arg(char *arg)
-{
-	if (!ft_isalpha(*arg) && *arg != '_')
-		return (0);
-	while (*arg && (ft_isalnum(*arg) || *arg == '_'))
-		arg++;
-	if (*arg == '\0')
-		return (1);
-	if (*arg && *arg == '=' && (ft_isprint_no_space((*(arg + 1))) || *(arg
-				+ 1) == '\0'))
-		return (1);
-	if (*arg && *arg == '+' && *(arg + 1) && *(arg + 1) == '='
-		&& (ft_isprint_no_space((*(arg + 2))) || *(arg + 2) == '\0'))
-		return (1);
-	return (0);
 }
