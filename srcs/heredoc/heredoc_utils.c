@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/30 21:24:01 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 22:36:30 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	p_err(int i)
 
 bool	hrdc_line_check(char *line, t_heredoc *hrdc)
 {
-	if (line == NULL || *line == '\n')
+	if (line == NULL)
 		return (1);
 	else if (ft_strcmp(line, hrdc->delim) == 0)
 		return (1);

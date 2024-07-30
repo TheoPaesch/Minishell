@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:52:19 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/30 21:54:00 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 22:30:48 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # define MAXARGS 255
 # define MAX_STR_LEN 2048
 
-extern volatile sig_atomic_t g_sig_break ;
+extern volatile sig_atomic_t	g_sig_break;
 
 typedef struct s_token
 {
@@ -246,7 +246,7 @@ int				check_valid_quotes(char *str);
 // move to lexer?
 void			expand(t_exec_cmd *exec_cmd);
 char			*expand_tilde(char **ptr);
-void			expand_tilde_helper(t_list *env, char *exp_str);
+void			expand_tilde_helper(t_list *env, char **exp_str);
 char			*expand_exit_stat(void);
 char			*expand_var(char **str);
 char			*expand_word(char **start, char **end, int *type);

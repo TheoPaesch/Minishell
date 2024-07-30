@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/30 21:29:25 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 23:18:21 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,18 @@ char	*heredoc_scan(char *input, t_heredoc *hrdc)
 
 void	heredoc_loop(t_heredoc *hrdc)
 {
-	char	*line;
-	int		fd;
+	char		*line;
+	int			fd;
+	t_program	*shell;
 
 	set_heredoc_signal();
 	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, 0644);
+	shell = get_shell();
 	while (1)
 	{
 		if (g_sig_break)
 			break ;
-		if (get_shell()->isatty)
+		if (shell->isatty)
 			line = readline("> ");
 		else
 		{
@@ -118,14 +120,12 @@ void	heredoc_loop(t_heredoc *hrdc)
 				close(fd);
 			else
 				p_err(1);
-			line = ft_free(line);
+			ft_free(line);
 			break ;
 		}
 		if (line != NULL)
-		{
 			write(fd, line, ft_strlen(line));
-			write(fd, "\n", 1);
-		}
+		write(fd, "\n", 1);
 		line = ft_free(line);
 	}
 	close(fd);

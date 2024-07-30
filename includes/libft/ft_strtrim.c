@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:30:39 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/17 16:07:54 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 22:51:38 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = 0;
 	j = 0;
 	trim_beg = 0;
+	if (!s1)
+		return (NULL);
 	if (!*s1)
 		return (ft_calloc(1, 1));
 	while (set[j] && s1[i])
