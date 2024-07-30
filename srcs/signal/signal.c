@@ -3,22 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:29:08 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/25 18:43:39 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:21:01 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*for ctrl + c*/
-
-void	handle_sigint(int sig)
+void	set_heredoc_signal(void)
 {
-	(void)sig;
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	set_signal_handler(SIGINT, heredoc_signal);
+	set_signal_handler(SIGQUIT, SIG_IGN);
+}
+
+void	set_normal_signal(void)
+{
+	set_signal_handler(SIGINT, handle_sigint);
+	set_signal_handler(SIGQUIT, SIG_IGN);
+	g_sig_break = 0;
+}
+
+void	signals_init(void)
+{
+	rl_catch_signals = 0;
+	set_normal_signal();
 }

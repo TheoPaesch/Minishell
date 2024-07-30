@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/29 23:49:44 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/30 16:18:22 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_txt(t_heredoc *hrdc)
 	while (1)
 	{
 		c = ft_itoa(i);
-		tmp = ft_strjoin("heredoc", c);
+		tmp = ft_strjoin("tmp/heredoc", c);
 		hrdc->file = ft_strjoin(tmp, ".txt");
 		if (access(hrdc->file, F_OK) == 0)
 		{
@@ -35,14 +35,6 @@ void	get_txt(t_heredoc *hrdc)
 	}
 	tmp = ft_free(tmp);
 }
-
-// HINT: use unlink() to
-// void	get_txt(t_heredoc *hrdc)
-// {
-// 	static int	i = 1;
-
-// 	return (ft_strjoinall("/tmp/heredoc", ft_itoa(i++), ".txt"));
-// }
 
 char	*adjust_output(t_heredoc *hrdc, char *input)
 {
@@ -95,6 +87,7 @@ char	*heredoc_scan(char *input, t_heredoc *hrdc)
 		}
 		i++;
 	}
+	set_normal_signal();
 	return (hrdc->out);
 }
 
@@ -104,12 +97,13 @@ void	heredoc_loop(t_heredoc *hrdc)
 	int			fd;
 	t_program	*shell;
 
-	signal(SIGINT, handle_sigint);
+	set_heredoc_signal();
 	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, 0644);
-	// keep at 0644 for max permissions
 	shell = get_shell();
 	while (1)
 	{
+		if (g_sig_break)
+			break ;
 		if (shell->isatty)
 			line = readline("> ");
 		else
@@ -118,7 +112,7 @@ void	heredoc_loop(t_heredoc *hrdc)
 			if (line != NULL)
 				line = ft_strtrim(line, "\n");
 		}
-		if (line == NULL)
+		if (line == NULL || g_sig_break)
 			return (close(fd), free(line));
 		if (fd == -1 || hrdc_line_check(line, hrdc))
 		{
@@ -151,7 +145,6 @@ char	*heredoc_base(char *input)
 		i += in_quotes(&input[i]);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
-			out = NULL;
 			out = heredoc_scan(input, hrdc);
 			if (out == NULL || out[0] == '\0')
 				return (NULL);
@@ -166,5 +159,3 @@ char	*heredoc_base(char *input)
 	}
 	return (out);
 }
-
-// have to be able to check signals!!!

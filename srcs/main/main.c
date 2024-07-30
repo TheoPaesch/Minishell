@@ -7,11 +7,13 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/28 00:16:26 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/29 23:13:48 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+volatile sig_atomic_t	g_sig_break = 0;
 
 void	null_shell(t_program *shell)
 {
@@ -51,7 +53,8 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	fill_program(&shell, envp);
 	splash_screen(&shell);
-	signal(SIGINT, handle_sigint);
+	signals_init();
+	g_sig_break = 0;
 	while (1)
 	{
 		input = read_input(&shell);
@@ -66,17 +69,12 @@ int	main(int ac, char **av, char **envp)
 		// input = early_expand(input);
 		// printf("post expansion: %s\n", input);
 		if (input != NULL)
-		{
-			// sinput = early_expand(input);
 			execute_cmd(print_tree(parse_cmd(ft_strdup(input))));
-		}
 		input = ft_free(input);
 	}
 	return (shell.last_exit_code);
-	
 }
 
-// have to return input so I take the delimiter from the input and then pass the rest
 // have to check that export with no env still creates env
 // if (ac > 1 && av[1] != NULL)
 // 	printf("minishell: no arguments needed\n");
@@ -86,7 +84,7 @@ char	*early_expand(char *input)
 	char	*output;
 	char	*start;
 
-	if (input == NULL)
+	if (!input)
 		return (NULL);
 	output = ft_calloc(sizeof(char), MAX_STR_LEN);
 	start = output;
