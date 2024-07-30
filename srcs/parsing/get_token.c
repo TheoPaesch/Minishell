@@ -1,9 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_token.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/30 20:39:39 by mstrauss          #+#    #+#             */
+/*   Updated: 2024/07/30 20:45:09 by mstrauss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
-/*
-IDEAS:
-- while iterating over word, use ft_isalnum instead?
-*/
+static void	gt_process_token(int *return_val, char **tmp, char *end_str)
+{
+	{
+		*return_val = 'x';
+		while (*tmp < end_str && !ft_strchr(" \t\r\n\v<|>&;()", **tmp))
+		{
+			if (**tmp == '\'' || **tmp == '\"')
+				gt_handle_quote(tmp, end_str, return_val);
+			(*tmp)++;
+		}
+	}
+}
 
 /// @brief Parses the Input, optional pointers for the start and end of a
 /// token can be returned by passing appropriate pointers. Pass NULL if
@@ -35,15 +55,7 @@ int	get_token(char **ptr_str, char *end_str, char **quote, char **end_quote)
 	else if (*tmp == '>')
 		gt_handle_redir(&tmp, &return_val);
 	else
-	{
-		return_val = 'x';
-		while (tmp < end_str && !ft_strchr(" \t\r\n\v<|>&;()", *tmp))
-		{
-			if (*tmp == '\'' || *tmp == '\"')
-				gt_handle_quote(&tmp, end_str, &return_val);
-			tmp++;
-		}
-	}
+		gt_process_token(&return_val, &tmp, end_str);
 	if (end_quote)
 		*end_quote = tmp;
 	while (tmp < end_str && ft_strchr(" \t\r\n\v", *tmp))
@@ -79,19 +91,3 @@ void	gt_handle_redir(char **tmp, int *return_val)
 		(*tmp)++;
 	}
 }
-
-// int	get_token_redir(char *tmp)
-// {
-// 	if (*tmp == '>')
-// 	{
-// 		tmp++;
-// 		if (*tmp == '>')
-// 		{
-// 			return_val = '+';
-// 			tmp++;
-// 		}
-// 	}
-
-// }
-
-// echo hallo &&

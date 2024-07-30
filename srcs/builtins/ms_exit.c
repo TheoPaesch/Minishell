@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/30 16:57:36 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:54:32 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	exit_builtin(t_cmd *cmd)
 			return (1);
 		}
 		tmp = ft_atoi(args[1]);
-		// tmp = ft_atod(args[1]);
 		// add atod to libft for exit 9223372036854775807 testcase (%256 = 255)
 		tmp = tmp % 256;
 		shell->last_exit_code = tmp;

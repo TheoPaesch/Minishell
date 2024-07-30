@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:43:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/23 18:39:30 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:22:53 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strjoinall(int count, int del, ...);
 size_t				ft_strcspn(const char *str1, const char *str2);
 size_t				ft_strspn(const char *str1, const char *str2);
+char				*ft_strtok(char *str, const char *delimiters);
 
 /* ------------------------------- LINKED LIST ------------------------------ */
 

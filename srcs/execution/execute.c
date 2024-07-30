@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/30 18:01:10 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:55:28 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	exec_exec(t_cmd *cmd)
 
 // fix for theos early exit
 // just add fork b4 redir
+// POSSIBILITY TO ADD MORE ERROR HANDLING????
 void	exec_redir(t_cmd *cmd)
 {
 	t_redir_cmd	*exec_redir;
@@ -71,7 +72,6 @@ void	exec_redir(t_cmd *cmd)
 	exec_redir = (t_redir_cmd *)cmd;
 	close(exec_redir->fd);
 	if (open(exec_redir->file, exec_redir->mode, 0644) < 0)
-	// CONTINUE HERE
 	{
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(exec_redir->file, 2);

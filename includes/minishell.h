@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/07/30 18:23:12 by mstrauss         ###   ########.fr       */
+/*   Created: 2024/07/30 20:52:19 by mstrauss          #+#    #+#             */
+/*   Updated: 2024/07/30 21:54:00 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@
 
 # define MAXARGS 255
 # define MAX_STR_LEN 2048
+
+extern volatile sig_atomic_t g_sig_break ;
 
 typedef struct s_token
 {
@@ -163,6 +165,7 @@ typedef struct s_heredoc
 }				t_heredoc;
 
 /* ---------------------------------- DEBUG --------------------------------- */
+
 t_cmd			*print_tree(t_cmd *root);
 t_cmd			*print_tree_util(t_cmd *node, int space);
 void			process_and_print_node(t_cmd *node, int space);
@@ -172,6 +175,7 @@ const char		*get_node_type_str(int type);
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
+
 char			*get_path(char *executable);
 char			*path_cwd_fallback(char *executable);
 int				get_token(char **ptr_str, char *end_str, char **quote,
@@ -185,8 +189,8 @@ void			restore_fds(t_program *shell);
 void			cd_print_err(char *str);
 void			print_err_unset(char *str);
 
-/* --------------------------------- Siganl --------------------------------- */
-extern volatile sig_atomic_t g_sig_break ;
+/* --------------------------------- Signal --------------------------------- */
+
 void			set_signal_handler(int signum, void (*handler)(int));
 void			handle_sigint(int sig);
 void			set_normal_signal(void);
@@ -195,11 +199,13 @@ void			set_heredoc_signal(void);
 void			signals_init(void);
 
 /* --------------------------------- Quotes --------------------------------- */
+
 void			gt_handle_quote(char **tmp, char *end_str, int *return_val);
 void			gt_handle_redir(char **tmp, int *return_val);
 char			*parse_quotes(char **quote, char **end_quote, int *type);
 
 /* -------------------------------- Builtins -------------------------------- */
+
 int				cd_builtin(t_cmd *cmd);
 void			print_env(t_list *env);
 void			print_export(t_list *expo);
@@ -217,6 +223,7 @@ int				calc_exit_code(int code);
 int				pwd_builtin(t_cmd *cmd);
 
 /* -------------------------------- Heredoc --------------------------------- */
+
 char			*arg_check(char *eof, t_heredoc *hrdc);
 int				def_arg_len(char *eof, t_heredoc *hrdc);
 char			*in_none(char *input, int len);
@@ -234,10 +241,12 @@ int				output_quotes(char *input, char *output);
 void			handle_sigint_heredoc(int sig);
 
 /* -------------------------------- Expander -------------------------------- */
+
 int				check_valid_quotes(char *str);
 // move to lexer?
 void			expand(t_exec_cmd *exec_cmd);
 char			*expand_tilde(char **ptr);
+void			expand_tilde_helper(t_list *env, char *exp_str);
 char			*expand_exit_stat(void);
 char			*expand_var(char **str);
 char			*expand_word(char **start, char **end, int *type);
@@ -246,6 +255,7 @@ char			*early_expand(char *input);
 void			copy_through_pair(char **output, char **input, char sym);
 
 /* ----------------------------- Error Handling ----------------------------- */
+
 void			set_exit_code(int status);
 void			print_err(char *str);
 // void			ft_panic(char *err_msg, int exit_stat);
@@ -253,12 +263,14 @@ void			print_err(char *str);
 void			p_err(int i);
 
 /* ---------------------------------- Pipes --------------------------------- */
+
 void			exec_pipe_left(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd);
 void			exec_pipe_right(pid_t pid, int (*pipes)[2], t_pipe_cmd *p_cmd);
 pid_t			safe_fork(void);
 void			safe_pipe(int pipefd[2]);
 
 /* -------------------------------- Get Input ------------------------------- */
+
 void			empty_env(void);
 void			fill_program(t_program *shell, char **envp);
 void			get_input(char **envp, t_list **env, t_list **expo);
@@ -271,6 +283,7 @@ t_list			**get_mem_lst(void);
 t_list			*new_list(void);
 
 /* -------------------------------- Execution ------------------------------- */
+
 void			add_env(t_list **env, char *key, char *value);
 void			add_export(t_list **env, t_list **expo, char *key, char *value);
 void			change_value_both(t_list *expo, t_list *env, char *key,
@@ -288,11 +301,12 @@ t_list			*pre_pointer(t_list *env, char *key);
 /* ------------------------- Join Commands and ARGs ------------------------- */
 
 /* ------------------------------ Tokenization ------------------------------ */
+
 int				get_token(char **ptr_str, char *end_str, char **quote,
 					char **end_quote);
-// char			*ft_strtok(char *str, const char *delimiters);
 
 /* --------------------------------- Parsing -------------------------------- */
+
 t_cmd			*init_back_cmd(t_cmd *sub_cmd);
 t_cmd			*list_cmd(t_cmd *left, t_cmd *right);
 t_cmd			*init_exec_cmd(void);

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/27 22:27:18 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/30 21:24:01 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 char	*arg_check(char *eof, t_heredoc *hrdc)
 {
@@ -38,7 +37,7 @@ void	p_err(int i)
 
 bool	hrdc_line_check(char *line, t_heredoc *hrdc)
 {
-	if (line == NULL)
+	if (line == NULL || *line == '\n')
 		return (1);
 	else if (ft_strcmp(line, hrdc->delim) == 0)
 		return (1);

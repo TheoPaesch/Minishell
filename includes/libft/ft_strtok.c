@@ -6,11 +6,11 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:51:09 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/05/13 20:24:22 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:31:22 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../libft.h"
 
 /// @brief A sequence of calls to this function split str into tokens,
 /// which are sequences of contiguous characters separated by

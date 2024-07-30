@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/30 17:16:16 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:34:16 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ int	export_builtin(t_cmd *cmd)
 {
 	t_program	*shell;
 	int			i;
-	char		*key;
-	char		*value;
 	char		**args;
 
 	errno = 0;
@@ -88,15 +86,15 @@ int	export_builtin(t_cmd *cmd)
 	{
 		if (!expo_verify_arg(args[i]))
 		{
-			errno = 1; // set errno here for illegal arg
+			errno = 1;
 			if (*args[i] == '-')
 				errno = 2;
 			print_err(args[i++]);
 			continue ;
 		}
-		key = get_key(args[i]);
-		value = get_value(args[i++]);
-		export_execution(&shell->env, &shell->expo, key, value);
+		export_execution(&shell->env, &shell->expo, get_key(args[i]),
+			get_value(args[i]));
+		i++;
 	}
 	return (errno);
 }
