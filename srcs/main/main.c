@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:34:37 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/30 20:45:28 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 19:09:11 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	fill_program(&shell, envp);
-	splash_screen(&shell);
+	if (isatty(fileno(stdin)))
+		splash_screen(&shell);
 	signals_init();
 	g_sig_break = 0;
 	while (1)

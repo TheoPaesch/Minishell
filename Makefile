@@ -20,7 +20,8 @@ SRC_DIRS =	./srcs \
 			./srcs/prompt \
 			./srcs/signal \
 			./srcs/tokenizer \
-			./srcs/heredoc
+			./srcs/heredoc \
+			./tmp
 
 vpath %.c $(SRC_DIRS)
 vpath %.h includes
@@ -60,7 +61,9 @@ SRC = env_exp_utils.c \
 	  heredoc_utils_for_len.c \
 	  print_bin_tree.c \
 	  signal_utils.c \
-	  heredoc_output.c
+	  heredoc_output.c \
+	  parse_quotes.c \
+	  parse_exec.c
 
 HEADERS = minishell.h
 
