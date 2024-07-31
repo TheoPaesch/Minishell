@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/31 12:14:12 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:50:01 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,14 +233,6 @@ char	*parse_quotes(char **quote, char **end_quote)
 	return (v.start_rtrn);
 }
 
-// && ft_isalnum(*(tmp_ptr + 1))
-
-// if (quote)
-// 	*quote = tmp_ptr;
-
-// if (end_quote)
-// 	*end_quote = tmp_ptr;
-
 t_cmd	*parse_block(char **ptr_str, char *end_str)
 {
 	t_cmd	*cmd;
@@ -257,6 +249,28 @@ t_cmd	*parse_block(char **ptr_str, char *end_str)
 }
 
 // '+' is >>
+/**
+ * Finds and
+ *
+
+	* @param cmd A pointer to the `t_cmd` structure to be updated with redirection information.
+
+	* @param ptr_str A pointer to a pointer to the current position in the string being parsed. This pointer is updated as the
+ *                function scans through the string.
+
+	* @param end_str A pointer to the end of the string being parsed. This is used to ensure the function does not read beyond
+ *                the bounds of the string.
+
+	* @return Returns the updated `t_cmd` structure with the redirection information included. If no redirection symbols are found,
+ *         the original `cmd` structure is returned unchanged.
+ *
+
+	* Note: The function uses a `t_parse_redir_vars` structure internally to store temporary variables needed for parsing.
+
+	*       The `init_redir_cmd` function is called to initialize redirection commands within the `cmd` structure.
+ *       Redirection for input ('<') sets the file descriptor (`fd`) to 0,
+	while output ('>' and '+') sets it to 1.
+ */
 t_cmd	*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str)
 {
 	t_parse_redir_vars	v;
