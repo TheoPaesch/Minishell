@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/31 16:45:26 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/31 16:50:08 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,8 @@ void	exec_exec(t_cmd *cmd)
 	char		*tmp;
 
 	exec_cmd = (t_exec_cmd *)cmd;
-	// if (!validate_exec_table())
-	// {
 	if (exec_cmd->argv[0] && is_builtin(exec_cmd))
 		return (exec_builtin(cmd));
-	// printf("%s\n", exec_cmd->argv[0]);
 	pid = safe_fork();
 	if (pid == 0)
 	{
@@ -52,7 +49,6 @@ void	exec_exec(t_cmd *cmd)
 		if (tmp)
 			execve(tmp, exec_cmd->argv, NULL);
 		get_shell()->last_exit_code = 127;
-		// printf("errno: %d\n", errno);
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(exec_cmd->argv[0], 2);
 		ft_putstr_fd(": command not found \n", 2);
@@ -60,7 +56,6 @@ void	exec_exec(t_cmd *cmd)
 	}
 	waitpid(pid, &status, 0);
 	set_exit_code(WEXITSTATUS(status));
-	// }
 	if ((get_shell())->isatty == false)
 		ms_exit((get_shell())->last_exit_code);
 }
