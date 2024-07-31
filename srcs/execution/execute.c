@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/31 15:10:49 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:45:26 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	exec_exec(t_cmd *cmd)
 	t_exec_cmd	*exec_cmd;
 	pid_t		pid;
 	int			status;
+	char		*tmp;
 
 	exec_cmd = (t_exec_cmd *)cmd;
 	// if (!validate_exec_table())
@@ -47,14 +48,14 @@ void	exec_exec(t_cmd *cmd)
 	pid = safe_fork();
 	if (pid == 0)
 	{
-		execve(get_path(exec_cmd->argv[0]), exec_cmd->argv, NULL);
+		tmp = get_path(exec_cmd->argv[0]);
+		if (tmp)
+			execve(tmp, exec_cmd->argv, NULL);
+		get_shell()->last_exit_code = 127;
 		// printf("errno: %d\n", errno);
-		// errno = 127;
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(exec_cmd->argv[0], 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putchar_fd('\n', 2);
+		ft_putstr_fd(": command not found \n", 2);
 		ms_exit(127);
 	}
 	waitpid(pid, &status, 0);

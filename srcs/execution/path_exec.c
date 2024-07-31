@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/31 14:37:31 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:35:24 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ char	*get_path(char *executable)
 		return (executable);
 	i = 0;
 	tmp = *env_lst;
-	while (tmp->data != NULL && ft_strcmp(((t_env *)(tmp->data))->key, "PATH"))
+	while (tmp && tmp->data != NULL && ft_strcmp(((t_env *)(tmp->data))->key, "PATH"))
 		tmp = tmp->next;
+	if (tmp == NULL)
+		return (NULL);
 	folders = ft_split(((t_env *)(tmp->data))->value, ':');
 	while (folders[i])
 	{
