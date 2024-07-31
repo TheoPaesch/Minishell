@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:29:08 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/29 22:21:01 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/31 12:45:56 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,10 @@ void	signals_init(void)
 {
 	rl_catch_signals = 0;
 	set_normal_signal();
+}
+
+void	set_exec_signal(void)
+{
+	signal(SIGINT, exec_signal);
+	signal(SIGQUIT, exec_signal);
 }

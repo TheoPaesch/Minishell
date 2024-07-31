@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:50:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/28 00:08:19 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:35:14 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_value(char *str)
 	while (str[i] != '=' && str[i] != '\0')
 		i++;
 	if (str[i] == '\0')
-		return (ft_strdup(""));
+		return (NULL);
 	i++;
 	j = i;
 	while (str[j] != '\0')
@@ -91,7 +91,7 @@ void	get_input(char **envp, t_list **env, t_list **expo)
 		data2->key = get_key(envp[i]);
 		data1->value = get_value(envp[i]);
 		data2->value = get_value(envp[i]);
-		if (data1->value[0] != '\0')
+		if (data1->value)
 			ft_lstadd_back(env, ft_lstnew(data1));
 		ft_lstadd_back(expo, ft_lstnew(data2));
 		i++;
