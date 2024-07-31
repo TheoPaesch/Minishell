@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:52:19 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/31 12:48:14 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/31 14:45:26 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # define MAXARGS 255
 # define MAX_STR_LEN 2048
 
-extern volatile sig_atomic_t	g_sig_break;
+extern volatile sig_atomic_t g_sig_break ;
 
 typedef struct s_token
 {
@@ -125,6 +125,15 @@ typedef struct s_back_cmd
 }				t_back_cmd;
 
 /* --------------------------------- Helpers -------------------------------- */
+
+typedef struct s_parse_quotes_vars
+{
+	char		*tmp_ptr;
+	char		*return_value;
+	char		*start_rtrn;
+	bool		in_single_quote;
+	bool		in_double_quote;
+}				t_parse_quotes_vars;
 
 typedef struct s_parse_exec_vars
 {
@@ -204,7 +213,7 @@ void			set_exec_signal(void);
 
 void			gt_handle_quote(char **tmp, char *end_str, int *return_val);
 void			gt_handle_redir(char **tmp, int *return_val);
-char			*parse_quotes(char **quote, char **end_quote, int *type);
+char			*parse_quotes(char **quote, char **end_quote);
 
 /* -------------------------------- Builtins -------------------------------- */
 
@@ -241,6 +250,8 @@ bool			count_in_single(char *eof, int *i, int *amount);
 bool			count_in_double(char *eof, int *i, int *amount);
 int				output_quotes(char *input, char *output);
 void			handle_sigint_heredoc(int sig);
+void			hd_loop_nontty(t_heredoc *hrdc, char *line, int fd);
+void			hd_loop_tty(t_heredoc *hrdc, char *line, int fd);
 
 /* -------------------------------- Expander -------------------------------- */
 
