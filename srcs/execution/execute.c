@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/30 20:55:28 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:48:35 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	execute_cmd(t_cmd *cmd)
 {
+	set_exec_signal();
 	if (cmd->type == EXEC)
 		exec_exec(cmd);
 	else if (cmd->type == REDIR)
@@ -24,6 +25,7 @@ void	execute_cmd(t_cmd *cmd)
 		exec_pipe(cmd);
 	else if (cmd->type == BACK)
 		exec_back(cmd);
+	set_normal_signal();
 }
 // ft_debug_msg("execute_cmd is exiting the shell");
 // if ()

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:50:04 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/30 20:34:16 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:53:55 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,13 @@ void	export_execution(t_list **env, t_list **expo, char *key, char *value)
 	{
 		if (value == NULL)
 			return (free(key));
-		if (check_key(*env, key))
-			change_value_both(*expo, *env, key, value);
-		else
+		if (!check_key(*env, key))
+		{
 			add_env(env, key, value);
+			change_value_both(*expo, *env, key, value);
+		}
+		else
+			change_value_both(*expo, *env, key, value);
 	}
 	else
 		add_export(env, expo, key, value);

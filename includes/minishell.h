@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:52:19 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/30 22:30:48 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:48:14 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,8 @@ void			set_normal_signal(void);
 void			heredoc_signal(int sig);
 void			set_heredoc_signal(void);
 void			signals_init(void);
+void			exec_signal(int sig);
+void			set_exec_signal(void);
 
 /* --------------------------------- Quotes --------------------------------- */
 

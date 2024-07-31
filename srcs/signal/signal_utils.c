@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 21:28:43 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/30 19:21:56 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:46:17 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,12 @@ void	heredoc_signal(int sig)
 	rl_done = 1;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	get_shell()->last_exit_code = 1;
+}
+
+void	exec_signal(int sig)
+{
+	if (sig == SIGINT)
+		ft_putstr_fd("\n", STDOUT_FILENO);
+	else if (sig == SIGQUIT)
+		ft_putstr_fd("QUIT\n", STDOUT_FILENO);
 }
