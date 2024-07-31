@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/30 23:18:21 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:12:43 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,35 +100,65 @@ void	heredoc_loop(t_heredoc *hrdc)
 	set_heredoc_signal();
 	fd = open(hrdc->file, O_RDWR | O_CREAT | O_APPEND, 0644);
 	shell = get_shell();
-	while (1)
+	line = NULL;
+	if (shell->isatty)
+		hd_loop_tty(hrdc, line, fd);
+	else
+		hd_loop_nontty(hrdc, line, fd);
+	close(fd);
+	line = ft_free(line);
+}
+
+void	hd_loop_tty(t_heredoc *hrdc, char *line, int fd)
+{
+	// bool	first_write;
+	// first_write = true;
+	if (fd == -1)
+		p_err(1);
+	while (g_sig_break == 0)
 	{
-		if (g_sig_break)
-			break ;
-		if (shell->isatty)
-			line = readline("> ");
-		else
-		{
-			line = get_next_line(STDIN_FILENO);
-			if (line != NULL)
-				line = ft_strtrim(line, "\n");
-		}
+		line = readline("> ");
 		if (line == NULL || g_sig_break)
-			return (close(fd), ft_free(line), free(NULL));
-		if (fd == -1 || hrdc_line_check(line, hrdc))
-		{
-			if (hrdc_line_check(line, hrdc))
-				close(fd);
-			else
-				p_err(1);
-			ft_free(line);
-			break ;
-		}
+			return ;
+		if (hrdc_line_check(line, hrdc))
+			return ;
 		if (line != NULL)
+		{
+			// if (first_write == false)
+			// write(fd, "\n", 1);
 			write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
+			write(fd, "\n", 1);
+			// first_write = false;
+		}
 		line = ft_free(line);
 	}
-	close(fd);
+}
+
+void	hd_loop_nontty(t_heredoc *hrdc, char *line, int fd)
+{
+	// bool	first_write;
+	// first_write = true;
+	if (fd == -1)
+		p_err(1);
+	while (g_sig_break == 0)
+	{
+		line = get_next_line(STDIN_FILENO);
+		if (line != NULL)
+			line = ft_strtrim(line, "\n");
+		if (line == NULL || g_sig_break)
+			return ;
+		if (hrdc_line_check(line, hrdc))
+			return ;
+		if (line != NULL)
+		{
+			// if (first_write == false)
+			// write(fd, "\n", 1);
+			write(fd, line, ft_strlen(line));
+			write(fd, "\n", 1);
+			// first_write = false;
+		}
+		line = ft_free(line);
+	}
 }
 
 char	*heredoc_base(char *input)

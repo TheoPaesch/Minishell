@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/30 18:18:39 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:14:12 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 		if (v.type == 0)
 			break ;
 		if (v.type == '"' || v.type == '\'')
-			parse_quotes(&v.quote, &v.end_quote, &v.type);
+			parse_quotes(&v.quote, &v.end_quote);
 		if (!(v.type == 'x' || v.type == '"' || v.type == '\''))
 			ft_panic("get_token returned UNKNOWN type", 100);
 		if (v.type == 'x')
@@ -142,6 +142,25 @@ char	*expand_word(char **start, char **end, int *type)
 	return (start_rtrn);
 }
 
+// typedef struct s_parse_quotes_vars
+// {
+// 	char	*tmp_ptr;
+// 	char	*return_value;
+// 	char	*start_rtrn;
+// 	bool	in_single_quote;
+// 	bool	in_double_quote;
+// }				t_parse_quotes_vars;
+
+void	init_parse_quotes(t_parse_quotes_vars *v, char **quote)
+{
+	v->tmp_ptr = *quote;
+	v->return_value = ft_malloc(sizeof(char) * MAX_STR_LEN);
+	v->start_rtrn = v->return_value;
+	*quote = v->start_rtrn;
+	v->in_single_quote = false;
+	v->in_double_quote = false;
+}
+
 /*
 PLAN:
 allocate long string in return_val
@@ -152,62 +171,66 @@ advance start_ptr past the expanded var / symbol
 continue copying to end
 */
 // TODO: add reallocation
-char	*parse_quotes(char **quote, char **end_quote, int *type)
-{
-	char	*return_value;
-	char	*start_rtrn;
-	char	*tmp_ptr;
-	bool	in_single_quote;
-	bool	in_double_quote;
 
-	tmp_ptr = *quote;
-	return_value = ft_malloc(sizeof(char) * MAX_STR_LEN);
-	start_rtrn = return_value;
-	*quote = start_rtrn;
-	in_single_quote = false;
-	in_double_quote = false;
-	while (tmp_ptr < *end_quote)
+bool	pq_handle_quotes(t_parse_quotes_vars *v)
+{
+	if (*v->tmp_ptr == '\'' && !v->in_double_quote)
 	{
-		if (*tmp_ptr == '\'')
-		{
-			if (!in_double_quote)
-			{
-				in_single_quote = !in_single_quote;
-				tmp_ptr++;
-				continue ;
-			}
-		}
-		else if (*tmp_ptr == '"')
-		{
-			if (!in_single_quote)
-			{
-				in_double_quote = !in_double_quote;
-				tmp_ptr++;
-				continue ;
-			}
-		}
-		else if (*tmp_ptr == '$' && ft_strchr("\'\"", *(tmp_ptr + 1))
-				&& !in_single_quote && !in_double_quote)
-		{
-			tmp_ptr++;
-			continue ;
-		}
-		if (*tmp_ptr == '~' && !in_single_quote && !in_double_quote)
-			return_value += ft_strlcpy(return_value, expand_tilde(&tmp_ptr),
-					MAX_STR_LEN);
-		else if (*tmp_ptr == '$' && !in_single_quote && ((in_double_quote
-					|| !in_double_quote) && (*(tmp_ptr + 1) == '_'
-					|| isalpha(*(tmp_ptr + 1)) || *(tmp_ptr + 1) == '?')))
-			return_value += ft_strlcpy(return_value, expand_var(&tmp_ptr),
-					MAX_STR_LEN);
-		else
-			*return_value++ = *tmp_ptr++;
+		v->in_single_quote = !v->in_single_quote;
+		v->tmp_ptr++;
+		return (true);
 	}
-	*return_value = '\0';
-	*end_quote = return_value;
-	// *type = 'x';
-	(void)type;
-	return (start_rtrn);
+	if (*v->tmp_ptr == '"' && !v->in_single_quote)
+	{
+		v->in_double_quote = !v->in_double_quote;
+		v->tmp_ptr++;
+		return (true);
+	}
+	return (false);
+}
+
+bool	pq_handle_expand(t_parse_quotes_vars *v)
+{
+	if (*v->tmp_ptr == '$' && ft_strchr("\'\"", *(v->tmp_ptr + 1))
+			&& !v->in_single_quote && !v->in_double_quote)
+	{
+		v->tmp_ptr++;
+		return (true);
+	}
+	if (*v->tmp_ptr == '~' && !v->in_single_quote && !v->in_double_quote)
+	{
+		v->return_value += ft_strlcpy(v->return_value,
+				expand_tilde(&v->tmp_ptr), MAX_STR_LEN);
+		return (true);
+	}
+	else if (*v->tmp_ptr == '$' && !v->in_single_quote && ((v->in_double_quote
+				|| !v->in_double_quote) && (*(v->tmp_ptr + 1) == '_'
+				|| isalpha(*(v->tmp_ptr + 1)) || *(v->tmp_ptr + 1) == '?')))
+	{
+		v->return_value += ft_strlcpy(v->return_value, expand_var(&v->tmp_ptr),
+				MAX_STR_LEN);
+		return (true);
+	}
+	return (false);
+}
+
+char	*parse_quotes(char **quote, char **end_quote)
+{
+	t_parse_quotes_vars	v;
+
+	init_parse_quotes(&v, quote);
+	while (v.tmp_ptr < *end_quote)
+	{
+		if (pq_handle_quotes(&v))
+			continue ;
+		if (pq_handle_expand(&v))
+			continue ;
+		else
+			*v.return_value++ = *v.tmp_ptr++;
+	}
+	*v.return_value = '\0';
+	*end_quote = v.return_value;
+	return (v.start_rtrn);
 }
 
 // && ft_isalnum(*(tmp_ptr + 1))
