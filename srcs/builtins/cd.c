@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:51:29 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/30 17:20:43 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:25:40 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	cd_builtin(t_cmd *cmd)
 			return (1);
 	}
 	old_path = getcwd(NULL, 0);
-	// error checking here
 	ret = chdir(new_path);
 	if (ret != 0)
 		return (cd_print_err(new_path), free(old_path), 1);

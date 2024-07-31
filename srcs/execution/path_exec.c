@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 15:16:20 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/31 13:35:24 by vscode           ###   ########.fr       */
+/*   Updated: 2024/07/31 18:28:12 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char	*get_path(char *executable)
 		return (executable);
 	i = 0;
 	tmp = *env_lst;
-	while (tmp && tmp->data != NULL && ft_strcmp(((t_env *)(tmp->data))->key, "PATH"))
+	while (tmp && tmp->data != NULL
+		&& ft_strcmp(((t_env *)(tmp->data))->key, "PATH"))
 		tmp = tmp->next;
 	if (tmp == NULL)
 		return (NULL);
@@ -37,8 +38,7 @@ char	*get_path(char *executable)
 		if (access(rtrn, F_OK | X_OK) == 0)
 			return (rtrn);
 	}
-	executable = path_cwd_fallback(executable);
-	return (executable);
+	return (path_cwd_fallback(executable));
 }
 
 char	*path_cwd_fallback(char *executable)
@@ -52,34 +52,3 @@ char	*path_cwd_fallback(char *executable)
 		return (free(cwd), cwd_exe);
 	return (NULL);
 }
-
-// Path: srcs/execute/execute.c
-// fork before execve
-// free split
-// save PID from fork for wait untill end and to get exit status
-// if pipe is after buildin, fork buildin
-
-// void	path_exec(t_program *shell, char *executable, char **args)
-// {
-// 	int		i;
-// 	char	**folders;
-
-// 	i = 0;
-// 	folders = ft_split(((t_env *)shell->env->data)->value, ':');
-// 	while (folders[i])
-// 	{
-// 		if (access(ft_strjoin(ft_strjoin(folders[i], "/"), executable),
-// 				F_OK) == 0)
-// 		{
-// 			execve(ft_strjoin(ft_strjoin(folders[i], "/"), executable), args,
-// 				NULL);
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// 	while (i > -1)
-// 	{
-// 		ft_free(folders[i]);
-// 		i--;
-// 	}
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 17:15:38 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/30 20:54:32 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:26:13 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,103 +99,9 @@ int	exit_builtin(t_cmd *cmd)
 			return (1);
 		}
 		tmp = ft_atoi(args[1]);
-		// add atod to libft for exit 9223372036854775807 testcase (%256 = 255)
 		tmp = tmp % 256;
 		shell->last_exit_code = tmp;
 	}
 	ms_exit(shell->last_exit_code);
 	return (0);
 }
-
-/* ---------- EXIT TEST CASES --------- */
-/*
-
-exit 9223372036854775807
-
-exit something somethingv2
-
-exit 0 0
-
-exit
-
-exit ""
-
-exit "+100"
-
-exit "-100"
-
-exit -9223372036854775805
-
-exit 0
-
-exit 10
-
-exit 42
-
-exit 1
-
-exit +++++
-
-exit ++++++
-
-exit +1
-
-exit ++1
-
-exit ++12560
-
-exit -----
-
-exit ------
-
-exit -1
-
-exit --1
-
-exit -12560
-
-exit --12560
-
-exit 255
-
-exit 1 2
-
-exit 1 2 3
-
-exit A
-
-exit A 2 3
-
-exit "A"
-
-exit "+++"
-
-exit ++++3193912939
-
-exit 01
-
-exit 001
-
-exit 0001
-
-exit +++000
-
-exit ++++000
-
-exit ---000
-
-exit ----000
-
-exit "something"
-
-exit x
-
-exit echo
-
-exit cd ..
-
-exit exit
-
-exit 42 42 42 42 42
-
-*/

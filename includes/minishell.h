@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 20:52:19 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/31 14:45:26 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/31 18:32:00 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # define MAXARGS 255
 # define MAX_STR_LEN 2048
 
-extern volatile sig_atomic_t g_sig_break ;
+extern volatile sig_atomic_t	g_sig_break;
 
 typedef struct s_token
 {
@@ -235,6 +235,7 @@ int				pwd_builtin(t_cmd *cmd);
 
 /* -------------------------------- Heredoc --------------------------------- */
 
+char			*adjust_output(t_heredoc *hrdc, char *input);
 char			*arg_check(char *eof, t_heredoc *hrdc);
 int				def_arg_len(char *eof, t_heredoc *hrdc);
 char			*in_none(char *input, int len);

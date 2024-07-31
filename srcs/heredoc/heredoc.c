@@ -3,64 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:18:47 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/31 13:12:43 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:30:50 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	get_txt(t_heredoc *hrdc)
-{
-	int		i;
-	char	*c;
-	char	*tmp;
-
-	i = 0;
-	while (1)
-	{
-		c = ft_itoa(i);
-		tmp = ft_strjoin("tmp/heredoc", c);
-		hrdc->file = ft_strjoin(tmp, ".txt");
-		if (access(hrdc->file, F_OK) == 0)
-		{
-			i++;
-			tmp = ft_free(tmp);
-			hrdc->file = ft_free(hrdc->file);
-		}
-		else
-			break ;
-	}
-	tmp = ft_free(tmp);
-}
-
-char	*adjust_output(t_heredoc *hrdc, char *input)
-{
-	int		i;
-	char	*out;
-	bool	condition;
-
-	i = ft_strlen(input) + ft_strlen(hrdc->file) + 2;
-	out = ft_calloc(i, sizeof(char));
-	condition = heredoc_placement(input, &i, hrdc);
-	if (condition)
-		return (ft_strjoin(out, &input[i]));
-	while (input[i] != '\0')
-	{
-		i += output_quotes(&input[i], &out[i]);
-		if (input[i] == '<' && input[i + 1] == '<')
-		{
-			out = fill_out(out, i, input, hrdc);
-			break ;
-		}
-		out[i] = input[i];
-		i++;
-	}
-	hrdc->full_arg = ft_free(hrdc->full_arg);
-	return (out);
-}
 
 char	*heredoc_scan(char *input, t_heredoc *hrdc)
 {
@@ -111,8 +61,6 @@ void	heredoc_loop(t_heredoc *hrdc)
 
 void	hd_loop_tty(t_heredoc *hrdc, char *line, int fd)
 {
-	// bool	first_write;
-	// first_write = true;
 	if (fd == -1)
 		p_err(1);
 	while (g_sig_break == 0)
@@ -124,11 +72,8 @@ void	hd_loop_tty(t_heredoc *hrdc, char *line, int fd)
 			return ;
 		if (line != NULL)
 		{
-			// if (first_write == false)
-			// write(fd, "\n", 1);
 			write(fd, line, ft_strlen(line));
 			write(fd, "\n", 1);
-			// first_write = false;
 		}
 		line = ft_free(line);
 	}
@@ -136,8 +81,6 @@ void	hd_loop_tty(t_heredoc *hrdc, char *line, int fd)
 
 void	hd_loop_nontty(t_heredoc *hrdc, char *line, int fd)
 {
-	// bool	first_write;
-	// first_write = true;
 	if (fd == -1)
 		p_err(1);
 	while (g_sig_break == 0)
@@ -151,11 +94,8 @@ void	hd_loop_nontty(t_heredoc *hrdc, char *line, int fd)
 			return ;
 		if (line != NULL)
 		{
-			// if (first_write == false)
-			// write(fd, "\n", 1);
 			write(fd, line, ft_strlen(line));
 			write(fd, "\n", 1);
-			// first_write = false;
 		}
 		line = ft_free(line);
 	}

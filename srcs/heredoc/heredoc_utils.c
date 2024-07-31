@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:49:55 by tpaesch           #+#    #+#             */
-/*   Updated: 2024/07/30 22:36:30 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:29:39 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,28 @@ char	*fill_out(char *out, int i, char *input, t_heredoc *hrdc)
 	i += len_adjust(&input[i], hrdc);
 	out = ft_strjoin(out, &input[i]);
 	return (out);
+}
+
+void	get_txt(t_heredoc *hrdc)
+{
+	int		i;
+	char	*c;
+	char	*tmp;
+
+	i = 0;
+	while (1)
+	{
+		c = ft_itoa(i);
+		tmp = ft_strjoin("tmp/heredoc", c);
+		hrdc->file = ft_strjoin(tmp, ".txt");
+		if (access(hrdc->file, F_OK) == 0)
+		{
+			i++;
+			tmp = ft_free(tmp);
+			hrdc->file = ft_free(hrdc->file);
+		}
+		else
+			break ;
+	}
+	tmp = ft_free(tmp);
 }

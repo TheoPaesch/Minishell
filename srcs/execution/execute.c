@@ -6,7 +6,7 @@
 /*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 20:10:56 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/31 16:50:08 by tpaesch          ###   ########.fr       */
+/*   Updated: 2024/07/31 18:24:22 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ void	execute_cmd(t_cmd *cmd)
 		exec_back(cmd);
 	set_normal_signal();
 }
-// ft_debug_msg("execute_cmd is exiting the shell");
-// if ()
-// exit(100); // are we already in a subprocess? if yes exit
-// otherwise no. FIX!!!!
 
 void	exec_exec(t_cmd *cmd)
 {
@@ -49,10 +45,9 @@ void	exec_exec(t_cmd *cmd)
 		if (tmp)
 			execve(tmp, exec_cmd->argv, NULL);
 		get_shell()->last_exit_code = 127;
-		ft_putstr_fd("bash: ", 2);
-		ft_putstr_fd(exec_cmd->argv[0], 2);
-		ft_putstr_fd(": command not found \n", 2);
-		ms_exit(127);
+		ft_putstr_fd(ft_strjoin("bash: ", exec_cmd->argv[0]), 2);
+		ft_putstr_fd(": no such file or directory\n", 2);
+		ms_exit(get_shell()->last_exit_code);
 	}
 	waitpid(pid, &status, 0);
 	set_exit_code(WEXITSTATUS(status));
@@ -60,9 +55,6 @@ void	exec_exec(t_cmd *cmd)
 		ms_exit((get_shell())->last_exit_code);
 }
 
-// fix for theos early exit
-// just add fork b4 redir
-// POSSIBILITY TO ADD MORE ERROR HANDLING????
 void	exec_redir(t_cmd *cmd)
 {
 	t_redir_cmd	*exec_redir;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpaesch <tpaesch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/31 13:50:01 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:33:37 by tpaesch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,6 @@ t_cmd	*parse_cmd(char *str)
 	nullterm(cmd);
 	return (cmd);
 }
-
-/*
-ATTENTION:
-Due to the way the subject is formulated, it seems as if handling
-lists and background execution is EXPLICITLY FORBIDDEN.
-So we removed it.
-Clarification in the subject would be appreciated.
-
-*/
 
 t_cmd	*parse_line(char **ptr_str, char *end_str)
 {
@@ -66,11 +57,6 @@ t_cmd	*parse_pipe(char **ptr_str, char *end_str)
 	return (cmd);
 }
 
-// IDEA:
-// export R="   R"
-// check if word contains a var "WO"$R"D
-// expand $VAR
-// return to beginning and treat expanded str as seperate tokens
 t_cmd	*parse_exec(char **ptr_str, char *end_str)
 {
 	t_parse_exec_vars	v;
@@ -101,19 +87,8 @@ t_cmd	*parse_exec(char **ptr_str, char *end_str)
 	}
 	v.cmd->argv[v.argc] = NULL;
 	v.cmd->end_argv[v.argc] = NULL;
-	// if (argv[0] = NULL && scan_skip_ws(ptr_str, end_str, "|)&;"))
-	// if(argv[0] = 0) && scan_skip_ws( , , "operators") then:
-	// bash: syntax error near unexpected token `|'
-	// for '| grep hello' handle errror here? output:
-	// bash: syntax error near unexpected token `|'
-	// using scan_skip_ws();
 	return (v.retrn_val);
 }
-
-// int	validate_cmd_table(char **ptr_str, char *end_str, char **argv)
-// {
-// 	return (1);
-// }
 
 char	*expand_word(char **start, char **end, int *type)
 {
@@ -142,15 +117,6 @@ char	*expand_word(char **start, char **end, int *type)
 	return (start_rtrn);
 }
 
-// typedef struct s_parse_quotes_vars
-// {
-// 	char	*tmp_ptr;
-// 	char	*return_value;
-// 	char	*start_rtrn;
-// 	bool	in_single_quote;
-// 	bool	in_double_quote;
-// }				t_parse_quotes_vars;
-
 void	init_parse_quotes(t_parse_quotes_vars *v, char **quote)
 {
 	v->tmp_ptr = *quote;
@@ -161,16 +127,6 @@ void	init_parse_quotes(t_parse_quotes_vars *v, char **quote)
 	v->in_double_quote = false;
 }
 
-/*
-PLAN:
-allocate long string in return_val
-iterate over string, copying if no special condition is met
-DONT copy the current quote type if within quotes
-expand $ and ~
-advance start_ptr past the expanded var / symbol
-continue copying to end
-*/
-// TODO: add reallocation
 
 bool	pq_handle_quotes(t_parse_quotes_vars *v)
 {
@@ -192,7 +148,7 @@ bool	pq_handle_quotes(t_parse_quotes_vars *v)
 bool	pq_handle_expand(t_parse_quotes_vars *v)
 {
 	if (*v->tmp_ptr == '$' && ft_strchr("\'\"", *(v->tmp_ptr + 1))
-			&& !v->in_single_quote && !v->in_double_quote)
+		&& !v->in_single_quote && !v->in_double_quote)
 	{
 		v->tmp_ptr++;
 		return (true);
@@ -248,29 +204,6 @@ t_cmd	*parse_block(char **ptr_str, char *end_str)
 	return (cmd);
 }
 
-// '+' is >>
-/**
- * Finds and
- *
-
-	* @param cmd A pointer to the `t_cmd` structure to be updated with redirection information.
-
-	* @param ptr_str A pointer to a pointer to the current position in the string being parsed. This pointer is updated as the
- *                function scans through the string.
-
-	* @param end_str A pointer to the end of the string being parsed. This is used to ensure the function does not read beyond
- *                the bounds of the string.
-
-	* @return Returns the updated `t_cmd` structure with the redirection information included. If no redirection symbols are found,
- *         the original `cmd` structure is returned unchanged.
- *
-
-	* Note: The function uses a `t_parse_redir_vars` structure internally to store temporary variables needed for parsing.
-
-	*       The `init_redir_cmd` function is called to initialize redirection commands within the `cmd` structure.
- *       Redirection for input ('<') sets the file descriptor (`fd`) to 0,
-	while output ('>' and '+') sets it to 1.
- */
 t_cmd	*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str)
 {
 	t_parse_redir_vars	v;
