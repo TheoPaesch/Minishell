@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:50 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/07/31 19:06:01 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/07/31 19:50:35 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ t_cmd	*parse_redir(t_cmd *cmd, char **ptr_str, char *end_str)
 		}
 		else if (v.type == '+')
 		{
-			cmd = init_redir_cmd(cmd, v.quote, v.end_quote, O_WRONLY | O_CREAT);
+			cmd = init_redir_cmd(cmd, v.quote, v.end_quote,
+					O_WRONLY | O_CREAT | O_APPEND);
 			((t_redir_cmd *)cmd)->fd = 1;
 		}
 	}
